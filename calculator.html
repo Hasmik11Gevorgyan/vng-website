@@ -16,12 +16,21 @@
       --line: rgba(255, 255, 255, 0.08);
       --line-2: rgba(255, 255, 255, 0.12);
       --text: #f3f7ff;
+      --text-soft: rgba(237, 243, 255, 0.94);
+      --text-muted: rgba(237, 243, 255, 0.62);
       --muted: rgba(203, 213, 225, 0.78);
       --muted-2: rgba(148, 163, 184, 0.92);
       --blue: #4f8cff;
       --blue-2: #2f6df4;
       --glow: rgba(47, 109, 244, 0.35);
       --success: #7dd3fc;
+      --purple: #7c5cff;
+      --purple-soft: #3fb7ff;
+      --radius-lg: 32px;
+      --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.22);
+      --shadow-purple: 0 12px 30px rgba(124, 92, 255, 0.28);
+      --container: 1400px;
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body {
@@ -45,105 +54,264 @@
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      background: linear-gradient(180deg, rgba(6, 12, 24, 0.90), rgba(6, 12, 24, 0.60));
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      background: rgba(6, 12, 24, 0.92);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .header {
-      max-width: 1920px;
+      width: min(100%, var(--container));
       margin: 0 auto;
       padding: 16px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 28px;
+      gap: 20px;
+      position: relative;
+    }
+
+    .container {
+      width: min(100%, var(--container));
+      margin: 0 auto;
+      padding-inline: 24px;
     }
 
     .logo {
       display: inline-flex;
       align-items: center;
       gap: 14px;
-      color: var(--text);
-      text-decoration: none;
       min-width: 180px;
       flex-shrink: 0;
     }
 
-    .logo-mark {
-      width: 46px;
-      height: 46px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      background: radial-gradient(circle at 30% 30%, rgba(143,179,255,0.95), rgba(54,118,255,0.88) 52%, rgba(107,82,255,0.9));
-      box-shadow: 0 18px 40px rgba(47, 109, 244, 0.28);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      overflow: hidden;
+    .logo__image {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
       flex-shrink: 0;
     }
 
-    .logo-mark svg {
-      width: 28px;
-      height: 28px;
-      display: block;
-    }
-
-    .logo-text {
+    .logo__text-group {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 2px;
     }
 
-    .logo-title {
-      font-size: 18px;
-      font-weight: 900;
+    .logo__title {
+      font-size: 22px;
+      font-weight: 950;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       background: linear-gradient(90deg, #3fb7ff 0%, #7c5cff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      line-height: 1;
+      line-height: 1.1;
       display: inline-block;
     }
 
-    .logo-subtitle {
-      color: var(--muted-2);
+    .logo__subtitle {
+      color: var(--text-muted);
       font-size: 11px;
-      line-height: 1.18;
-      max-width: 210px;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: 0.03em;
     }
 
-    .header-nav {
+    .nav {
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
       gap: 26px;
-      flex: 1;
+      flex-wrap: wrap;
     }
 
-    .header-nav a {
-      color: rgba(237, 243, 255, 0.92);
-      text-decoration: none;
-      font-size: 15px;
+    .nav__link {
+      color: var(--text-soft);
+      font-size: 16px;
       font-weight: 800;
-      letter-spacing: -0.01em;
-      transition: color 0.18s ease, transform 0.18s ease;
-      white-space: nowrap;
+      opacity: 0.95;
+      transition: color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+      text-decoration: none;
     }
 
-    .header-nav a:hover {
+    .nav__link:hover,
+    .nav__link.is-active {
       color: #fff;
       transform: translateY(-1px);
+      opacity: 1;
     }
 
-    .header-actions {
+    .nav__actions {
       display: flex;
       align-items: center;
       gap: 14px;
+    }
+
+    .burger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .burger svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .lang-switcher {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .lang-switcher__button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      cursor: pointer;
+      transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .lang-switcher__button:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(126, 167, 255, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .lang-switcher__current {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .lang-switcher__current-text {
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lang-switcher__arrow {
+      width: 18px;
+      height: 18px;
+      opacity: 0.9;
+      transition: transform var(--transition-fast);
+    }
+
+    .lang-switcher.is-open .lang-switcher__arrow {
+      transform: rotate(180deg);
+    }
+
+    .lang-switcher__menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 220px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 17, 31, 0.98);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(16px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition:
+        opacity var(--transition-fast),
+        visibility var(--transition-fast),
+        transform var(--transition-fast);
+      z-index: 120;
+    }
+
+    .lang-switcher.is-open .lang-switcher__menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .lang-switcher__option {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text-soft);
+      text-align: left;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .lang-switcher__option:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .lang-switcher__flag {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .lang-switcher__label {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 28px;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+      color: #fff;
+      background: linear-gradient(135deg, #7c5cff, #9479ff);
+      box-shadow: 0 10px 25px rgba(124, 92, 255, 0.3);
+      text-decoration: none;
+    }
+
+    .header-cta:hover {
+      transform: translateY(-2px);
+    }x;
       flex-shrink: 0;
     }
 
@@ -666,207 +834,144 @@
         gap: 24px;
       }
 
-      .header-nav a {
-        font-size: 16px;
+    @media (max-width: 1080px) {
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 16px;
+        right: 16px;
+        padding: 18px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(8, 17, 31, 0.94);
+        box-shadow: var(--shadow-xl);
       }
 
-      .logo {
-        min-width: auto;
-      }
-    }
-
-    @media (max-width: 1100px) {
-      body {
-        padding-top: 150px;
+      .nav.is-open {
+        display: flex;
       }
 
-      .header {
-        flex-wrap: wrap;
-        justify-content: center;
+      .nav__links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
       }
 
-      .header-nav {
-        order: 3;
-        width: 100%;
-        gap: 18px;
-        flex-wrap: wrap;
-      }
-
-      .header-actions {
-        gap: 12px;
-      }
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .field-grid,
-      .field-grid-4 {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-      body {
-        padding-top: 130px;
-      }
-
-      .header {
-        padding: 16px 18px;
+      .nav__actions {
+        flex-direction: column;
         align-items: stretch;
       }
 
-      .logo {
+      .lang-switcher {
         width: 100%;
       }
 
-      .logo-mark {
-        width: 46px;
-        height: 46px;
-      }
-
-      .logo-title {
-        font-size: 15px;
-      }
-
-      .logo-subtitle {
-        font-size: 13px;
-        max-width: none;
-      }
-
-      .header-nav {
-        gap: 14px 18px;
-      }
-
-      .header-nav a {
-        font-size: 15px;
-      }
-
-      .header-actions {
+      .lang-switcher__button {
         width: 100%;
         justify-content: space-between;
       }
 
-      .lang-button {
-        min-height: 48px;
-        padding: 0 16px;
-        font-size: 14px;
+      .lang-switcher__menu {
+        position: static;
+        width: 100%;
+        margin-top: 10px;
       }
 
-      .header-cta {
-        min-height: 48px;
-        padding: 0 22px;
-        font-size: 15px;
+      .burger {
+        display: inline-flex;
       }
+    }
+
+    @media (max-width: 860px) {
       .header {
         padding: 14px 16px;
-      }
-
-      .logo-subtitle {
-        display: none;
-      }
-
-      .left,
-      .right {
-        padding: 20px;
-      }
-
-      .module {
-        grid-template-columns: 1fr;
-      }
-
-      .quick-grid {
-        grid-template-columns: 1fr;
       }
 
       .hero-top {
         flex-direction: column;
       }
-      .footer {
-        padding: 28px 0 40px;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-        margin-top: 60px;
-      }
+    }
 
-      .footer__row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 18px;
-        flex-wrap: wrap;
-        width: min(100%, var(--container, 1200px));
-        margin: 0 auto;
-        padding-inline: 24px;
-      }
-
-      .footer__brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-      }
-
-      .footer__logo {
-        width: 38px;
-        height: 38px;
-        object-fit: contain;
-        flex-shrink: 0;
-      }
-
-      .footer__text {
-        color: #748ba7;
-        font-size: 14px;
-        line-height: 1.55;
-      }
-
-      .footer__email {
-        color: #a9beff;
-        font-weight: 700;
-        text-decoration: none;
+    @media (max-width: 560px) {
+      .logo__subtitle {
+        display: none;
       }
     }
   </style>
 </head>
 <body>
   <div class="header-wrap">
-    <div class="header">
-      <a href="index.html#hero" class="logo" aria-label="AI Platform">
-        <div class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 4L27 10.5V21.5L16 28L5 21.5V10.5L16 4Z" stroke="white" stroke-width="1.8" opacity="0.9"/>
-            <path d="M11 17.5L14 20.5L21.5 12.5" stroke="white" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="logo-text">
-          <div class="logo-title" data-i18n="logoTitle">vengeea.com</div>
-          <div class="logo-subtitle" data-i18n="logoSubtitle">Видеоаналитика для объектов и инфраструктуры</div>
-        </div>
+    <header class="header" aria-label="Шапка сайта">
+      <a href="index.html#hero" class="logo" aria-label="Перейти на главный экран">
+        <img class="logo__image" src="./logo-recreated (1).png" alt="Логотип компании" />
+        <span class="logo__text-group">
+          <span class="logo__title" data-i18n="logoTitle">VENGEEA.COM</span>
+          <span class="logo__subtitle" data-i18n="logoSubtitle">ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ</span>
+        </span>
       </a>
 
-      <nav class="header-nav" aria-label="Main navigation">
-        <a href="./index.html#hero" data-i18n="navHome">Главная</a>
-        <a href="./about-draft.html" data-i18n="navAbout">О нас</a>
-        <a href="./modules.html" data-i18n="navModules">Модули</a>
-        <a href="./calculator.html" class="is-active" data-i18n="navCalculator">Калькулятор</a>
-        <a href="./contact_us.html" data-i18n="navContacts">Контакты</a>
-      </nav>
+      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
 
-      <div class="header-actions">
-        <div class="lang-switcher" id="langSwitcher">
-          <button type="button" class="lang-button" id="langButton">
-            <span id="currentLangFlag">🇷🇺</span>
-            <span id="currentLangText">RU</span>
-            <span class="chevron"></span>
-          </button>
-          <div class="lang-menu">
-            <button type="button" class="lang-option" data-lang="ru"><span>🇷🇺</span><span>Русский</span></button>
-            <button type="button" class="lang-option" data-lang="en"><span>🇺🇸</span><span>English</span></button>
-            <button type="button" class="lang-option" data-lang="zh"><span>🇨🇳</span><span>中文</span></button>
-            <button type="button" class="lang-option" data-lang="kk"><span>🇰🇿</span><span>Қазақша</span></button>
-          </div>
+      <nav class="nav" id="main-nav" aria-label="Основная навигация">
+        <div class="nav__links">
+          <a class="nav__link" href="index.html#hero" data-i18n="navHome">Главная</a>
+          <a class="nav__link" href="./about-draft.html" data-i18n="navAbout">О нас</a>
+          <a class="nav__link" href="./modules.html" data-i18n="navModules">Модули</a>
+          <a class="nav__link is-active" href="./calculator.html" data-i18n="navCalculator">Калькулятор</a>
+          <a class="nav__link" href="./contact_us.html" data-i18n="navContacts">Контакты</a>
         </div>
-        <a href="./contact_us.html" class="header-cta" data-i18n="ctaHeader">Запросить решение</a>
-      </div>
-    </div>
+
+        <div class="nav__actions">
+          <div class="lang-switcher" id="langSwitcher">
+            <button
+              class="lang-switcher__button"
+              id="langButton"
+              type="button"
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-controls="langMenu"
+            >
+              <span class="lang-switcher__current-text" style="opacity: 0.6; font-size: 12px;">RU</span>
+              <span class="lang-switcher__current-text" id="currentLangText">RU</span>
+              <svg class="lang-switcher__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <div class="lang-switcher__menu" id="langMenu" role="menu" aria-label="Выбор языка">
+              <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
+                <span class="lang-switcher__flag">🇷🇺</span>
+                <span class="lang-switcher__label">Русский</span>
+              </button>
+              <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
+                <span class="lang-switcher__flag">🇬🇧</span>
+                <span class="lang-switcher__label">English</span>
+              </button>
+              <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
+                <span class="lang-switcher__flag">🇨🇳</span>
+                <span class="lang-switcher__label">中文</span>
+              </button>
+              <button class="lang-switcher__option" type="button" data-lang="kk" role="menuitem">
+                <span class="lang-switcher__flag">🇰🇿</span>
+                <span class="lang-switcher__label">Қазақша</span>
+              </button>
+            </div>
+          </div>
+
+          <a href="./contact_us.html" class="header-cta" data-i18n="ctaHeader">Запросить решение</a>
+        </div>
+      </nav>
+    </header>
   </div>
 
   <div class="wrap">
@@ -1579,47 +1684,135 @@ ${raid}
       emailStatus.innerText = "Отправка...";
     });
 
+    const languageMeta = {
+      ru: { flag: "🇷🇺", code: "RU", htmlLang: "ru" },
+      en: { flag: "🇬🇧", code: "EN", htmlLang: "en" },
+      zh: { flag: "🇨🇳", code: "ZH", htmlLang: "zh" },
+      kk: { flag: "🇰🇿", code: "KK", htmlLang: "kk" }
+    };
+
+    const translations = {
+      ru: {
+        logoTitle: "vengeea.com",
+        logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
+        navHome: "Главная",
+        navAbout: "О нас",
+        navModules: "Модули",
+        navCalculator: "Калькулятор",
+        navContacts: "Контакты",
+        ctaHeader: "Запросить решение",
+        footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
+      },
+      en: {
+        logoTitle: "vengeea.com",
+        logoSubtitle: "FORECASTING FUTURE EVENTS",
+        navHome: "Home",
+        navAbout: "About",
+        navModules: "Modules",
+        navCalculator: "Calculator",
+        navContacts: "Contacts",
+        ctaHeader: "Request a solution",
+        footerText: "Leak detection and development toward predictive incident prevention"
+      },
+      zh: {
+        logoTitle: "vengeea.com",
+        logoSubtitle: "预测未来事件",
+        navHome: "首页",
+        navAbout: "关于我们",
+        navModules: "功能模块",
+        navCalculator: "计算器",
+        navContacts: "联系我们",
+        ctaHeader: "申请方案",
+        footerText: "泄漏检测以及向预测性事故预防方向发展"
+      },
+      kk: {
+        logoTitle: "vengeea.com",
+        logoSubtitle: "БОЛАШАҚ ОҚИҒАЛАРДЫ БОЛЖАУ",
+        navHome: "Басты бет",
+        navAbout: "Біз туралы",
+        navModules: "Модульдер",
+        navCalculator: "Калькулятор",
+        navContacts: "Байланыс",
+        ctaHeader: "Шешімге сұраныс",
+        footerText: "Ағып кетуді анықтау және инциденттердің алдын алуға бағытталған даму"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const dict = translations[lang] || translations.ru;
+      const meta = languageMeta[lang] || languageMeta.ru;
+
+      document.documentElement.lang = meta.htmlLang;
+      const currentLangText = document.getElementById("currentLangText");
+      const mutedLangText = document.querySelector(".lang-switcher__button .lang-switcher__current-text:first-child");
+
+      if (currentLangText) currentLangText.textContent = meta.code;
+      if (mutedLangText) mutedLangText.textContent = meta.code;
+
+      document.querySelectorAll("[data-i18n]").forEach(function(el) {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+
+      localStorage.setItem("site-language", lang);
+    }
+
+    const burger = document.getElementById("burger");
+    const nav = document.getElementById("main-nav");
     const langSwitcher = document.getElementById("langSwitcher");
     const langButton = document.getElementById("langButton");
 
-    langButton.addEventListener("click", function() {
-      langSwitcher.classList.toggle("is-open");
-    });
-
-    document.querySelectorAll(".lang-option").forEach(function(option) {
-      option.addEventListener("click", function() {
-        applyLanguage(option.getAttribute("data-lang"));
-        langSwitcher.classList.remove("is-open");
+    if (burger && nav) {
+      burger.addEventListener("click", () => {
+        const isOpen = nav.classList.toggle("is-open");
+        burger.setAttribute("aria-expanded", String(isOpen));
       });
-    });
+    }
 
-    document.addEventListener("click", function(event) {
-      if (!langSwitcher.contains(event.target)) {
-        langSwitcher.classList.remove("is-open");
-      }
-    });
+    if (langButton && langSwitcher) {
+      langButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = langSwitcher.classList.toggle("is-open");
+        langButton.setAttribute("aria-expanded", String(isOpen));
+      });
 
-    applyLanguage("ru");
+      document.querySelectorAll(".lang-switcher__option").forEach(function(option) {
+        option.addEventListener("click", function() {
+          applyTranslations(option.getAttribute("data-lang"));
+          langSwitcher.classList.remove("is-open");
+          langButton.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      document.addEventListener("click", function(event) {
+        if (!langSwitcher.contains(event.target)) {
+          langSwitcher.classList.remove("is-open");
+          langButton.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+
+    const savedLanguage = localStorage.getItem("site-language") || "ru";
+    applyTranslations(savedLanguage);
     vypolnitRaschet();
   </script>
 
   <footer class="footer">
-    <div class="footer__row">
-      <a href="index.html#hero" class="footer__brand">
-        <div class="logo-mark" style="width: 32px; height: 32px; flex-shrink: 0;">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 4L27 10.5V21.5L16 28L5 21.5V10.5L16 4Z" stroke="white" stroke-width="1.8" opacity="0.9"/>
-            <path d="M11 17.5L14 20.5L21.5 12.5" stroke="white" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="footer__brand-content">
-          <div class="logo-title" style="font-size: 16px; margin-bottom: 2px;">vengeea.com</div>
-          <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident prevention</div>
-        </div>
-      </a>
+    <div class="container">
+      <div class="footer__row">
+        <a href="index.html#hero" class="footer__brand">
+          <img class="footer__logo" src="./logo-recreated (1).png" alt="Company logo" />
+          <div class="footer__brand-content">
+            <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;">vengeea.com</div>
+            <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident prevention</div>
+          </div>
+        </a>
 
-      <div class="footer__text">
-        <a class="footer__email" href="mailto:support@vengeea.com">support@vengeea.com</a>
+        <div class="footer__text">
+          <a class="footer__email" href="mailto:support@vengeea.com">support@vengeea.com</a>
+        </div>
       </div>
     </div>
   </footer>
