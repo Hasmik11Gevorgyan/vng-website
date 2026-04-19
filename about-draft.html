@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vengeea | О нас</title>
+  <meta
+    name="description"
+    content="История компании Vengeea и путь к созданию AI-решений для раннего выявления рисков и предотвращения инцидентов."
+  />
+  <meta name="theme-color" content="#07111d" />
+
+  <style>
+    :root {
+      --bg: #07111d;
+      --bg-deep: #081423;
+      --text: #edf3ff;
+      --text-soft: #dce8fb;
+      --text-muted: #a7bad8;
+      --text-dim: #7d91b0;
+
+      --line: rgba(255, 255, 255, 0.08);
+
+      --blue: #3f7cff;
+      --blue-soft: #7ea7ff;
+
+      --purple: #7c5cff;
+      --purple-soft: #9c87ff;
+
+      --shadow-xl: 0 30px 90px rgba(0, 0, 0, 0.34);
+      --shadow-lg: 0 20px 65px rgba(0, 0, 0, 0.24);
+      --shadow-purple: 0 18px 50px rgba(124, 92, 255, 0.28);
+
+      --radius-lg: 26px;
+      --radius-pill: 999px;
+
+      --container: 1320px;
+
+      --transition-fast: 0.22s ease;
+      --transition-main: 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(73, 126, 255, 0.18), transparent 22%),
+        linear-gradient(180deg, #06111c 0%, #081321 45%, #07111d 100%);
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .site {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .site::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(126, 167, 255, 0.08), transparent 18%),
+        radial-gradient(circle at 80% 25%, rgba(91, 226, 255, 0.07), transparent 16%);
+    }
+
+    .container {
+      width: min(100%, var(--container));
+      margin: 0 auto;
+      padding-inline: 24px;
+    }
+
+    .panel {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(20, 37, 63, 0.78), rgba(8, 17, 31, 0.96));
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(126, 167, 255, 0.08), transparent 34%);
+      pointer-events: none;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 58px;
+      padding: 0 26px;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn--primary {
+      color: #fff;
+      background: linear-gradient(180deg, var(--purple-soft), var(--purple));
+      box-shadow: var(--shadow-purple);
+    }
+
+    .btn--secondary {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn--secondary:hover {
+      border-color: rgba(126, 167, 255, 0.28);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .header-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(180deg, rgba(6, 12, 24, 0.82), rgba(6, 12, 24, 0.46));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header {
+      width: min(100%, var(--container));
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      position: relative;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 180px;
+      flex-shrink: 0;
+    }
+
+    .logo__image {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .logo__text-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo__title {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #fff 0%, var(--blue-soft) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      display: inline-block;
+    }
+
+    .logo__subtitle {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: 0.03em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .nav__link {
+      color: var(--text-soft);
+      font-size: 15px;
+      font-weight: 700;
+      opacity: 0.95;
+      transition: color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+    }
+
+    .nav__link:hover,
+    .nav__link.is-active {
+      color: #fff;
+      transform: translateY(-1px);
+      opacity: 1;
+    }
+
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .burger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .burger svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .lang-switcher {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .lang-switcher__button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      cursor: pointer;
+      transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .lang-switcher__button:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(126, 167, 255, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .lang-switcher__current {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .lang-switcher__current-text {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lang-switcher__arrow {
+      width: 18px;
+      height: 18px;
+      opacity: 0.9;
+      transition: transform var(--transition-fast);
+    }
+
+    .lang-switcher.is-open .lang-switcher__arrow {
+      transform: rotate(180deg);
+    }
+
+    .lang-switcher__menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 220px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 17, 31, 0.98);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(16px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition:
+        opacity var(--transition-fast),
+        visibility var(--transition-fast),
+        transform var(--transition-fast);
+      z-index: 120;
+    }
+
+    .lang-switcher.is-open .lang-switcher__menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .lang-switcher__option {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text-soft);
+      text-align: left;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .lang-switcher__option:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .lang-switcher__flag {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .lang-switcher__label {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .about-page {
+      position: relative;
+      padding: 92px 0 80px;
+      overflow: hidden;
+    }
+
+    .about-page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(126, 167, 255, 0.12), transparent 24%),
+        radial-gradient(circle at 86% 20%, rgba(124, 92, 255, 0.14), transparent 22%),
+        linear-gradient(180deg, rgba(7, 17, 29, 0.1), rgba(7, 17, 29, 0));
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(380px, 0.98fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .about-story {
+      padding: 38px;
+      min-height: 520px;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      overflow: visible;
+    }
+
+
+
+    .about-story__badge {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-soft);
+      background: rgba(126, 167, 255, 0.08);
+      border: 1px solid rgba(126, 167, 255, 0.16);
+    }
+
+    .about-story__title {
+      width: fit-content;
+      margin: 10px 0 18px;
+      font-size: clamp(28px, 3.5vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      font-weight: 950;
+      color: var(--text);
+      text-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+    }
+
+    .about-story__text {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 760px;
+      flex: 1;
+      overflow-y: visible;
+      padding-right: 0;
+    }
+
+    .about-story__text::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .about-story__text::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+    }
+
+    .about-story__text::-webkit-scrollbar-thumb {
+      background: rgba(126, 167, 255, 0.2);
+      border-radius: 10px;
+    }
+
+    .about-story__text p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .about-story__text p:first-child,
+    .about-story__lead {
+      color: var(--text-soft);
+      font-weight: 700;
+    }
+
+    .about-story__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .about-media {
+      padding: 20px;
+      height: auto;
+    }
+
+    .about-media__item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-lg);
+      background: #0a1423;
+      height: 233px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .about-media__item:hover {
+      transform: scale(1.02);
+    }
+
+    .about-media__item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(9, 18, 33, 0.02), rgba(9, 18, 33, 0.18)),
+        radial-gradient(circle at center, transparent 58%, rgba(7, 14, 28, 0.16) 100%);
+    }
+
+    .about-media__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .about-media__item:nth-child(1),
+    .about-media__item:nth-child(2) {
+      grid-column: span 2;
+    }
+
+    .about-media__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Lightbox Styles */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(7, 17, 29, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      backdrop-filter: blur(10px);
+      padding: 20px;
+    }
+
+    .lightbox.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox__content {
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox__media {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .lightbox__close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: #fff;
+      font-size: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .lightbox__close svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .footer {
+      padding: 28px 0 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(5, 11, 20, 0.4);
+      backdrop-filter: blur(12px);
+    }
+
+    .footer__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer__logo {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .footer__text {
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .footer__email {
+      color: #a9beff;
+      font-weight: 700;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1180px) {
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 16px;
+        right: 16px;
+        padding: 18px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(8, 17, 31, 0.94);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .nav.is-open {
+        display: flex;
+      }
+
+      .nav__links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .nav__actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .lang-switcher {
+        width: 100%;
+      }
+
+      .lang-switcher__button {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .lang-switcher__menu {
+        position: static;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .burger {
+        display: inline-flex;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .header {
+        padding: 14px 16px;
+      }
+
+      .container {
+        padding-inline: 16px;
+      }
+
+      .about-page {
+        padding: 72px 0;
+      }
+
+      .about-story,
+      .about-media {
+        padding: 24px 20px;
+      }
+
+      .about-story__title {
+        font-size: 30px;
+      }
+
+      .about-story__text p {
+        font-size: 15px;
+        line-height: 1.72;
+      }
+
+      .about-media__hero {
+        min-height: 240px;
+      }
+
+      .about-media__grid {
+        gap: 12px;
+      }
+
+      .about-media__item {
+        min-height: 120px;
+      }
+
+      .about-story__actions .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .logo__subtitle {
+        display: none;
+      }
+
+      .logo__title {
+        font-size: 15px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <div class="header-wrap">
+      <header class="header" aria-label="Шапка сайта">
+        <a href="index.html#hero" class="logo" aria-label="Vengeea">
+          <img class="logo__image" src="./logo-recreated (1).png" alt="Логотип компании" />
+          <span class="logo__text-group">
+            <span class="logo__title" data-i18n="logoTitle">AI Platform</span>
+            <span class="logo__subtitle" data-i18n="logoSubtitle">Видеоаналитика для объектов и инфраструктуры</span>
+          </span>
+        </a>
+
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                          <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <nav class="nav" id="main-nav" aria-label="Основная навигация">
+          <div class="nav__links">
+            <a class="nav__link" href="./index.html#hero" data-i18n="navHome">Главная</a>
+            <a class="nav__link is-active" href="./about-draft.html" data-i18n="navAbout">О нас</a>
+            <a class="nav__link" href="./modules.html" data-i18n="navModules">Модули</a>
+            <a class="nav__link" href="./calculator.html" data-i18n="navCalculator">Калькулятор</a>
+            <a class="nav__link" href="./contact_us.html" data-i18n="navContacts">Контакты</a>
+          </div>
+
+          <div class="nav__actions">
+            <div class="lang-switcher" id="langSwitcher">
+              <button
+                class="lang-switcher__button"
+                id="langButton"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="langMenu"
+              >
+                <span class="lang-switcher__current" id="langCurrentFlag">🇷🇺</span>
+                <span class="lang-switcher__current-text" id="langCurrentText">RU</span>
+                <svg class="lang-switcher__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <div class="lang-switcher__menu" id="langMenu" role="menu" aria-label="Выбор языка">
+                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
+                  <span class="lang-switcher__flag">🇷🇺</span>
+                  <span class="lang-switcher__label">Русский</span>
+                </button>
+                <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
+                  <span class="lang-switcher__flag">🇬🇧</span>
+                  <span class="lang-switcher__label">English</span>
+                </button>
+                <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
+                  <span class="lang-switcher__flag">🇨🇳</span>
+                  <span class="lang-switcher__label">中文</span>
+                </button>
+                <button class="lang-switcher__option" type="button" data-lang="kk" role="menuitem">
+                  <span class="lang-switcher__flag">🇰🇿</span>
+                  <span class="lang-switcher__label">Қазақша</span>
+                </button>
+              </div>
+            </div>
+
+            <a class="btn btn--primary" href="mailto:support@vengeea.com" data-i18n="requestSolution">Запросить решение</a>
+          </div>
+        </nav>
+      </header>
+    </div>
+
+    <main>
+      <section id="about" class="about-page">
+        <div class="container">
+          <div class="about-layout">
+            <article class="about-story panel">
+              <div class="about-story__badge" id="about-badge">О нас</div>
+
+              <h1 class="about-story__title" id="about-title">
+                С чего началась наша история
+              </h1>
+
+              <div class="about-story__text" id="about-text">
+                <p class="about-story__lead">Лето 2024 года. Амиачный завод. Ночная смена.</p>
+                <p>Наш помощник Илья заступил в дежурство ещё вечером. К трём ночи всё уже шло по привычному сценарию. Самая обычная тишина в цехах, редкие сигналы по системе, однообразная картинка с камер. Он сидел в операторской, пил остывший кофе и время от времени пролистывал экраны. Ничего необычного. Та самая смена, когда ждёшь, что до утра так ничего и не произойдёт.</p>
+                <p>В какой-то момент система подсветила участок на одной из линий. Без звука тревоги, без резких сигналов, а просто самая обычная отметка, что в зоне появилось отклонение. Илья даже не сразу переключился. На камере это выглядело как лёгкое искажение, почти как блик. Ничего, что однозначно говорило бы о проблеме. Но, он всё-таки открыл этот поток, посмотрел внимательнее. Картинка оставалась спокойной. Ни дыма, ни явных признаков утечки. В обычной ситуации на этом всё бы и закончилось, Илья бы отметил бы как "шум" и пошёл дальше.</p>
+                <p>Но система не убрала метку. Наоборот, она продолжала держать этот участок в фокусе.</p>
+                <p>Через несколько секунд пришло уведомление, что уровень риска вырос. Не критично, но уже достаточно, чтобы не игнорировать.</p>
+                <p>Илья нахмурился, отставил кружку и вернулся к экрану. Что-то в этом было не так. Не визуально — логически. Система явно "видела" больше, чем он. Он увеличил изображение, переключил пару ракурсов, но по-прежнему не находил очевидной причины. И всё же решил не откладывать, и передал информацию инженерам и попросил проверить участок.</p>
+                <p>Когда бригада подошла к линии, утечка уже начинала проявляться. Хоть и слабая, но реальная. Её удалось локализовать практически сразу, до того, как она переросла в проблему.</p>
+                <p>Если бы её заметили позже, хотя бы через десять–пятнадцать минут, ситуация могла бы развиваться совсем иначе. Для таких объектов это не просто инцидент, а цепочка последствий: утечки, остановка производства, проверки, суды, страховые разбирательства, многомиллионные потери. И каждый раз, на кону стоит репутация, которую невозможно восстановить полностью.</p>
+                <p>Илья потом ещё долго смотрел на тот самый фрагмент записи. Визуально там по-прежнему почти ничего не было. Но система это увидела.</p>
+                <p>И в ту ночь самым важным было не то, что произошло. А то, что не успело произойти. И тогда, наша компания поняла, что назад пути нет: Нужно создавать решения, которые действительно нужны людям. Потому что мы не единственные, кто сталкивается с такими ситуациями.</p>
+                <p>В мире тысячи подобных объектов и риск у всех один и тот же.</p>
+              </div>
+
+              <div class="about-story__actions">
+                <a href="./contact_us.html" class="btn btn--primary" id="about-btn-primary">Запросить решение</a>
+                <a href="./contact_us.html" class="btn btn--secondary" id="about-btn-secondary">Связаться с нами</a>
+              </div>
+            </article>
+
+            <aside class="about-media panel" aria-label="Визуальные материалы истории">
+              <div class="about-media__grid">
+                <div class="about-media__item">
+                  <img class="about-media__image" src="./ilya-Monitroing.png" alt="Илья в операторской" />
+                </div>
+
+                <div class="about-media__item">
+                  <img class="about-media__image" src="./oil_spil.png" alt="Обнаружение утечки" />
+                </div>
+
+                <div class="about-media__item">
+                  <img class="about-media__image" src="./intrusion.png" alt="Обнаружение вторжения" />
+                </div>
+
+                <div class="about-media__item">
+                  <img class="about-media__image" src="./detection.png" alt="AI детекция" />
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contacts">
+      <div class="container">
+        <div class="footer__row">
+          <div class="footer__brand">
+            <img class="footer__logo" src="./logo-recreated (1).png" alt="Company logo" />
+            <div class="footer__text">
+              <strong style="display:block; color:#edf3ff; margin-bottom:4px;" data-i18n="footerTitle">AI video analytics platform</strong>
+              <span data-i18n="footerText">Leak detection and development toward predictive incident prevention</span>
+            </div>
+          </div>
+
+          <div class="footer__text">
+            <a class="footer__email" href="mailto:support@vengeea.com">support@vengeea.com</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <div class="lightbox__content">
+        <button class="lightbox__close" id="lightboxClose" aria-label="Закрыть">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div id="lightboxMediaContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const burger = document.getElementById("burger");
+      const nav = document.getElementById("main-nav");
+      const langSwitcher = document.getElementById("langSwitcher");
+      const langButton = document.getElementById("langButton");
+      const langMenu = document.getElementById("langMenu");
+      const langCurrentFlag = document.getElementById("langCurrentFlag");
+      const langCurrentText = document.getElementById("langCurrentText");
+
+      const languageMeta = {
+        ru: { code: "RU", flag: "🇷🇺", htmlLang: "ru" },
+        en: { code: "EN", flag: "🇬🇧", htmlLang: "en" },
+        zh: { code: "ZH", flag: "🇨🇳", htmlLang: "zh" },
+        kk: { code: "KK", flag: "🇰🇿", htmlLang: "kk" }
+      };
+
+      const translations = {
+        ru: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Видеоаналитика для объектов и инфраструктуры",
+          navHome: "Главная",
+          navAbout: "О нас",
+          navModules: "Модули",
+          navCalculator: "Калькулятор",
+          navContacts: "Контакты",
+          requestSolution: "Запросить решение",
+          footerTitle: "AI-платформа видеоаналитики",
+          footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
+        },
+        en: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Video analytics for facilities and infrastructure",
+          navHome: "Home",
+          navAbout: "About",
+          navModules: "Modules",
+          navCalculator: "Calculator",
+          navContacts: "Contacts",
+          requestSolution: "Request a Solution",
+          footerTitle: "AI video analytics platform",
+          footerText: "Leak detection and development toward predictive incident prevention"
+        },
+        zh: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "面向设施与基础设施的视频分析平台",
+          navHome: "首页",
+          navAbout: "关于我们",
+          navModules: "模块",
+          navCalculator: "计算器",
+          navContacts: "联系我们",
+          requestSolution: "申请解决方案",
+          footerTitle: "AI 视频分析平台",
+          footerText: "泄漏检测以及向预测性事故预防方向发展"
+        },
+        kk: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Нысандар мен инфрақұрылымға арналған бейнеаналитика",
+          navHome: "Басты бет",
+          navAbout: "Біз туралы",
+          navModules: "Модульдер",
+          navCalculator: "Калькулятор",
+          navContacts: "Байланыс",
+          requestSolution: "Шешім сұрау",
+          footerTitle: "AI-бейнеаналитика платформасы",
+          footerText: "Ағып кетуді анықтау және инциденттердің алдын алуға бағытталған даму"
+        }
+      };
+
+      const aboutTranslations = {
+        ru: {
+          badge: "О нас",
+          title: "С чего началась наша история",
+          text: [
+            "Лето 2024 года. Амиачный завод. Ночная смена.",
+            "Наш помощник Илья заступил в дежурство ещё вечером. К трём ночи всё уже шло по привычному сценарию. Самая обычная тишина в цехах, редкие сигналы по системе, однообразная картинка с камер. Он сидел в операторской, пил остывший кофе и время от времени пролистывал экраны. Ничего необычного. Та самая смена, когда ждёшь, что до утра так ничего и не произойдёт.",
+            "В какой-то момент система подсветила участок на одной из линий. Без звука тревоги, без резких сигналов, а просто самая обычная отметка, что в зоне появилось отклонение. Илья даже не сразу переключился. На камере это выглядело как лёгкое искажение, почти как блик. Ничего, что однозначно говорило бы о проблеме. Но он всё-таки открыл этот поток, посмотрел внимательнее. Картинка оставалась спокойной. Ни дыма, ни явных признаков утечки. В обычной ситуации на этом всё бы и закончилось, Илья бы отметил это как шум и пошёл дальше.",
+            "Но система не убрала метку. Наоборот, она продолжала держать этот участок в фокусе.",
+            "Через несколько секунд пришло уведомление, что уровень риска вырос. Не критично, но уже достаточно, чтобы не игнорировать.",
+            "Илья нахмурился, отставил кружку и вернулся к экрану. Что-то в этом было не так. Не визуально — логически. Система явно видела больше, чем он. Он увеличил изображение, переключил пару ракурсов, но по-прежнему не находил очевидной причины. И всё же решил не откладывать, и передал информацию инженерам и попросил проверить участок.",
+            "Когда бригада подошла к линии, утечка уже начинала проявляться. Хоть и слабая, но реальная. Её удалось локализовать практически сразу, до того, как она переросла в проблему.",
+            "Если бы её заметили позже, хотя бы через десять–пятнадцать минут, ситуация могла бы развиваться совсем иначе. Для таких объектов это не просто инцидент, а цепочка последствий: утечки, остановка производства, проверки, суды, страховые разбирательства, многомиллионные потери. И каждый раз, на кону стоит репутация, которую невозможно восстановить полностью.",
+            "Илья потом ещё долго смотрел на тот самый фрагмент записи. Визуально там по-прежнему почти ничего не было. Но система это увидела.",
+            "И в ту ночь самым важным было не то, что произошло. А то, что не успело произойти. И тогда наша компания поняла, что назад пути нет: нужно создавать решения, которые действительно нужны людям. Потому что мы не единственные, кто сталкивается с такими ситуациями.",
+            "В мире тысячи подобных объектов и риск у всех один и тот же."
+          ],
+          btnPrimary: "Запросить решение",
+          btnSecondary: "Связаться с нами"
+        },
+
+        en: {
+          badge: "About Us",
+          title: "Where our story began",
+          text: [
+            "Summer 2024. Ammonia plant. Night shift.",
+            "Our operator, Ilya, started his shift earlier that evening. By 3 a.m., everything was following the usual pattern. The familiar silence in the workshops, occasional system alerts, and the same repetitive camera feeds. He sat in the control room, drinking coffee that had already gone cold and scrolling through the screens from time to time. Nothing unusual. The kind of shift when you expect absolutely nothing to happen before morning.",
+            "At one point, the system highlighted a section on one of the lines. No alarm sound, no sharp warning — just an ordinary mark showing that a deviation had appeared in the area. Ilya did not even switch to it right away. On the camera, it looked like a slight distortion, almost like a glare. Nothing that clearly suggested a problem. Still, he opened the stream and looked more closely. The image remained calm. No smoke, no obvious signs of a leak. Under normal circumstances, that would have been the end of it — he would have marked it as noise and moved on.",
+            "But the system did not remove the mark. On the contrary, it kept that area in focus.",
+            "A few seconds later, a notification came in saying that the risk level had increased. Not critical, but already enough not to ignore.",
+            "Ilya frowned, set his cup aside, and returned to the screen. Something about it felt wrong. Not visually, but logically. The system was clearly seeing more than he was. He zoomed in, switched between a couple of angles, but still could not find an obvious cause. Even so, he decided not to delay and passed the information to the engineers, asking them to inspect the section.",
+            "By the time the team reached the line, the leak was already beginning to appear. Still weak, but real. It was localized almost immediately, before it had time to turn into a larger problem.",
+            "If it had been noticed later, even ten or fifteen minutes later, the situation could have developed very differently. For facilities like this, it is never just an incident. It becomes a chain of consequences: leaks, production shutdowns, inspections, court cases, insurance disputes, multimillion losses. And every time, the company's reputation is on the line — something that can never be fully restored.",
+            "Ilya kept looking at that same fragment of recording for a long time afterward. Visually, there was still almost nothing there. But the system had seen it.",
+            "And that night, what mattered most was not what happened. It was what did not have time to happen. That was the moment our company understood there was no turning back: we had to build solutions that people truly need. Because we are not the only ones facing situations like this.",
+            "There are thousands of similar facilities in the world, and the risk is the same for all of them."
+          ],
+          btnPrimary: "Request a Solution",
+          btnSecondary: "Contact Us"
+        },
+
+        zh: {
+          badge: "关于我们",
+          title: "我们的故事从这里开始",
+          text: [
+            "2024年夏天。氨工厂。夜班。",
+            "我们的操作员伊利亚那天傍晚就开始值班。凌晨三点左右，一切仍按惯例进行。车间里是一如既往的安静，系统偶尔发出信号，监控画面也始终单调重复。他坐在控制室里，喝着已经凉掉的咖啡，不时翻看着屏幕。没有任何异常。那种你会觉得一直到天亮都不会发生任何事情的夜班。",
+            "某一刻，系统在其中一条生产线上标记出了一个区域。没有警报声，没有刺耳的告警，只是一个普通提示，显示该区域出现了偏差。伊利亚起初甚至没有立刻切换过去。在画面上，那看起来只是轻微的图像扭曲，几乎像一道反光。没有任何明确表明问题的迹象。尽管如此，他还是打开了这一路视频，仔细看了一遍。画面依旧很平静。没有烟雾，也没有明显的泄漏迹象。按正常情况，这里本该就此结束——他会把它标记为"噪声"，然后继续往下看。",
+            "但系统并没有取消这个标记。相反，它一直将这个区域保持在关注之中。",
+            "几秒钟后，系统发来通知，提示风险等级已经上升。虽然还不到严重的程度，但已经足够让人不能忽视。",
+            "伊利亚皱起眉头，放下杯子，重新回到屏幕前。这里面有些不对劲。不是视觉上的，而是逻辑上的。系统显然比他看到了更多内容。他放大画面，又切换了几个角度，但仍然找不到明显的原因。即便如此，他还是决定不再拖延，将信息传给工程师，并要求他们去现场检查。",
+            "当工程小组赶到生产线时，泄漏已经开始显现。虽然仍然很轻微，但却是真实存在的。他们几乎立刻就将其控制住了，在它还来不及演变成更大问题之前。",
+            "如果再晚一点发现，哪怕只是晚了十到十五分钟，情况都可能完全不同。对于这样的设施来说，这绝不只是一个事件，而是一连串后果的开始：泄漏、停产、检查、诉讼、保险纠纷以及数百万级别的损失。每一次，押上的还有声誉，而声誉是无法被完全恢复的。",
+            "之后很久，伊利亚仍然反复看着那段录像。画面上几乎还是看不出什么。可是系统看到了。",
+            "而那天夜里，最重要的不是已经发生了什么，而是那些还未来得及发生的事情。就在那一刻，我们的公司明白了一件事：已经没有回头路了。我们必须创造真正被人需要的解决方案。因为遇到这种情况的，并不只有我们。",
+            "世界上有成千上万类似的设施，而它们面临的风险其实都一样。"
+          ],
+          btnPrimary: "申请解决方案",
+          btnSecondary: "联系我们"
+        },
+
+        kk: {
+          badge: "Біз туралы",
+          title: "Біздің тарихымыз осы жерден басталды",
+          text: [
+            "2024 жылдың жазы. Аммиак зауыты. Түнгі ауысым.",
+            "Біздің операторымыз Илья сол күні кешке кезекшілікке кіріскен еді. Түнгі үшке қарай бәрі әдеттегі сценариймен өтіп жатты. Цехтардағы үйреншікті тыныштық, жүйеден анда-санда келетін сигналдар, камералардағы бірсарынды көрініс. Ол оператор бөлмесінде отырып, суып қалған кофесін ішіп, экрандарды ара-тұра қарап шығатын. Ештеңе ерекше емес. Таң атқанша ештеңе болмайтындай көрінетін кәдімгі ауысымдардың бірі.",
+            "Бір кезде жүйе желілердің біріндегі учаскені белгіледі. Ешқандай дабыл дыбысы жоқ, ешқандай өткір сигнал жоқ, тек аймақта ауытқу пайда болғанын көрсеткен қарапайым белгі ғана. Илья бірден ауысып қарамады. Камерада бұл жеңіл бұрмалану сияқты, тіпті шағылысқан сәуле секілді көрінді. Мәселе бар екенін анық көрсететін ештеңе болмады. Соған қарамастан, ол бұл ағынды ашып, мұқият қарап шықты. Көрініс әлі де тыныш еді. Түтін де жоқ, ағып кетудің айқын белгісі де жоқ. Қалыпты жағдайда бәрі осымен аяқталар еді: ол мұны «шу» деп белгілеп, ары қарай жүре берер еді.",
+            "Бірақ жүйе белгіні алып тастамады. Керісінше, сол аймақты назарда ұстай берді.",
+            "Бірнеше секундтан кейін тәуекел деңгейінің өскені туралы хабарлама келді. Бұл әлі сыни деңгей емес еді, бірақ елемеуге болмайтын деңгейге жетті.",
+            "Илья қабағын түйіп, кружкасын шетке қойып, қайтадан экранға оралды. Мұнда бір нәрсе дұрыс емес еді. Көрініс жағынан емес, логика жағынан. Жүйе оның өзінен көбірек көріп тұрғандай болды. Ол суретті үлкейтті, бірнеше ракурсты ауыстырды, бірақ бәрібір анық себеп таба алмады. Соған қарамастан, кейінге қалдырмай, инженерлерге ақпаратты беріп, сол учаскені тексеруді сұрады.",
+            "Бригада желіге жеткенде, ағып кету енді ғана байқала бастаған еді. Әлсіз болса да, шынайы болатын. Оны үлкен мәселеге айналмай тұрып, бірден дерлік оқшаулап үлгерді.",
+            "Егер оны кейінірек байқаса, тіпті он-он бес минутқа кешіксе де, жағдай мүлде басқаша өрбуі мүмкін еді. Мұндай объектілер үшін бұл жай ғана оқиға емес. Бұл салдардың тұтас тізбегі: ағып кету, өндірістің тоқтауы, тексерулер, соттар, сақтандыру даулары, миллиондаған шығын. Әр жолы қауіпке тек ақша ғана емес, толық қалпына келмейтін бедел де тігіледі.",
+            "Содан кейін Илья сол жазбаның дәл сол үзіндісіне ұзақ қарап отырды. Көзге әлі де ештеңе көрінбейтіндей еді. Бірақ жүйе оны көрді.",
+            "Сол түні ең маңыздысы не болғаны емес еді. Ең маңыздысы — не болып үлгермегені. Дәл сол сәтте біздің компания кері жол жоқ екенін түсінді: біз адамдарға шынымен қажет шешімдерді жасауымыз керек еді. Өйткені мұндай жағдайлармен тек біз ғана бетпе-бет келіп отырған жоқпыз.",
+            "Әлемде осындай мыңдаған нысан бар, ал олардың тәуекелі бірдей."
+          ],
+          btnPrimary: "Шешім сұрау",
+          btnSecondary: "Бізбен байланысу"
+        }
+      };
+
+      function renderAboutText(paragraphs) {
+        return paragraphs.map(function (paragraph, index) {
+          const leadClass = index === 0 ? ' class="about-story__lead"' : '';
+          return '<p' + leadClass + '>' + paragraph + '</p>';
+        }).join('');
+      }
+
+      function setAboutLanguage(lang) {
+        const data = aboutTranslations[lang] || aboutTranslations.ru;
+
+        document.getElementById("about-badge").textContent = data.badge;
+        document.getElementById("about-title").textContent = data.title;
+        document.getElementById("about-btn-primary").textContent = data.btnPrimary;
+        document.getElementById("about-btn-secondary").textContent = data.btnSecondary;
+        
+        const visualMain = document.getElementById("about-visual-main");
+        if (visualMain) visualMain.textContent = data.visualMain;
+        
+        const visual1 = document.getElementById("about-visual-1");
+        if (visual1) visual1.textContent = data.visual1;
+        
+        const visual2 = document.getElementById("about-visual-2");
+        if (visual2) visual2.textContent = data.visual2;
+        
+        const visual3 = document.getElementById("about-visual-3");
+        if (visual3) visual3.textContent = data.visual3;
+        
+        const visual4 = document.getElementById("about-visual-4");
+        if (visual4) visual4.textContent = data.visual4;
+
+        document.getElementById("about-text").innerHTML = renderAboutText(data.text);
+      }
+
+      function applyTranslations(lang) {
+        const dict = translations[lang] || translations.ru;
+        const meta = languageMeta[lang] || languageMeta.ru;
+
+        document.documentElement.lang = meta.htmlLang;
+        langCurrentFlag.textContent = meta.flag;
+        langCurrentText.textContent = meta.code;
+
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key]) {
+            el.textContent = dict[key];
+          }
+        });
+
+        try { setAboutLanguage(lang); } catch(e) {}
+        try { localStorage.setItem("site-language", lang); } catch(e) {}
+      }
+
+      if (burger && nav) {
+        burger.addEventListener("click", function () {
+          const isOpen = nav.classList.toggle("is-open");
+          document.body.classList.toggle("menu-open", isOpen);
+          burger.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        nav.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            nav.classList.remove("is-open");
+            document.body.classList.remove("menu-open");
+            burger.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+
+      if (langSwitcher && langButton && langMenu) {
+        langButton.addEventListener("click", function (event) {
+          event.stopPropagation();
+          const isOpen = langSwitcher.classList.toggle("is-open");
+          langButton.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        langMenu.querySelectorAll("[data-lang]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            const lang = button.getAttribute("data-lang");
+            applyTranslations(lang);
+            langSwitcher.classList.remove("is-open");
+            langButton.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        document.addEventListener("click", function (event) {
+          if (!langSwitcher.contains(event.target)) {
+            langSwitcher.classList.remove("is-open");
+            langButton.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
+
+      const reveals = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          function (entries, obs) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.14,
+            rootMargin: "0px 0px -40px 0px"
+          }
+        );
+
+        reveals.forEach(function (item) {
+          observer.observe(item);
+        });
+      } else {
+        reveals.forEach(function (item) {
+          item.classList.add("is-visible");
+        });
+      }
+
+      var savedLanguage = "ru";
+      try { savedLanguage = localStorage.getItem("site-language") || "ru"; } catch(e) {}
+      try { applyTranslations(savedLanguage); } catch(e) {}
+      // Lightbox Logic
+      const lightbox = document.getElementById("lightbox");
+      const lightboxClose = document.getElementById("lightboxClose");
+      const lightboxMediaContainer = document.getElementById("lightboxMediaContainer");
+      const mediaItems = document.querySelectorAll(".about-media__item");
+
+      function openLightbox(src, type) {
+        lightboxMediaContainer.innerHTML = "";
+        let media;
+        if (type === "video") {
+          media = document.createElement("video");
+          media.src = src;
+          media.controls = true;
+          media.autoplay = true;
+        } else {
+          media = document.createElement("img");
+          media.src = src;
+        }
+        media.className = "lightbox__media";
+        lightboxMediaContainer.appendChild(media);
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxMediaContainer.innerHTML = "";
+        document.body.style.overflow = "";
+      }
+
+      mediaItems.forEach(item => {
+        item.addEventListener("click", () => {
+          const img = item.querySelector("img");
+          const video = item.querySelector("video");
+          if (img) openLightbox(img.src, "image");
+          else if (video) openLightbox(video.src, "video");
+        });
+      });
+
+      if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
+      if (lightbox) {
+        lightbox.addEventListener("click", (e) => {
+          if (e.target === lightbox) closeLightbox();
+        });
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("is-open")) closeLightbox();
+      });
+    })();
+  </script>
+</body>
+</html>

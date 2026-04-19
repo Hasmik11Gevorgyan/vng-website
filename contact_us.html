@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vengeea | Contact Us</title>
+  <meta
+    name="description"
+    content="Contact us to discuss AI video analytics modules for your facility."
+  />
+  <meta name="theme-color" content="#07111d" />
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init({
+        publicKey: "pR5y1_WuJwFbkeUbK",
+      });
+    })();
+  </script>
+
+  <style>
+    :root {
+      --bg: #07111d;
+      --bg-deep: #081423;
+      --text: #edf3ff;
+      --text-soft: #dce8fb;
+      --text-muted: #a7bad8;
+      --text-dim: #7d91b0;
+
+      --line: rgba(255, 255, 255, 0.08);
+
+      --blue: #3f7cff;
+      --blue-soft: #7ea7ff;
+      --green: #47dd8c;
+      --green-soft: #8cf0b6;
+
+      --purple: #7c5cff;
+      --purple-soft: #9c87ff;
+
+      --shadow-xl: 0 30px 90px rgba(0, 0, 0, 0.34);
+      --shadow-lg: 0 20px 65px rgba(0, 0, 0, 0.24);
+      --shadow-purple: 0 18px 50px rgba(124, 92, 255, 0.28);
+
+      --radius-sm: 16px;
+      --radius-md: 20px;
+      --radius-lg: 26px;
+      --radius-xl: 32px;
+      --radius-pill: 999px;
+
+      --container: 1320px;
+
+      --transition-fast: 0.22s ease;
+      --transition-main: 0.3s ease;
+      --transition-slow: 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(73, 126, 255, 0.18), transparent 22%),
+        linear-gradient(180deg, #06111c 0%, #081321 45%, #07111d 100%);
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    img,
+    video {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .site {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .site::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(126, 167, 255, 0.08), transparent 18%),
+        radial-gradient(circle at 80% 25%, rgba(91, 226, 255, 0.07), transparent 16%);
+    }
+
+    .container {
+      width: min(100%, var(--container));
+      margin: 0 auto;
+      padding-inline: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 58px;
+      padding: 0 26px;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        opacity var(--transition-fast);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn--primary {
+      color: #fff;
+      background: linear-gradient(180deg, var(--purple-soft), var(--purple));
+      box-shadow: var(--shadow-purple);
+    }
+
+    .btn--secondary {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn--secondary:hover {
+      border-color: rgba(126, 167, 255, 0.28);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .header-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(180deg, rgba(6, 12, 24, 0.82), rgba(6, 12, 24, 0.46));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header {
+      width: min(100%, var(--container));
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      position: relative;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 180px;
+      flex-shrink: 0;
+    }
+
+    .logo__image {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .logo__text-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo__title {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #fff 0%, var(--blue-soft) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      display: inline-block;
+    }
+
+    .logo__subtitle {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: 0.03em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .nav__link {
+      color: var(--text-soft);
+      font-size: 15px;
+      font-weight: 700;
+      opacity: 0.95;
+      transition: color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+    }
+
+    .nav__link:hover,
+    .nav__link.is-active {
+      color: #fff;
+      transform: translateY(-1px);
+      opacity: 1;
+    }
+
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .burger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .burger svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .lang-switcher {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .lang-switcher__button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      cursor: pointer;
+      transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .lang-switcher__button:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(126, 167, 255, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .lang-switcher__current {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .lang-switcher__current-text {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lang-switcher__arrow {
+      width: 18px;
+      height: 18px;
+      opacity: 0.9;
+      transition: transform var(--transition-fast);
+    }
+
+    .lang-switcher.is-open .lang-switcher__arrow {
+      transform: rotate(180deg);
+    }
+
+    .lang-switcher__menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 220px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 17, 31, 0.98);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(16px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition:
+        opacity var(--transition-fast),
+        visibility var(--transition-fast),
+        transform var(--transition-fast);
+      z-index: 120;
+    }
+
+    .lang-switcher.is-open .lang-switcher__menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .lang-switcher__option {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text-soft);
+      text-align: left;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .lang-switcher__option:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .lang-switcher__flag {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .lang-switcher__label {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .contact-hero {
+      position: relative;
+      min-height: calc(100vh - 86px);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 42px 0 64px;
+    }
+
+    .contact-hero__video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .contact-hero__video {
+      position: absolute;
+      inset: -5%;
+      width: 110%;
+      height: 110%;
+      object-fit: cover;
+      filter: blur(22px) brightness(0.44) saturate(0.82);
+      transform: scale(1.08);
+    }
+
+    .contact-hero__video--secondary {
+      opacity: 0.42;
+      mix-blend-mode: screen;
+      animation: pulseVideo 14s ease-in-out infinite alternate;
+    }
+
+    .contact-hero__video--primary {
+      opacity: 0.78;
+      animation: driftVideo 18s ease-in-out infinite alternate;
+    }
+
+    .contact-hero__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 68% 28%, rgba(124, 92, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 18% 22%, rgba(63, 124, 255, 0.14), transparent 20%),
+        linear-gradient(180deg, rgba(6, 12, 24, 0.38), rgba(6, 12, 24, 0.74) 55%, rgba(6, 12, 24, 0.94) 100%);
+      pointer-events: none;
+    }
+
+    .contact-hero__glow {
+      position: absolute;
+      z-index: 1;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.34;
+      pointer-events: none;
+    }
+
+    .contact-hero__glow--left {
+      top: 12%;
+      left: -120px;
+      background: radial-gradient(circle, rgba(63, 124, 255, 0.42), transparent 70%);
+    }
+
+    .contact-hero__glow--right {
+      right: -120px;
+      bottom: 10%;
+      background: radial-gradient(circle, rgba(124, 92, 255, 0.42), transparent 70%);
+    }
+
+    .contact-hero__content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(460px, 0.9fr);
+      gap: 28px;
+      align-items: center;
+    }
+
+    .contact-copy {
+      max-width: 700px;
+    }
+
+    .contact-copy__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+      background: rgba(126, 167, 255, 0.09);
+      border: 1px solid rgba(126, 167, 255, 0.14);
+      color: var(--blue-soft);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+    }
+
+    .contact-copy__title {
+      margin: 0;
+      font-size: clamp(38px, 5.5vw, 68px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      font-weight: 950;
+      text-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+    }
+
+    .contact-copy__text {
+      max-width: 680px;
+      margin: 22px 0 0;
+      color: var(--text-soft);
+      font-size: 19px;
+      line-height: 1.72;
+      text-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    .contact-copy__stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .contact-stat {
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-stat__value {
+      color: #fff;
+      font-size: clamp(22px, 2vw, 28px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .contact-stat__label {
+      margin-top: 8px;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .contact-card {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(18, 31, 54, 0.78), rgba(8, 17, 31, 0.94));
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+      transform: translateY(0);
+      transition: transform var(--transition-main), box-shadow var(--transition-main);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 38px 110px rgba(0, 0, 0, 0.38);
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top right, rgba(126, 167, 255, 0.14), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(124, 92, 255, 0.12), transparent 26%);
+    }
+
+    .contact-card__head {
+      position: relative;
+      z-index: 1;
+      padding: 24px 28px 0;
+    }
+
+    .contact-card__title {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.12;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .contact-card__text {
+      margin: 10px 0 0;
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    .contact-form {
+      position: relative;
+      z-index: 1;
+      padding: 24px 28px 28px;
+    }
+
+    .contact-form__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field--full {
+      grid-column: 1 / -1;
+    }
+
+    .field__label {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--text-soft);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .field__input {
+      width: 100%;
+      min-height: 58px;
+      padding: 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      outline: none;
+      transition:
+        border-color var(--transition-fast),
+        background var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .field__input::placeholder {
+      color: rgba(220, 232, 251, 0.46);
+    }
+
+    .field__input:focus {
+      border-color: rgba(126, 167, 255, 0.34);
+      background: rgba(255, 255, 255, 0.07);
+      box-shadow: 0 0 0 4px rgba(63, 124, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .field__select {
+      appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.6)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+      background-size: 20px;
+      padding-right: 46px;
+    }
+
+    .field__select option {
+      background-color: var(--bg-deep);
+      color: #fff;
+    }
+
+    .field__textarea {
+      min-height: 148px;
+      resize: vertical;
+    }
+
+    .field__error {
+      min-height: 20px;
+      padding-top: 8px;
+      color: #ff9d9d;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .contact-form__actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .contact-form__submit {
+      min-width: 220px;
+    }
+
+    .contact-form__note {
+      color: var(--text-dim);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .contact-form__success {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(71, 221, 140, 0.16);
+      background: rgba(71, 221, 140, 0.08);
+      color: #d9ffe9;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .footer {
+      padding: 28px 0 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(5, 11, 20, 0.4);
+      backdrop-filter: blur(12px);
+    }
+
+    .footer__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer__logo {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .footer__text {
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .footer__email {
+      color: #a9beff;
+      font-weight: 700;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulseVideo {
+      0% {
+        transform: scale(1.04) translate3d(0, 0, 0);
+      }
+      100% {
+        transform: scale(1.1) translate3d(1.5%, -1.5%, 0);
+      }
+    }
+
+    @keyframes driftVideo {
+      0% {
+        transform: scale(1.08) translate3d(0, 0, 0);
+      }
+      100% {
+        transform: scale(1.14) translate3d(-2%, 2%, 0);
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-copy {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 16px;
+        right: 16px;
+        padding: 18px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(8, 17, 31, 0.94);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .nav.is-open {
+        display: flex;
+      }
+
+      .nav__links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .nav__actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .lang-switcher {
+        width: 100%;
+      }
+
+      .lang-switcher__button {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .lang-switcher__menu {
+        position: static;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .burger {
+        display: inline-flex;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .header {
+        padding: 14px 16px;
+      }
+
+      .container {
+        padding-inline: 16px;
+      }
+
+      .contact-hero {
+        min-height: auto;
+        padding-top: 28px;
+      }
+
+      .contact-copy__stats {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card__head,
+      .contact-form {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .contact-form__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .logo__subtitle {
+        display: none;
+      }
+
+      .logo__title {
+        font-size: 14px;
+      }
+
+      .contact-copy__title {
+        font-size: 38px;
+      }
+
+      .contact-copy__text {
+        font-size: 17px;
+      }
+
+      .contact-card__title {
+        font-size: 24px;
+      }
+
+      .contact-form__submit {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <div class="header-wrap">
+      <header class="header" aria-label="Site header">
+        <a href="index.html#hero" class="logo" aria-label="Go to main screen">
+          <img class="logo__image" src="./logo-recreated (1).png" alt="Company logo" />
+          <span class="logo__text-group">
+            <span class="logo__title" data-i18n="logoTitle">AI Platform</span>
+            <span class="logo__subtitle" data-i18n="logoSubtitle">Видеоаналитика для объектов и инфраструктуры</span>
+          </span>
+        </a>
+
+        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <nav class="nav" id="main-nav" aria-label="Main navigation">
+          <div class="nav__links">
+            <a class="nav__link" href="./index.html#hero" data-i18n="navHome">Главная</a>
+            <a class="nav__link" href="./index.html#about" data-i18n="navAbout">О нас</a>
+            <a class="nav__link" href="./modules.html" data-i18n="navModules">Модули</a>
+            <a class="nav__link" href="./calculator.html" data-i18n="navCalculator">Калькулятор</a>
+            <a class="nav__link is-active" href="./contact_us.html" data-i18n="navContacts">Контакты</a>
+          </div>
+
+          <div class="nav__actions">
+            <div class="lang-switcher" id="langSwitcher">
+              <button
+                class="lang-switcher__button"
+                id="langButton"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="langMenu"
+              >
+                <span class="lang-switcher__current" id="langCurrentFlag">🇷🇺</span>
+                <span class="lang-switcher__current-text" id="langCurrentText">RU</span>
+                <svg class="lang-switcher__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <div class="lang-switcher__menu" id="langMenu" role="menu" aria-label="Language selection">
+                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
+                  <span class="lang-switcher__flag">🇷🇺</span>
+                  <span class="lang-switcher__label">Русский</span>
+                </button>
+
+                <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
+                  <span class="lang-switcher__flag">🇬🇧</span>
+                  <span class="lang-switcher__label">English</span>
+                </button>
+
+                <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
+                  <span class="lang-switcher__flag">🇨🇳</span>
+                  <span class="lang-switcher__label">中文</span>
+                </button>
+
+                <button class="lang-switcher__option" type="button" data-lang="kk" role="menuitem">
+                  <span class="lang-switcher__flag">🇰🇿</span>
+                  <span class="lang-switcher__label">Қазақша</span>
+                </button>
+              </div>
+            </div>
+
+            <a class="btn btn--primary" href="./contact_us.html" data-i18n="requestSolution">Запросить решение</a>
+          </div>
+        </nav>
+      </header>
+    </div>
+
+    <main>
+      <section class="contact-hero" aria-labelledby="contact-title">
+        <div class="contact-hero__video-wrap" aria-hidden="true">
+          <video class="contact-hero__video contact-hero__video--primary" autoplay muted loop playsinline preload="auto">
+            <source src="./leak_video.MP4" type="video/mp4" />
+          </video>
+
+          <video class="contact-hero__video contact-hero__video--secondary" autoplay muted loop playsinline preload="auto">
+            <source src="./intrusion_video.MP4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="contact-hero__overlay"></div>
+        <div class="contact-hero__glow contact-hero__glow--left"></div>
+        <div class="contact-hero__glow contact-hero__glow--right"></div>
+
+        <div class="contact-hero__content">
+          <div class="container">
+            <div class="contact-layout">
+              <div class="contact-copy">
+                <div class="contact-copy__eyebrow" data-i18n="contactEyebrow">Contact us</div>
+
+                <h1 class="contact-copy__title" id="contact-title" data-i18n="contactTitle">
+                  Tell us about your site — we’ll map the right AI scenario
+                </h1>
+
+                <p class="contact-copy__text" data-i18n="contactText">
+                  Share what you want to detect, how many cameras you use, and which risks matter most.
+                  We’ll help you choose the right modules and show how the solution can work in your real environment.
+                </p>
+
+                <div class="contact-copy__stats">
+                  <div class="contact-stat">
+                    <div class="contact-stat__value" data-i18n="stat1Value">24/7</div>
+                    <div class="contact-stat__label" data-i18n="stat1Label">Continuous monitoring logic for high-risk zones</div>
+                  </div>
+
+                  <div class="contact-stat">
+                    <div class="contact-stat__value" data-i18n="stat2Value">AI</div>
+                    <div class="contact-stat__label" data-i18n="stat2Label">Detection scenarios tailored to your facility type</div>
+                  </div>
+
+                  <div class="contact-stat">
+                    <div class="contact-stat__value" data-i18n="stat3Value">Fast</div>
+                    <div class="contact-stat__label" data-i18n="stat3Label">Quick response with a recommended next step</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="contact-card">
+                <div class="contact-card__head">
+                  <h2 class="contact-card__title" data-i18n="formTitle">Request a solution</h2>
+                  <p class="contact-card__text" data-i18n="formText">
+                    Fill out the form and we’ll contact you with a relevant module combination for your cameras, zones, and risks.
+                  </p>
+                </div>
+
+                <form class="contact-form" id="contactForm" novalidate>
+                  <div class="contact-form__grid">
+                    <div class="field">
+                      <label class="field__label" for="contactName" data-i18n="labelName">Name</label>
+                      <input
+                        class="field__input"
+                        id="contactName"
+                        name="name"
+                        type="text"
+                        autocomplete="name"
+                        required
+                      />
+                      <div class="field__error" id="errorName"></div>
+                    </div>
+
+                    <div class="field">
+                      <label class="field__label" for="contactEmail" data-i18n="labelEmail">Email</label>
+                      <input
+                        class="field__input"
+                        id="contactEmail"
+                        name="email"
+                        type="email"
+                        autocomplete="email"
+                        required
+                      />
+                      <div class="field__error" id="errorEmail"></div>
+                    </div>
+
+                    <div class="field">
+                      <label class="field__label" for="contactInterest" data-i18n="labelInterest">Interest</label>
+                      <select class="field__input field__select" id="contactInterest" name="interest" required>
+                        <option value="" data-i18n="optionChoose">Choose a module</option>
+                        <option value="leak" data-i18n="optionLeak">Liquid Leak</option>
+                        <option value="fire" data-i18n="optionFire">Smoke and Fire</option>
+                        <option value="intrusion" data-i18n="optionIntrusion">Intrusion</option>
+                        <option value="fight" data-i18n="optionFight">Fight and Vandalism</option>
+                        <option value="theft" data-i18n="optionTheft">Theft</option>
+                        <option value="multi" data-i18n="optionMulti">Several modules</option>
+                      </select>
+                      <div class="field__error" id="errorInterest"></div>
+                    </div>
+
+                    <div class="field">
+                      <label class="field__label" for="contactCameras" data-i18n="labelCameras">Number of cameras</label>
+                      <input
+                        class="field__input"
+                        id="contactCameras"
+                        name="cameras"
+                        type="number"
+                        min="1"
+                        step="1"
+                        inputmode="numeric"
+                        required
+                      />
+                      <div class="field__error" id="errorCameras"></div>
+                    </div>
+
+                    <div class="field field--full">
+                      <label class="field__label" for="contactMessage" data-i18n="labelMessage">Message *</label>
+                      <textarea
+                        class="field__input field__textarea"
+                        id="contactMessage"
+                        name="message"
+                        rows="6"
+                        required
+                      ></textarea>
+                      <div class="field__error" id="errorMessage"></div>
+                    </div>
+                  </div>
+
+                  <div class="contact-form__actions">
+                    <button class="btn btn--primary contact-form__submit" type="submit">
+                      <span data-i18n="sendRequest">Send request</span>
+                    </button>
+
+                    <div class="contact-form__note" data-i18n="contactNote">
+                      We’ll use this information only to contact you about your request.
+                    </div>
+                  </div>
+
+                  <div class="contact-form__success" id="contactSuccess" hidden data-i18n="successMessage">
+                    Your email draft is ready. Please confirm sending it in your mail app.
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__row">
+          <div class="footer__brand">
+            <img class="footer__logo" src="./logo-recreated (1).png" alt="Company logo" />
+            <div class="footer__text">
+              <strong style="display:block; color:#edf3ff; margin-bottom:4px;" data-i18n="footerTitle">AI video analytics platform</strong>
+              <span data-i18n="footerText">Leak detection and development toward predictive incident prevention</span>
+            </div>
+          </div>
+
+          <div class="footer__text">
+            <a class="footer__email" href="mailto:support@vengeea.com">support@vengeea.com</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const burger = document.getElementById("burger");
+      const nav = document.getElementById("main-nav");
+      const langSwitcher = document.getElementById("langSwitcher");
+      const langButton = document.getElementById("langButton");
+      const langCurrentFlag = document.getElementById("langCurrentFlag");
+      const langCurrentText = document.getElementById("langCurrentText");
+
+      const contactForm = document.getElementById("contactForm");
+      const contactName = document.getElementById("contactName");
+      const contactEmail = document.getElementById("contactEmail");
+      const contactInterest = document.getElementById("contactInterest");
+      const contactCameras = document.getElementById("contactCameras");
+      const contactMessage = document.getElementById("contactMessage");
+      const contactSuccess = document.getElementById("contactSuccess");
+
+      const errorName = document.getElementById("errorName");
+      const errorEmail = document.getElementById("errorEmail");
+      const errorInterest = document.getElementById("errorInterest");
+      const errorCameras = document.getElementById("errorCameras");
+      const errorMessage = document.getElementById("errorMessage");
+
+      const languageMeta = {
+        ru: { code: "RU", flag: "🇷🇺", htmlLang: "ru" },
+        en: { code: "EN", flag: "🇬🇧", htmlLang: "en" },
+        zh: { code: "ZH", flag: "🇨🇳", htmlLang: "zh" },
+        kk: { code: "KK", flag: "🇰🇿", htmlLang: "kk" }
+      };
+
+      const translations = {
+        ru: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Видеоаналитика для объектов и инфраструктуры",
+          navHome: "Главная",
+          navAbout: "О нас",
+          navModules: "Модули",
+          navCalculator: "Калькулятор",
+          navContacts: "Контакты",
+          requestSolution: "Запросить решение",
+
+          contactEyebrow: "Связаться с нами",
+          contactTitle: "Расскажите о вашем объекте — мы подберём правильный AI-сценарий",
+          contactText: "Опишите, что вы хотите обнаруживать, сколько камер вы используете и какие риски для вас наиболее критичны. Мы поможем выбрать подходящие модули и покажем, как решение будет работать именно в вашей инфраструктуре.",
+
+          stat1Value: "24/7",
+          stat1Label: "Непрерывная логика мониторинга для зон повышенного риска",
+          stat2Value: "AI",
+          stat2Label: "Сценарии обнаружения, адаптированные под тип вашего объекта",
+          stat3Value: "Быстро",
+          stat3Label: "Оперативный ответ и понятный следующий шаг",
+
+          formTitle: "Запросить решение",
+          formText: "Заполните форму — и мы свяжемся с вами с релевантной конфигурацией модулей под ваши камеры, зоны и риски.",
+
+          labelName: "Имя",
+          labelEmail: "Email",
+          labelInterest: "Интерес",
+          labelCameras: "Количество камер",
+          labelMessage: "Сообщение *",
+
+          optionChoose: "Выберите модуль",
+          optionLeak: "Утечка жидкости",
+          optionFire: "Дым и огонь",
+          optionIntrusion: "Вторжение",
+          optionFight: "Драка и вандализм",
+          optionTheft: "Воровство",
+          optionMulti: "Несколько модулей",
+
+          sendRequest: "Отправить запрос",
+          contactNote: "Мы используем эту информацию только для связи с вами по вашему запросу.",
+          successMessage: "Ваше сообщение отправлено",
+
+          errorNameRequired: "Пожалуйста, введите имя.",
+          errorEmailRequired: "Пожалуйста, введите email.",
+          errorEmailInvalid: "Введите корректный email.",
+          errorInterestRequired: "Пожалуйста, выберите модуль.",
+          errorCamerasRequired: "Пожалуйста, укажите количество камер.",
+          errorCamerasInvalid: "Введите число больше 0.",
+          errorMessageRequired: "Пожалуйста, напишите сообщение.",
+
+          footerTitle: "AI-платформа видеоаналитики",
+          footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
+        },
+
+        en: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Video analytics for facilities and infrastructure",
+          navHome: "Home",
+          navAbout: "About",
+          navModules: "Modules",
+          navCalculator: "Calculator",
+          navContacts: "Contacts",
+          requestSolution: "Request a solution",
+
+          contactEyebrow: "Contact us",
+          contactTitle: "Tell us about your site — we’ll map the right AI scenario",
+          contactText: "Share what you want to detect, how many cameras you use, and which risks matter most. We’ll help you choose the right modules and show how the solution can work in your real environment.",
+
+          stat1Value: "24/7",
+          stat1Label: "Continuous monitoring logic for high-risk zones",
+          stat2Value: "AI",
+          stat2Label: "Detection scenarios tailored to your facility type",
+          stat3Value: "Fast",
+          stat3Label: "Quick response with a recommended next step",
+
+          formTitle: "Request a solution",
+          formText: "Fill out the form and we’ll contact you with a relevant module combination for your cameras, zones, and risks.",
+
+          labelName: "Name",
+          labelEmail: "Email",
+          labelInterest: "Interest",
+          labelCameras: "Number of cameras",
+          labelMessage: "Message *",
+
+          optionChoose: "Choose a module",
+          optionLeak: "Liquid Leak",
+          optionFire: "Smoke and Fire",
+          optionIntrusion: "Intrusion",
+          optionFight: "Fight and Vandalism",
+          optionTheft: "Theft",
+          optionMulti: "Several modules",
+
+          sendRequest: "Send request",
+          contactNote: "We’ll use this information only to contact you about your request.",
+          successMessage: "Your message was sent",
+
+          errorNameRequired: "Please enter your name.",
+          errorEmailRequired: "Please enter your email.",
+          errorEmailInvalid: "Please enter a valid email.",
+          errorInterestRequired: "Please choose a module.",
+          errorCamerasRequired: "Please enter the number of cameras.",
+          errorCamerasInvalid: "Enter a number greater than 0.",
+          errorMessageRequired: "Please enter your message.",
+
+          footerTitle: "AI video analytics platform",
+          footerText: "Leak detection and development toward predictive incident prevention"
+        },
+
+        zh: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "面向设施与基础设施的视频分析",
+          navHome: "首页",
+          navAbout: "关于我们",
+          navModules: "模块",
+          navCalculator: "计算器",
+          navContacts: "联系我们",
+          requestSolution: "申请方案",
+
+          contactEyebrow: "联系我们",
+          contactTitle: "告诉我们您的场地情况——我们将匹配最合适的 AI 场景",
+          contactText: "请告诉我们您希望检测什么、使用多少摄像头，以及最关键的风险是什么。我们将帮助您选择合适的模块，并展示该解决方案如何在您的真实环境中运行。",
+
+          stat1Value: "24/7",
+          stat1Label: "针对高风险区域的持续监控逻辑",
+          stat2Value: "AI",
+          stat2Label: "根据您的设施类型定制的检测场景",
+          stat3Value: "快速",
+          stat3Label: "快速响应并给出清晰的下一步建议",
+
+          formTitle: "申请方案",
+          formText: "填写表单后，我们将根据您的摄像头、区域和风险，向您推荐合适的模块组合。",
+
+          labelName: "姓名",
+          labelEmail: "邮箱",
+          labelInterest: "感兴趣的模块",
+          labelCameras: "摄像头数量",
+          labelMessage: "留言 *",
+
+          optionChoose: "请选择模块",
+          optionLeak: "液体泄漏",
+          optionFire: "烟雾和火焰",
+          optionIntrusion: "入侵",
+          optionFight: "打斗与破坏",
+          optionTheft: "盗窃",
+          optionMulti: "多个模块",
+
+          sendRequest: "发送请求",
+          contactNote: "我们仅使用这些信息与您联系并处理您的请求。",
+          successMessage: "您的留言已发送",
+
+          errorNameRequired: "请输入姓名。",
+          errorEmailRequired: "请输入邮箱。",
+          errorEmailInvalid: "请输入有效的邮箱地址。",
+          errorInterestRequired: "请选择一个模块。",
+          errorCamerasRequired: "请输入摄像头数量。",
+          errorCamerasInvalid: "请输入大于 0 的数字。",
+          errorMessageRequired: "请输入留言内容。",
+
+          footerTitle: "AI 视频分析平台",
+          footerText: "泄漏检测以及向预测性事故预防方向发展"
+        },
+
+        kk: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Нысандар мен инфрақұрылымға арналған бейнеаналитика",
+          navHome: "Басты бет",
+          navAbout: "Біз туралы",
+          navModules: "Модульдер",
+          navCalculator: "Калькулятор",
+          navContacts: "Байланыс",
+          requestSolution: "Шешімге сұраныс",
+
+          contactEyebrow: "Бізбен байланыс",
+          contactTitle: "Нысаныңыз туралы айтыңыз — біз дұрыс AI-сценарийді таңдаймыз",
+          contactText: "Не анықтағыңыз келетінін, қанша камера қолданатыныңызды және қандай тәуекелдер маңызды екенін жазыңыз. Біз сізге дұрыс модульдерді таңдауға көмектесеміз және шешімнің сіздің нақты ортаңызда қалай жұмыс істейтінін көрсетеміз.",
+
+          stat1Value: "24/7",
+          stat1Label: "Қауіпті аймақтарға арналған үздіксіз мониторинг логикасы",
+          stat2Value: "AI",
+          stat2Label: "Нысан түріне бейімделген анықтау сценарийлері",
+          stat3Value: "Жылдам",
+          stat3Label: "Жедел жауап және нақты келесі қадам",
+
+          formTitle: "Шешімге сұраныс",
+          formText: "Форманы толтырыңыз — біз сіздің камераларыңызға, аймақтарыңызға және тәуекелдеріңізге сай модульдер комбинациясын ұсынамыз.",
+
+          labelName: "Аты-жөні",
+          labelEmail: "Email",
+          labelInterest: "Қызығушылық",
+          labelCameras: "Камера саны",
+          labelMessage: "Хабарлама *",
+
+          optionChoose: "Модульді таңдаңыз",
+          optionLeak: "Сұйықтықтың ағуы",
+          optionFire: "Түтін және өрт",
+          optionIntrusion: "Басып кіру",
+          optionFight: "Төбелес және вандализм",
+          optionTheft: "Ұрлық",
+          optionMulti: "Бірнеше модуль",
+
+          sendRequest: "Сұраныс жіберу",
+          contactNote: "Бұл ақпарат тек сізбен сұранысыңыз бойынша байланысу үшін қолданылады.",
+          successMessage: "Сіздің хабарламаңыз жіберілді",
+
+          errorNameRequired: "Аты-жөніңізді енгізіңіз.",
+          errorEmailRequired: "Email енгізіңіз.",
+          errorEmailInvalid: "Дұрыс email енгізіңіз.",
+          errorInterestRequired: "Модульді таңдаңыз.",
+          errorCamerasRequired: "Камера санын енгізіңіз.",
+          errorCamerasInvalid: "0-ден үлкен сан енгізіңіз.",
+          errorMessageRequired: "Хабарлама жазыңыз.",
+
+          footerTitle: "AI-бейнеаналитика платформасы",
+          footerText: "Ағып кетуді анықтау және инциденттердің алдын алуға бағытталған даму"
+        }
+      };
+
+      function getLang() {
+        const saved = localStorage.getItem("site-language") || "ru";
+        return languageMeta[saved] ? saved : "ru";
+      }
+
+      function t(key) {
+        const lang = getLang();
+        return translations[lang]?.[key] || translations.ru[key] || key;
+      }
+
+      function applyTranslations(lang) {
+        const selectedLang = languageMeta[lang] ? lang : "ru";
+        document.documentElement.lang = languageMeta[selectedLang].htmlLang;
+        langCurrentFlag.textContent = languageMeta[selectedLang].flag;
+        langCurrentText.textContent = languageMeta[selectedLang].code;
+
+        document.querySelectorAll("[data-i18n]").forEach((element) => {
+          const key = element.dataset.i18n;
+          const value = translations[selectedLang]?.[key] || translations.ru[key];
+          if (value) {
+            element.textContent = value;
+          }
+        });
+
+        localStorage.setItem("site-language", selectedLang);
+      }
+
+      function clearErrors() {
+        errorName.textContent = "";
+        errorEmail.textContent = "";
+        errorInterest.textContent = "";
+        errorCameras.textContent = "";
+        errorMessage.textContent = "";
+        contactSuccess.hidden = true;
+      }
+
+      function isValidEmail(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      }
+
+      function validateForm() {
+        clearErrors();
+        let valid = true;
+
+        if (!contactName.value.trim()) {
+          errorName.textContent = t("errorNameRequired");
+          valid = false;
+        }
+
+        if (!contactEmail.value.trim()) {
+          errorEmail.textContent = t("errorEmailRequired");
+          valid = false;
+        } else if (!isValidEmail(contactEmail.value.trim())) {
+          errorEmail.textContent = t("errorEmailInvalid");
+          valid = false;
+        }
+
+        if (!contactInterest.value) {
+          errorInterest.textContent = t("errorInterestRequired");
+          valid = false;
+        }
+
+        if (!contactCameras.value.trim()) {
+          errorCameras.textContent = t("errorCamerasRequired");
+          valid = false;
+        } else if (Number(contactCameras.value.trim()) <= 0) {
+          errorCameras.textContent = t("errorCamerasInvalid");
+          valid = false;
+        }
+
+        if (!contactMessage.value.trim()) {
+          errorMessage.textContent = t("errorMessageRequired");
+          valid = false;
+        }
+
+        return valid;
+      }
+
+      if (burger) {
+        burger.addEventListener("click", () => {
+          const isOpen = nav.classList.toggle("is-open");
+          document.body.classList.toggle("menu-open", isOpen);
+          burger.setAttribute("aria-expanded", String(isOpen));
+        });
+      }
+
+      if (langButton) {
+        langButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const isOpen = !langSwitcher.classList.contains("is-open");
+          langSwitcher.classList.toggle("is-open", isOpen);
+          langButton.setAttribute("aria-expanded", String(isOpen));
+        });
+      }
+
+      document.querySelectorAll(".lang-switcher__option").forEach((button) => {
+        button.addEventListener("click", () => {
+          applyTranslations(button.dataset.lang || "ru");
+          langSwitcher.classList.remove("is-open");
+          langButton.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        if (langSwitcher && !langSwitcher.contains(event.target)) {
+          langSwitcher.classList.remove("is-open");
+          langButton.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      if (contactForm) {
+        contactForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          if (!validateForm()) return;
+
+          const submitBtn = contactForm.querySelector('.contact-form__submit');
+          const originalBtnText = submitBtn.innerHTML;
+          submitBtn.disabled = true;
+
+          emailjs.sendForm('service_8v4z1g8', 'template_9e9avfj', contactForm)
+            .then(() => {
+              contactSuccess.hidden = false;
+              contactForm.reset();
+            })
+            .catch((error) => {
+              console.error('EmailJS Error:', error);
+              alert('Error sending request: ' + (error.text || error.message || JSON.stringify(error)));
+            })
+            .finally(() => {
+              submitBtn.innerHTML = originalBtnText;
+              submitBtn.disabled = false;
+            });
+        });
+      }
+
+      const preferredLanguage = getLang();
+      applyTranslations(preferredLanguage);
+
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+
+      document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+    })();
+  </script>
+</body>
+</html>

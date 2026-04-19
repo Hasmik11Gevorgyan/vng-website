@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Калькулятор серверной конфигурации</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-1: #07111f;
+      --bg-2: #0b1528;
+      --bg-3: #09101d;
+      --line: rgba(255, 255, 255, 0.08);
+      --line-2: rgba(255, 255, 255, 0.12);
+      --text: #f3f7ff;
+      --muted: rgba(203, 213, 225, 0.78);
+      --muted-2: rgba(148, 163, 184, 0.92);
+      --blue: #4f8cff;
+      --blue-2: #2f6df4;
+      --glow: rgba(47, 109, 244, 0.35);
+      --success: #7dd3fc;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top center, rgba(37, 99, 235, 0.16), transparent 26%),
+        radial-gradient(circle at 85% 10%, rgba(59, 130, 246, 0.10), transparent 22%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 45%, var(--bg-3) 100%);
+      min-height: 100vh;
+      padding: 130px 20px 60px;
+    }
+
+    .wrap {
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+
+    .header-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: linear-gradient(180deg, rgba(6, 12, 24, 0.90), rgba(6, 12, 24, 0.60));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .header {
+      max-width: 1920px;
+      margin: 0 auto;
+      padding: 22px 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text);
+      text-decoration: none;
+      min-width: 360px;
+      flex-shrink: 0;
+    }
+
+    .logo-mark {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: radial-gradient(circle at 30% 30%, rgba(143,179,255,0.95), rgba(54,118,255,0.88) 52%, rgba(107,82,255,0.9));
+      box-shadow: 0 18px 40px rgba(47, 109, 244, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-mark svg {
+      width: 34px;
+      height: 34px;
+      display: block;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .logo-title {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .logo-subtitle {
+      color: var(--muted-2);
+      font-size: 15px;
+      line-height: 1.18;
+      max-width: 210px;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 46px;
+      flex: 1;
+    }
+
+    .header-nav a {
+      color: rgba(237, 243, 255, 0.92);
+      text-decoration: none;
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      transition: color 0.18s ease, transform 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .header-nav a:hover {
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-shrink: 0;
+    }
+
+    .lang-switcher {
+      position: relative;
+    }
+
+    .lang-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .lang-button .chevron {
+      width: 12px;
+      height: 12px;
+      border-right: 2px solid rgba(255,255,255,0.85);
+      border-bottom: 2px solid rgba(255,255,255,0.85);
+      transform: rotate(45deg) translateY(-1px);
+      margin-left: 4px;
+    }
+
+    .lang-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 10px);
+      width: 210px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 17, 31, 0.98);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    }
+
+    .lang-switcher.is-open .lang-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .lang-option {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text-soft, #dce8fb);
+      text-align: left;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .lang-option:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 38px;
+      border-radius: 20px;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+      background: linear-gradient(180deg, #9d83ff, #8464ff);
+      box-shadow: 0 18px 40px rgba(132, 100, 255, 0.28);
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+
+    .top {
+      max-width: 980px;
+      margin: 0 auto 34px;
+      text-align: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(226, 232, 240, 0.92);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 14px rgba(79, 140, 255, 0.7);
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(38px, 5vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      font-weight: 900;
+    }
+
+    .sub {
+      margin: 0 auto;
+      max-width: 900px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.06fr 0.94fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      box-shadow:
+        0 22px 70px rgba(0, 0, 0, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+    }
+
+    .left,
+    .right {
+      padding: 28px;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted-2);
+      font-weight: 800;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 16px;
+    }
+
+    .field-grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label,
+    .module-input label {
+      display: block;
+      margin-bottom: 8px;
+      color: rgba(226, 232, 240, 0.82);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .surface {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(2, 6, 23, 0.64);
+      color: #f8fbff;
+      border-radius: 18px;
+      padding: 15px 16px;
+      font-size: 15px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .surface:focus {
+      border-color: rgba(96, 165, 250, 0.95);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.16);
+      background: rgba(2, 6, 23, 0.82);
+    }
+
+    .row-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .mini-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.18);
+      color: rgba(219, 234, 254, 0.94);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .modules {
+      display: grid;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .module {
+      display: grid;
+      grid-template-columns: 1fr 160px;
+      gap: 18px;
+      align-items: center;
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .module:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.13);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .module h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 750;
+    }
+
+    .module p {
+      margin: 0;
+      color: rgba(203, 213, 225, 0.72);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: rgba(191, 219, 254, 0.94);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .hint {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(59, 130, 246, 0.18);
+      background: rgba(37, 99, 235, 0.10);
+      color: rgba(219, 234, 254, 0.92);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 20px;
+      border: none;
+      border-radius: 20px;
+      padding: 17px 20px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      background: linear-gradient(180deg, var(--blue) 0%, var(--blue-2) 100%);
+      box-shadow: 0 18px 40px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.20);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 44px rgba(47, 109, 244, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.20);
+    }
+
+    .hero {
+      padding: 24px;
+      border-radius: 26px;
+      margin-bottom: 18px;
+      background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.28), transparent 45%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      border: 1px solid var(--line-2);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .hero-label {
+      color: rgba(191, 219, 254, 0.95);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 800;
+    }
+
+    .hero-badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(125, 211, 252, 0.16);
+      background: rgba(125, 211, 252, 0.08);
+      color: rgba(224, 242, 254, 0.95);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .hero-value {
+      margin-top: 12px;
+      font-size: clamp(48px, 6vw, 78px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-sub {
+      margin-top: 10px;
+      color: rgba(226, 232, 240, 0.72);
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 640px;
+    }
+
+    .meter {
+      margin-top: 18px;
+    }
+
+    .meter-line {
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .meter-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #2f6df4 0%, #86b7ff 100%);
+      box-shadow: 0 0 18px rgba(79, 140, 255, 0.5);
+      transition: width 0.25s ease;
+    }
+
+    .meter-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 8px;
+      color: rgba(148, 163, 184, 0.86);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 16px 0 18px;
+    }
+
+    .quick-box {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .quick-box small {
+      display: block;
+      color: rgba(148, 163, 184, 0.86);
+      font-size: 12px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .quick-box strong {
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    .result-box {
+      padding: 20px;
+      border-radius: 24px;
+      margin-bottom: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .result-box h3 {
+      margin: 0 0 14px;
+      font-size: 16px;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .row span {
+      color: rgba(203, 213, 225, 0.8);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .row strong {
+      font-size: 15px;
+      text-align: right;
+      font-weight: 800;
+    }
+
+    .email-box p {
+      color: #94a3b8;
+      margin: 0 0 14px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .status {
+      margin-top: 12px;
+      color: #93c5fd;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .foot {
+      color: rgba(148, 163, 184, 0.86);
+      font-size: 13px;
+      line-height: 1.65;
+      padding: 4px 4px 0;
+    }
+
+    @media (max-width: 1300px) {
+      .header {
+        padding: 18px 28px;
+      }
+
+      .header-nav {
+        gap: 24px;
+      }
+
+      .header-nav a {
+        font-size: 16px;
+      }
+
+      .logo {
+        min-width: auto;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      body {
+        padding-top: 120px;
+      }
+
+      .header {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .header-nav {
+        order: 3;
+        width: 100%;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .header-actions {
+        gap: 12px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field-grid,
+      .field-grid-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding-top: 174px;
+      }
+
+      .header {
+        padding: 16px 18px;
+        align-items: stretch;
+      }
+
+      .logo {
+        width: 100%;
+      }
+
+      .logo-mark {
+        width: 46px;
+        height: 46px;
+      }
+
+      .logo-title {
+        font-size: 17px;
+      }
+
+      .logo-subtitle {
+        font-size: 13px;
+        max-width: none;
+      }
+
+      .header-nav {
+        gap: 14px 18px;
+      }
+
+      .header-nav a {
+        font-size: 15px;
+      }
+
+      .header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .lang-button {
+        min-height: 48px;
+        padding: 0 16px;
+        font-size: 14px;
+      }
+
+      .header-cta {
+        min-height: 48px;
+        padding: 0 22px;
+        font-size: 15px;
+      }
+      .header {
+        padding: 14px 16px;
+      }
+
+      .logo-subtitle {
+        display: none;
+      }
+
+      .left,
+      .right {
+        padding: 20px;
+      }
+
+      .module {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-top {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header-wrap">
+    <div class="header">
+      <a href="index.html#hero" class="logo" aria-label="AI Platform">
+        <div class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 4L27 10.5V21.5L16 28L5 21.5V10.5L16 4Z" stroke="white" stroke-width="1.8" opacity="0.9"/>
+            <path d="M11 17.5L14 20.5L21.5 12.5" stroke="white" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <div class="logo-title">AI PLATFORM</div>
+          <div class="logo-subtitle" data-i18n="logoSubtitle">Видеоаналитика для объектов и инфраструктуры</div>
+        </div>
+      </a>
+
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="./index.html#hero" data-i18n="navHome">Главная</a>
+        <a href="./index.html#about" data-i18n="navAbout">О нас</a>
+        <a href="./modules.html" data-i18n="navModules">Модули</a>
+        <a href="./calculator.html" class="is-active" data-i18n="navCalculator">Калькулятор</a>
+        <a href="./contact_us.html" data-i18n="navContacts">Контакты</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-switcher" id="langSwitcher">
+          <button type="button" class="lang-button" id="langButton">
+            <span id="currentLangFlag">🇷🇺</span>
+            <span id="currentLangText">RU</span>
+            <span class="chevron"></span>
+          </button>
+          <div class="lang-menu">
+            <button type="button" class="lang-option" data-lang="ru"><span>🇷🇺</span><span>Русский</span></button>
+            <button type="button" class="lang-option" data-lang="en"><span>🇺🇸</span><span>English</span></button>
+            <button type="button" class="lang-option" data-lang="zh"><span>🇨🇳</span><span>中文</span></button>
+            <button type="button" class="lang-option" data-lang="kk"><span>🇰🇿</span><span>Қазақша</span></button>
+          </div>
+        </div>
+        <a href="./contact_us.html" class="header-cta" data-i18n="ctaHeader">Запросить решение</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="top">
+      <div class="pill"><span class="dot"></span><span data-i18n="topPill">Предварительный расчёт инфраструктуры</span></div>
+      <h1 data-i18n="topTitle">Калькулятор серверной конфигурации</h1>
+      <p class="sub" data-i18n="topSub">Укажите камеры, параметры потока и нужные модули. Калькулятор покажет ориентировочную нагрузку, архив и рекомендуемую конфигурацию.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="left">
+          <div class="row-top">
+            <div class="section-title" style="margin: 0;">Входные параметры</div>
+            <div class="mini-status">Настраиваемая конфигурация</div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="obshchee_kolichestvo_kamer">Общее количество камер на объекте</label>
+              <input class="surface" type="number" id="obshchee_kolichestvo_kamer" value="0" min="0" />
+            </div>
+
+            <div class="field">
+              <label for="chastota_kadrov">Частота кадров</label>
+              <select class="surface" id="chastota_kadrov">
+                <option value="10">10 кадров в секунду</option>
+                <option value="15">15 кадров в секунду</option>
+                <option value="20">20 кадров в секунду</option>
+                <option value="25" selected>25 кадров в секунду</option>
+                <option value="30">30 кадров в секунду</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-grid-4">
+            <div class="field">
+              <label for="razreshenie">Разрешение видео</label>
+              <select class="surface" id="razreshenie">
+                <option value="1">720p</option>
+                <option value="1.4" selected>1080p</option>
+                <option value="2.0">2K</option>
+                <option value="2.8">4MP</option>
+                <option value="3.2">4K</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="kodek">Кодек</label>
+              <select class="surface" id="kodek">
+                <option value="1" selected>H.264</option>
+                <option value="0.7">H.265</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="bitrate">Средний битрейт (Мбит/с)</label>
+              <input class="surface" type="number" id="bitrate" value="8" min="1" step="0.1" />
+            </div>
+
+            <div class="field">
+              <label for="retention">Дни хранения архива</label>
+              <input class="surface" type="number" id="retention" value="30" min="1" />
+            </div>
+          </div>
+
+          <div class="section-title" style="margin-top: 12px;">Использование модулей по камерам</div>
+
+          <div class="modules">
+            <div class="module">
+              <div>
+                <h3>Обнаружение вторжения</h3>
+                <p>Контроль проникновения в запрещённые, охраняемые и периметровые зоны.</p>
+                <div class="tag-row">
+                  <span class="tag">Периметр</span>
+                  <span class="tag">Реакция в реальном времени</span>
+                </div>
+              </div>
+              <div class="module-input">
+                <label for="kamery_vtorzhenie">Количество камер</label>
+                <input class="surface" type="number" id="kamery_vtorzhenie" value="0" min="0" />
+              </div>
+            </div>
+
+            <div class="module">
+              <div>
+                <h3>Обнаружение кражи</h3>
+                <p>Выявление подозрительных действий, сокрытия товара и рискованных сценариев.</p>
+                <div class="tag-row">
+                  <span class="tag">Розница</span>
+                  <span class="tag">Поведенческий анализ</span>
+                </div>
+              </div>
+              <div class="module-input">
+                <label for="kamery_krazha">Количество камер</label>
+                <input class="surface" type="number" id="kamery_krazha" value="0" min="0" />
+              </div>
+            </div>
+
+            <div class="module">
+              <div>
+                <h3>Обнаружение лиц</h3>
+                <p>Выделение и анализ лиц в видеопотоке в реальном времени.</p>
+                <div class="tag-row">
+                  <span class="tag">Идентификация</span>
+                  <span class="tag">Оперативный поиск</span>
+                </div>
+              </div>
+              <div class="module-input">
+                <label for="kamery_lica">Количество камер</label>
+                <input class="surface" type="number" id="kamery_lica" value="0" min="0" />
+              </div>
+            </div>
+
+            <div class="module">
+              <div>
+                <h3>Обнаружение дыма и огня</h3>
+                <p>Раннее выявление задымления и признаков возгорания по видеопотоку.</p>
+                <div class="tag-row">
+                  <span class="tag">Пожарная безопасность</span>
+                  <span class="tag">Раннее предупреждение</span>
+                </div>
+              </div>
+              <div class="module-input">
+                <label for="kamery_dym_ogon">Количество камер</label>
+                <input class="surface" type="number" id="kamery_dym_ogon" value="0" min="0" />
+              </div>
+            </div>
+          </div>
+
+          <div class="hint">
+            Если по всем модулям указано 0 камер, вычислительная нагрузка тоже остаётся 0.
+            Архив при этом всё равно может рассчитываться отдельно, если указаны камеры, битрейт и срок хранения.
+          </div>
+
+          <button class="btn" id="knopka_rascheta" type="button">Рассчитать конфигурацию</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="right">
+          <div class="hero">
+            <div class="hero-top">
+              <div>
+                <div class="hero-label">Итоговая вычислительная нагрузка</div>
+                <div class="hero-value" id="itogovaya_nagruzka">0.00</div>
+              </div>
+              <div class="hero-badge" id="profil_nagruzki">Нет нагрузки</div>
+            </div>
+
+            <div class="hero-sub">
+              Ориентировочная вычислительная нагрузка с учётом разрешения, частоты кадров, кодека и аналитических модулей.
+            </div>
+
+            <div class="meter">
+              <div class="meter-line">
+                <div class="meter-fill" id="polosa_nagruzki"></div>
+              </div>
+              <div class="meter-meta">
+                <span>Низкая</span>
+                <span>Оптимальная</span>
+                <span>Высокая</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="quick-grid">
+            <div class="quick-box">
+              <small>Аналитических серверов</small>
+              <strong id="kolichestvo_serverov_kratko">0</strong>
+            </div>
+            <div class="quick-box">
+              <small>Ускоритель</small>
+              <strong id="klass_uskoritelya">—</strong>
+            </div>
+            <div class="quick-box">
+              <small>Профиль</small>
+              <strong id="tip_razmeshcheniya">—</strong>
+            </div>
+          </div>
+
+          <div class="result-box">
+            <h3>Требуемые ресурсы аналитической системы</h3>
+
+            <div class="row">
+              <span>Количество процессорных ядер</span>
+              <strong id="yadra_processor">0</strong>
+            </div>
+
+            <div class="row">
+              <span>Оперативная память</span>
+              <strong id="operativnaya_pamyat">0 ГБ</strong>
+            </div>
+
+            <div class="row">
+              <span>Графическая память</span>
+              <strong id="graficheskaya_pamyat">0 ГБ</strong>
+            </div>
+
+            <div class="row">
+              <span>Графическая вычислительная мощность</span>
+              <strong id="graficheskaya_moshnost">0.00 TFLOPS</strong>
+            </div>
+
+            <div class="row">
+              <span>Пропускная способность сети</span>
+              <strong id="setevaya_propusk">0 Мбит/с</strong>
+            </div>
+          </div>
+
+          <div class="result-box">
+            <h3>Сервер хранения видеоархива</h3>
+
+            <div class="row">
+              <span>Количество серверов хранения</span>
+              <strong id="storage_servers">0</strong>
+            </div>
+
+            <div class="row">
+              <span>Общий объём архива</span>
+              <strong id="archive_volume">0 ГБ</strong>
+            </div>
+
+            <div class="row">
+              <span>Рекомендуемый RAID</span>
+              <strong id="raid_level">—</strong>
+            </div>
+
+            <div class="row">
+              <span>Тип накопителей</span>
+              <strong id="disk_type">—</strong>
+            </div>
+          </div>
+
+          <div class="result-box">
+            <h3>Рекомендуемая серверная конфигурация</h3>
+
+            <div class="row">
+              <span>Количество аналитических серверов</span>
+              <strong id="kolichestvo_serverov">0</strong>
+            </div>
+
+            <div class="row">
+              <span>Процессор</span>
+              <strong id="model_processor">—</strong>
+            </div>
+
+            <div class="row">
+              <span>Оперативная память на сервер</span>
+              <strong id="pamyat_na_server">—</strong>
+            </div>
+
+            <div class="row">
+              <span>Графический ускоритель</span>
+              <strong id="graficheskiy_uskoritel">—</strong>
+            </div>
+
+            <div class="row">
+              <span>Накопитель</span>
+              <strong id="nakopitel">—</strong>
+            </div>
+
+            <div class="row">
+              <span>Операционная система</span>
+              <strong>Ubuntu 22.04</strong>
+            </div>
+          </div>
+
+          <div class="result-box email-box">
+            <h3>Получить расчёт на email</h3>
+
+            <p>
+              Введите email, и результаты расчёта серверной инфраструктуры будут отправлены вам автоматически.
+            </p>
+
+            <form id="email_form" action="https://formspree.io/f/xjgarawq" method="POST">
+              <input
+                type="email"
+                name="email"
+                id="user_email"
+                placeholder="Ваш email"
+                required
+                class="surface"
+                style="margin-bottom: 12px;"
+              />
+
+              <textarea
+                name="message"
+                id="calc_message"
+                style="display: none;"
+              ></textarea>
+
+              <button type="submit" class="btn">Отправить расчёт</button>
+            </form>
+
+            <div id="email_status" class="status"></div>
+          </div>
+
+          <div class="foot">
+            Расчёт является ориентировочным и нужен для предварительной оценки.
+            Итоговая конфигурация зависит от архитектуры системы, сценариев аналитики и особенностей внедрения.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const translations = {
+      ru: {
+        topPill: "Предварительный расчёт инфраструктуры",
+        topTitle: "Калькулятор серверной конфигурации",
+        topSub: "Укажите камеры, параметры потока и нужные модули. Калькулятор покажет ориентировочную нагрузку, архив и рекомендуемую конфигурацию.",
+        logoSubtitle: "Видеоаналитика для объектов и инфраструктуры",
+        navHome: "Главная",
+        navAbout: "О нас",
+        navModules: "Модули",
+        navCalculator: "Калькулятор",
+        navContacts: "Контакты",
+        ctaHeader: "Запросить решение"
+      },
+      en: {
+        topPill: "Preliminary infrastructure estimate",
+        topTitle: "Server Configuration Calculator",
+        topSub: "Enter cameras, stream settings, and required modules. The calculator will show estimated load, archive size, and a recommended setup.",
+        logoSubtitle: "Video analytics for facilities and infrastructure",
+        navHome: "Home",
+        navAbout: "About",
+        navModules: "Modules",
+        navCalculator: "Calculator",
+        navContacts: "Contacts",
+        ctaHeader: "Request solution"
+      },
+      zh: {
+        topPill: "基础基础设施预估",
+        topTitle: "服务器配置计算器",
+        topSub: "输入摄像机数量、视频流参数和所需模块。计算器将显示预估负载、存储归档和推荐配置。",
+        logoSubtitle: "面向设施与基础设施的视频分析",
+        navHome: "主页",
+        navAbout: "关于我们",
+        navModules: "模块",
+        navCalculator: "计算器",
+        navContacts: "联系我们",
+        ctaHeader: "申请方案"
+      },
+      kk: {
+        topPill: "Инфрақұрылымның алдын ала есебі",
+        topTitle: "Сервер конфигурация калькуляторы",
+        topSub: "Камералар санын, ағын параметрлерін және қажет модульдерді енгізіңіз. Калькулятор шамамен жүктемені, архив көлемін және ұсынылатын конфигурацияны көрсетеді.",
+        logoSubtitle: "Нысандар мен инфрақұрылымға арналған бейнеаналитика",
+        navHome: "Басты бет",
+        navAbout: "Біз туралы",
+        navModules: "Модульдер",
+        navCalculator: "Калькулятор",
+        navContacts: "Байланыс",
+        ctaHeader: "Шешім сұрау"
+      }
+    };
+
+    const languageMeta = {
+      ru: { flag: "🇷🇺", label: "RU" },
+      en: { flag: "🇺🇸", label: "EN" },
+      zh: { flag: "🇨🇳", label: "ZH" },
+      kk: { flag: "🇰🇿", label: "KK" }
+    };
+
+    function applyLanguage(lang) {
+      const dict = translations[lang] || translations.ru;
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+      document.getElementById('currentLangFlag').textContent = languageMeta[lang].flag;
+      document.getElementById('currentLangText').textContent = languageMeta[lang].label;
+      document.documentElement.lang = lang;
+    }
+
+    function okruglitVverh(chislo) {
+      return Math.ceil(chislo);
+    }
+
+    function opredelitProfilNagruzki(vychislitelnayaMoshnost) {
+      if (vychislitelnayaMoshnost <= 0) {
+        return "Нет нагрузки";
+      } else if (vychislitelnayaMoshnost <= 15) {
+        return "Низкий профиль";
+      } else if (vychislitelnayaMoshnost <= 35) {
+        return "Средний профиль";
+      } else if (vychislitelnayaMoshnost <= 70) {
+        return "Средне-высокий профиль";
+      } else {
+        return "Высокий профиль";
+      }
+    }
+
+    function opredelitKlassUskoritelya(vychislitelnayaMoshnost) {
+      if (vychislitelnayaMoshnost <= 0) {
+        return "—";
+      } else if (vychislitelnayaMoshnost <= 20) {
+        return "Начальный";
+      } else if (vychislitelnayaMoshnost <= 40) {
+        return "Средний";
+      } else if (vychislitelnayaMoshnost <= 70) {
+        return "Высокий";
+      } else {
+        return "Серверный";
+      }
+    }
+
+    function opredelitUskoritel(vychislitelnayaMoshnost) {
+      if (vychislitelnayaMoshnost <= 0) {
+        return "—";
+      } else if (vychislitelnayaMoshnost <= 20) {
+        return "NVIDIA T4 / аналог";
+      } else if (vychislitelnayaMoshnost <= 40) {
+        return "NVIDIA RTX A4000 / аналог";
+      } else if (vychislitelnayaMoshnost <= 70) {
+        return "NVIDIA L40 / аналог";
+      } else {
+        return "NVIDIA A100 / аналог";
+      }
+    }
+
+    function opredelitProcessor(vychislitelnayaMoshnost) {
+      if (vychislitelnayaMoshnost <= 0) {
+        return "—";
+      } else if (vychislitelnayaMoshnost <= 20) {
+        return "AMD Ryzen 9 / Intel Core i7 / аналог";
+      } else if (vychislitelnayaMoshnost <= 45) {
+        return "AMD Ryzen 9 16-core / Intel Core i9 / аналог";
+      } else if (vychislitelnayaMoshnost <= 75) {
+        return "Intel Xeon Silver / Gold / аналог";
+      } else {
+        return "Серверный многоядерный процессор";
+      }
+    }
+
+    function opredelitKolichestvoServerov(vychislitelnayaMoshnost, kolichestvoKamer) {
+      if (vychislitelnayaMoshnost <= 0 || kolichestvoKamer <= 0) {
+        return 0;
+      }
+
+      const poNagruzke = Math.ceil(vychislitelnayaMoshnost / 28);
+      const poKameram = Math.ceil(kolichestvoKamer / 12);
+
+      return Math.max(poNagruzke, poKameram);
+    }
+
+    function opredelitPamyatNaServer(obshchayaOperativnayaPamyat, kolichestvoServerov) {
+      if (kolichestvoServerov === 0) {
+        return "—";
+      }
+
+      const pamyatNaOdinServer = obshchayaOperativnayaPamyat / kolichestvoServerov;
+
+      if (pamyatNaOdinServer <= 16) {
+        return "16 ГБ";
+      } else if (pamyatNaOdinServer <= 32) {
+        return "32 ГБ";
+      } else if (pamyatNaOdinServer <= 64) {
+        return "64 ГБ";
+      } else {
+        return "128 ГБ";
+      }
+    }
+
+    function opredelitTipRazmeshcheniya(kolichestvoServerov) {
+      if (kolichestvoServerov === 0) {
+        return "—";
+      } else if (kolichestvoServerov === 1) {
+        return "Одиночный сервер";
+      } else {
+        return "Централизованный";
+      }
+    }
+
+    function opredelitStorageServers(storageTB) {
+      if (storageTB <= 0) return 0;
+      if (storageTB <= 40) return 1;
+      if (storageTB <= 120) return 2;
+      if (storageTB <= 300) return 3;
+      return Math.ceil(storageTB / 120);
+    }
+
+    function opredelitRaid(storageTB) {
+      if (storageTB <= 0) return "—";
+      if (storageTB <= 50) return "RAID 5";
+      if (storageTB <= 200) return "RAID 6";
+      return "RAID 6 / RAID 60";
+    }
+
+    function opredelitDiskType(storageTB) {
+      if (storageTB <= 0) return "—";
+      if (storageTB <= 50) return "SATA HDD";
+      if (storageTB <= 200) return "Enterprise HDD";
+      return "Enterprise HDD + SSD cache";
+    }
+
+    function formatStorage(gigabytes) {
+      if (gigabytes >= 1024) {
+        return (gigabytes / 1024).toFixed(2) + " ТБ";
+      }
+      return Math.round(gigabytes) + " ГБ";
+    }
+
+    function poluchitSvodkuDlyaEmail() {
+      const aiNagruzka = document.getElementById("itogovaya_nagruzka").innerText;
+      const aiServers = document.getElementById("kolichestvo_serverov").innerText;
+      const cpu = document.getElementById("model_processor").innerText;
+      const gpu = document.getElementById("graficheskiy_uskoritel").innerText;
+      const ramServer = document.getElementById("pamyat_na_server").innerText;
+      const archive = document.getElementById("archive_volume").innerText;
+      const storageServers = document.getElementById("storage_servers").innerText;
+      const raid = document.getElementById("raid_level").innerText;
+      const network = document.getElementById("setevaya_propusk").innerText;
+
+      return `
+Результаты расчёта серверной инфраструктуры
+
+Итоговая вычислительная нагрузка:
+${aiNagruzka} TFLOPS
+
+Количество аналитических серверов:
+${aiServers}
+
+Процессор:
+${cpu}
+
+Графический ускоритель:
+${gpu}
+
+Оперативная память на сервер:
+${ramServer}
+
+Пропускная способность сети:
+${network}
+
+Общий объём архива:
+${archive}
+
+Количество серверов хранения:
+${storageServers}
+
+Рекомендуемый RAID:
+${raid}
+
+Расчёт сформирован автоматически на сайте.
+`;
+    }
+
+    function vypolnitRaschet() {
+      const obshcheeKolichestvoKamer =
+        parseFloat(document.getElementById("obshchee_kolichestvo_kamer").value) || 0;
+
+      const chastotaKadrov =
+        parseFloat(document.getElementById("chastota_kadrov").value) || 25;
+
+      const razreshenieFactor =
+        parseFloat(document.getElementById("razreshenie").value) || 1.4;
+
+      const kodekFactor =
+        parseFloat(document.getElementById("kodek").value) || 1;
+
+      const bitrate =
+        parseFloat(document.getElementById("bitrate").value) || 8;
+
+      const retention =
+        parseFloat(document.getElementById("retention").value) || 30;
+
+      const kameryVtorzhenie =
+        parseFloat(document.getElementById("kamery_vtorzhenie").value) || 0;
+
+      const kameryKrazha =
+        parseFloat(document.getElementById("kamery_krazha").value) || 0;
+
+      const kameryLica =
+        parseFloat(document.getElementById("kamery_lica").value) || 0;
+
+      const kameryDymOgon =
+        parseFloat(document.getElementById("kamery_dym_ogon").value) || 0;
+
+      const summaModuley =
+        kameryVtorzhenie +
+        kameryKrazha +
+        kameryLica +
+        kameryDymOgon;
+
+      const bazaNaKameru = 0;
+      const dobavkaVtorzhenie = 0.15;
+      const dobavkaKrazha = 0.30;
+      const dobavkaLica = 0.20;
+      const dobavkaDymOgon = 0.20;
+
+      let modulnayaDobavka = 0;
+
+      if (kameryVtorzhenie > 0) modulnayaDobavka += dobavkaVtorzhenie;
+      if (kameryKrazha > 0) modulnayaDobavka += dobavkaKrazha;
+      if (kameryLica > 0) modulnayaDobavka += dobavkaLica;
+      if (kameryDymOgon > 0) modulnayaDobavka += dobavkaDymOgon;
+
+      let itogovayaNagruzka = 0;
+
+      if (summaModuley > 0 && obshcheeKolichestvoKamer > 0) {
+        const nagruzkaNaKameru = bazaNaKameru + 1.0 + modulnayaDobavka;
+
+        itogovayaNagruzka =
+          obshcheeKolichestvoKamer *
+          nagruzkaNaKameru *
+          razreshenieFactor *
+          (chastotaKadrov / 25) *
+          kodekFactor;
+      }
+
+      const kolichestvoYader =
+        itogovayaNagruzka > 0 ? okruglitVverh(itogovayaNagruzka * 0.87) : 0;
+
+      const operativnayaPamyat =
+        itogovayaNagruzka > 0 ? okruglitVverh(itogovayaNagruzka * 1.31) : 0;
+
+      const graficheskayaPamyat =
+        itogovayaNagruzka > 0 ? okruglitVverh(itogovayaNagruzka * 1.02) : 0;
+
+      const graficheskayaMoshnost =
+        itogovayaNagruzka > 0 ? itogovayaNagruzka.toFixed(2) : "0.00";
+
+      const setevayaPropusk =
+        obshcheeKolichestvoKamer > 0 ? (obshcheeKolichestvoKamer * bitrate).toFixed(2) : "0.00";
+
+      const diskovoeProstranstvoGB =
+        obshcheeKolichestvoKamer > 0
+          ? (obshcheeKolichestvoKamer * bitrate * 3600 * 24 * retention) / 8000
+          : 0;
+
+      const storageTB = diskovoeProstranstvoGB / 1024;
+      const storageServers = opredelitStorageServers(storageTB);
+      const raidLevel = opredelitRaid(storageTB);
+      const diskType = opredelitDiskType(storageTB);
+
+      const kolichestvoServerov =
+        opredelitKolichestvoServerov(itogovayaNagruzka, obshcheeKolichestvoKamer);
+
+      const processor =
+        opredelitProcessor(itogovayaNagruzka);
+
+      const uskoritel =
+        opredelitUskoritel(itogovayaNagruzka);
+
+      const pamyatNaServer =
+        opredelitPamyatNaServer(operativnayaPamyat, kolichestvoServerov);
+
+      const nakopitel =
+        kolichestvoServerov > 0 ? "Твердотельный накопитель 1 ТБ и выше" : "—";
+
+      const profilNagruzki =
+        opredelitProfilNagruzki(itogovayaNagruzka);
+
+      const klassUskoritelya =
+        opredelitKlassUskoritelya(itogovayaNagruzka);
+
+      const tipRazmeshcheniya =
+        opredelitTipRazmeshcheniya(kolichestvoServerov);
+
+      let protsentNagruzki = 0;
+      if (itogovayaNagruzka > 0) {
+        protsentNagruzki = Math.min(itogovayaNagruzka, 100);
+      }
+
+      document.getElementById("itogovaya_nagruzka").textContent = graficheskayaMoshnost;
+      document.getElementById("profil_nagruzki").textContent = profilNagruzki;
+      document.getElementById("polosa_nagruzki").style.width = protsentNagruzki + "%";
+
+      document.getElementById("kolichestvo_serverov_kratko").textContent = kolichestvoServerov;
+      document.getElementById("klass_uskoritelya").textContent = klassUskoritelya;
+      document.getElementById("tip_razmeshcheniya").textContent = tipRazmeshcheniya;
+
+      document.getElementById("yadra_processor").textContent = kolichestvoYader;
+      document.getElementById("operativnaya_pamyat").textContent = operativnayaPamyat + " ГБ";
+      document.getElementById("graficheskaya_pamyat").textContent = graficheskayaPamyat + " ГБ";
+      document.getElementById("graficheskaya_moshnost").textContent = graficheskayaMoshnost + " TFLOPS";
+      document.getElementById("setevaya_propusk").textContent = setevayaPropusk + " Мбит/с";
+
+      document.getElementById("storage_servers").textContent = storageServers;
+      document.getElementById("archive_volume").textContent = formatStorage(diskovoeProstranstvoGB);
+      document.getElementById("raid_level").textContent = raidLevel;
+      document.getElementById("disk_type").textContent = diskType;
+
+      document.getElementById("kolichestvo_serverov").textContent = kolichestvoServerov;
+      document.getElementById("model_processor").textContent = processor;
+      document.getElementById("pamyat_na_server").textContent = pamyatNaServer;
+      document.getElementById("graficheskiy_uskoritel").textContent = uskoritel;
+      document.getElementById("nakopitel").textContent = nakopitel;
+    }
+
+    document.getElementById("knopka_rascheta").addEventListener("click", vypolnitRaschet);
+
+    document.querySelectorAll("input, select").forEach(function(element) {
+      element.addEventListener("input", vypolnitRaschet);
+      element.addEventListener("change", vypolnitRaschet);
+    });
+
+    const form = document.getElementById("email_form");
+    const emailStatus = document.getElementById("email_status");
+
+    form.addEventListener("submit", function() {
+      document.getElementById("calc_message").value = poluchitSvodkuDlyaEmail();
+      emailStatus.innerText = "Отправка...";
+    });
+
+    const langSwitcher = document.getElementById("langSwitcher");
+    const langButton = document.getElementById("langButton");
+
+    langButton.addEventListener("click", function() {
+      langSwitcher.classList.toggle("is-open");
+    });
+
+    document.querySelectorAll(".lang-option").forEach(function(option) {
+      option.addEventListener("click", function() {
+        applyLanguage(option.getAttribute("data-lang"));
+        langSwitcher.classList.remove("is-open");
+      });
+    });
+
+    document.addEventListener("click", function(event) {
+      if (!langSwitcher.contains(event.target)) {
+        langSwitcher.classList.remove("is-open");
+      }
+    });
+
+    applyLanguage("ru");
+    vypolnitRaschet();
+  </script>
+</body>
+</html> 

@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vengeea | AI-видеоаналитика</title>
+  <meta
+    name="description"
+    content="AI-платформа видеоаналитики для обнаружения утечек, контроля безопасности и предотвращения инцидентов на объекте."
+  />
+  <meta name="theme-color" content="#07111d" />
+
+  <style>
+    :root {
+      --bg: #07111d;
+      --bg-deep: #081423;
+      --text: #edf3ff;
+      --text-soft: #dce8fb;
+      --text-muted: #a7bad8;
+      --text-dim: #7d91b0;
+
+      --line: rgba(255, 255, 255, 0.08);
+
+      --blue: #3f7cff;
+      --blue-soft: #7ea7ff;
+      --green: #47dd8c;
+      --green-soft: #8cf0b6;
+
+      --purple: #7c5cff;
+      --purple-soft: #9c87ff;
+
+      --shadow-xl: 0 30px 90px rgba(0, 0, 0, 0.34);
+      --shadow-lg: 0 20px 65px rgba(0, 0, 0, 0.24);
+      --shadow-blue: 0 18px 50px rgba(63, 124, 255, 0.28);
+      --shadow-purple: 0 18px 50px rgba(124, 92, 255, 0.28);
+
+      --radius-sm: 16px;
+      --radius-md: 20px;
+      --radius-lg: 26px;
+      --radius-xl: 32px;
+      --radius-pill: 999px;
+
+      --container: 1320px;
+
+      --transition-fast: 0.22s ease;
+      --transition-main: 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(73, 126, 255, 0.18), transparent 22%),
+        linear-gradient(180deg, #06111c 0%, #081321 45%, #07111d 100%);
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    img,
+    video {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .site {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .site::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(126, 167, 255, 0.08), transparent 18%),
+        radial-gradient(circle at 80% 25%, rgba(91, 226, 255, 0.07), transparent 16%);
+    }
+
+    .container {
+      width: min(100%, var(--container));
+      margin: 0 auto;
+      padding-inline: 24px;
+    }
+
+    .section {
+      position: relative;
+      padding: 84px 0;
+    }
+
+    .section-header {
+      max-width: 860px;
+      margin: 0 auto 30px;
+      text-align: center;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 50px);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+    }
+
+    .section-text {
+      margin: 16px auto 0;
+      max-width: 860px;
+      color: var(--text-muted);
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    .panel {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(20, 37, 63, 0.78), rgba(8, 17, 31, 0.96));
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(126, 167, 255, 0.08), transparent 34%);
+      pointer-events: none;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 58px;
+      padding: 0 26px;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn--primary {
+      color: #fff;
+      background: linear-gradient(180deg, var(--purple-soft), var(--purple));
+      box-shadow: var(--shadow-purple);
+    }
+
+    .btn--secondary {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn--secondary:hover {
+      border-color: rgba(126, 167, 255, 0.28);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .header-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(180deg, rgba(6, 12, 24, 0.82), rgba(6, 12, 24, 0.46));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header {
+      width: min(100%, var(--container));
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 180px;
+      flex-shrink: 0;
+    }
+
+    .logo__image {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .logo__text-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo__title {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #fff 0%, var(--blue-soft) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      display: inline-block;
+    }
+
+    .logo__subtitle {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: 0.03em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .nav__link {
+      color: var(--text-soft);
+      font-size: 15px;
+      font-weight: 700;
+      opacity: 0.95;
+      transition: color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+    }
+
+    .nav__link:hover {
+      color: #fff;
+      transform: translateY(-1px);
+      opacity: 1;
+    }
+
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .burger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .burger svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .lang-switcher {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .lang-switcher__button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      cursor: pointer;
+      transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .lang-switcher__button:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(126, 167, 255, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .lang-switcher__current {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .lang-switcher__current-text {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lang-switcher__arrow {
+      width: 18px;
+      height: 18px;
+      opacity: 0.9;
+      transition: transform var(--transition-fast);
+    }
+
+    .lang-switcher.is-open .lang-switcher__arrow {
+      transform: rotate(180deg);
+    }
+
+    .lang-switcher__menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 220px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 17, 31, 0.98);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(16px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition:
+        opacity var(--transition-fast),
+        visibility var(--transition-fast),
+        transform var(--transition-fast);
+      z-index: 120;
+    }
+
+    .lang-switcher.is-open .lang-switcher__menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .lang-switcher__option {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text-soft);
+      text-align: left;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .lang-switcher__option:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .lang-switcher__flag {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .lang-switcher__label {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: #08111e;
+    }
+
+    .hero__video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      transform: scale(1.03);
+      filter: saturate(0.9) brightness(0.62);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(6, 12, 24, 0.18) 0%,
+          rgba(6, 12, 24, 0.28) 28%,
+          rgba(6, 12, 24, 0.56) 62%,
+          rgba(6, 12, 24, 0.88) 100%
+        );
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 18%;
+      transform: translateX(-50%);
+      width: min(92%, 1320px);
+      height: 300px;
+      z-index: 1;
+      border-radius: 40px;
+      background:
+        radial-gradient(circle at center, rgba(6, 12, 24, 0.72), rgba(6, 12, 24, 0.46) 58%, transparent 100%);
+      pointer-events: none;
+      filter: blur(10px);
+    }
+
+    .hero__video-mask {
+      position: absolute;
+      left: 50%;
+      top: 44%;
+      transform: translateX(-50%);
+      width: min(88vw, 980px);
+      height: 210px;
+      z-index: 1;
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(7, 14, 28, 0.58), rgba(7, 14, 28, 0.82));
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 1100px);
+      margin: 0 auto;
+      padding: 80px 24px 72px;
+      text-align: center;
+    }
+
+    .hero__title {
+      margin: 0 auto;
+      max-width: 1200px;
+      font-size: clamp(38px, 6.3vw, 72px);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      font-weight: 950;
+      text-shadow: 0 10px 26px rgba(0, 0, 0, 0.24);
+    }
+
+    .hero__text {
+      max-width: 980px;
+      margin: 24px auto 0;
+      color: var(--text-soft);
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.5;
+      text-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+    }
+
+    .hero__actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .hero__note {
+      margin: 18px auto 0;
+      color: rgba(237, 243, 255, 0.72);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 860px;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .demo-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .demo-card__media {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      background: #07111d;
+      overflow: hidden;
+    }
+
+    .demo-card__media video {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .demo-card__media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(9, 18, 33, 0.04), rgba(9, 18, 33, 0.18)),
+        radial-gradient(circle at center, transparent 60%, rgba(7, 14, 28, 0.16) 100%);
+      pointer-events: none;
+    }
+
+    .demo-card__body {
+      position: relative;
+      z-index: 1;
+      padding: 24px 22px 26px;
+    }
+
+    .demo-card__title {
+      margin: 0 0 10px;
+      font-size: 25px;
+      line-height: 1.15;
+      font-weight: 850;
+    }
+
+    .demo-card__text {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .future-section {
+      padding-top: 84px;
+      padding-bottom: 84px;
+    }
+
+    .future-enterprise {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(420px, 0.85fr);
+      gap: 30px;
+      align-items: start;
+    }
+
+    .future-enterprise__intro {
+      padding-top: 14px;
+      max-width: 760px;
+    }
+
+    .future-enterprise__title {
+      margin: 0;
+      font-size: clamp(34px, 4.4vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      font-weight: 950;
+      max-width: 760px;
+    }
+
+    .future-enterprise__text {
+      margin: 20px 0 0;
+      max-width: 720px;
+      color: var(--text-muted);
+      font-size: 18px;
+      line-height: 1.72;
+    }
+
+    .future-roadmap {
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(18, 31, 54, 0.88), rgba(8, 17, 31, 0.98));
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.30);
+      overflow: hidden;
+    }
+
+    .future-roadmap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top right, rgba(63, 124, 255, 0.16), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(71, 221, 140, 0.08), transparent 28%);
+    }
+
+    .future-roadmap__head {
+      position: relative;
+      z-index: 1;
+      padding: 24px 24px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .future-roadmap__label {
+      color: var(--text);
+      font-size: 26px;
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .future-roadmap__sub {
+      margin-top: 8px;
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 430px;
+    }
+
+    .future-roadmap__steps {
+      position: relative;
+      z-index: 1;
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .future-step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.025);
+      transition:
+        transform var(--transition-main),
+        border-color var(--transition-main),
+        background var(--transition-main),
+        box-shadow var(--transition-main);
+    }
+
+    .future-step:hover {
+      transform: translateY(-2px);
+      border-color: rgba(126, 167, 255, 0.20);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .future-step--accent {
+      border-color: rgba(71, 221, 140, 0.22);
+      background:
+        linear-gradient(180deg, rgba(9, 49, 41, 0.28), rgba(255, 255, 255, 0.03));
+      box-shadow: inset 0 0 0 1px rgba(71, 221, 140, 0.04);
+    }
+
+    .future-step__meta {
+      display: flex;
+      align-items: center;
+      min-height: 100%;
+    }
+
+    .future-step__tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 78px;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(126, 167, 255, 0.10);
+      border: 1px solid rgba(126, 167, 255, 0.16);
+      color: var(--blue-soft);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .future-step--accent .future-step__tag {
+      background: rgba(71, 221, 140, 0.10);
+      border-color: rgba(71, 221, 140, 0.22);
+      color: var(--green-soft);
+    }
+
+    .future-step__content {
+      min-width: 0;
+    }
+
+    .future-step__title {
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.3;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+    }
+
+    .future-step__text {
+      margin: 8px 0 0;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .anchor {
+      position: relative;
+      top: -110px;
+      height: 0;
+      visibility: hidden;
+    }
+
+    .cta-box {
+      padding: 34px 30px;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cta-box::before {
+      content: "";
+      position: absolute;
+      inset: auto auto -120px 50%;
+      transform: translateX(-50%);
+      width: 760px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(63, 124, 255, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box__title {
+      position: relative;
+      z-index: 1;
+      margin: 0 auto;
+      max-width: 900px;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+    }
+
+    .cta-box__text {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 14px auto 0;
+      color: var(--text-muted);
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    .cta-box__email {
+      position: relative;
+      z-index: 1;
+      margin: 14px auto 0;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .cta-box__email a {
+      color: #a9beff;
+    }
+
+    .cta-box__actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .footer {
+      padding: 28px 0 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer__logo {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .footer__text {
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .footer__email {
+      color: #a9beff;
+      font-weight: 700;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1240px) {
+      .demo-grid,
+      .future-enterprise {
+        grid-template-columns: 1fr;
+      }
+
+      .hero__video-mask {
+        top: 48%;
+        width: min(92vw, 920px);
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 16px;
+        right: 16px;
+        padding: 18px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(8, 17, 31, 0.94);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .nav.is-open {
+        display: flex;
+      }
+
+      .nav__links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .nav__actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .lang-switcher {
+        width: 100%;
+      }
+
+      .lang-switcher__button {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .lang-switcher__menu {
+        position: static;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .burger {
+        display: inline-flex;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .section {
+        padding: 72px 0;
+      }
+
+      .header {
+        padding: 14px 16px;
+      }
+
+      .container {
+        padding-inline: 16px;
+      }
+
+      .hero__content {
+        padding-inline: 16px;
+        padding-bottom: 52px;
+      }
+
+      .hero__actions .btn,
+      .cta-box__actions .btn {
+        width: 100%;
+      }
+
+      .future-step {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .hero__video-mask {
+        top: 45%;
+        height: 160px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .logo__subtitle {
+        display: none;
+      }
+
+      .logo__title {
+        font-size: 14px;
+      }
+
+      .hero__title {
+        font-size: 36px;
+      }
+
+      .hero__text {
+        font-size: 17px;
+      }
+
+      .section-title,
+      .cta-box__title,
+      .future-enterprise__title {
+        font-size: 30px;
+      }
+
+      .section-text,
+      .cta-box__text,
+      .future-enterprise__text {
+        font-size: 16px;
+      }
+
+      .demo-card__title {
+        font-size: 22px;
+      }
+
+      .cta-box,
+      .future-roadmap__head,
+      .future-step {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .future-roadmap__label {
+        font-size: 22px;
+      }
+
+      .hero__video-mask {
+        top: 42%;
+        height: 120px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <div class="header-wrap">
+      <header class="header" aria-label="Шапка сайта">
+        <a href="#hero" class="logo" aria-label="Перейти на главный экран">
+          <img class="logo__image" src="./logo-recreated (1).png" alt="Логотип компании" />
+          <span class="logo__text-group">
+            <span class="logo__title" data-i18n="logoTitle">AI Platform</span>
+            <span class="logo__subtitle" data-i18n="logoSubtitle">Видеоаналитика для объектов и инфраструктуры</span>
+          </span>
+        </a>
+
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <nav class="nav" id="main-nav" aria-label="Основная навигация">
+          <div class="nav__links">
+            <a class="nav__link" href="#hero" data-i18n="navHome">Главная</a>
+            <a class="nav__link" href="#about" data-i18n="navAbout">О нас</a>
+            <a class="nav__link" href="./modules.html" data-i18n="navModules">Модули</a>
+            <a class="nav__link" href="./calculator.html" data-i18n="navCalculator">Калькулятор</a>
+            <a class="nav__link" href="./contact_us.html" data-i18n="navContacts">Контакты</a>
+          </div>
+
+          <div class="nav__actions">
+            <div class="lang-switcher" id="langSwitcher">
+              <button
+                class="lang-switcher__button"
+                id="langButton"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="langMenu"
+              >
+                <span class="lang-switcher__current" id="langCurrentFlag">🇷🇺</span>
+                <span class="lang-switcher__current-text" id="langCurrentText">RU</span>
+                <svg class="lang-switcher__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <div class="lang-switcher__menu" id="langMenu" role="menu" aria-label="Выбор языка">
+                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
+                  <span class="lang-switcher__flag">🇷🇺</span>
+                  <span class="lang-switcher__label">Русский</span>
+                </button>
+
+                <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
+                  <span class="lang-switcher__flag">🇬🇧</span>
+                  <span class="lang-switcher__label">English</span>
+                </button>
+
+                <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
+                  <span class="lang-switcher__flag">🇨🇳</span>
+                  <span class="lang-switcher__label">中文</span>
+                </button>
+
+                <button class="lang-switcher__option" type="button" data-lang="kk" role="menuitem">
+                  <span class="lang-switcher__flag">🇰🇿</span>
+                  <span class="lang-switcher__label">Қазақша</span>
+                </button>
+              </div>
+            </div>
+
+            <a class="btn btn--primary" href="./contact_us.html" data-i18n="requestSolution">Запросить решение</a>
+          </div>
+        </nav>
+      </header>
+    </div>
+
+    <main>
+      <section class="hero" id="hero" aria-label="Главный экран">
+        <video class="hero__video" autoplay muted loop playsinline preload="auto">
+          <source src="./IMG_6557.MP4" type="video/mp4" />
+        </video>
+
+        <div class="hero__video-mask" aria-hidden="true"></div>
+
+        <div class="hero__content reveal">
+          <h1 class="hero__title" data-i18n="heroTitle">
+            Обнаружение утечек в реальном времени
+          </h1>
+
+          <p class="hero__text" data-i18n="heroText">
+            Система фиксирует инцидент в момент появления и мгновенно передаёт сигнал оператору.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="./contact_us.html" data-i18n="requestSolution">Запросить решение</a>
+            <a class="btn btn--secondary" href="#modules" data-i18n="viewModules">Посмотреть модули</a>
+          </div>
+
+          <p class="hero__note" data-i18n="heroNote">
+            От обнаружения утечек — к предотвращению инцидентов. Сегодня система фиксирует событие
+            в момент появления. Следующий этап развития — прогнозирование риска до возникновения утечки.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="monitoring-title">
+        <div class="anchor" id="about" aria-hidden="true"></div>
+        <div class="container">
+          <header class="section-header reveal">
+            <h2 class="section-title" id="monitoring-title" data-i18n="monitoringTitle">
+              Фиксация утечки в момент возникновения
+            </h2>
+
+            <p class="section-text" data-i18n="monitoringText">
+              Два сценария работы системы на реальном видеопотоке: обнаружение утечки и автоматическая
+              регистрация события для дальнейшего реагирования.
+            </p>
+          </header>
+
+          <div class="demo-grid">
+            <article class="panel demo-card reveal">
+              <div class="demo-card__media">
+                <video autoplay muted loop playsinline preload="auto">
+                  <source src="./IMG_6557.MP4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div class="demo-card__body">
+                <h3 class="demo-card__title" data-i18n="leakDetectionTitle">Обнаружение утечки в кадре</h3>
+                <p class="demo-card__text" data-i18n="leakDetectionText">
+                  Система анализирует видеопоток, отслеживает появление жидкости в зоне наблюдения
+                  и формирует событие без участия оператора.
+                </p>
+              </div>
+            </article>
+
+            <article class="panel demo-card reveal">
+              <div class="demo-card__media">
+                <video autoplay muted loop playsinline preload="auto">
+                  <source src="./IMG_6540.MP4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div class="demo-card__body">
+                <h3 class="demo-card__title" data-i18n="eventFixTitle">Фиксация события и уведомление</h3>
+                <p class="demo-card__text" data-i18n="eventFixText">
+                  После обнаружения система сохраняет видеосценарий, формирует метаданные события
+                  и направляет сигнал оператору для быстрой оценки ситуации.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section future-section" aria-labelledby="future-title">
+        <div class="anchor" id="modules" aria-hidden="true"></div>
+        <div class="anchor" id="calculator" aria-hidden="true"></div>
+        <div class="container">
+          <div class="future-enterprise reveal">
+            <div class="future-enterprise__intro">
+              <h2 class="future-enterprise__title" id="future-title" data-i18n="futureTitle">
+                От выявления аномалий и поведения — к их предотвращению
+              </h2>
+
+              <p class="future-enterprise__text" data-i18n="futureText">
+                Система в реальном времени фиксирует отклонения и нетипичные действия, мгновенно уведомляя оператора.
+                Следующий шаг — предиктивная аналитика: выявление рисков до того, как они перерастут в инцидент.
+              </p>
+            </div>
+
+            <aside class="future-roadmap" aria-label="Предиктивный контур">
+              <div class="future-roadmap__head">
+                <div>
+                  <div class="future-roadmap__label" data-i18n="predictiveContour">Предиктивный контур</div>
+                  <div class="future-roadmap__sub" data-i18n="predictiveSub">
+                    Переход от фиксации события к раннему предупреждению риска
+                  </div>
+                </div>
+              </div>
+
+              <div class="future-roadmap__steps">
+                <div class="future-step">
+                  <div class="future-step__meta">
+                    <span class="future-step__tag" data-i18n="stepNow">Сейчас</span>
+                  </div>
+                  <div class="future-step__content">
+                    <div class="future-step__title" data-i18n="stepNowTitle">Фиксация инцидента в момент появления</div>
+                    <p class="future-step__text" data-i18n="stepNowText">
+                      Обнаружение утечки на видеопотоке и мгновенное уведомление оператора.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="future-step future-step--accent">
+                  <div class="future-step__meta">
+                    <span class="future-step__tag" data-i18n="stepNext">Далее</span>
+                  </div>
+                  <div class="future-step__content">
+                    <div class="future-step__title" data-i18n="stepNextTitle">
+                      Переход к прогнозной аналитике и автономным решениям
+                    </div>
+                    <p class="future-step__text" data-i18n="stepNextText">
+                      Понимание поведения, контекста и развития событий с возможностью предсказать инцидент до его фактического начала.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="future-step">
+                  <div class="future-step__meta">
+                    <span class="future-step__tag" data-i18n="stepGoal">Цель</span>
+                  </div>
+                  <div class="future-step__content">
+                    <div class="future-step__title" data-i18n="stepGoalTitle">Автономное предотвращение рисков</div>
+                    <p class="future-step__text" data-i18n="stepGoalText">
+                      Система способна не только выявлять угрозы, но и самостоятельно инициировать меры для их предотвращения до наступления ущерба.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contacts" aria-labelledby="contacts-title">
+        <div class="container">
+          <div class="panel cta-box reveal">
+            <h2 class="cta-box__title" id="contacts-title" data-i18n="ctaTitle">
+              Покажем, как решение будет работать на вашем объекте
+            </h2>
+
+            <p class="cta-box__text" data-i18n="ctaText">
+              Проверим применимость сценария на ваших камерах, зонах контроля и типовых рисках объекта.
+              Покажем ключевой сценарий по утечкам и обсудим развитие решения под вашу инфраструктуру.
+            </p>
+
+            <p class="cta-box__email">
+              <a href="mailto:support@vengeea.com">support@vengeea.com</a>
+            </p>
+
+            <div class="cta-box__actions">
+              <a class="btn btn--primary" href="mailto:support@vengeea.com" data-i18n="requestSolution">Запросить решение</a>
+              <a class="btn btn--secondary" href="#modules" data-i18n="viewModules">Посмотреть модули</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__row">
+          <div class="footer__brand">
+            <img class="footer__logo" src="./logo-recreated (1).png" alt="Company logo" />
+            <div class="footer__text">
+              <strong style="display:block; color:#edf3ff; margin-bottom:4px;" data-i18n="footerTitle">AI video analytics platform</strong>
+              <span data-i18n="footerText">Leak detection and development toward predictive incident prevention</span>
+            </div>
+          </div>
+
+          <div class="footer__text">
+            <a class="footer__email" href="mailto:support@vengeea.com">support@vengeea.com</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const burger = document.getElementById("burger");
+      const nav = document.getElementById("main-nav");
+      const langSwitcher = document.getElementById("langSwitcher");
+      const langButton = document.getElementById("langButton");
+      const langMenu = document.getElementById("langMenu");
+      const langCurrentFlag = document.getElementById("langCurrentFlag");
+      const langCurrentText = document.getElementById("langCurrentText");
+
+      const languageMeta = {
+        ru: { code: "RU", flag: "🇷🇺", htmlLang: "ru" },
+        en: { code: "EN", flag: "🇬🇧", htmlLang: "en" },
+        zh: { code: "ZH", flag: "🇨🇳", htmlLang: "zh" },
+        kk: { code: "KK", flag: "🇰🇿", htmlLang: "kk" }
+      };
+
+      const translations = {
+        ru: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Видеоаналитика для объектов и инфраструктуры",
+
+          navHome: "Главная",
+          navAbout: "О нас",
+          navModules: "Модули",
+          navCalculator: "Калькулятор",
+          navContacts: "Контакты",
+
+          requestSolution: "Запросить решение",
+          viewModules: "Посмотреть модули",
+
+          heroTitle: "Обнаружение утечек в реальном времени",
+          heroText: "Система фиксирует инцидент в момент появления и мгновенно передаёт сигнал оператору.",
+          heroNote: "От обнаружения утечек — к предотвращению инцидентов. Сегодня система фиксирует событие в момент появления. Следующий этап развития — прогнозирование риска до возникновения утечки.",
+
+          monitoringTitle: "Фиксация утечки в момент возникновения",
+          monitoringText: "Два сценария работы системы на реальном видеопотоке: обнаружение утечки и автоматическая регистрация события для дальнейшего реагирования.",
+
+          leakDetectionTitle: "Обнаружение утечки в кадре",
+          leakDetectionText: "Система анализирует видеопоток, отслеживает появление жидкости в зоне наблюдения и формирует событие без участия оператора.",
+
+          eventFixTitle: "Фиксация события и уведомление",
+          eventFixText: "После обнаружения система сохраняет видеосценарий, формирует метаданные события и направляет сигнал оператору для быстрой оценки ситуации.",
+
+          futureTitle: "От выявления аномалий и поведения — к их предотвращению",
+          futureText: "Система в реальном времени фиксирует отклонения и нетипичные действия, мгновенно уведомляя оператора. Следующий шаг — предиктивная аналитика: выявление рисков до того, как они перерастут в инцидент.",
+
+          predictiveContour: "Предиктивный контур",
+          predictiveSub: "Переход от фиксации события к раннему предупреждению риска",
+
+          stepNow: "Сейчас",
+          stepNowTitle: "Фиксация инцидента в момент появления",
+          stepNowText: "Обнаружение утечки на видеопотоке и мгновенное уведомление оператора.",
+
+          stepNext: "Далее",
+          stepNextTitle: "Переход к прогнозной аналитике и автономным решениям",
+          stepNextText: "Понимание поведения, контекста и развития событий с возможностью предсказать инцидент до его фактического начала.",
+
+          stepGoal: "Цель",
+          stepGoalTitle: "Автономное предотвращение рисков",
+          stepGoalText: "Система способна не только выявлять угрозы, но и самостоятельно инициировать меры для их предотвращения до наступления ущерба.",
+
+          ctaTitle: "Покажем, как решение будет работать на вашем объекте",
+          ctaText: "Проверим применимость сценария на ваших камерах, зонах контроля и типовых рисках объекта. Покажем ключевой сценарий по утечкам и обсудим развитие решения под вашу инфраструктуру.",
+
+          footerTitle: "AI-платформа видеоаналитики",
+          footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
+        },
+
+        en: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Video analytics for facilities and infrastructure",
+
+          navHome: "Home",
+          navAbout: "About",
+          navModules: "Modules",
+          navCalculator: "Calculator",
+          navContacts: "Contacts",
+
+          requestSolution: "Request a solution",
+          viewModules: "View modules",
+
+          heroTitle: "Real-time leak detection",
+          heroText: "The system detects an incident the moment it appears and instantly sends an alert to the operator.",
+          heroNote: "From leak detection to incident prevention. Today, the system records an event the moment it appears. The next stage of development is risk prediction before a leak occurs.",
+
+          monitoringTitle: "Leak detection at the moment it occurs",
+          monitoringText: "Two system scenarios on a live video stream: leak detection and automatic event registration for further response.",
+
+          leakDetectionTitle: "Leak detection in the frame",
+          leakDetectionText: "The system analyzes the video stream, tracks the appearance of liquid in the monitoring zone, and generates an event without operator involvement.",
+
+          eventFixTitle: "Event recording and notification",
+          eventFixText: "After detection, the system saves the video scenario, creates event metadata, and sends an alert to the operator for rapid situation assessment.",
+
+          futureTitle: "From detecting anomalies and behavior to preventing them",
+          futureText: "The system detects deviations and unusual actions in real time, instantly notifying the operator. The next step is predictive analytics: identifying risks before they grow into an incident.",
+
+          predictiveContour: "Predictive layer",
+          predictiveSub: "Transition from event recording to early risk warning",
+
+          stepNow: "Now",
+          stepNowTitle: "Incident recording at the moment it appears",
+          stepNowText: "Leak detection in the video stream and instant operator notification.",
+
+          stepNext: "Next",
+          stepNextTitle: "Transition to predictive analytics and autonomous decisions",
+          stepNextText: "Understanding behavior, context, and event development with the ability to predict an incident before it actually begins.",
+
+          stepGoal: "Goal",
+          stepGoalTitle: "Autonomous risk prevention",
+          stepGoalText: "The system is capable not only of detecting threats, but also of independently initiating measures to prevent them before damage occurs.",
+
+          ctaTitle: "We’ll show how the solution will work at your facility",
+          ctaText: "We will assess the applicability of the scenario on your cameras, control zones, and typical facility risks. We’ll demonstrate the key leak-detection scenario and discuss how the solution can evolve for your infrastructure.",
+
+          footerTitle: "AI video analytics platform",
+          footerText: "Leak detection and development toward predictive incident prevention"
+        },
+
+        zh: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "面向设施与基础设施的视频分析",
+
+          navHome: "首页",
+          navAbout: "关于我们",
+          navModules: "模块",
+          navCalculator: "计算器",
+          navContacts: "联系我们",
+
+          requestSolution: "申请方案",
+          viewModules: "查看模块",
+
+          heroTitle: "实时泄漏检测",
+          heroText: "系统可在事件出现的瞬间检测到，并立即向操作员发送警报。",
+          heroNote: "从泄漏检测到事故预防。如今，系统能在事件出现时立即记录。下一阶段的发展是：在泄漏发生前预测风险。",
+
+          monitoringTitle: "在泄漏发生时即时检测",
+          monitoringText: "系统在真实视频流中的两种工作场景：泄漏检测与自动事件记录，以便后续响应。",
+
+          leakDetectionTitle: "画面中的泄漏检测",
+          leakDetectionText: "系统分析视频流，跟踪监控区域内液体的出现，并在无需操作员参与的情况下生成事件。",
+
+          eventFixTitle: "事件记录与通知",
+          eventFixText: "检测到后，系统会保存视频片段、生成事件元数据，并将警报发送给操作员，以便快速评估情况。",
+
+          futureTitle: "从异常与行为识别到主动预防",
+          futureText: "系统能够实时识别偏差和异常行为，并立即通知操作员。下一步是预测性分析：在风险演变为事件之前识别出来。",
+
+          predictiveContour: "预测性模块",
+          predictiveSub: "从事件记录转向风险早期预警",
+
+          stepNow: "当前",
+          stepNowTitle: "在事件出现时即时记录",
+          stepNowText: "在视频流中检测泄漏并立即通知操作员。",
+
+          stepNext: "下一步",
+          stepNextTitle: "转向预测分析与自主决策",
+          stepNextText: "理解行为、上下文和事件发展，并能够在事件真正开始之前进行预测。",
+
+          stepGoal: "目标",
+          stepGoalTitle: "自主风险预防",
+          stepGoalText: "系统不仅能够识别威胁，还能够在损失发生前自主启动预防措施。",
+
+          ctaTitle: "我们将展示该方案如何在您的设施中运行",
+          ctaText: "我们会根据您的摄像头、控制区域和典型风险评估该场景的适用性。展示关键的泄漏检测场景，并讨论如何针对您的基础设施扩展该方案。",
+
+          footerTitle: "AI 视频分析平台",
+          footerText: "泄漏检测以及向预测性事故预防方向发展"
+        },
+
+        kk: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Нысандар мен инфрақұрылымға арналған бейнеаналитика",
+
+          navHome: "Басты бет",
+          navAbout: "Біз туралы",
+          navModules: "Модульдер",
+          navCalculator: "Калькулятор",
+          navContacts: "Байланыс",
+
+          requestSolution: "Шешімге сұраныс",
+          viewModules: "Модульдерді қарау",
+
+          heroTitle: "Нақты уақытта ағып кетуді анықтау",
+          heroText: "Жүйе оқиғаны пайда болған сәтте тіркеп, операторға бірден сигнал жібереді.",
+          heroNote: "Ағып кетуді анықтаудан — инциденттердің алдын алуға дейін. Қазір жүйе оқиғаны пайда болған сәтте тіркейді. Келесі даму кезеңі — ағып кету туындағанға дейін тәуекелді болжау.",
+
+          monitoringTitle: "Ағып кетуді пайда болған сәтте тіркеу",
+          monitoringText: "Жүйенің нақты бейнеағында жұмыс істеуінің екі сценарийі: ағып кетуді анықтау және кейінгі әрекет ету үшін оқиғаны автоматты түрде тіркеу.",
+
+          leakDetectionTitle: "Кадрдағы ағып кетуді анықтау",
+          leakDetectionText: "Жүйе бейнеағынды талдайды, бақылау аймағында сұйықтықтың пайда болуын қадағалайды және оператордың қатысуынсыз оқиға қалыптастырады.",
+
+          eventFixTitle: "Оқиғаны тіркеу және хабарлау",
+          eventFixText: "Анықталғаннан кейін жүйе бейнесценарийді сақтайды, оқиға метадеректерін қалыптастырады және жағдайды жедел бағалау үшін операторға сигнал жібереді.",
+
+          futureTitle: "Аномалиялар мен мінез-құлықты анықтаудан — олардың алдын алуға дейін",
+          futureText: "Жүйе нақты уақытта ауытқулар мен әдеттен тыс әрекеттерді тіркеп, операторға бірден хабар береді. Келесі қадам — предиктивті аналитика: тәуекелдерді инцидентке айналмай тұрып анықтау.",
+
+          predictiveContour: "Предиктивті контур",
+          predictiveSub: "Оқиғаны тіркеуден тәуекелді ертерек ескертуге көшу",
+
+          stepNow: "Қазір",
+          stepNowTitle: "Инцидентті пайда болған сәтте тіркеу",
+          stepNowText: "Бейнеағында ағып кетуді анықтау және операторға жедел хабарлау.",
+
+          stepNext: "Келесі",
+          stepNextTitle: "Болжамды аналитика мен автономды шешімдерге көшу",
+          stepNextText: "Инцидент нақты басталғанға дейін оны болжау мүмкіндігімен мінез-құлықты, контексті және оқиғалардың дамуын түсіну.",
+
+          stepGoal: "Мақсат",
+          stepGoalTitle: "Тәуекелдерді автономды түрде болдырмау",
+          stepGoalText: "Жүйе тек қауіптерді анықтап қана қоймай, залал туындағанға дейін олардың алдын алу шараларын өздігінен іске қоса алады.",
+
+          ctaTitle: "Шешімнің сіздің нысаныңызда қалай жұмыс істейтінін көрсетеміз",
+          ctaText: "Сценарийдің сіздің камераларыңызда, бақылау аймақтарыңызда және нысанға тән тәуекелдерде қолданылуын тексереміз. Ағып кету бойынша негізгі сценарийді көрсетіп, шешімді сіздің инфрақұрылымыңызға бейімдеу жолдарын талқылаймыз.",
+
+          footerTitle: "AI-бейнеаналитика платформасы",
+          footerText: "Ағып кетуді анықтау және инциденттердің алдын алуға бағытталған даму"
+        }
+      };
+
+      function applyTranslations(lang) {
+        const dict = translations[lang] || translations.ru;
+        const meta = languageMeta[lang] || languageMeta.ru;
+
+        document.documentElement.lang = meta.htmlLang;
+        langCurrentFlag.textContent = meta.flag;
+        langCurrentText.textContent = meta.code;
+
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key]) {
+            el.textContent = dict[key];
+          }
+        });
+
+        localStorage.setItem("site-language", lang);
+      }
+
+      if (burger && nav) {
+        burger.addEventListener("click", function () {
+          const isOpen = nav.classList.toggle("is-open");
+          document.body.classList.toggle("menu-open", isOpen);
+          burger.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        nav.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            nav.classList.remove("is-open");
+            document.body.classList.remove("menu-open");
+            burger.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+
+      if (langSwitcher && langButton && langMenu) {
+        langButton.addEventListener("click", function (event) {
+          event.stopPropagation();
+          const isOpen = langSwitcher.classList.toggle("is-open");
+          langButton.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        langMenu.querySelectorAll("[data-lang]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            const lang = button.getAttribute("data-lang");
+            applyTranslations(lang);
+            langSwitcher.classList.remove("is-open");
+            langButton.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        document.addEventListener("click", function (event) {
+          if (!langSwitcher.contains(event.target)) {
+            langSwitcher.classList.remove("is-open");
+            langButton.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
+
+      const savedLanguage = localStorage.getItem("site-language") || "ru";
+      applyTranslations(savedLanguage);
+
+      const reveals = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          function (entries, obs) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.14,
+            rootMargin: "0px 0px -40px 0px"
+          }
+        );
+
+        reveals.forEach(function (item) {
+          observer.observe(item);
+        });
+      } else {
+        reveals.forEach(function (item) {
+          item.classList.add("is-visible");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

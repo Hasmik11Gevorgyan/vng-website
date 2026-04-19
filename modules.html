@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Модули AI-видеоаналитики</title>
+  <meta
+    name="description"
+    content="Модули AI-видеоаналитики: утечка жидкости, дым и огонь, вторжение, драка и вандализм, воровство, распознавание и детекция лиц."
+  />
+  <meta name="theme-color" content="#07111d" />
+
+  <style>
+    :root {
+      --bg: #07111d;
+      --bg-deep: #081423;
+      --text: #edf3ff;
+      --text-soft: #dce8fb;
+      --text-muted: #a7bad8;
+      --text-dim: #7d91b0;
+
+      --line: rgba(255, 255, 255, 0.08);
+
+      --blue: #3f7cff;
+      --blue-soft: #7ea7ff;
+      --green: #47dd8c;
+      --green-soft: #8cf0b6;
+
+      --purple: #7c5cff;
+      --purple-soft: #9c87ff;
+
+      --shadow-xl: 0 30px 90px rgba(0, 0, 0, 0.34);
+      --shadow-purple: 0 18px 50px rgba(124, 92, 255, 0.28);
+
+      --radius-lg: 26px;
+      --container: 1320px;
+
+      --transition-fast: 0.22s ease;
+      --transition-slow: 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(73, 126, 255, 0.18), transparent 22%),
+        linear-gradient(180deg, #06111c 0%, #081321 45%, #07111d 100%);
+      overflow-x: hidden;
+    }
+
+    body.menu-open,
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    img,
+    video {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .site {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .site::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(126, 167, 255, 0.08), transparent 18%),
+        radial-gradient(circle at 80% 25%, rgba(91, 226, 255, 0.07), transparent 16%);
+    }
+
+    .container {
+      width: min(100%, var(--container));
+      margin: 0 auto;
+      padding-inline: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 58px;
+      padding: 0 26px;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn--primary {
+      color: #fff;
+      background: linear-gradient(180deg, var(--purple-soft), var(--purple));
+      box-shadow: var(--shadow-purple);
+    }
+
+    .btn--ghost {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn--ghost:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(126, 167, 255, 0.22);
+    }
+
+    .header-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(180deg, rgba(6, 12, 24, 0.82), rgba(6, 12, 24, 0.46));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .header {
+      width: min(100%, var(--container));
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      position: relative;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 180px;
+      flex-shrink: 0;
+    }
+
+    .logo__image {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .logo__text-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo__title {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #fff 0%, var(--blue-soft) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      display: inline-block;
+    }
+
+    .logo__subtitle {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: 0.03em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      flex-wrap: wrap;
+    }
+
+    .nav__link {
+      color: var(--text-soft);
+      font-size: 15px;
+      font-weight: 700;
+      opacity: 0.95;
+      transition: color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+    }
+
+    .nav__link:hover,
+    .nav__link.is-active {
+      color: #fff;
+      transform: translateY(-1px);
+      opacity: 1;
+    }
+
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .burger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .burger svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .lang-switcher {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .lang-switcher__button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      cursor: pointer;
+      transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .lang-switcher__button:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(126, 167, 255, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .lang-switcher__current {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .lang-switcher__current-text {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .lang-switcher__arrow {
+      width: 18px;
+      height: 18px;
+      opacity: 0.9;
+      transition: transform var(--transition-fast);
+    }
+
+    .lang-switcher.is-open .lang-switcher__arrow {
+      transform: rotate(180deg);
+    }
+
+    .lang-switcher__menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 220px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 17, 31, 0.98);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(16px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition:
+        opacity var(--transition-fast),
+        visibility var(--transition-fast),
+        transform var(--transition-fast);
+      z-index: 120;
+    }
+
+    .lang-switcher.is-open .lang-switcher__menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .lang-switcher__option {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: transparent;
+      color: var(--text-soft);
+      text-align: left;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .lang-switcher__option:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+    }
+
+    .lang-switcher__flag {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .lang-switcher__label {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .modules-page {
+      padding: 72px 0 96px;
+    }
+
+    .hero-head {
+      max-width: 940px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+
+    .hero-head__eyebrow {
+      margin-bottom: 12px;
+      color: var(--blue-soft);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-head__title {
+      margin: 0;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      font-weight: 950;
+    }
+
+    .hero-head__text {
+      max-width: 860px;
+      margin: 16px auto 0;
+      color: var(--text-muted);
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .solution-card {
+      position: relative;
+      min-height: 320px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(18, 33, 60, 0.78), rgba(9, 18, 35, 0.96));
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      padding: 0;
+      cursor: pointer;
+      text-align: left;
+      color: inherit;
+      transform: translateY(0) scale(1);
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+    }
+
+    .solution-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 34px 90px rgba(0, 0, 0, 0.42);
+      border-color: rgba(125, 167, 255, 0.22);
+    }
+
+    .solution-card:hover .solution-card__image {
+      transform: scale(1.08);
+    }
+
+    .solution-card:hover .solution-card__arrow {
+      transform: translateX(6px);
+    }
+
+    .solution-card:focus-visible {
+      outline: 2px solid rgba(126, 167, 255, 0.9);
+      outline-offset: 4px;
+    }
+
+    .solution-card__image-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .solution-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1);
+      transition: transform 0.6s ease;
+    }
+
+    .solution-card__overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(5, 12, 24, 0.08), rgba(5, 12, 24, 0.18) 36%, rgba(5, 12, 24, 0.86) 100%);
+    }
+
+    .solution-card__content {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 22px;
+      z-index: 2;
+    }
+
+    .solution-card__tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #eef4ff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .solution-card__title {
+      margin: 0 0 10px;
+      font-size: 30px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    .solution-card__text {
+      margin: 0;
+      max-width: 420px;
+      font-size: 16px;
+      line-height: 1.55;
+      color: #dbe7fa;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.24);
+    }
+
+    .solution-card__arrow {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .footer {
+      padding: 28px 0 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer__logo {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .footer__text {
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .footer__email {
+      color: #a9beff;
+      font-weight: 700;
+    }
+
+    .module-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-start;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .module-modal.is-open {
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .module-modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(2, 8, 18, 0.62);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transition: opacity var(--transition-slow);
+    }
+
+    .module-modal.is-open .module-modal__backdrop {
+      opacity: 1;
+    }
+
+    .module-modal__panel {
+      position: relative;
+      z-index: 1;
+      width: min(92vw, 1240px);
+      height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(420px, 1.05fr) minmax(380px, 0.95fr);
+      background:
+        linear-gradient(180deg, rgba(18, 31, 54, 0.72), rgba(8, 17, 31, 0.88));
+      border-right: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 30px 0 90px rgba(0, 0, 0, 0.34);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+      transform: translateX(-100%);
+      transition: transform var(--transition-slow);
+    }
+
+    .module-modal.is-open .module-modal__panel {
+      transform: translateX(0);
+    }
+
+    .module-modal__panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, rgba(126, 167, 255, 0.12), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(124, 92, 255, 0.1), transparent 24%);
+    }
+
+    .module-modal__media {
+      position: relative;
+      min-width: 0;
+      background: #050d17;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .module-modal__video-layer {
+      position: absolute;
+      inset: 0;
+    }
+
+    .module-modal__video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #02070d;
+    }
+
+    .module-modal__media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(4, 10, 18, 0.08), rgba(4, 10, 18, 0.16) 45%, rgba(4, 10, 18, 0.34) 100%);
+    }
+
+    .module-modal__body {
+      position: relative;
+      min-width: 0;
+      padding: 96px 42px 42px;
+      overflow-y: auto;
+    }
+
+    .module-modal__close {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      z-index: 3;
+      width: 52px;
+      height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      cursor: pointer;
+      transition:
+        transform var(--transition-fast),
+        background var(--transition-fast),
+        border-color var(--transition-fast);
+      backdrop-filter: blur(10px);
+    }
+
+    .module-modal__close:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(126, 167, 255, 0.26);
+    }
+
+    .module-modal__close svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .module-modal__content {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.24s ease, transform 0.24s ease;
+    }
+
+    .module-modal__content.is-switching {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    .module-modal__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      background: rgba(126, 167, 255, 0.09);
+      border: 1px solid rgba(126, 167, 255, 0.14);
+      color: var(--blue-soft);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .module-modal__title {
+      margin: 0;
+      font-size: clamp(32px, 3.4vw, 48px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      font-weight: 950;
+      color: #fff;
+    }
+
+    .module-modal__description {
+      margin: 18px 0 0;
+      color: var(--text-soft);
+      font-size: 18px;
+      line-height: 1.72;
+      max-width: 640px;
+    }
+
+    .module-modal__info {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .module-modal__info-card {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 14px;
+      align-items: start;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 18px 18px 16px;
+      background: rgba(255, 255, 255, 0.035);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    }
+
+    .module-modal__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(126, 167, 255, 0.16), rgba(124, 92, 255, 0.12));
+      border: 1px solid rgba(126, 167, 255, 0.16);
+      color: #fff;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .module-modal__icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .module-modal__info-title {
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .module-modal__info-text {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .module-modal__footer {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .module-modal__footer-text {
+      margin: 0 0 22px;
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .module-modal__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .module-modal__note {
+      margin-top: 18px;
+      color: rgba(237, 243, 255, 0.62);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1100px) {
+      .solutions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 16px;
+        right: 16px;
+        padding: 18px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(8, 17, 31, 0.94);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .nav.is-open {
+        display: flex;
+      }
+
+      .nav__links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .nav__actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .lang-switcher {
+        width: 100%;
+      }
+
+      .lang-switcher__button {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .lang-switcher__menu {
+        position: static;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .burger {
+        display: inline-flex;
+      }
+
+      .module-modal__panel {
+        width: 100vw;
+        grid-template-columns: 1fr;
+      }
+
+      .module-modal__media {
+        min-height: 42vh;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .module-modal__body {
+        padding: 86px 24px 28px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .header {
+        padding: 14px 16px;
+      }
+
+      .container {
+        padding-inline: 16px;
+      }
+
+      .hero-head__title {
+        font-size: 38px;
+      }
+
+      .hero-head__text {
+        font-size: 17px;
+      }
+
+      .solution-card__title {
+        font-size: 26px;
+      }
+
+      .module-modal__media {
+        min-height: 36vh;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .logo__subtitle {
+        display: none;
+      }
+
+      .logo__title {
+        font-size: 14px;
+      }
+
+      .solutions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .solution-card {
+        min-height: 280px;
+      }
+
+      .solution-card__content {
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+      }
+
+      .solution-card__title {
+        font-size: 24px;
+      }
+
+      .solution-card__text {
+        font-size: 15px;
+      }
+
+      .hero-head__title {
+        font-size: 32px;
+      }
+
+      .module-modal__body {
+        padding-inline: 18px;
+      }
+
+      .module-modal__title {
+        font-size: 30px;
+      }
+
+      .module-modal__description {
+        font-size: 16px;
+      }
+
+      .module-modal__info-card {
+        grid-template-columns: 1fr;
+      }
+
+      .module-modal__icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+      }
+
+      .module-modal__actions .btn {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <div class="header-wrap">
+      <header class="header" aria-label="Site header">
+        <a href="index.html#hero" class="logo" aria-label="Go to main screen">
+          <img class="logo__image" src="./logo-recreated (1).png" alt="Company logo" />
+          <span class="logo__text-group">
+            <span class="logo__title" data-i18n="logoTitle">AI Platform</span>
+            <span class="logo__subtitle" data-i18n="logoSubtitle">Видеоаналитика для объектов и инфраструктуры</span>
+          </span>
+        </a>
+
+        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <nav class="nav" id="main-nav" aria-label="Main navigation">
+          <div class="nav__links">
+            <a class="nav__link" href="./index.html#hero" data-i18n="navHome">Главная</a>
+            <a class="nav__link" href="./index.html#about" data-i18n="navAbout">О нас</a>
+            <a class="nav__link is-active" href="./modules.html" data-i18n="navModules">Модули</a>
+            <a class="nav__link" href="./calculator.html" data-i18n="navCalculator">Калькулятор</a>
+            <a class="nav__link" href="./contact_us.html" data-i18n="navContacts">Контакты</a>
+          </div>
+
+          <div class="nav__actions">
+            <div class="lang-switcher" id="langSwitcher">
+              <button
+                class="lang-switcher__button"
+                id="langButton"
+                type="button"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="langMenu"
+              >
+                <span class="lang-switcher__current" id="langCurrentFlag">🇷🇺</span>
+                <span class="lang-switcher__current-text" id="langCurrentText">RU</span>
+                <svg class="lang-switcher__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <div class="lang-switcher__menu" id="langMenu" role="menu" aria-label="Language selection">
+                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
+                  <span class="lang-switcher__flag">🇷🇺</span>
+                  <span class="lang-switcher__label">Русский</span>
+                </button>
+
+                <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
+                  <span class="lang-switcher__flag">🇬🇧</span>
+                  <span class="lang-switcher__label">English</span>
+                </button>
+
+                <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
+                  <span class="lang-switcher__flag">🇨🇳</span>
+                  <span class="lang-switcher__label">中文</span>
+                </button>
+
+                <button class="lang-switcher__option" type="button" data-lang="kk" role="menuitem">
+                  <span class="lang-switcher__flag">🇰🇿</span>
+                  <span class="lang-switcher__label">Қазақша</span>
+                </button>
+              </div>
+            </div>
+
+            <a class="btn btn--primary" href="./contact_us.html" data-i18n="requestSolution">Запросить решение</a>
+          </div>
+        </nav>
+      </header>
+    </div>
+
+    <main class="modules-page">
+      <div class="container">
+        <header class="hero-head">
+          <div class="hero-head__eyebrow" data-i18n="pageEyebrow">Модули</div>
+          <h1 class="hero-head__title" data-i18n="pageTitle">Модули AI-видеоаналитики</h1>
+          <p class="hero-head__text" data-i18n="pageText">
+            Выберите сценарий обнаружения для вашего объекта: от утечек и дыма до краж, вторжений и актов вандализма.
+          </p>
+        </header>
+
+        <section class="solutions-grid" aria-label="Modules list">
+          <button class="solution-card" type="button" data-module="leak">
+            <div class="solution-card__image-wrap">
+              <img class="solution-card__image" src="./oil_spil.png" alt="Leak detection" />
+            </div>
+            <div class="solution-card__overlay"></div>
+            <div class="solution-card__content">
+              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
+              <h2 class="solution-card__title" data-i18n="cardLeakTitle">Утечка жидкости</h2>
+              <p class="solution-card__text" data-i18n="cardLeakText">Выявление разливов и утечек в критических зонах объекта.</p>
+              <span class="solution-card__arrow">→</span>
+            </div>
+          </button>
+
+          <button class="solution-card" type="button" data-module="fire">
+            <div class="solution-card__image-wrap">
+              <img class="solution-card__image" src="./fire.png" alt="Smoke and fire detection" />
+            </div>
+            <div class="solution-card__overlay"></div>
+            <div class="solution-card__content">
+              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
+              <h2 class="solution-card__title" data-i18n="cardFireTitle">Дым и огонь</h2>
+              <p class="solution-card__text" data-i18n="cardFireText">Раннее обнаружение задымления и открытого пламени.</p>
+              <span class="solution-card__arrow">→</span>
+            </div>
+          </button>
+
+          <button class="solution-card" type="button" data-module="intrusion">
+            <div class="solution-card__image-wrap">
+              <img class="solution-card__image" src="./intrusion.png" alt="Intrusion detection" />
+            </div>
+            <div class="solution-card__overlay"></div>
+            <div class="solution-card__content">
+              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
+              <h2 class="solution-card__title" data-i18n="cardIntrusionTitle">Вторжение</h2>
+              <p class="solution-card__text" data-i18n="cardIntrusionText">Фиксация несанкционированного проникновения на объект.</p>
+              <span class="solution-card__arrow">→</span>
+            </div>
+          </button>
+
+          <button class="solution-card" type="button" data-module="fight">
+            <div class="solution-card__image-wrap">
+              <img class="solution-card__image" src="./fight.png" alt="Fight and vandalism detection" />
+            </div>
+            <div class="solution-card__overlay"></div>
+            <div class="solution-card__content">
+              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
+              <h2 class="solution-card__title" data-i18n="cardFightTitle">Драка и вандализм</h2>
+              <p class="solution-card__text" data-i18n="cardFightText">Обнаружение агрессивных и разрушительных действий.</p>
+              <span class="solution-card__arrow">→</span>
+            </div>
+          </button>
+
+          <button class="solution-card" type="button" data-module="theft">
+            <div class="solution-card__image-wrap">
+              <img class="solution-card__image" src="./shoplift.png" alt="Theft detection" />
+            </div>
+            <div class="solution-card__overlay"></div>
+            <div class="solution-card__content">
+              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
+              <h2 class="solution-card__title" data-i18n="cardTheftTitle">Воровство</h2>
+              <p class="solution-card__text" data-i18n="cardTheftText">Выявление сценариев, связанных с хищением имущества.</p>
+              <span class="solution-card__arrow">→</span>
+            </div>
+          </button>
+
+          <button class="solution-card" type="button" data-module="face">
+            <div class="solution-card__image-wrap">
+              <img class="solution-card__image" src="./face-det.png" alt="Face Detection and Recognition" />
+            </div>
+            <div class="solution-card__overlay"></div>
+            <div class="solution-card__content">
+              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
+              <h2 class="solution-card__title" data-i18n="cardFaceTitle">Распознавание и детекция лица</h2>
+              <p class="solution-card__text" data-i18n="cardFaceText">Фиксация лица, повторных появлений и контроль по собственным спискам наблюдения.</p>
+              <span class="solution-card__arrow">→</span>
+            </div>
+          </button>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__row">
+          <div class="footer__brand">
+            <img class="footer__logo" src="./logo-recreated (1).png" alt="Company logo" />
+            <div class="footer__text">
+              <strong style="display:block; color:#edf3ff; margin-bottom:4px;" data-i18n="footerTitle">AI-платформа видеоаналитики</strong>
+              <span data-i18n="footerText">Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов</span>
+            </div>
+          </div>
+
+          <div class="footer__text">
+            <a class="footer__email" href="mailto:support@vengeea.com">support@vengeea.com</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div
+    class="module-modal"
+    id="moduleModal"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="moduleModalTitle"
+  >
+    <div class="module-modal__backdrop" id="moduleBackdrop"></div>
+
+    <div class="module-modal__panel" id="modulePanel">
+      <div class="module-modal__media">
+        <div class="module-modal__video-layer">
+          <video
+            id="moduleVideo"
+            class="module-modal__video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source id="moduleVideoSource" src="" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+      <div class="module-modal__body">
+        <button class="module-modal__close" id="moduleClose" type="button" aria-label="Close window">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="module-modal__content" id="modalContent">
+          <div class="module-modal__eyebrow" id="moduleEyebrow">AI-модуль</div>
+          <h2 class="module-modal__title" id="moduleModalTitle">Заголовок модуля</h2>
+
+          <p class="module-modal__description" id="moduleDescription">
+            Описание модуля.
+          </p>
+
+          <div class="module-modal__info">
+            <div class="module-modal__info-card">
+              <div class="module-modal__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 4L19 7.5V12C19 16.5 16 19.5 12 21C8 19.5 5 16.5 5 12V7.5L12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="module-modal__info-title" id="moduleDetectsTitle">Что обнаруживает</h3>
+                <p class="module-modal__info-text" id="moduleDetects"></p>
+              </div>
+            </div>
+
+            <div class="module-modal__info-card">
+              <div class="module-modal__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 5V12L16.5 14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="module-modal__info-title" id="modulePurposeTitle">Зачем нужен</h3>
+                <p class="module-modal__info-text" id="modulePurpose"></p>
+              </div>
+            </div>
+
+            <div class="module-modal__info-card">
+              <div class="module-modal__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21C16 17.2 19 14.2 19 10.5C19 6.91 15.87 4 12 4C8.13 4 5 6.91 5 10.5C5 14.2 8 17.2 12 21Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <circle cx="12" cy="10.5" r="2.5" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="module-modal__info-title" id="moduleAreasTitle">Где применяется</h3>
+                <p class="module-modal__info-text" id="moduleAreas"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="module-modal__footer">
+            <p class="module-modal__footer-text" id="moduleFooter">
+              Решение помогает перейти от реакции на последствия — к предотвращению риска в момент его появления.
+            </p>
+
+            <div class="module-modal__actions">
+              <a class="btn btn--primary" id="moduleDemoLink" href="mailto:support@vengeea.com?subject=Запрос демо модуля">
+                <span id="moduleDemoLabel">Запросить демо модуля</span>
+              </a>
+              <a class="btn btn--ghost" href="./contact_us.html">
+                <span data-i18n="contactUs">Связаться с нами</span>
+              </a>
+            </div>
+
+            <div class="module-modal__note" id="moduleNote">
+              Чем раньше вы видите риск, тем дешевле обходятся его последствия.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const burger = document.getElementById("burger");
+      const nav = document.getElementById("main-nav");
+
+      const langSwitcher = document.getElementById("langSwitcher");
+      const langButton = document.getElementById("langButton");
+      const langCurrentFlag = document.getElementById("langCurrentFlag");
+      const langCurrentText = document.getElementById("langCurrentText");
+
+      const modal = document.getElementById("moduleModal");
+      const backdrop = document.getElementById("moduleBackdrop");
+      const closeButton = document.getElementById("moduleClose");
+      const modalContent = document.getElementById("modalContent");
+
+      const modalTitle = document.getElementById("moduleModalTitle");
+      const modalDescription = document.getElementById("moduleDescription");
+      const modalDetects = document.getElementById("moduleDetects");
+      const modalPurpose = document.getElementById("modulePurpose");
+      const modalAreas = document.getElementById("moduleAreas");
+      const modalEyebrow = document.getElementById("moduleEyebrow");
+      const modalFooter = document.getElementById("moduleFooter");
+      const modalNote = document.getElementById("moduleNote");
+      const moduleDemoLink = document.getElementById("moduleDemoLink");
+      const moduleDemoLabel = document.getElementById("moduleDemoLabel");
+
+      const modalVideo = document.getElementById("moduleVideo");
+      const modalVideoSource = document.getElementById("moduleVideoSource");
+
+      const moduleDetectsTitle = document.getElementById("moduleDetectsTitle");
+      const modulePurposeTitle = document.getElementById("modulePurposeTitle");
+      const moduleAreasTitle = document.getElementById("moduleAreasTitle");
+
+      let lastFocusedCard = null;
+      let currentModuleKey = null;
+      let currentLanguage = localStorage.getItem("site-language") || "ru";
+
+      const languageMeta = {
+        ru: { code: "RU", flag: "🇷🇺", htmlLang: "ru" },
+        en: { code: "EN", flag: "🇬🇧", htmlLang: "en" },
+        zh: { code: "ZH", flag: "🇨🇳", htmlLang: "zh" },
+        kk: { code: "KK", flag: "🇰🇿", htmlLang: "kk" }
+      };
+
+      const uiTranslations = {
+        ru: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Видеоаналитика для объектов и инфраструктуры",
+          navHome: "Главная",
+          navAbout: "О нас",
+          navModules: "Модули",
+          navCalculator: "Калькулятор",
+          navContacts: "Контакты",
+          requestSolution: "Запросить решение",
+          pageEyebrow: "Модули",
+          pageText: "Выберите сценарий обнаружения для вашего объекта: от утечек и дыма до краж, вторжений и актов вандализма.",
+          cardTag: "AI-модуль",
+          cardLeakTitle: "Утечка жидкости",
+          cardLeakText: "Выявление разливов и утечек в критических зонах объекта.",
+          cardFireTitle: "Дым и огонь",
+          cardFireText: "Раннее обнаружение задымления и открытого пламени.",
+          cardIntrusionTitle: "Вторжение",
+          cardIntrusionText: "Фиксация несанкционированного проникновения на объект.",
+          cardFightTitle: "Драка и вандализм",
+          cardFightText: "Обнаружение агрессивных и разрушительных действий.",
+          cardTheftTitle: "Воровство",
+          cardTheftText: "Выявление сценариев, связанных с хищением имущества.",
+          cardFaceTitle: "Распознавание и детекция лица",
+          cardFaceText: "Фиксация лица, повторных появлений и контроль по собственным спискам наблюдения.",
+          contactUs: "Связаться с нами",
+          detectsTitle: "Что обнаруживает",
+          purposeTitle: "Зачем нужен",
+          areasTitle: "Где применяется",
+          demoButton: "Запросить демо модуля",
+          closeLabel: "Закрыть окно",
+          footerTitle: "AI-платформа видеоаналитики",
+          footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
+        },
+        en: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Video analytics for facilities and infrastructure",
+          navHome: "Home",
+          navAbout: "About",
+          navModules: "Modules",
+          navCalculator: "Calculator",
+          navContacts: "Contacts",
+          requestSolution: "Request a solution",
+          pageEyebrow: "Modules",
+          pageTitle: "AI Video Analytics Modules",
+          pageText: "Choose a detection scenario for your facility: from leaks and smoke to theft, intrusion, vandalism, and face recognition workflows.",
+          cardTag: "AI Module",
+          cardLeakTitle: "Liquid Leak",
+          cardLeakText: "Detection of spills and leaks in critical facility areas.",
+          cardFireTitle: "Smoke and Fire",
+          cardFireText: "Early detection of smoke and open flame.",
+          cardIntrusionTitle: "Intrusion",
+          cardIntrusionText: "Detection of unauthorized entry to the facility.",
+          cardFightTitle: "Fight and Vandalism",
+          cardFightText: "Detection of aggressive and destructive actions.",
+          cardTheftTitle: "Theft",
+          cardTheftText: "Detection of scenarios related to property theft.",
+          cardFaceTitle: "Face Recognition and Detection",
+          cardFaceText: "Face detection and recognition, returning appearance tracking, and monitoring through custom watchlists.",
+          contactUs: "Contact us",
+          detectsTitle: "What it detects",
+          purposeTitle: "Why it matters",
+          areasTitle: "Where it is used",
+          demoButton: "Request module demo",
+          closeLabel: "Close window",
+          footerTitle: "AI video analytics platform",
+          footerText: "Leak detection and development toward predictive incident prevention"
+        },
+        zh: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "面向设施与基础设施的视频分析",
+          navHome: "首页",
+          navAbout: "关于我们",
+          navModules: "模块",
+          navCalculator: "计算器",
+          navContacts: "联系我们",
+          requestSolution: "申请方案",
+          pageEyebrow: "模块",
+          pageTitle: "AI 视频分析模块",
+          pageText: "为您的设施选择检测场景：从泄漏和烟雾到盗窃、入侵、破坏以及人脸识别流程。",
+          cardTag: "AI 模块",
+          cardLeakTitle: "液体泄漏",
+          cardLeakText: "检测设施关键区域中的泄漏和溢出。",
+          cardFireTitle: "烟雾和火焰",
+          cardFireText: "及早发现烟雾和明火。",
+          cardIntrusionTitle: "入侵",
+          cardIntrusionText: "检测未经授权进入设施的行为。",
+          cardFightTitle: "打斗与破坏",
+          cardFightText: "检测攻击性和破坏性行为。",
+          cardTheftTitle: "盗窃",
+          cardTheftText: "识别与财产盗窃相关的场景。",
+          cardFaceTitle: "人脸识别与检测",
+          cardFaceText: "人脸捕捉、重复出现跟踪以及基于自定义观察名单的监控。",
+          contactUs: "联系我们",
+          detectsTitle: "检测内容",
+          purposeTitle: "价值与作用",
+          areasTitle: "应用场景",
+          demoButton: "申请模块演示",
+          closeLabel: "关闭窗口",
+          footerTitle: "AI 视频分析平台",
+          footerText: "泄漏检测以及向预测性事故预防方向发展"
+        },
+        kk: {
+          logoTitle: "AI Platform",
+          logoSubtitle: "Нысандар мен инфрақұрылымға арналған бейнеаналитика",
+          navHome: "Басты бет",
+          navAbout: "Біз туралы",
+          navModules: "Модульдер",
+          navCalculator: "Калькулятор",
+          navContacts: "Байланыс",
+          requestSolution: "Шешімге сұраныс",
+          pageEyebrow: "Модульдер",
+          pageTitle: "AI-бейнеаналитика модульдері",
+          pageText: "Нысаныңыз үшін анықтау сценарийін таңдаңыз: ағып кетуден және түтіннен бастап ұрлық, басып кіру, вандализм және бетті тану процестеріне дейін.",
+          cardTag: "AI-модуль",
+          cardLeakTitle: "Сұйықтықтың ағуы",
+          cardLeakText: "Нысанның маңызды аймақтарындағы төгілулер мен ағып кетулерді анықтау.",
+          cardFireTitle: "Түтін және өрт",
+          cardFireText: "Түтін мен ашық жалынды ерте анықтау.",
+          cardIntrusionTitle: "Басып кіру",
+          cardIntrusionText: "Нысанға рұқсатсыз кіруді тіркеу.",
+          cardFightTitle: "Төбелес және вандализм",
+          cardFightText: "Агрессивті және қиратушы әрекеттерді анықтау.",
+          cardTheftTitle: "Ұрлық",
+          cardTheftText: "Мүлікті ұрлауға байланысты сценарийлерді анықтау.",
+          cardFaceTitle: "Бетті тану және анықтау",
+          cardFaceText: "Бетті тіркеу, қайталанатын пайда болуды бақылау және жеке бақылау тізімдері арқылы мониторинг.",
+          contactUs: "Бізбен байланысу",
+          detectsTitle: "Нені анықтайды",
+          purposeTitle: "Не үшін керек",
+          areasTitle: "Қайда қолданылады",
+          demoButton: "Модуль демосын сұрау",
+          closeLabel: "Терезені жабу",
+          footerTitle: "AI-бейнеаналитика платформасы",
+          footerText: "Ағып кетуді анықтау және инциденттердің алдын алуға бағытталған даму"
+        }
+      };
+
+      const modules = {
+        leak: {
+          video: "./leak_video.MP4",
+          ru: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Утечка жидкости",
+            title: "Обнаружение утечки до того, как она станет проблемой",
+            description: "Одна незаметная протечка — и уже через минуты вы теряете оборудование, продукцию или останавливаете процесс. Система фиксирует появление жидкости в момент её возникновения — без задержек и без человеческого фактора. Вы узнаёте об инциденте раньше, чем он превращается в убытки. Это не просто обнаружение — это контроль над ситуацией до того, как она выходит из-под контроля.",
+            detects: "Утечки, разливы, появление жидкости, скопление опасных следов в зоне контроля.",
+            purpose: "Чтобы сократить простой, защитить оборудование, снизить ущерб и не дать небольшой проблеме превратиться в дорогую аварию.",
+            areas: "Производство, склады, серверные, инженерные помещения, технические зоны, инфраструктурные объекты.",
+            footer: "Чем раньше обнаружена утечка, тем меньше стоимость последствий. В этом и есть настоящая ценность системы.",
+            note: "Маленькая утечка редко остаётся маленькой. Поэтому выигрывает тот, кто видит её первым."
+          },
+          en: {
+            eyebrow: "AI Module",
+            shortTitle: "Liquid Leak",
+            title: "Detect leaks before they become a crisis",
+            description: "A single unnoticed leak can damage equipment, destroy products, or stop operations within minutes. The system detects the appearance of liquid the moment it happens — without delays and without relying on human attention. You learn about the incident before it turns into loss. This is not just detection — it is control before the situation gets out of control.",
+            detects: "Leaks, spills, liquid appearance, and hazardous traces in the monitored area.",
+            purpose: "To reduce downtime, protect equipment, limit damage, and prevent a small issue from becoming an expensive failure.",
+            areas: "Production sites, warehouses, server rooms, engineering facilities, technical zones, and infrastructure assets.",
+            footer: "The earlier a leak is detected, the lower the cost of the consequences. That is the real value of the system.",
+            note: "A small leak rarely stays small. The advantage belongs to the one who sees it first."
+          },
+          zh: {
+            eyebrow: "AI 模块",
+            shortTitle: "液体泄漏",
+            title: "在泄漏演变成问题之前发现它",
+            description: "一次不起眼的泄漏，几分钟内就可能导致设备受损、产品报废或流程中断。系统会在液体出现的瞬间完成识别——没有延迟，也不依赖人工注意力。您会在事故演变为损失之前得到预警。这不仅是检测，更是在局势失控之前重新掌握主动权。",
+            detects: "泄漏、溢出、液体出现，以及监控区域中的危险液体痕迹。",
+            purpose: "用于减少停机时间、保护设备、降低损失，并防止小问题演变成昂贵事故。",
+            areas: "生产现场、仓库、机房、工程设施、技术区域和基础设施对象。",
+            footer: "泄漏发现得越早，后果成本越低。这正是系统真正的价值所在。",
+            note: "小泄漏很少会一直保持“小”。优势永远属于最早发现它的人。"
+          },
+          kk: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Сұйықтықтың ағуы",
+            title: "Ағып кетуді үлкен мәселеге айналмай тұрып анықтау",
+            description: "Көзге түспеген бір ғана ағу бірнеше минут ішінде жабдыққа зиян келтіріп, өнімді жоғалтып немесе процесті тоқтатуы мүмкін. Жүйе сұйықтықтың пайда болуын дәл сол сәтте анықтайды — кешігусіз және адам факторына тәуелсіз. Сіз инцидент туралы оның шығынға айналуынан бұрын білесіз. Бұл жай анықтау емес — жағдай бақылаудан шықпай тұрып оны басқару.",
+            detects: "Ағып кету, төгілу, сұйықтықтың пайда болуы және бақылау аймағындағы қауіпті іздер.",
+            purpose: "Тоқтап қалуды азайту, жабдықты қорғау, шығынды төмендету және шағын мәселенің қымбат апатқа айналуына жол бермеу үшін.",
+            areas: "Өндіріс, қоймалар, серверлік бөлмелер, инженерлік нысандар, техникалық аймақтар және инфрақұрылым объектілері.",
+            footer: "Ағып кету неғұрлым ерте анықталса, салдарының құны соғұрлым аз болады. Жүйенің нағыз құндылығы осында.",
+            note: "Кішкентай ағу сирек жағдайда кішкентай болып қалады. Артықшылық оны бірінші болып көрген жақта."
+          }
+        },
+        fire: {
+          video: "./smokeandfire_video.MP4",
+          ru: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Дым и огонь",
+            title: "Когда секунды решают всё",
+            description: "Пожар не начинается с пламени — он начинается с момента, который обычно никто не замечает. Система выявляет дым и признаки возгорания на ранней стадии, когда ещё есть время предотвратить катастрофу. Вы реагируете не тогда, когда уже горит — а тогда, когда ещё можно остановить. Это разница между инцидентом и разрушением бизнеса.",
+            detects: "Дым, открытое пламя, визуальные признаки возгорания, ранние опасные изменения в кадре.",
+            purpose: "Чтобы сократить время реакции персонала, минимизировать ущерб и защитить объект до развития критического сценария.",
+            areas: "Склады, производство, паркинги, торговые площади, общественные пространства, объекты с повышенным риском возгорания.",
+            footer: "Огонь выигрывает у тех, кто замечает его слишком поздно. Этот модуль нужен, чтобы вы были быстрее.",
+            note: "Иногда между тревогой и катастрофой — всего несколько секунд. Именно их система и покупает для вас."
+          },
+          en: {
+            eyebrow: "AI Module",
+            shortTitle: "Smoke and Fire",
+            title: "When seconds decide everything",
+            description: "Fire does not start with flames — it starts with the moment no one notices. The system detects smoke and signs of ignition at an early stage, when there is still time to prevent disaster. You respond not when everything is already burning, but while it can still be stopped. That is the difference between an incident and business destruction.",
+            detects: "Smoke, open flame, visual signs of ignition, and early dangerous changes in the frame.",
+            purpose: "To reduce response time, minimize damage, and protect the facility before the situation becomes critical.",
+            areas: "Warehouses, production sites, parking areas, retail spaces, public environments, and high fire-risk facilities.",
+            footer: "Fire wins against those who notice it too late. This module exists to make you faster.",
+            note: "Sometimes only a few seconds stand between an alarm and a catastrophe. This system buys those seconds for you."
+          },
+          zh: {
+            eyebrow: "AI 模块",
+            shortTitle: "烟雾和火焰",
+            title: "当每一秒都决定结果",
+            description: "火灾并不是从明火开始，而是从那个通常无人察觉的瞬间开始。系统能够在早期识别烟雾和起火迹象，在灾难发生前为您争取反应时间。您不是在已经燃烧时才行动，而是在仍然可以阻止的时候就开始处理。这就是事故与业务毁灭之间的区别。",
+            detects: "烟雾、明火、起火视觉迹象，以及画面中的早期危险变化。",
+            purpose: "用于缩短响应时间、减少损失，并在局势升级前保护现场。",
+            areas: "仓库、生产现场、停车场、零售空间、公共区域以及高火灾风险设施。",
+            footer: "火焰总是战胜那些发现得太晚的人。这个模块的意义，就是让您更快一步。",
+            note: "有时候，警报与灾难之间只差几秒。系统为您赢回的正是这几秒。"
+          },
+          kk: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Түтін және өрт",
+            title: "Секундтар бәрін шешетін сәт",
+            description: "Өрт жалыннан басталмайды — ол әдетте ешкім байқамайтын сәттен басталады. Жүйе түтін мен тұтану белгілерін ерте кезеңде анықтайды, яғни апатты тоқтатуға әлі уақыт бар кезде. Сіз бәрі жанып кеткенде емес, оны әлі тоқтатуға болатын кезде әрекет етесіз. Бұл инцидент пен бизнестің күйреуі арасындағы айырмашылық.",
+            detects: "Түтін, ашық жалын, тұтанудың визуалды белгілері және кадрдағы ерте қауіпті өзгерістер.",
+            purpose: "Жауап беру уақытын қысқарту, шығынды азайту және жағдай ушығып кетпей тұрып нысанды қорғау үшін.",
+            areas: "Қоймалар, өндіріс орындары, паркингтер, сауда алаңдары, қоғамдық кеңістіктер және өрт қаупі жоғары объектілер.",
+            footer: "Өрт оны тым кеш байқағандарды әрқашан жеңеді. Бұл модуль сіздің тезірек әрекет етуіңіз үшін жасалған.",
+            note: "Кейде дабыл мен апаттың арасында бірнеше секунд қана болады. Жүйе сізге дәл сол секундтарды алып береді."
+          }
+        },
+        intrusion: {
+          video: "./intrusion_video.MP4",
+          ru: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Вторжение",
+            title: "Контроль границ, которые нельзя нарушать",
+            description: "Любое несанкционированное проникновение — это риск: от краж до аварий и прямых угроз безопасности. Система мгновенно фиксирует появление человека или техники в запрещённой зоне. Вы видите нарушение в момент, когда оно происходит — не после. Контроль становится непрерывным, а не реактивным.",
+            detects: "Вторжение, пересечение заданных линий, проникновение в запрещённые зоны, присутствие в неположенное время.",
+            purpose: "Чтобы защитить объект, усилить периметр, снизить вероятность инцидентов и дать службе безопасности время на действие.",
+            areas: "Промышленные территории, склады, стройплощадки, режимные объекты, логистические зоны, закрытые пространства.",
+            footer: "Безопасность заканчивается там, где нарушение замечают слишком поздно. Этот модуль меняет правило игры.",
+            note: "Если угроза уже внутри периметра, значит сигнал пришёл поздно. Здесь всё устроено наоборот."
+          },
+          en: {
+            eyebrow: "AI Module",
+            shortTitle: "Intrusion",
+            title: "Control the boundaries that must not be crossed",
+            description: "Any unauthorized entry is a risk — from theft and operational disruption to direct safety threats. The system instantly detects a person or vehicle appearing in a restricted zone. You see the violation when it happens, not after it is too late. Security becomes continuous instead of reactive.",
+            detects: "Intrusion, line crossing, entry into restricted areas, and presence at unauthorized times.",
+            purpose: "To protect the site, strengthen the perimeter, reduce incident probability, and give security teams time to act.",
+            areas: "Industrial sites, warehouses, construction zones, restricted facilities, logistics areas, and controlled spaces.",
+            footer: "Security ends where a breach is noticed too late. This module changes that rule.",
+            note: "If the threat is already inside the perimeter, the signal came too late. Here, the logic is the opposite."
+          },
+          zh: {
+            eyebrow: "AI 模块",
+            shortTitle: "入侵",
+            title: "守住不可被突破的边界",
+            description: "任何未经授权的进入都意味着风险——从盗窃、事故到直接的安全威胁。系统会即时发现人员或设备出现在受限区域中。您看到的是违规发生的当下，而不是事后追查。安全不再是被动反应，而是持续控制。",
+            detects: "入侵、越线、进入禁区、以及不合规时间段内的出现。",
+            purpose: "用于保护场地、加强周界、降低事故概率，并为安保团队争取反应时间。",
+            areas: "工业场地、仓库、施工区、受限设施、物流区域和受控空间。",
+            footer: "当违规被发现得太晚时，安全就已经失守。这个模块改变了这一点。",
+            note: "如果威胁已经进入周界，说明信号来得太晚。这里的逻辑恰恰相反。"
+          },
+          kk: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Басып кіру",
+            title: "Бұзуға болмайтын шекараларды бақылау",
+            description: "Кез келген рұқсатсыз кіру — бұл тәуекел: ұрлықтан бастап апаттарға және тікелей қауіпсіздік қатерлеріне дейін. Жүйе тыйым салынған аймақта адамның немесе техниканың пайда болуын бірден анықтайды. Сіз бұзушылықты кейін емес, дәл сол сәтте көресіз. Қауіпсіздік реактивті емес, үздіксіз бақылауға айналады.",
+            detects: "Басып кіру, сызықтан өту, тыйым салынған аймаққа ену және рұқсат етілмеген уақытта болу.",
+            purpose: "Нысанды қорғау, периметрді күшейту, инцидент ықтималдығын азайту және қауіпсіздік қызметіне әрекет етуге уақыт беру үшін.",
+            areas: "Өнеркәсіптік аумақтар, қоймалар, құрылыс алаңдары, режимдік объектілер, логистикалық аймақтар және жабық кеңістіктер.",
+            footer: "Бұзушылық тым кеш байқалған жерде қауіпсіздік аяқталады. Бұл модуль сол ережені өзгертеді.",
+            note: "Егер қауіп периметрдің ішінде болса, демек белгі тым кеш келген. Мұнда бәрі керісінше жұмыс істейді."
+          }
+        },
+        fight: {
+          video: "./fight_video.mp4",
+          ru: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Драка и вандализм",
+            title: "Опасность, которую нельзя игнорировать",
+            description: "Конфликт начинается за секунды — последствия остаются надолго. Система выявляет агрессию, драки и разрушительные действия в реальном времени. Вы реагируете сразу, а не разбираетесь с последствиями позже. Это позволяет не только защитить людей, но и сохранить репутацию, имущество и контроль над пространством.",
+            detects: "Агрессивное поведение, физические конфликты, драки, резкие всплески активности, акты вандализма.",
+            purpose: "Чтобы остановить эскалацию на ранней стадии, сократить ущерб и вовремя подключить охрану или ответственный персонал.",
+            areas: "Торговые центры, жилые комплексы, транспортные узлы, улицы, общественные пространства, учебные учреждения.",
+            footer: "Когда ситуация выходит из-под контроля, цена промедления всегда выше. Поэтому реакция должна начинаться в момент события.",
+            note: "Сильная безопасность — это не та, что разбирается после. Это та, что успевает вмешаться вовремя."
+          },
+          en: {
+            eyebrow: "AI Module",
+            shortTitle: "Fight and Vandalism",
+            title: "A threat you cannot afford to ignore",
+            description: "Conflict starts in seconds, but the consequences can last much longer. The system detects aggression, fights, and destructive actions in real time. You respond immediately instead of dealing with the aftermath later. This helps protect people, preserve reputation, safeguard property, and maintain control over the environment.",
+            detects: "Aggressive behavior, physical conflicts, fights, sudden activity spikes, and acts of vandalism.",
+            purpose: "To stop escalation early, reduce damage, and involve security or responsible staff before the situation worsens.",
+            areas: "Shopping malls, residential complexes, transport hubs, streets, public environments, and educational institutions.",
+            footer: "When a situation gets out of control, the cost of delay is always higher. Response must begin the moment the event starts.",
+            note: "Strong security is not the one that investigates after the fact. It is the one that intervenes in time."
+          },
+          zh: {
+            eyebrow: "AI 模块",
+            shortTitle: "打斗与破坏",
+            title: "无法被忽视的危险",
+            description: "冲突往往只需几秒钟就会爆发，但后果却会持续很久。系统能够实时识别攻击性行为、打斗和破坏行为。您不是在事后处理后果，而是在事件发生时立即响应。这不仅保护人员安全，也能保护声誉、财产和对场景的控制。",
+            detects: "攻击性行为、肢体冲突、打斗、异常活动激增和破坏行为。",
+            purpose: "用于在早期阻止局势升级、减少损失，并及时通知安保或责任人员。",
+            areas: "购物中心、住宅区、交通枢纽、街道、公共区域和教育机构。",
+            footer: "当局势失控时，拖延的代价永远更高。因此反应必须从事件发生的那一刻开始。",
+            note: "真正强大的安全，不是事后调查，而是来得及在关键时刻介入。"
+          },
+          kk: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Төбелес және вандализм",
+            title: "Елемеуге болмайтын қауіп",
+            description: "Қақтығыс бірнеше секундта басталады, ал салдары ұзақ сақталады. Жүйе агрессияны, төбелесті және қиратушы әрекеттерді нақты уақытта анықтайды. Сіз кейін салдармен күреспей, сол сәтте әрекет етесіз. Бұл адамдарды қорғап қана қоймай, беделді, мүлікті және кеңістікке бақылауды сақтауға көмектеседі.",
+            detects: "Агрессивті мінез-құлық, физикалық қақтығыстар, төбелестер, белсенділіктің күрт өсуі және вандализм актілері.",
+            purpose: "Эскалацияны ерте тоқтату, шығынды азайту және қауіпсіздік қызметін немесе жауапты персоналды уақтылы қосу үшін.",
+            areas: "Сауда орталықтары, тұрғын кешендер, көлік тораптары, көшелер, қоғамдық кеңістіктер және оқу орындары.",
+            footer: "Жағдай бақылаудан шыққанда, кешігу бағасы әрқашан қымбатқа түседі. Сондықтан әрекет оқиға басталған сәттен басталуы тиіс.",
+            note: "Күшті қауіпсіздік — кейін тексеретін жүйе емес. Ол — уақытында араласа алатын жүйе."
+          }
+        },
+        theft: {
+          video: "./shoplift_video.mp4",
+          ru: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Воровство",
+            title: "Когда потери происходят незаметно",
+            description: "Кражи редко выглядят как преступление — чаще как обычное поведение. Система выявляет подозрительные действия и сценарии, связанные с хищением. Вы получаете сигнал до того, как товар или имущество покидают зону контроля. Это превращает безопасность из пассивной в проактивную.",
+            detects: "Подозрительное поведение, скрытие товара, несанкционированный вынос имущества, сценарии потенциального хищения.",
+            purpose: "Чтобы снижать потери, усиливать контроль активов и предотвращать инциденты ещё до фактического ущерба.",
+            areas: "Ритейл, склады, офисы, пункты выдачи, зоны хранения, пространства с материальными ценностями.",
+            footer: "Самые дорогие потери — те, которые происходят тихо. Этот модуль помогает видеть то, что обычно замечают слишком поздно.",
+            note: "Тихие потери опаснее громких — потому что их замечают слишком поздно. Здесь именно это и решается."
+          },
+          en: {
+            eyebrow: "AI Module",
+            shortTitle: "Theft",
+            title: "When losses happen quietly",
+            description: "Theft rarely looks like a crime in real time — it often looks like ordinary behavior. The system detects suspicious actions and scenarios associated with stealing. You receive a signal before goods or property leave the control zone. This turns security from passive observation into proactive prevention.",
+            detects: "Suspicious behavior, concealment of goods, unauthorized removal of property, and potential theft scenarios.",
+            purpose: "To reduce losses, strengthen asset control, and prevent incidents before actual damage occurs.",
+            areas: "Retail, warehouses, offices, pickup points, storage areas, and environments with valuable assets.",
+            footer: "The most expensive losses are the silent ones. This module helps you see what is usually noticed too late.",
+            note: "Quiet losses are more dangerous than loud ones because they are discovered too late. That is exactly what this module solves."
+          },
+          zh: {
+            eyebrow: "AI 模块",
+            shortTitle: "盗窃",
+            title: "当损失悄无声息地发生",
+            description: "盗窃在实时场景中很少看起来像犯罪，更多时候它只是看起来像普通行为。系统能够识别与盗窃有关的可疑动作和场景。在货物或财产离开控制区域之前，您就会收到提醒。这让安全从被动观察升级为主动预防。",
+            detects: "可疑行为、藏匿商品、未经授权搬离财产，以及潜在盗窃场景。",
+            purpose: "用于减少损失、加强资产控制，并在实际损害发生前阻止事件。",
+            areas: "零售、仓库、办公室、自提点、存储区域和有贵重资产的场景。",
+            footer: "最昂贵的损失，往往是那些悄悄发生的损失。这个模块帮助您看到那些通常被发现得太晚的事情。",
+            note: "安静发生的损失比明显的损失更危险，因为它们总是在太晚时才被发现。这正是这里要解决的问题。"
+          },
+          kk: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Ұрлық",
+            title: "Шығындар үнсіз болатын кезде",
+            description: "Ұрлық нақты уақытта қылмыс сияқты көрінбейді — көбіне ол жай ғана қалыпты әрекетке ұқсайды. Жүйе күмәнді қимылдарды және ұрлықпен байланысты сценарийлерді анықтайды. Сіз тауар немесе мүлік бақылау аймағынан шықпай тұрып белгі аласыз. Бұл қауіпсіздікті пассивті бақылаудан проактивті алдын алуға айналдырады.",
+            detects: "Күдікті мінез-құлық, тауарды жасыру, мүлікті рұқсатсыз алып шығу және ықтимал ұрлық сценарийлері.",
+            purpose: "Шығынды азайту, активтерді бақылауды күшейту және нақты зиян келмей тұрып инциденттердің алдын алу үшін.",
+            areas: "Ритейл, қоймалар, кеңселер, а пункттері, сақтау аймақтары және құнды активтері бар кеңістіктер.",
+            footer: "Ең қымбат шығындар — үнсіз болатын шығындар. Бұл модуль әдетте тым кеш байқалатын нәрсені көруге көмектеседі.",
+            note: "Үнсіз шығындар қатты байқалатын шығындарға қарағанда қауіпті, өйткені олар тым кеш анықталады. Дәл осы мәселе осында шешіледі."
+          }
+        },
+        face: {
+          video: "./face-detect.mp4",
+          ru: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Распознавание и детекция лица",
+            title: "Когда важно не только событие — но и контекст происходящего",
+            description: "Не все сценарии требуют идентификации человека. Система фиксирует присутствие людей в кадре и связывает события между собой, формируя целостную картину происходящего. Вы видите не отдельные тревоги, а взаимосвязанные действия и контекст.",
+            detects: "Присутствие людей в зоне наблюдения, их перемещение и участие в событиях, а также взаимосвязь между инцидентами во времени.",
+            purpose: "Чтобы анализировать происходящее без необходимости идентификации личности, соблюдать требования законодательства и при этом сохранять контроль над ситуацией.",
+            areas: "Склады, производство, офисы, общественные пространства, инфраструктурные объекты, зоны повышенного контроля.",
+            footer: "Иногда важно не знать, кто именно находится в кадре, а понимать, что происходит.",
+            note: "Система по умолчанию не использует биометрические данные. При необходимости функции работы с лицами могут быть ограничены или настроены оператором в соответствии с требованиями законодательства."
+          },
+
+          en: {
+            eyebrow: "AI Module",
+            shortTitle: "Face Recognition and Detection",
+            title: "When it’s not just the event — but the context behind it",
+            description: "Not every scenario requires identifying a person. The system detects human presence and connects events over time, providing a complete understanding of what is happening. You see not isolated alerts, but patterns and context.",
+            detects: "Human presence in monitored areas, movement, involvement in events, and relationships between incidents over time.",
+            purpose: "To analyze situations without requiring identity recognition, comply with privacy regulations, and maintain full operational awareness.",
+            areas: "Retail, warehouses, production sites, offices, public spaces, infrastructure facilities, and high-security zones.",
+            footer: "Sometimes it’s not about who is in the frame — but about understanding what is happening.",
+            note: "The system does not rely on biometric identification by default. Facial data visibility can be limited or disabled by the operator in accordance with local regulations."
+          },
+          zh: {
+            eyebrow: "AI 模块",
+            shortTitle: "人脸识别与检测",
+            title: "重要的不只是发生了什么，而是谁又回来了",
+            description: "事件很少只发生一次。人会返回、重复行为并再次出现。系统会捕捉画面中的人脸，并支持在不同事件中跟踪同一个人。它可用于重复出现匹配、自定义观察名单流程、基于特定场景的自动人脸录入，以及当某人再次进入受控区域时发出提醒。",
+            detects: "画面中的人脸、出现在监控区域中的人员、同一人在不同事件中的重复出现，以及与用户自定义观察名单的匹配。",
+            purpose: "不仅用于对事件做出反应，还用于识别重复场景、跟踪返回人员，并在系统内使用自定义观察名单。",
+            areas: "零售、仓库、生产现场、办公室、公共空间、基础设施以及高安全区域。",
+            footer: "有时候重要的不只是看到一个人，而是知道他以前已经来过这里。",
+            note: "系统默认不使用生物识别数据。操作员可根据当地法规限制或关闭人脸显示。"
+          },
+          kk: {
+            eyebrow: "AI-модуль",
+            shortTitle: "Бетті тану және анықтау",
+            title: "Маңыздысы тек не болғаны емес — кімнің қайта келгені",
+            description: "Инциденттер сирек бір рет болады. Адамдар қайта келеді, әрекеттерді қайталайды және қайта көрінеді. Жүйе кадрдағы бетті тіркеп, бір адамды әртүрлі оқиғалар арасында бақылауға мүмкіндік береді. Ол қайталанатын пайда болуды салыстыруға, жеке watchlist қолдануға, таңдалған сценарийлер бойынша бетті автоматты түрде қосуға және адам бақылау аймағына қайта келгенде хабар беруге пайдаланылуы мүмкін.",
+            detects: "Кадрдағы беттерді, бақылау аймағындағы адамдарды, бір адамның әртүрлі оқиғаларда қайта пайда болуын және пайдаланушы жасаған бақылау тізімдерімен сәйкестікті анықтайды.",
+            purpose: "Оқиғаға жай ғана жауап беру үшін емес, қайталанатын сценарийлерді бақылау, қайта оралған адамдарды анықтау және жүйе ішіндегі жеке watchlist-пен жұмыс істеу үшін.",
+            areas: "Ритейл, қоймалар, өндіріс орындары, кеңселер, қоғамдық кеңістіктер, инфрақұрылым нысандары және жоғары бақылау аймақтары.",
+            footer: "Кейде адамды көру жеткіліксіз — оның мұнда бұрын болғанын білу маңызды.",
+            note: "Жүйе әдепкі бойынша биометриялық деректерді қолданбайды. Оператор заң талаптарына сәйкес беттерді көрсету функциясын шектей немесе өшіре алады."
+          }
+        }
+      };
+
+      function applyTranslations(lang) {
+        currentLanguage = languageMeta[lang] ? lang : "ru";
+        const dictionary = uiTranslations[currentLanguage];
+
+        document.documentElement.lang = languageMeta[currentLanguage].htmlLang;
+        langCurrentFlag.textContent = languageMeta[currentLanguage].flag;
+        langCurrentText.textContent = languageMeta[currentLanguage].code;
+
+        document.querySelectorAll("[data-i18n]").forEach((element) => {
+          const key = element.dataset.i18n;
+          if (dictionary[key]) {
+            element.textContent = dictionary[key];
+          }
+        });
+
+        moduleDetectsTitle.textContent = dictionary.detectsTitle;
+        modulePurposeTitle.textContent = dictionary.purposeTitle;
+        moduleAreasTitle.textContent = dictionary.areasTitle;
+        moduleDemoLabel.textContent = dictionary.demoButton;
+        closeButton.setAttribute("aria-label", dictionary.closeLabel);
+
+        localStorage.setItem("site-language", currentLanguage);
+
+        if (currentModuleKey) {
+          setModalContent(currentModuleKey);
+        }
+      }
+
+      function closeMenu() {
+        nav.classList.remove("is-open");
+        document.body.classList.remove("menu-open");
+        burger.setAttribute("aria-expanded", "false");
+      }
+
+      function setVideoSource(src) {
+        modalVideo.pause();
+        modalVideoSource.src = src;
+        modalVideo.load();
+
+        const playPromise = modalVideo.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {});
+        }
+      }
+
+      function getModuleText(moduleKey) {
+        const moduleData = modules[moduleKey];
+        if (!moduleData) return null;
+        return moduleData[currentLanguage] || moduleData.ru;
+      }
+
+      function setModalContent(moduleKey) {
+        const moduleData = modules[moduleKey];
+        const localized = getModuleText(moduleKey);
+        if (!moduleData || !localized) return;
+
+        modalEyebrow.textContent = localized.eyebrow;
+        modalTitle.textContent = localized.title;
+        modalDescription.textContent = localized.description;
+        modalDetects.textContent = localized.detects;
+        modalPurpose.textContent = localized.purpose;
+        modalAreas.textContent = localized.areas;
+        modalFooter.textContent = localized.footer;
+        modalNote.textContent = localized.note;
+
+        const subject = encodeURIComponent(`${uiTranslations[currentLanguage].demoButton}: ${localized.shortTitle}`);
+        moduleDemoLink.href = `mailto:support@vengeea.com?subject=${subject}`;
+      }
+
+      function openModal(moduleKey, triggerElement) {
+        const moduleData = modules[moduleKey];
+        if (!moduleData) return;
+
+        lastFocusedCard = triggerElement || null;
+
+        if (!modal.classList.contains("is-open")) {
+          currentModuleKey = moduleKey;
+          setModalContent(moduleKey);
+          setVideoSource(moduleData.video);
+
+          modal.classList.add("is-open");
+          modal.setAttribute("aria-hidden", "false");
+          document.body.classList.add("modal-open");
+          closeButton.focus();
+          return;
+        }
+
+        if (currentModuleKey !== moduleKey) {
+          currentModuleKey = moduleKey;
+          modalContent.classList.add("is-switching");
+
+          window.setTimeout(() => {
+            setModalContent(moduleKey);
+            setVideoSource(moduleData.video);
+            modalContent.classList.remove("is-switching");
+          }, 180);
+        }
+      }
+
+      function closeModal() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+
+        if (lastFocusedCard) {
+          lastFocusedCard.focus();
+        }
+      }
+
+      burger.addEventListener("click", () => {
+        const isOpen = nav.classList.toggle("is-open");
+        document.body.classList.toggle("menu-open", isOpen);
+        burger.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      langButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const shouldOpen = !langSwitcher.classList.contains("is-open");
+        langSwitcher.classList.toggle("is-open", shouldOpen);
+        langButton.setAttribute("aria-expanded", String(shouldOpen));
+      });
+
+      document.querySelectorAll(".lang-switcher__option").forEach((button) => {
+        button.addEventListener("click", () => {
+          const lang = button.dataset.lang || "ru";
+          applyTranslations(lang);
+          langSwitcher.classList.remove("is-open");
+          langButton.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!langSwitcher.contains(event.target)) {
+          langSwitcher.classList.remove("is-open");
+          langButton.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      document.querySelectorAll(".nav__link").forEach((link) => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth <= 1100) {
+            closeMenu();
+          }
+        });
+      });
+
+      document.querySelectorAll(".solution-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          const moduleKey = card.dataset.module;
+          openModal(moduleKey, card);
+        });
+      });
+
+      closeButton.addEventListener("click", closeModal);
+      backdrop.addEventListener("click", closeModal);
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          if (modal.classList.contains("is-open")) {
+            closeModal();
+          }
+          if (langSwitcher.classList.contains("is-open")) {
+            langSwitcher.classList.remove("is-open");
+            langButton.setAttribute("aria-expanded", "false");
+          }
+        }
+      });
+
+      applyTranslations(currentLanguage);
+    })();
+  </script>
+</body>
+</html>
