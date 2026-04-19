@@ -52,14 +52,12 @@
     }
 
     .header-wrap {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      backdrop-filter: blur(20px);
-      background: rgba(6, 12, 24, 0.92);
-      border-bottom: none;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(180deg, rgba(6, 12, 24, 0.82), rgba(6, 12, 24, 0.46));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .header {
@@ -70,13 +68,6 @@
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      position: relative;
-    }
-
-    .container {
-      width: min(100%, var(--container));
-      margin: 0 auto;
-      padding-inline: 24px;
     }
 
     .logo {
@@ -85,12 +76,11 @@
       gap: 14px;
       min-width: 180px;
       flex-shrink: 0;
-      text-decoration: none;
     }
 
     .logo__image {
-      width: 52px;
-      height: 52px;
+      width: 46px;
+      height: 46px;
       object-fit: contain;
       flex-shrink: 0;
     }
@@ -102,8 +92,8 @@
     }
 
     .logo__title {
-      font-size: 22px;
-      font-weight: 950;
+      font-size: 18px;
+      font-weight: 900;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       background: linear-gradient(90deg, #3fb7ff 0%, #7c5cff 100%);
@@ -138,8 +128,8 @@
 
     .nav__link {
       color: var(--text-soft);
-      font-size: 16px;
-      font-weight: 800;
+      font-size: 15px;
+      font-weight: 700;
       opacity: 0.95;
       transition: color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
       text-decoration: none;
@@ -186,11 +176,11 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      min-height: 48px;
-      padding: 0 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.04);
+      min-height: 52px;
+      padding: 0 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
       color: #fff;
       cursor: pointer;
       transition:
@@ -212,7 +202,7 @@
 
     .lang-switcher__current-text {
       font-size: 14px;
-      font-weight: 900;
+      font-weight: 800;
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
@@ -314,102 +304,6 @@
 
     .header-cta:hover {
       transform: translateY(-2px);
-    }x;
-      flex-shrink: 0;
-    }
-
-    .lang-switcher {
-      position: relative;
-    }
-
-    .lang-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      min-height: 54px;
-      padding: 0 22px;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-    }
-
-    .lang-button .chevron {
-      width: 12px;
-      height: 12px;
-      border-right: 2px solid rgba(255,255,255,0.85);
-      border-bottom: 2px solid rgba(255,255,255,0.85);
-      transform: rotate(45deg) translateY(-1px);
-      margin-left: 4px;
-    }
-
-    .lang-menu {
-      position: absolute;
-      right: 0;
-      top: calc(100% + 10px);
-      width: 210px;
-      padding: 10px;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(8, 17, 31, 0.98);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(8px);
-      pointer-events: none;
-      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
-    }
-
-    .lang-switcher.is-open .lang-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .lang-option {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px;
-      border: none;
-      border-radius: 12px;
-      background: transparent;
-      color: var(--text-soft, #dce8fb);
-      text-align: left;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .lang-option:hover {
-      background: rgba(255, 255, 255, 0.06);
-      color: #fff;
-    }
-
-    .header-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 54px;
-      padding: 0 38px;
-      border-radius: 20px;
-      border: none;
-      color: #fff;
-      font-size: 18px;
-      font-weight: 900;
-      background: linear-gradient(180deg, #9d83ff, #8464ff);
-      box-shadow: 0 18px 40px rgba(132, 100, 255, 0.28);
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
     }
 
 
@@ -959,7 +853,7 @@
       <a href="index.html#hero" class="logo" aria-label="Перейти на главный экран">
         <img class="logo__image" src="./logo-recreated (1).png" alt="Логотип компании" />
         <span class="logo__text-group">
-          <span class="logo__title" data-i18n="logoTitle">VENGEEA.COM</span>
+          <span class="logo__title" data-i18n="logoTitle">vengeea.com</span>
           <span class="logo__subtitle" data-i18n="logoSubtitle">ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ</span>
         </span>
       </a>
@@ -991,8 +885,8 @@
               aria-haspopup="true"
               aria-controls="langMenu"
             >
-              <span class="lang-switcher__current-text" style="opacity: 0.6; font-size: 12px;">RU</span>
-              <span class="lang-switcher__current-text" id="currentLangText">RU</span>
+              <span class="lang-switcher__current" id="langCurrentFlag">🇷🇺</span>
+              <span class="lang-switcher__current-text" id="langCurrentText">RU</span>
               <svg class="lang-switcher__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -1003,14 +897,17 @@
                 <span class="lang-switcher__flag">🇷🇺</span>
                 <span class="lang-switcher__label">Русский</span>
               </button>
+
               <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
                 <span class="lang-switcher__flag">🇬🇧</span>
                 <span class="lang-switcher__label">English</span>
               </button>
+
               <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
                 <span class="lang-switcher__flag">🇨🇳</span>
                 <span class="lang-switcher__label">中文</span>
               </button>
+
               <button class="lang-switcher__option" type="button" data-lang="kk" role="menuitem">
                 <span class="lang-switcher__flag">🇰🇿</span>
                 <span class="lang-switcher__label">Қазақша</span>
@@ -1018,7 +915,7 @@
             </div>
           </div>
 
-          <a href="./contact_us.html" class="header-cta" data-i18n="ctaHeader">Запросить решение</a>
+          <a class="header-cta" href="./contact_us.html" data-i18n="ctaHeader">Запросить решение</a>
         </div>
       </nav>
     </header>
