@@ -205,9 +205,9 @@
     .logo__title {
       font-size: 18px;
       font-weight: 900;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      background: linear-gradient(90deg, #fff 0%, var(--blue-soft) 100%);
+      background: linear-gradient(90deg, #3fb7ff 0%, #7c5cff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       line-height: 1.1;
@@ -389,7 +389,7 @@
 
     .about-page {
       position: relative;
-      padding: 92px 0 80px;
+      padding: 110px 0 80px;
       overflow: hidden;
     }
 
@@ -447,6 +447,7 @@
       font-weight: 950;
       color: var(--text);
       text-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+      text-transform: uppercase;
     }
 
     .about-story__text {
@@ -505,7 +506,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: var(--shadow-lg);
       background: #0a1423;
-      height: 233px;
+      aspect-ratio: 16 / 10;
       cursor: pointer;
       transition: transform 0.3s ease;
     }
@@ -619,6 +620,7 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
+      text-decoration: none;
     }
 
     .footer__logo {
@@ -719,7 +721,7 @@
       }
 
       .about-page {
-        padding: 72px 0;
+        padding: 100px 0 60px;
       }
 
       .about-story,
@@ -736,7 +738,9 @@
         line-height: 1.72;
       }
 
-      .about-media__hero {
+      .about-media__item:nth-child(1),
+      .about-media__item:nth-child(2) {
+        aspect-ratio: auto;
         min-height: 240px;
       }
 
@@ -745,7 +749,8 @@
       }
 
       .about-media__item {
-        min-height: 120px;
+        aspect-ratio: auto;
+        min-height: 140px;
       }
 
       .about-story__actions .btn {
@@ -760,6 +765,14 @@
 
       .logo__title {
         font-size: 15px;
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        background: linear-gradient(90deg, #3fb7ff 0%, #7c5cff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.1;
+        display: inline-block;
       }
     }
 
@@ -789,8 +802,8 @@
         <a href="index.html#hero" class="logo" aria-label="Vengeea">
           <img class="logo__image" src="./logo-recreated (1).png" alt="Логотип компании" />
           <span class="logo__text-group">
-            <span class="logo__title" data-i18n="logoTitle">AI Platform</span>
-            <span class="logo__subtitle" data-i18n="logoSubtitle">Видеоаналитика для объектов и инфраструктуры</span>
+            <span class="logo__title" data-i18n="logoTitle">vengeea.com</span>
+            <span class="logo__subtitle" data-i18n="logoSubtitle">ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ</span>
           </span>
         </a>
 
@@ -847,7 +860,7 @@
               </div>
             </div>
 
-            <a class="btn btn--primary" href="mailto:support@vengeea.com" data-i18n="requestSolution">Запросить решение</a>
+            <a class="btn btn--primary" href="./contact_us.html" data-i18n="requestSolution">Запросить решение</a>
           </div>
         </nav>
       </header>
@@ -911,13 +924,13 @@
     <footer class="footer" id="contacts">
       <div class="container">
         <div class="footer__row">
-          <div class="footer__brand">
+          <a href="index.html#hero" class="footer__brand">
             <img class="footer__logo" src="./logo-recreated (1).png" alt="Company logo" />
-            <div class="footer__text">
-              <strong style="display:block; color:#edf3ff; margin-bottom:4px;" data-i18n="footerTitle">AI video analytics platform</strong>
-              <span data-i18n="footerText">Leak detection and development toward predictive incident prevention</span>
+            <div class="footer__brand-content">
+              <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;">vengeea.com</div>
+              <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident prevention</div>
             </div>
-          </div>
+          </a>
 
           <div class="footer__text">
             <a class="footer__email" href="mailto:support@vengeea.com">support@vengeea.com</a>
@@ -959,8 +972,8 @@
 
       const translations = {
         ru: {
-          logoTitle: "AI Platform",
-          logoSubtitle: "Видеоаналитика для объектов и инфраструктуры",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
           navHome: "Главная",
           navAbout: "О нас",
           navModules: "Модули",
@@ -971,8 +984,8 @@
           footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
         },
         en: {
-          logoTitle: "AI Platform",
-          logoSubtitle: "Video analytics for facilities and infrastructure",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "FORECASTING FUTURE EVENTS",
           navHome: "Home",
           navAbout: "About",
           navModules: "Modules",
@@ -983,8 +996,8 @@
           footerText: "Leak detection and development toward predictive incident prevention"
         },
         zh: {
-          logoTitle: "AI Platform",
-          logoSubtitle: "面向设施与基础设施的视频分析平台",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "预测未来事件",
           navHome: "首页",
           navAbout: "关于我们",
           navModules: "模块",
@@ -995,8 +1008,8 @@
           footerText: "泄漏检测以及向预测性事故预防方向发展"
         },
         kk: {
-          logoTitle: "AI Platform",
-          logoSubtitle: "Нысандар мен инфрақұрылымға арналған бейнеаналитика",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "БОЛАШАҚ ОҚИҒАЛАРДЫ БОЛЖАУ",
           navHome: "Басты бет",
           navAbout: "Біз туралы",
           navModules: "Модульдер",
@@ -1104,21 +1117,6 @@
         document.getElementById("about-title").textContent = data.title;
         document.getElementById("about-btn-primary").textContent = data.btnPrimary;
         document.getElementById("about-btn-secondary").textContent = data.btnSecondary;
-        
-        const visualMain = document.getElementById("about-visual-main");
-        if (visualMain) visualMain.textContent = data.visualMain;
-        
-        const visual1 = document.getElementById("about-visual-1");
-        if (visual1) visual1.textContent = data.visual1;
-        
-        const visual2 = document.getElementById("about-visual-2");
-        if (visual2) visual2.textContent = data.visual2;
-        
-        const visual3 = document.getElementById("about-visual-3");
-        if (visual3) visual3.textContent = data.visual3;
-        
-        const visual4 = document.getElementById("about-visual-4");
-        if (visual4) visual4.textContent = data.visual4;
 
         document.getElementById("about-text").innerHTML = renderAboutText(data.text);
       }

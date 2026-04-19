@@ -32,12 +32,11 @@
         radial-gradient(circle at top center, rgba(37, 99, 235, 0.16), transparent 26%),
         radial-gradient(circle at 85% 10%, rgba(59, 130, 246, 0.10), transparent 22%),
         linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 45%, var(--bg-3) 100%);
-      min-height: 100vh;
-      padding: 130px 20px 60px;
+      padding: 110px 20px 40px;
     }
 
     .wrap {
-      max-width: 1320px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
@@ -56,7 +55,7 @@
     .header {
       max-width: 1920px;
       margin: 0 auto;
-      padding: 22px 72px;
+      padding: 16px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -66,16 +65,16 @@
     .logo {
       display: inline-flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       color: var(--text);
       text-decoration: none;
-      min-width: 360px;
+      min-width: 180px;
       flex-shrink: 0;
     }
 
     .logo-mark {
-      width: 54px;
-      height: 54px;
+      width: 46px;
+      height: 46px;
       border-radius: 16px;
       display: grid;
       place-items: center;
@@ -88,8 +87,8 @@
     }
 
     .logo-mark svg {
-      width: 34px;
-      height: 34px;
+      width: 28px;
+      height: 28px;
       display: block;
     }
 
@@ -100,16 +99,20 @@
     }
 
     .logo-title {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 900;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
+      background: linear-gradient(90deg, #3fb7ff 0%, #7c5cff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       line-height: 1;
+      display: inline-block;
     }
 
     .logo-subtitle {
       color: var(--muted-2);
-      font-size: 15px;
+      font-size: 11px;
       line-height: 1.18;
       max-width: 210px;
     }
@@ -118,14 +121,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 46px;
+      gap: 26px;
       flex: 1;
     }
 
     .header-nav a {
       color: rgba(237, 243, 255, 0.92);
       text-decoration: none;
-      font-size: 19px;
+      font-size: 15px;
       font-weight: 800;
       letter-spacing: -0.01em;
       transition: color 0.18s ease, transform 0.18s ease;
@@ -140,7 +143,7 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 14px;
       flex-shrink: 0;
     }
 
@@ -240,8 +243,9 @@
 
 
     .top {
-      max-width: 980px;
-      margin: 0 auto 34px;
+      max-width: 860px;
+      margin: 0 auto 24px;
+      padding-top: 32px;
       text-align: center;
     }
 
@@ -249,14 +253,14 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 16px;
+      padding: 8px 14px;
       border-radius: 999px;
       border: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.04);
       color: rgba(226, 232, 240, 0.92);
       font-size: 14px;
       font-weight: 600;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
 
@@ -269,8 +273,8 @@
     }
 
     h1 {
-      margin: 0 0 14px;
-      font-size: clamp(38px, 5vw, 64px);
+      margin: 0 0 12px;
+      font-size: clamp(32px, 4.5vw, 54px);
       line-height: 1.02;
       letter-spacing: -0.05em;
       font-weight: 900;
@@ -278,16 +282,16 @@
 
     .sub {
       margin: 0 auto;
-      max-width: 900px;
+      max-width: 800px;
       color: var(--muted);
-      font-size: 18px;
-      line-height: 1.7;
+      font-size: 16px;
+      line-height: 1.6;
     }
 
     .grid {
       display: grid;
       grid-template-columns: 1.06fr 0.94fr;
-      gap: 24px;
+      gap: 20px;
       align-items: start;
     }
 
@@ -315,11 +319,11 @@
 
     .left,
     .right {
-      padding: 28px;
+      padding: 22px;
     }
 
     .section-title {
-      margin: 0 0 18px;
+      margin: 0 0 12px;
       font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
@@ -330,17 +334,17 @@
     .field-grid {
       display: grid;
       grid-template-columns: 1fr 220px;
-      gap: 16px;
+      gap: 12px;
     }
 
     .field-grid-4 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 12px;
     }
 
     .field {
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .field label,
@@ -348,7 +352,7 @@
       display: block;
       margin-bottom: 8px;
       color: rgba(226, 232, 240, 0.82);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
     }
 
@@ -357,9 +361,9 @@
       border: 1px solid rgba(255, 255, 255, 0.10);
       background: rgba(2, 6, 23, 0.64);
       color: #f8fbff;
-      border-radius: 18px;
-      padding: 15px 16px;
-      font-size: 15px;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-size: 14px;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
       outline: none;
       transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -383,12 +387,12 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 12px;
+      padding: 6px 10px;
       border-radius: 999px;
       background: rgba(37, 99, 235, 0.12);
       border: 1px solid rgba(59, 130, 246, 0.18);
       color: rgba(219, 234, 254, 0.94);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
     }
 
@@ -400,11 +404,11 @@
 
     .module {
       display: grid;
-      grid-template-columns: 1fr 160px;
-      gap: 18px;
+      grid-template-columns: 1fr 140px;
+      gap: 16px;
       align-items: center;
-      padding: 18px;
-      border-radius: 24px;
+      padding: 15px;
+      border-radius: 20px;
       border: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
       transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
@@ -418,7 +422,7 @@
 
     .module h3 {
       margin: 0 0 6px;
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1.2;
       font-weight: 750;
     }
@@ -438,12 +442,12 @@
     }
 
     .tag {
-      padding: 6px 10px;
+      padding: 5px 8px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.06);
       color: rgba(191, 219, 254, 0.94);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
     }
 
@@ -479,8 +483,8 @@
     }
 
     .hero {
-      padding: 24px;
-      border-radius: 26px;
+      padding: 20px;
+      border-radius: 22px;
       margin-bottom: 18px;
       background:
         radial-gradient(circle at top left, rgba(59, 130, 246, 0.28), transparent 45%),
@@ -593,8 +597,8 @@
     }
 
     .result-box {
-      padding: 20px;
-      border-radius: 24px;
+      padding: 16px;
+      border-radius: 20px;
       margin-bottom: 16px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -673,7 +677,7 @@
 
     @media (max-width: 1100px) {
       body {
-        padding-top: 120px;
+        padding-top: 150px;
       }
 
       .header {
@@ -703,7 +707,7 @@
 
     @media (max-width: 760px) {
       body {
-        padding-top: 174px;
+        padding-top: 130px;
       }
 
       .header {
@@ -721,7 +725,7 @@
       }
 
       .logo-title {
-        font-size: 17px;
+        font-size: 15px;
       }
 
       .logo-subtitle {
@@ -777,6 +781,48 @@
       .hero-top {
         flex-direction: column;
       }
+      .footer {
+        padding: 28px 0 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        margin-top: 60px;
+      }
+
+      .footer__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+        width: min(100%, var(--container, 1200px));
+        margin: 0 auto;
+        padding-inline: 24px;
+      }
+
+      .footer__brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .footer__logo {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+        flex-shrink: 0;
+      }
+
+      .footer__text {
+        color: #748ba7;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .footer__email {
+        color: #a9beff;
+        font-weight: 700;
+        text-decoration: none;
+      }
     }
   </style>
 </head>
@@ -791,14 +837,14 @@
           </svg>
         </div>
         <div class="logo-text">
-          <div class="logo-title">AI PLATFORM</div>
+          <div class="logo-title" data-i18n="logoTitle">vengeea.com</div>
           <div class="logo-subtitle" data-i18n="logoSubtitle">Видеоаналитика для объектов и инфраструктуры</div>
         </div>
       </a>
 
       <nav class="header-nav" aria-label="Main navigation">
         <a href="./index.html#hero" data-i18n="navHome">Главная</a>
-        <a href="./index.html#about" data-i18n="navAbout">О нас</a>
+        <a href="./about-draft.html" data-i18n="navAbout">О нас</a>
         <a href="./modules.html" data-i18n="navModules">Модули</a>
         <a href="./calculator.html" class="is-active" data-i18n="navCalculator">Калькулятор</a>
         <a href="./contact_us.html" data-i18n="navContacts">Контакты</a>
@@ -825,7 +871,7 @@
 
   <div class="wrap">
     <div class="top">
-      <div class="pill"><span class="dot"></span><span data-i18n="topPill">Предварительный расчёт инфраструктуры</span></div>
+      <div class="pill"><span data-i18n="topPill">Предварительный расчёт инфраструктуры</span></div>
       <h1 data-i18n="topTitle">Калькулятор серверной конфигурации</h1>
       <p class="sub" data-i18n="topSub">Укажите камеры, параметры потока и нужные модули. Калькулятор покажет ориентировочную нагрузку, архив и рекомендуемую конфигурацию.</p>
     </div>
@@ -1134,7 +1180,8 @@
         topPill: "Предварительный расчёт инфраструктуры",
         topTitle: "Калькулятор серверной конфигурации",
         topSub: "Укажите камеры, параметры потока и нужные модули. Калькулятор покажет ориентировочную нагрузку, архив и рекомендуемую конфигурацию.",
-        logoSubtitle: "Видеоаналитика для объектов и инфраструктуры",
+        logoTitle: "vengeea.com",
+        logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
         navHome: "Главная",
         navAbout: "О нас",
         navModules: "Модули",
@@ -1146,7 +1193,8 @@
         topPill: "Preliminary infrastructure estimate",
         topTitle: "Server Configuration Calculator",
         topSub: "Enter cameras, stream settings, and required modules. The calculator will show estimated load, archive size, and a recommended setup.",
-        logoSubtitle: "Video analytics for facilities and infrastructure",
+        logoTitle: "vengeea.com",
+        logoSubtitle: "FORECASTING FUTURE EVENTS",
         navHome: "Home",
         navAbout: "About",
         navModules: "Modules",
@@ -1158,7 +1206,8 @@
         topPill: "基础基础设施预估",
         topTitle: "服务器配置计算器",
         topSub: "输入摄像机数量、视频流参数和所需模块。计算器将显示预估负载、存储归档和推荐配置。",
-        logoSubtitle: "面向设施与基础设施的视频分析",
+        logoTitle: "vengeea.com",
+        logoSubtitle: "预测未来事件",
         navHome: "主页",
         navAbout: "关于我们",
         navModules: "模块",
@@ -1170,7 +1219,8 @@
         topPill: "Инфрақұрылымның алдын ала есебі",
         topTitle: "Сервер конфигурация калькуляторы",
         topSub: "Камералар санын, ағын параметрлерін және қажет модульдерді енгізіңіз. Калькулятор шамамен жүктемені, архив көлемін және ұсынылатын конфигурацияны көрсетеді.",
-        logoSubtitle: "Нысандар мен инфрақұрылымға арналған бейнеаналитика",
+        logoTitle: "vengeea.com",
+        logoSubtitle: "БОЛАШАҚ ОҚИҒАЛАРДЫ БОЛЖАУ",
         navHome: "Басты бет",
         navAbout: "Біз туралы",
         navModules: "Модульдер",
@@ -1552,5 +1602,26 @@ ${raid}
     applyLanguage("ru");
     vypolnitRaschet();
   </script>
+
+  <footer class="footer">
+    <div class="footer__row">
+      <a href="index.html#hero" class="footer__brand">
+        <div class="logo-mark" style="width: 32px; height: 32px; flex-shrink: 0;">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 4L27 10.5V21.5L16 28L5 21.5V10.5L16 4Z" stroke="white" stroke-width="1.8" opacity="0.9"/>
+            <path d="M11 17.5L14 20.5L21.5 12.5" stroke="white" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="footer__brand-content">
+          <div class="logo-title" style="font-size: 16px; margin-bottom: 2px;">vengeea.com</div>
+          <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident prevention</div>
+        </div>
+      </a>
+
+      <div class="footer__text">
+        <a class="footer__email" href="mailto:support@vengeea.com">support@vengeea.com</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html> 

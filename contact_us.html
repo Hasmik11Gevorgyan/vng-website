@@ -208,9 +208,9 @@
     .logo__title {
       font-size: 18px;
       font-weight: 900;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      background: linear-gradient(90deg, #fff 0%, var(--blue-soft) 100%);
+      background: linear-gradient(90deg, #3fb7ff 0%, #7c5cff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       line-height: 1.1;
@@ -873,6 +873,14 @@
 
       .logo__title {
         font-size: 14px;
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        background: linear-gradient(90deg, #3fb7ff 0%, #7c5cff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.1;
+        display: inline-block;
       }
 
       .contact-copy__title {
@@ -908,6 +916,43 @@
         opacity: 1 !important;
         transform: none !important;
       }
+      .footer {
+        padding: 28px 0 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .footer__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .footer__brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .footer__logo {
+        width: 38px;
+        height: 38px;
+        object-fit: contain;
+        flex-shrink: 0;
+      }
+
+      .footer__text {
+        color: var(--text-dim);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .footer__email {
+        color: #a9beff;
+        font-weight: 700;
+      }
     }
   </style>
 </head>
@@ -918,8 +963,8 @@
         <a href="index.html#hero" class="logo" aria-label="Go to main screen">
           <img class="logo__image" src="./logo-recreated (1).png" alt="Company logo" />
           <span class="logo__text-group">
-            <span class="logo__title" data-i18n="logoTitle">AI Platform</span>
-            <span class="logo__subtitle" data-i18n="logoSubtitle">Видеоаналитика для объектов и инфраструктуры</span>
+            <span class="logo__title" data-i18n="logoTitle">vengeea.com</span>
+            <span class="logo__subtitle" data-i18n="logoSubtitle">ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ</span>
           </span>
         </a>
 
@@ -934,7 +979,7 @@
         <nav class="nav" id="main-nav" aria-label="Main navigation">
           <div class="nav__links">
             <a class="nav__link" href="./index.html#hero" data-i18n="navHome">Главная</a>
-            <a class="nav__link" href="./index.html#about" data-i18n="navAbout">О нас</a>
+            <a class="nav__link" href="./about-draft.html" data-i18n="navAbout">О нас</a>
             <a class="nav__link" href="./modules.html" data-i18n="navModules">Модули</a>
             <a class="nav__link" href="./calculator.html" data-i18n="navCalculator">Калькулятор</a>
             <a class="nav__link is-active" href="./contact_us.html" data-i18n="navContacts">Контакты</a>
@@ -1185,8 +1230,8 @@
 
       const translations = {
         ru: {
-          logoTitle: "AI Platform",
-          logoSubtitle: "Видеоаналитика для объектов и инфраструктуры",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
           navHome: "Главная",
           navAbout: "О нас",
           navModules: "Модули",
@@ -1239,8 +1284,8 @@
         },
 
         en: {
-          logoTitle: "AI Platform",
-          logoSubtitle: "Video analytics for facilities and infrastructure",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "FORECASTING FUTURE EVENTS",
           navHome: "Home",
           navAbout: "About",
           navModules: "Modules",
@@ -1293,8 +1338,8 @@
         },
 
         zh: {
-          logoTitle: "AI Platform",
-          logoSubtitle: "面向设施与基础设施的视频分析",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "预测未来事件",
           navHome: "首页",
           navAbout: "关于我们",
           navModules: "模块",
@@ -1347,8 +1392,8 @@
         },
 
         kk: {
-          logoTitle: "AI Platform",
-          logoSubtitle: "Нысандар мен инфрақұрылымға арналған бейнеаналитика",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "БОЛАШАҚ ОҚИҒАЛАРДЫ БОЛЖАУ",
           navHome: "Басты бет",
           navAbout: "Біз туралы",
           navModules: "Модульдер",
@@ -1555,5 +1600,23 @@
       document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
     })();
   </script>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__row">
+        <a href="index.html#hero" class="footer__brand">
+          <img class="footer__logo" src="./logo-recreated (1).png" alt="Company logo" />
+          <div class="footer__brand-content">
+            <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;">vengeea.com</div>
+            <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident prevention</div>
+          </div>
+        </a>
+
+        <div class="footer__text">
+          <a class="footer__email" href="mailto:support@vengeea.com">support@vengeea.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
