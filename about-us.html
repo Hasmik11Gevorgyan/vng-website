@@ -1122,12 +1122,13 @@
       }
 
       function applyTranslations(lang) {
-        const dict = translations[lang] || translations.ru;
-        const meta = languageMeta[lang] || languageMeta.ru;
+        const selectedLang = translations[lang] ? lang : "ru";
+        const dict = translations[selectedLang];
+        const meta = languageMeta[selectedLang];
 
         document.documentElement.lang = meta.htmlLang;
-        langCurrentFlag.textContent = meta.flag;
-        langCurrentText.textContent = meta.code;
+        if (langCurrentFlag) langCurrentFlag.textContent = meta.flag;
+        if (langCurrentText) langCurrentText.textContent = meta.code;
 
         document.querySelectorAll("[data-i18n]").forEach(function (el) {
           const key = el.getAttribute("data-i18n");
@@ -1136,8 +1137,8 @@
           }
         });
 
-        try { setAboutLanguage(lang); } catch(e) {}
-        try { localStorage.setItem("site-language", lang); } catch(e) {}
+        try { setAboutLanguage(selectedLang); } catch(e) { console.error(e); }
+        try { localStorage.setItem("site-language", selectedLang); } catch(e) { console.error(e); }
       }
 
       if (burger && nav) {
