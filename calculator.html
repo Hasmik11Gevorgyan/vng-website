@@ -41,14 +41,19 @@
         radial-gradient(circle at 20% 15%, rgba(126, 167, 255, 0.08), transparent 18%),
         radial-gradient(circle at 80% 25%, rgba(91, 226, 255, 0.07), transparent 16%),
         linear-gradient(180deg, #06111c 0%, #081321 45%, #07111d 100%);
-      padding: 110px 20px 40px;
       overflow-x: hidden;
       min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .wrap {
       max-width: 1100px;
       margin: 0 auto;
+      padding: 90px 20px 40px;
     }
 
     .header-wrap {
@@ -310,7 +315,7 @@
     .top {
       max-width: 860px;
       margin: 0 auto 24px;
-      padding-top: 32px;
+      padding-top: 16px;
       text-align: center;
     }
 
@@ -717,7 +722,7 @@
     }
 
     .footer {
-      padding: 28px 0 40px;
+      padding: 28px 0 24px;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       margin-top: 60px;
     }
@@ -827,7 +832,7 @@
       }
 
       .footer {
-        padding: 28px 0 40px;
+        padding: 28px 0 24px;
         border-top: 1px solid rgba(255, 255, 255, 0.06);
         margin-top: 60px;
       }
@@ -1227,6 +1232,13 @@
   </div>
 
   <script>
+    const languageMeta = {
+      ru: { flag: "🇷🇺", code: "RU", htmlLang: "ru" },
+      en: { flag: "🇬🇧", code: "EN", htmlLang: "en" },
+      zh: { flag: "🇨🇳", code: "ZH", htmlLang: "zh" },
+      kk: { flag: "🇰🇿", code: "KK", htmlLang: "kk" }
+    };
+
     const translations = {
       ru: {
         topPill: "Предварительный расчёт инфраструктуры",
@@ -1239,7 +1251,8 @@
         navModules: "Модули",
         navCalculator: "Калькулятор",
         navContacts: "Контакты",
-        ctaHeader: "Запросить решение"
+        ctaHeader: "Запросить решение",
+        footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
       },
       en: {
         topPill: "Preliminary infrastructure estimate",
@@ -1252,7 +1265,8 @@
         navModules: "Modules",
         navCalculator: "Calculator",
         navContacts: "Contacts",
-        ctaHeader: "Request solution"
+        ctaHeader: "Request a solution",
+        footerText: "Leak detection and development toward predictive incident prevention"
       },
       zh: {
         topPill: "基础基础设施预估",
@@ -1260,12 +1274,13 @@
         topSub: "输入摄像机数量、视频流参数和所需模块。计算器将显示预估负载、存储归档和推荐配置。",
         logoTitle: "vengeea.com",
         logoSubtitle: "预测未来事件",
-        navHome: "主页",
+        navHome: "首页",
         navAbout: "关于我们",
-        navModules: "模块",
+        navModules: "功能模块",
         navCalculator: "计算器",
         navContacts: "联系我们",
-        ctaHeader: "申请方案"
+        ctaHeader: "申请方案",
+        footerText: "泄漏检测以及向预测性事故预防方向发展"
       },
       kk: {
         topPill: "Инфрақұрылымның алдын ала есебі",
@@ -1278,26 +1293,30 @@
         navModules: "Модульдер",
         navCalculator: "Калькулятор",
         navContacts: "Байланыс",
-        ctaHeader: "Шешім сұрау"
+        ctaHeader: "Шешім сұрау",
+        footerText: "Ағып кетуді анықтау және инциденттердің алдын алуға бағытталған даму"
       }
     };
 
-    const languageMeta = {
-      ru: { flag: "🇷🇺", label: "RU" },
-      en: { flag: "🇺🇸", label: "EN" },
-      zh: { flag: "🇨🇳", label: "ZH" },
-      kk: { flag: "🇰🇿", label: "KK" }
-    };
-
-    function applyLanguage(lang) {
+    function applyTranslations(lang) {
       const dict = translations[lang] || translations.ru;
-      document.querySelectorAll('[data-i18n]').forEach((el) => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key]) el.textContent = dict[key];
+      const meta = languageMeta[lang] || languageMeta.ru;
+
+      document.documentElement.lang = meta.htmlLang;
+      const langCurrentFlag = document.getElementById("langCurrentFlag");
+      const langCurrentText = document.getElementById("langCurrentText");
+
+      if (langCurrentFlag) langCurrentFlag.textContent = meta.flag;
+      if (langCurrentText) langCurrentText.textContent = meta.code;
+
+      document.querySelectorAll("[data-i18n]").forEach(function(el) {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
       });
-      document.getElementById('currentLangFlag').textContent = languageMeta[lang].flag;
-      document.getElementById('currentLangText').textContent = languageMeta[lang].label;
-      document.documentElement.lang = lang;
+
+      localStorage.setItem("site-language", lang);
     }
 
     function okruglitVverh(chislo) {
@@ -1631,80 +1650,7 @@ ${raid}
       emailStatus.innerText = "Отправка...";
     });
 
-    const languageMeta = {
-      ru: { flag: "🇷🇺", code: "RU", htmlLang: "ru" },
-      en: { flag: "🇬🇧", code: "EN", htmlLang: "en" },
-      zh: { flag: "🇨🇳", code: "ZH", htmlLang: "zh" },
-      kk: { flag: "🇰🇿", code: "KK", htmlLang: "kk" }
-    };
 
-    const translations = {
-      ru: {
-        logoTitle: "vengeea.com",
-        logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
-        navHome: "Главная",
-        navAbout: "О нас",
-        navModules: "Модули",
-        navCalculator: "Калькулятор",
-        navContacts: "Контакты",
-        ctaHeader: "Запросить решение",
-        footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
-      },
-      en: {
-        logoTitle: "vengeea.com",
-        logoSubtitle: "FORECASTING FUTURE EVENTS",
-        navHome: "Home",
-        navAbout: "About",
-        navModules: "Modules",
-        navCalculator: "Calculator",
-        navContacts: "Contacts",
-        ctaHeader: "Request a solution",
-        footerText: "Leak detection and development toward predictive incident prevention"
-      },
-      zh: {
-        logoTitle: "vengeea.com",
-        logoSubtitle: "预测未来事件",
-        navHome: "首页",
-        navAbout: "关于我们",
-        navModules: "功能模块",
-        navCalculator: "计算器",
-        navContacts: "联系我们",
-        ctaHeader: "申请方案",
-        footerText: "泄漏检测以及向预测性事故预防方向发展"
-      },
-      kk: {
-        logoTitle: "vengeea.com",
-        logoSubtitle: "БОЛАШАҚ ОҚИҒАЛАРДЫ БОЛЖАУ",
-        navHome: "Басты бет",
-        navAbout: "Біз туралы",
-        navModules: "Модульдер",
-        navCalculator: "Калькулятор",
-        navContacts: "Байланыс",
-        ctaHeader: "Шешімге сұраныс",
-        footerText: "Ағып кетуді анықтау және инциденттердің алдын алуға бағытталған даму"
-      }
-    };
-
-    function applyTranslations(lang) {
-      const dict = translations[lang] || translations.ru;
-      const meta = languageMeta[lang] || languageMeta.ru;
-
-      document.documentElement.lang = meta.htmlLang;
-      const currentLangText = document.getElementById("currentLangText");
-      const mutedLangText = document.querySelector(".lang-switcher__button .lang-switcher__current-text:first-child");
-
-      if (currentLangText) currentLangText.textContent = meta.code;
-      if (mutedLangText) mutedLangText.textContent = meta.code;
-
-      document.querySelectorAll("[data-i18n]").forEach(function(el) {
-        const key = el.getAttribute("data-i18n");
-        if (dict[key]) {
-          el.textContent = dict[key];
-        }
-      });
-
-      localStorage.setItem("site-language", lang);
-    }
 
     const burger = document.getElementById("burger");
     const nav = document.getElementById("main-nav");
