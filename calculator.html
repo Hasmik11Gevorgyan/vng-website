@@ -1232,6 +1232,8 @@
             </p>
 
             <form id="email_form" action="https://formspree.io/f/xjgarawq" method="POST">
+              <div id="email_status" class="status" style="margin-bottom: 12px; font-size: 14px; font-weight: 500;"></div>
+              
               <input
                 type="email"
                 name="email"
@@ -1251,8 +1253,6 @@
 
               <button type="submit" class="btn" data-i18n="emailBtn">Отправить расчёт</button>
             </form>
-
-            <div id="email_status" class="status"></div>
           </div>
 
           <div class="foot" data-i18n="footNote">
@@ -1434,7 +1434,10 @@
           emailSummaryArchive: "Общий объём архива:",
           emailSummaryStorageServers: "Количество серверов хранения:",
           emailSummaryRaid: "Рекомендуемый RAID:",
-          emailSummaryFooter: "Расчёт сформирован автоматически на сайте."
+          emailSummaryFooter: "Расчёт сформирован автоматически на сайте.",
+          emailSending: "Отправка...",
+          emailSuccess: "Сообщение успешно отправлено!",
+          emailError: "Ошибка отправки. Попробуйте еще раз.",
         },
         en: {
           topPill: "Preliminary infrastructure estimate",
@@ -1580,7 +1583,10 @@
           emailSummaryArchive: "Total archive volume:",
           emailSummaryStorageServers: "Storage servers:",
           emailSummaryRaid: "Recommended RAID:",
-          emailSummaryFooter: "Calculation generated automatically on the website."
+          emailSummaryFooter: "Calculation generated automatically on the website.",
+          emailSending: "Sending...",
+          emailSuccess: "Message sent successfully!",
+          emailError: "Error sending. Please try again."
         },
         zh: {
           topPill: "基础架构初步评估",
@@ -1726,7 +1732,10 @@
           emailSummaryArchive: "总存档容量:",
           emailSummaryStorageServers: "存储服务器数量:",
           emailSummaryRaid: "推荐的 RAID:",
-          emailSummaryFooter: "计算由网站自动生成。"
+          emailSummaryFooter: "计算由网站自动生成。",
+          emailSending: "发送中...",
+          emailSuccess: "消息发送成功！",
+          emailError: "发送失败，请重试。"
         },
         kk: {
           topPill: "Инфрақұрылымның алдын ала есебі",
@@ -1872,7 +1881,10 @@
           emailSummaryArchive: "Архивтің жалпы көлемі:",
           emailSummaryStorageServers: "Сақтау серверлерінің саны:",
           emailSummaryRaid: "Ұсынылатын RAID:",
-          emailSummaryFooter: "Есеп сайтта автоматты түрде жасалды."
+          emailSummaryFooter: "Есеп сайтта автоматты түрде жасалды.",
+          emailSending: "Жіберілуде...",
+          emailSuccess: "Хабарлама сәтті жіберілді!",
+          emailError: "Жіберу қатесі. Қайта көріңіз."
         }
       };
 
@@ -2167,12 +2179,46 @@ ${dict.emailSummaryFooter}
 
       const form = document.getElementById("email_form");
       if (form) {
-        form.addEventListener("submit", function() {
+        form.addEventListener("submit", async function(e) {
+          e.preventDefault();
+          
           if (elements.calcMessage) {
             elements.calcMessage.value = poluchitSvodkuDlyaEmail(translations[currentLang]);
           }
           if (elements.emailStatus) {
-            elements.emailStatus.innerText = "Отправка...";
+            elements.emailStatus.innerText = translations[currentLang].emailSending;
+            elements.emailStatus.style.color = "rgba(148, 163, 184, 0.86)";
+          }
+
+          const formData = new FormData(form);
+          try {
+            const response = await fetch(form.action, {
+              method: form.method,
+              body: formData,
+              headers: {
+                  'Accept': 'application/json'
+              }
+            });
+            if (response.ok) {
+              if (elements.emailStatus) {
+                elements.emailStatus.innerText = translations[currentLang].emailSuccess;
+                elements.emailStatus.style.color = "#4ade80";
+              }
+              const userEmailInput = document.getElementById("user_email");
+              if (userEmailInput) {
+                userEmailInput.value = "";
+              }
+            } else {
+              if (elements.emailStatus) {
+                elements.emailStatus.innerText = translations[currentLang].emailError;
+                elements.emailStatus.style.color = "#ef4444";
+              }
+            }
+          } catch (error) {
+             if (elements.emailStatus) {
+                elements.emailStatus.innerText = translations[currentLang].emailError;
+                elements.emailStatus.style.color = "#ef4444";
+             }
           }
         });
       }
