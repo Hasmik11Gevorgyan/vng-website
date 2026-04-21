@@ -955,31 +955,31 @@
       <div class="card">
         <div class="left">
           <div class="row-top">
-            <div class="section-title" style="margin: 0;">Входные параметры</div>
-            <div class="mini-status">Настраиваемая конфигурация</div>
+            <div class="section-title" style="margin: 0;" data-i18n="sectionInput">Входные параметры</div>
+            <div class="mini-status" data-i18n="sectionInputStatus">Настраиваемая конфигурация</div>
           </div>
 
           <div class="field-grid">
             <div class="field">
-              <label for="obshchee_kolichestvo_kamer">Общее количество камер на объекте</label>
+              <label for="obshchee_kolichestvo_kamer" data-i18n="labelTotalCameras">Общее количество камер на объекте</label>
               <input class="surface" type="number" id="obshchee_kolichestvo_kamer" value="0" min="0" />
             </div>
 
             <div class="field">
-              <label for="chastota_kadrov">Частота кадров</label>
+              <label for="chastota_kadrov" data-i18n="labelFps">Частота кадров</label>
               <select class="surface" id="chastota_kadrov">
-                <option value="10">10 кадров в секунду</option>
-                <option value="15">15 кадров в секунду</option>
-                <option value="20">20 кадров в секунду</option>
-                <option value="25" selected>25 кадров в секунду</option>
-                <option value="30">30 кадров в секунду</option>
+                <option value="10" data-i18n-opt="fps10">10 кадров в секунду</option>
+                <option value="15" data-i18n-opt="fps15">15 кадров в секунду</option>
+                <option value="20" data-i18n-opt="fps20">20 кадров в секунду</option>
+                <option value="25" selected data-i18n-opt="fps25">25 кадров в секунду</option>
+                <option value="30" data-i18n-opt="fps30">30 кадров в секунду</option>
               </select>
             </div>
           </div>
 
           <div class="field-grid-4">
             <div class="field">
-              <label for="razreshenie">Разрешение видео</label>
+              <label for="razreshenie" data-i18n="labelResolution">Разрешение видео</label>
               <select class="surface" id="razreshenie">
                 <option value="1">720p</option>
                 <option value="1.4" selected>1080p</option>
@@ -990,7 +990,7 @@
             </div>
 
             <div class="field">
-              <label for="kodek">Кодек</label>
+              <label for="kodek" data-i18n="labelCodec">Кодек</label>
               <select class="surface" id="kodek">
                 <option value="1" selected>H.264</option>
                 <option value="0.7">H.265</option>
@@ -998,86 +998,86 @@
             </div>
 
             <div class="field">
-              <label for="bitrate">Средний битрейт (Мбит/с)</label>
+              <label for="bitrate" data-i18n="labelBitrate">Средний битрейт (Мбит/с)</label>
               <input class="surface" type="number" id="bitrate" value="8" min="1" step="0.1" />
             </div>
 
             <div class="field">
-              <label for="retention">Дни хранения архива</label>
+              <label for="retention" data-i18n="labelRetention">Дни хранения архива</label>
               <input class="surface" type="number" id="retention" value="30" min="1" />
             </div>
           </div>
 
-          <div class="section-title" style="margin-top: 12px;">Использование модулей по камерам</div>
+          <div class="section-title" style="margin-top: 12px;" data-i18n="sectionModules">Использование модулей по камерам</div>
 
           <div class="modules">
             <div class="module">
               <div>
-                <h3>Обнаружение вторжения</h3>
-                <p>Контроль проникновения в запрещённые, охраняемые и периметровые зоны.</p>
+                <h3 data-i18n="modIntrusionTitle">Обнаружение вторжения</h3>
+                <p data-i18n="modIntrusionDesc">Контроль проникновения в запрещённые, охраняемые и периметровые зоны.</p>
                 <div class="tag-row">
-                  <span class="tag">Периметр</span>
-                  <span class="tag">Реакция в реальном времени</span>
+                  <span class="tag" data-i18n="modIntrusionTag1">Периметр</span>
+                  <span class="tag" data-i18n="modIntrusionTag2">Реакция в реальном времени</span>
                 </div>
               </div>
               <div class="module-input">
-                <label for="kamery_vtorzhenie">Количество камер</label>
+                <label for="kamery_vtorzhenie" data-i18n="labelCameraCount">Количество камер</label>
                 <input class="surface" type="number" id="kamery_vtorzhenie" value="0" min="0" />
               </div>
             </div>
 
             <div class="module">
               <div>
-                <h3>Обнаружение кражи</h3>
-                <p>Выявление подозрительных действий, сокрытия товара и рискованных сценариев.</p>
+                <h3 data-i18n="modTheftTitle">Обнаружение кражи</h3>
+                <p data-i18n="modTheftDesc">Выявление подозрительных действий, сокрытия товара и рискованных сценариев.</p>
                 <div class="tag-row">
-                  <span class="tag">Розница</span>
-                  <span class="tag">Поведенческий анализ</span>
+                  <span class="tag" data-i18n="modTheftTag1">Розница</span>
+                  <span class="tag" data-i18n="modTheftTag2">Поведенческий анализ</span>
                 </div>
               </div>
               <div class="module-input">
-                <label for="kamery_krazha">Количество камер</label>
+                <label for="kamery_krazha" data-i18n="labelCameraCount">Количество камер</label>
                 <input class="surface" type="number" id="kamery_krazha" value="0" min="0" />
               </div>
             </div>
 
             <div class="module">
               <div>
-                <h3>Обнаружение лиц</h3>
-                <p>Выделение и анализ лиц в видеопотоке в реальном времени.</p>
+                <h3 data-i18n="modFaceTitle">Обнаружение лиц</h3>
+                <p data-i18n="modFaceDesc">Выделение и анализ лиц в видеопотоке в реальном времени.</p>
                 <div class="tag-row">
-                  <span class="tag">Идентификация</span>
-                  <span class="tag">Оперативный поиск</span>
+                  <span class="tag" data-i18n="modFaceTag1">Идентификация</span>
+                  <span class="tag" data-i18n="modFaceTag2">Оперативный поиск</span>
                 </div>
               </div>
               <div class="module-input">
-                <label for="kamery_lica">Количество камер</label>
+                <label for="kamery_lica" data-i18n="labelCameraCount">Количество камер</label>
                 <input class="surface" type="number" id="kamery_lica" value="0" min="0" />
               </div>
             </div>
 
             <div class="module">
               <div>
-                <h3>Обнаружение дыма и огня</h3>
-                <p>Раннее выявление задымления и признаков возгорания по видеопотоку.</p>
+                <h3 data-i18n="modFireTitle">Обнаружение дыма и огня</h3>
+                <p data-i18n="modFireDesc">Раннее выявление задымления и признаков возгорания по видеопотоку.</p>
                 <div class="tag-row">
-                  <span class="tag">Пожарная безопасность</span>
-                  <span class="tag">Раннее предупреждение</span>
+                  <span class="tag" data-i18n="modFireTag1">Пожарная безопасность</span>
+                  <span class="tag" data-i18n="modFireTag2">Раннее предупреждение</span>
                 </div>
               </div>
               <div class="module-input">
-                <label for="kamery_dym_ogon">Количество камер</label>
+                <label for="kamery_dym_ogon" data-i18n="labelCameraCount">Количество камер</label>
                 <input class="surface" type="number" id="kamery_dym_ogon" value="0" min="0" />
               </div>
             </div>
           </div>
 
-          <div class="hint">
+          <div class="hint" data-i18n="hintText">
             Если по всем модулям указано 0 камер, вычислительная нагрузка тоже остаётся 0.
             Архив при этом всё равно может рассчитываться отдельно, если указаны камеры, битрейт и срок хранения.
           </div>
 
-          <button class="btn" id="knopka_rascheta" type="button">Рассчитать конфигурацию</button>
+          <button class="btn" id="knopka_rascheta" type="button" data-i18n="btnCalculate">Рассчитать конфигурацию</button>
         </div>
       </div>
 
@@ -1086,13 +1086,13 @@
           <div class="hero">
             <div class="hero-top">
               <div>
-                <div class="hero-label">Итоговая вычислительная нагрузка</div>
+                <div class="hero-label" data-i18n="resultLoadLabel">Итоговая вычислительная нагрузка</div>
                 <div class="hero-value" id="itogovaya_nagruzka">0.00</div>
               </div>
-              <div class="hero-badge" id="profil_nagruzki">Нет нагрузки</div>
+              <div class="hero-badge" id="profil_nagruzki" data-i18n="profileNoLoad">Нет нагрузки</div>
             </div>
 
-            <div class="hero-sub">
+            <div class="hero-sub" data-i18n="resultLoadSub">
               Ориентировочная вычислительная нагрузка с учётом разрешения, частоты кадров, кодека и аналитических модулей.
             </div>
 
@@ -1101,119 +1101,119 @@
                 <div class="meter-fill" id="polosa_nagruzki"></div>
               </div>
               <div class="meter-meta">
-                <span>Низкая</span>
-                <span>Оптимальная</span>
-                <span>Высокая</span>
+                <span data-i18n="meterLow">Низкая</span>
+                <span data-i18n="meterMid">Оптимальная</span>
+                <span data-i18n="meterHigh">Высокая</span>
               </div>
             </div>
           </div>
 
           <div class="quick-grid">
             <div class="quick-box">
-              <small>Аналитических серверов</small>
+              <small data-i18n="quickServers">Аналитических серверов</small>
               <strong id="kolichestvo_serverov_kratko">0</strong>
             </div>
             <div class="quick-box">
-              <small>Ускоритель</small>
+              <small data-i18n="quickAccelerator">Ускоритель</small>
               <strong id="klass_uskoritelya">—</strong>
             </div>
             <div class="quick-box">
-              <small>Профиль</small>
+              <small data-i18n="quickProfile">Профиль</small>
               <strong id="tip_razmeshcheniya">—</strong>
             </div>
           </div>
 
           <div class="result-box">
-            <h3>Требуемые ресурсы аналитической системы</h3>
+            <h3 data-i18n="resAnalyticsTitle">Требуемые ресурсы аналитической системы</h3>
 
             <div class="row">
-              <span>Количество процессорных ядер</span>
+              <span data-i18n="resCpuCores">Количество процессорных ядер</span>
               <strong id="yadra_processor">0</strong>
             </div>
 
             <div class="row">
-              <span>Оперативная память</span>
+              <span data-i18n="resRam">Оперативная память</span>
               <strong id="operativnaya_pamyat">0 ГБ</strong>
             </div>
 
             <div class="row">
-              <span>Графическая память</span>
+              <span data-i18n="resVram">Графическая память</span>
               <strong id="graficheskaya_pamyat">0 ГБ</strong>
             </div>
 
             <div class="row">
-              <span>Графическая вычислительная мощность</span>
+              <span data-i18n="resGpuPower">Графическая вычислительная мощность</span>
               <strong id="graficheskaya_moshnost">0.00 TFLOPS</strong>
             </div>
 
             <div class="row">
-              <span>Пропускная способность сети</span>
+              <span data-i18n="resNetwork">Пропускная способность сети</span>
               <strong id="setevaya_propusk">0 Мбит/с</strong>
             </div>
           </div>
 
           <div class="result-box">
-            <h3>Сервер хранения видеоархива</h3>
+            <h3 data-i18n="resStorageTitle">Сервер хранения видеоархива</h3>
 
             <div class="row">
-              <span>Количество серверов хранения</span>
+              <span data-i18n="resStorageServers">Количество серверов хранения</span>
               <strong id="storage_servers">0</strong>
             </div>
 
             <div class="row">
-              <span>Общий объём архива</span>
+              <span data-i18n="resArchiveVol">Общий объём архива</span>
               <strong id="archive_volume">0 ГБ</strong>
             </div>
 
             <div class="row">
-              <span>Рекомендуемый RAID</span>
+              <span data-i18n="resRaid">Рекомендуемый RAID</span>
               <strong id="raid_level">—</strong>
             </div>
 
             <div class="row">
-              <span>Тип накопителей</span>
+              <span data-i18n="resDiskType">Тип накопителей</span>
               <strong id="disk_type">—</strong>
             </div>
           </div>
 
           <div class="result-box">
-            <h3>Рекомендуемая серверная конфигурация</h3>
+            <h3 data-i18n="resServerTitle">Рекомендуемая серверная конфигурация</h3>
 
             <div class="row">
-              <span>Количество аналитических серверов</span>
+              <span data-i18n="resAnalyticServers">Количество аналитических серверов</span>
               <strong id="kolichestvo_serverov">0</strong>
             </div>
 
             <div class="row">
-              <span>Процессор</span>
+              <span data-i18n="resCpu">Процессор</span>
               <strong id="model_processor">—</strong>
             </div>
 
             <div class="row">
-              <span>Оперативная память на сервер</span>
+              <span data-i18n="resRamPerServer">Оперативная память на сервер</span>
               <strong id="pamyat_na_server">—</strong>
             </div>
 
             <div class="row">
-              <span>Графический ускоритель</span>
+              <span data-i18n="resGpu">Графический ускоритель</span>
               <strong id="graficheskiy_uskoritel">—</strong>
             </div>
 
             <div class="row">
-              <span>Накопитель</span>
+              <span data-i18n="resDrive">Накопитель</span>
               <strong id="nakopitel">—</strong>
             </div>
 
             <div class="row">
-              <span>Операционная система</span>
+              <span data-i18n="resOs">Операционная система</span>
               <strong>Ubuntu 22.04</strong>
             </div>
           </div>
 
           <div class="result-box email-box">
-            <h3>Получить расчёт на email</h3>
+            <h3 data-i18n="emailTitle">Получить расчёт на email</h3>
 
-            <p>
+            <p data-i18n="emailDesc">
               Введите email, и результаты расчёта серверной инфраструктуры будут отправлены вам автоматически.
             </p>
 
@@ -1222,6 +1222,7 @@
                 type="email"
                 name="email"
                 id="user_email"
+                data-i18n-placeholder="emailPlaceholder"
                 placeholder="Ваш email"
                 required
                 class="surface"
@@ -1234,13 +1235,13 @@
                 style="display: none;"
               ></textarea>
 
-              <button type="submit" class="btn">Отправить расчёт</button>
+              <button type="submit" class="btn" data-i18n="emailBtn">Отправить расчёт</button>
             </form>
 
             <div id="email_status" class="status"></div>
           </div>
 
-          <div class="foot">
+          <div class="foot" data-i18n="footNote">
             Расчёт является ориентировочным и нужен для предварительной оценки.
             Итоговая конфигурация зависит от архитектуры системы, сценариев аналитики и особенностей внедрения.
           </div>
@@ -1266,465 +1267,940 @@
   </div>
 
   <script>
-    const languageMeta = {
-      ru: { flag: "🇷🇺", code: "RU", htmlLang: "ru" },
-      en: { flag: "🇬🇧", code: "EN", htmlLang: "en" },
-      zh: { flag: "🇨🇳", code: "ZH", htmlLang: "zh" },
-      kk: { flag: "🇰🇿", code: "KK", htmlLang: "kk" }
-    };
+    (function () {
+      const languageMeta = {
+        ru: { flag: "🇷🇺", code: "RU", htmlLang: "ru" },
+        en: { flag: "🇬🇧", code: "EN", htmlLang: "en" },
+        zh: { flag: "🇨🇳", code: "ZH", htmlLang: "zh" },
+        kk: { flag: "🇰🇿", code: "KK", htmlLang: "kk" }
+      };
 
-    const translations = {
-      ru: {
-        topPill: "Предварительный расчёт инфраструктуры",
-        topTitle: "Калькулятор серверной конфигурации",
-        topSub: "Укажите камеры, параметры потока и нужные модули. Калькулятор покажет ориентировочную нагрузку, архив и рекомендуемую конфигурацию.",
-        logoTitle: "vengeea.com",
-        logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
-        navHome: "Главная",
-        navAbout: "О нас",
-        navModules: "Модули",
-        navCalculator: "Калькулятор",
-        navContacts: "Контакты",
-        ctaHeader: "Запросить решение",
-        footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
-      },
-      en: {
-        topPill: "Preliminary infrastructure estimate",
-        topTitle: "Server Configuration Calculator",
-        topSub: "Enter cameras, stream settings, and required modules. The calculator will show estimated load, archive size, and a recommended setup.",
-        logoTitle: "vengeea.com",
-        logoSubtitle: "FORECASTING FUTURE EVENTS",
-        navHome: "Home",
-        navAbout: "About",
-        navModules: "Modules",
-        navCalculator: "Calculator",
-        navContacts: "Contacts",
-        ctaHeader: "Request a solution",
-        footerText: "Leak detection and development toward predictive incident prevention"
-      },
-      zh: {
-        topPill: "基础基础设施预估",
-        topTitle: "服务器配置计算器",
-        topSub: "输入摄像机数量、视频流参数和所需模块。计算器将显示预估负载、存储归档和推荐配置。",
-        logoTitle: "vengeea.com",
-        logoSubtitle: "预测未来事件",
-        navHome: "首页",
-        navAbout: "关于我们",
-        navModules: "功能模块",
-        navCalculator: "计算器",
-        navContacts: "联系我们",
-        ctaHeader: "申请方案",
-        footerText: "泄漏检测以及向预测性事故预防方向发展"
-      },
-      kk: {
-        topPill: "Инфрақұрылымның алдын ала есебі",
-        topTitle: "Сервер конфигурация калькуляторы",
-        topSub: "Камералар санын, ағын параметрлерін және қажет модульдерді енгізіңіз. Калькулятор шамамен жүктемені, архив көлемін және ұсынылатын конфигурацияны көрсетеді.",
-        logoTitle: "vengeea.com",
-        logoSubtitle: "БОЛАШАҚ ОҚИҒАЛАРДЫ БОЛЖАУ",
-        navHome: "Басты бет",
-        navAbout: "Біз туралы",
-        navModules: "Модульдер",
-        navCalculator: "Калькулятор",
-        navContacts: "Байланыс",
-        ctaHeader: "Шешім сұрау",
-        footerText: "Ағып кетуді анықтау және инциденттердің алдын алуға бағытталған даму"
-      }
-    };
+      const translations = {
+        ru: {
+          topPill: "Предварительный расчёт инфраструктуры",
+          topTitle: "Калькулятор серверной конфигурации",
+          topSub: "Укажите камеры, параметры потока и нужные модули. Калькулятор покажет ориентировочную нагрузку, архив и рекомендуемую конфигурацию.",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
+          navHome: "Главная",
+          navAbout: "О нас",
+          navModules: "Модули",
+          navCalculator: "Калькулятор",
+          navContacts: "Контакты",
+          ctaHeader: "Запросить решение",
+          footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов",
+          
+          sectionInput: "Входные параметры",
+          sectionInputStatus: "Настраиваемая конфигурация",
+          labelTotalCameras: "Общее количество камер на объекте",
+          labelFps: "Частота кадров",
+          fps10: "10 кадров в секунду",
+          fps15: "15 кадров в секунду",
+          fps20: "20 кадров в секунду",
+          fps25: "25 кадров в секунду",
+          fps30: "30 кадров в секунду",
+          labelResolution: "Разрешение видео",
+          labelCodec: "Кодек",
+          labelBitrate: "Средний битрейт (Мбит/с)",
+          labelRetention: "Дни хранения архива",
+          
+          sectionModules: "Использование модулей по камерам",
+          modIntrusionTitle: "Обнаружение вторжения",
+          modIntrusionDesc: "Контроль проникновения в запрещённые, охраняемые и периметровые зоны.",
+          modIntrusionTag1: "Периметр",
+          modIntrusionTag2: "Реакция в реальном времени",
+          labelCameraCount: "Количество камер",
+          
+          modTheftTitle: "Обнаружение кражи",
+          modTheftDesc: "Выявление подозрительных действий, сокрытия товара и рискованных сценариев.",
+          modTheftTag1: "Розница",
+          modTheftTag2: "Поведенческий анализ",
+          
+          modFaceTitle: "Обнаружение лиц",
+          modFaceDesc: "Выделение и анализ лиц в видеопотоке в реальном времени.",
+          modFaceTag1: "Идентификация",
+          modFaceTag2: "Оперативный поиск",
+          
+          modFireTitle: "Обнаружение дыма и огня",
+          modFireDesc: "Раннее выявление задымления и признаки возгорания по видеопотоку.",
+          modFireTag1: "Пожарная безопасность",
+          modFireTag2: "Раннее предупреждение",
+          
+          hintText: "Если по всем модулям указано 0 камер, вычислительная нагрузка тоже остаётся 0. Архив при этом всё равно может рассчитываться отдельно, если указаны камеры, битрейт и срок хранения.",
+          btnCalculate: "Рассчитать конфигурацию",
+          
+          resultLoadLabel: "Итоговая вычислительная нагрузка",
+          resultLoadSub: "Ориентировочная вычислительная нагрузка с учётом разрешения, частоты кадров, кодека и аналитических модулей.",
+          meterLow: "Низкая",
+          meterMid: "Оптимальная",
+          meterHigh: "Высокая",
+          
+          quickServers: "Аналитических серверов",
+          quickAccelerator: "Ускоритель",
+          quickProfile: "Профиль",
+          
+          resAnalyticsTitle: "Требуемые ресурсы аналитической системы",
+          resCpuCores: "Количество процессорных ядер",
+          resRam: "Оперативная память",
+          resVram: "Графическая память",
+          resGpuPower: "Графическая вычислительная мощность",
+          resNetwork: "Пропускная способность сети",
+          
+          resStorageTitle: "Сервер хранения видеоархива",
+          resStorageServers: "Количество серверов хранения",
+          resArchiveVol: "Общий объём архива",
+          resRaid: "Рекомендуемый RAID",
+          resDiskType: "Тип накопителей",
+          
+          resServerTitle: "Рекомендуемая серверная конфигурация",
+          resAnalyticServers: "Количество аналитических серверов",
+          resCpu: "Процессор",
+          resRamPerServer: "Оперативная память на сервер",
+          resGpu: "Графический ускоритель",
+          resDrive: "Накопитель",
+          resOs: "Операционная система",
+          
+          emailTitle: "Получить расчёт на email",
+          emailDesc: "Введите email, и результаты расчёта серверной инфраструктуры будут отправлены вам автоматически.",
+          emailPlaceholder: "Ваш email",
+          emailBtn: "Отправить расчёт",
+          footNote: "Расчёт является ориентировочным и нужен для предварительной оценки. Итоговая конфигурация зависит от архитектуры системы, сценариев аналитики и особенностей внедрения.",
 
-    function applyTranslations(lang) {
-      const selectedLang = translations[lang] ? lang : "ru";
-      const dict = translations[selectedLang];
-      const meta = languageMeta[selectedLang];
+          profNoLoad: "Нет нагрузки",
+          profLow: "Низкий профиль",
+          profMid: "Средний профиль",
+          profMidHigh: "Средне-высокий профиль",
+          profHigh: "Высокий профиль",
+          
+          accelNone: "—",
+          accelEntry: "Начальный",
+          accelMid: "Средний",
+          accelHigh: "Высокий",
+          accelServer: "Серверный",
+          
+          gpuT4: "NVIDIA T4 / аналог",
+          gpuA4000: "NVIDIA RTX A4000 / аналог",
+          gpuL40: "NVIDIA L40 / аналог",
+          gpuA100: "NVIDIA A100 / аналог",
+          
+          cpuEntry: "AMD Ryzen 9 / Intel Core i7 / аналог",
+          cpuMid: "AMD Ryzen 9 16-core / Intel Core i9 / аналог",
+          cpuHigh: "Intel Xeon Silver / Gold / аналог",
+          cpuServer: "Серверный многоядерный процессор",
+          
+          typeNone: "—",
+          typeSingle: "Одиночный сервер",
+          typeCentral: "Централизованный",
+          
+          raidNone: "—",
+          raid5: "RAID 5",
+          raid6: "RAID 6",
+          raid60: "RAID 6 / RAID 60",
+          
+          diskNone: "—",
+          diskSata: "SATA HDD",
+          diskEnt: "Enterprise HDD",
+          diskEntCache: "Enterprise HDD + SSD cache",
+          
+          driveNone: "—",
+          driveSsd: "Твердотельный накопитель 1 ТБ и выше",
+          
+          unitGB: "ГБ",
+          unitTB: "ТБ",
+          unitMbps: "Мбит/с",
+          unitTFLOPS: "TFLOPS",
+          
+          emailSummaryTitle: "Результаты расчёта серверной инфраструктуры",
+          emailSummaryLoad: "Итоговая вычислительная нагрузка:",
+          emailSummaryAiServers: "Количество аналитических серверов:",
+          emailSummaryCpu: "Процессор:",
+          emailSummaryGpu: "Графический ускоритель:",
+          emailSummaryRam: "Оперативная память на сервер:",
+          emailSummaryNetwork: "Пропускная способность сети:",
+          emailSummaryArchive: "Общий объём архива:",
+          emailSummaryStorageServers: "Количество серверов хранения:",
+          emailSummaryRaid: "Рекомендуемый RAID:",
+          emailSummaryFooter: "Расчёт сформирован автоматически на сайте."
+        },
+        en: {
+          topPill: "Preliminary infrastructure estimate",
+          topTitle: "Server Configuration Calculator",
+          topSub: "Enter cameras, stream settings, and required modules. The calculator will show estimated load, archive size, and a recommended setup.",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "FORECASTING FUTURE EVENTS",
+          navHome: "Home",
+          navAbout: "About",
+          navModules: "Modules",
+          navCalculator: "Calculator",
+          navContacts: "Contacts",
+          ctaHeader: "Request a solution",
+          footerText: "Leak detection and development toward predictive incident prevention",
+          
+          sectionInput: "Input parameters",
+          sectionInputStatus: "Custom configuration",
+          labelTotalCameras: "Total number of cameras",
+          labelFps: "Frame rate",
+          fps10: "10 frames per second",
+          fps15: "15 frames per second",
+          fps20: "20 frames per second",
+          fps25: "25 frames per second",
+          fps30: "30 frames per second",
+          labelResolution: "Video resolution",
+          labelCodec: "Codec",
+          labelBitrate: "Average bitrate (Mbps)",
+          labelRetention: "Archive retention days",
+          
+          sectionModules: "Module usage by cameras",
+          modIntrusionTitle: "Intrusion detection",
+          modIntrusionDesc: "Access control for restricted, protected, and perimeter zones.",
+          modIntrusionTag1: "Perimeter",
+          modIntrusionTag2: "Real-time reaction",
+          labelCameraCount: "Camera count",
+          
+          modTheftTitle: "Theft detection",
+          modTheftDesc: "Detection of suspicious activities, concealment, and risky scenarios.",
+          modTheftTag1: "Retail",
+          modTheftTag2: "Behavioral analysis",
+          
+          modFaceTitle: "Face detection",
+          modFaceDesc: "Real-time face extraction and analysis from the video stream.",
+          modFaceTag1: "Identification",
+          modFaceTag2: "Rapid search",
+          
+          modFireTitle: "Smoke and fire detection",
+          modFireDesc: "Early detection of smoke and signs of fire from the video stream.",
+          modFireTag1: "Fire safety",
+          modFireTag2: "Early warning",
+          
+          hintText: "If 0 cameras are specified for all modules, the computing load will also remain 0. However, the archive size may still be calculated separately if cameras, bitrate, and retention are specified.",
+          btnCalculate: "Calculate configuration",
+          
+          resultLoadLabel: "Total computing load",
+          resultLoadSub: "Estimated computing load considering resolution, frame rate, codec, and analytical modules.",
+          meterLow: "Low",
+          meterMid: "Optimal",
+          meterHigh: "High",
+          
+          quickServers: "Analytical servers",
+          quickAccelerator: "Accelerator",
+          quickProfile: "Profile",
+          
+          resAnalyticsTitle: "Required analytical resources",
+          resCpuCores: "Number of CPU cores",
+          resRam: "RAM",
+          resVram: "VRAM",
+          resGpuPower: "GPU computing power",
+          resNetwork: "Network bandwidth",
+          
+          resStorageTitle: "Video archive storage server",
+          resStorageServers: "Number of storage servers",
+          resArchiveVol: "Total archive volume",
+          resRaid: "Recommended RAID",
+          resDiskType: "Drive type",
+          
+          resServerTitle: "Recommended server configuration",
+          resAnalyticServers: "Number of analytical servers",
+          resCpu: "Processor",
+          resRamPerServer: "RAM per server",
+          resGpu: "GPU",
+          resDrive: "Storage drive",
+          resOs: "Operating system",
+          
+          emailTitle: "Get calculation via email",
+          emailDesc: "Enter your email, and the server infrastructure calculation results will be sent to you automatically.",
+          emailPlaceholder: "Your email",
+          emailBtn: "Send calculation",
+          footNote: "The calculation is indicative and intended for preliminary estimation. The final configuration depends on system architecture, analytics scenarios, and deployment specifics.",
 
-      document.documentElement.lang = meta.htmlLang;
-      const langCurrentFlag = document.getElementById("langCurrentFlag");
-      const langCurrentText = document.getElementById("langCurrentText");
+          profNoLoad: "No load",
+          profLow: "Low profile",
+          profMid: "Medium profile",
+          profMidHigh: "Medium-high profile",
+          profHigh: "High profile",
+          
+          accelNone: "—",
+          accelEntry: "Entry",
+          accelMid: "Medium",
+          accelHigh: "High",
+          accelServer: "Server",
+          
+          gpuT4: "NVIDIA T4 / equivalent",
+          gpuA4000: "NVIDIA RTX A4000 / equivalent",
+          gpuL40: "NVIDIA L40 / equivalent",
+          gpuA100: "NVIDIA A100 / equivalent",
+          
+          cpuEntry: "AMD Ryzen 9 / Intel Core i7 / equivalent",
+          cpuMid: "AMD Ryzen 9 16-core / Intel Core i9 / equivalent",
+          cpuHigh: "Intel Xeon Silver / Gold / equivalent",
+          cpuServer: "Multi-core server processor",
+          
+          typeNone: "—",
+          typeSingle: "Single server",
+          typeCentral: "Centralized",
+          
+          raidNone: "—",
+          raid5: "RAID 5",
+          raid6: "RAID 6",
+          raid60: "RAID 6 / RAID 60",
+          
+          diskNone: "—",
+          diskSata: "SATA HDD",
+          diskEnt: "Enterprise HDD",
+          diskEntCache: "Enterprise HDD + SSD cache",
+          
+          driveNone: "—",
+          driveSsd: "Solid State Drive 1 TB or higher",
+          
+          unitGB: "GB",
+          unitTB: "TB",
+          unitMbps: "Mbps",
+          unitTFLOPS: "TFLOPS",
+          
+          emailSummaryTitle: "Server Infrastructure Calculation Results",
+          emailSummaryLoad: "Total analytical load:",
+          emailSummaryAiServers: "Number of analytical servers:",
+          emailSummaryCpu: "Processor:",
+          emailSummaryGpu: "GPU:",
+          emailSummaryRam: "RAM per server:",
+          emailSummaryNetwork: "Network bandwidth:",
+          emailSummaryArchive: "Total archive volume:",
+          emailSummaryStorageServers: "Storage servers:",
+          emailSummaryRaid: "Recommended RAID:",
+          emailSummaryFooter: "Calculation generated automatically on the website."
+        },
+        zh: {
+          topPill: "基础架构初步评估",
+          topTitle: "服务器配置计算器",
+          topSub: "输入摄像头、流设置及所需模块。计算器将显示预估负载、存档大小及推荐配置。",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "预测未来事件",
+          navHome: "首页",
+          navAbout: "关于我们",
+          navModules: "模块",
+          navCalculator: "计算器",
+          navContacts: "联系我们",
+          ctaHeader: "申请方案",
+          footerText: "泄漏检测以及向预测性事故预防方向发展",
+          
+          sectionInput: "输入参数",
+          sectionInputStatus: "自定义配置",
+          labelTotalCameras: "摄像头总数",
+          labelFps: "帧率",
+          fps10: "10 帧/秒",
+          fps15: "15 帧/秒",
+          fps20: "20 帧/秒",
+          fps25: "25 帧/秒",
+          fps30: "30 帧/秒",
+          labelResolution: "视频分辨率",
+          labelCodec: "编解码器",
+          labelBitrate: "平均比特率 (Mbps)",
+          labelRetention: "存档保留天数",
+          
+          sectionModules: "各摄像头的模块使用情况",
+          modIntrusionTitle: "入侵检测",
+          modIntrusionDesc: "针对受限区域、受保护区域及周边的访问控制。",
+          modIntrusionTag1: "周边",
+          modIntrusionTag2: "实时反应",
+          labelCameraCount: "摄像头数量",
+          
+          modTheftTitle: "防盗检测",
+          modTheftDesc: "检测可疑活动、隐蔽行为及危险场景。",
+          modTheftTag1: "零售",
+          modTheftTag2: "行为分析",
+          
+          modFaceTitle: "人脸检测",
+          modFaceDesc: "从视频流中实时提取和分析人脸。",
+          modFaceTag1: "识别",
+          modFaceTag2: "快速搜索",
+          
+          modFireTitle: "烟雾与火灾检测",
+          modFireDesc: "从视频流中及早检测烟雾和火灾迹象。",
+          modFireTag1: "消防安全",
+          modFireTag2: "早期预警",
+          
+          hintText: "如果所有模块的摄像头数均设为0，计算负载也将保持为0。但如果指定了摄像头、比特率和保留天数，仍可以单独计算存档大小。",
+          btnCalculate: "计算配置",
+          
+          resultLoadLabel: "总计算负载",
+          resultLoadSub: "综合分辨率、帧率、编解码器和分析模块的预估计算负载。",
+          meterLow: "低",
+          meterMid: "最佳",
+          meterHigh: "高",
+          
+          quickServers: "分析服务器",
+          quickAccelerator: "加速器",
+          quickProfile: "配置文件",
+          
+          resAnalyticsTitle: "所需分析资源",
+          resCpuCores: "CPU核心数",
+          resRam: "内存",
+          resVram: "显存",
+          resGpuPower: "GPU计算能力",
+          resNetwork: "网络带宽",
+          
+          resStorageTitle: "视频存档存储服务器",
+          resStorageServers: "存储服务器数量",
+          resArchiveVol: "存档总容量",
+          resRaid: "推荐 RAID",
+          resDiskType: "硬盘类型",
+          
+          resServerTitle: "推荐服务器配置",
+          resAnalyticServers: "分析服务器数量",
+          resCpu: "处理器",
+          resRamPerServer: "单台服务器内存",
+          resGpu: "GPU",
+          resDrive: "存储硬盘",
+          resOs: "操作系统",
+          
+          emailTitle: "通过电子邮件接收计算结果",
+          emailDesc: "输入您的电子邮件，服务器基础架构计算结果将自动发送给您。",
+          emailPlaceholder: "您的邮箱",
+          emailBtn: "发送计算结果",
+          footNote: "该计算结果仅供初步评估参考。最终配置取决于系统架构、分析场景及具体部署情况。",
 
-      if (langCurrentFlag) langCurrentFlag.textContent = meta.flag;
-      if (langCurrentText) langCurrentText.textContent = meta.code;
+          profNoLoad: "无负载",
+          profLow: "低负载",
+          profMid: "中等负载",
+          profMidHigh: "中高负载",
+          profHigh: "高负载",
+          
+          accelNone: "—",
+          accelEntry: "入门级",
+          accelMid: "中级",
+          accelHigh: "高级",
+          accelServer: "服务器级",
+          
+          gpuT4: "NVIDIA T4 / 同等",
+          gpuA4000: "NVIDIA RTX A4000 / 同等",
+          gpuL40: "NVIDIA L40 / 同等",
+          gpuA100: "NVIDIA A100 / 同等",
+          
+          cpuEntry: "AMD Ryzen 9 / Intel Core i7 / 同等",
+          cpuMid: "AMD Ryzen 9 16核 / Intel Core i9 / 同等",
+          cpuHigh: "Intel Xeon Silver / Gold / 同等",
+          cpuServer: "多核服务器处理器",
+          
+          typeNone: "—",
+          typeSingle: "单服务器",
+          typeCentral: "集中式",
+          
+          raidNone: "—",
+          raid5: "RAID 5",
+          raid6: "RAID 6",
+          raid60: "RAID 6 / RAID 60",
+          
+          diskNone: "—",
+          diskSata: "SATA HDD",
+          diskEnt: "企业级 HDD",
+          diskEntCache: "企业级 HDD + SSD 缓存",
+          
+          driveNone: "—",
+          driveSsd: "1 TB 或更高容量固态硬盘",
+          
+          unitGB: "GB",
+          unitTB: "TB",
+          unitMbps: "Mbps",
+          unitTFLOPS: "TFLOPS",
+          
+          emailSummaryTitle: "服务器基础架构计算结果",
+          emailSummaryLoad: "总分析负载:",
+          emailSummaryAiServers: "分析服务器数量:",
+          emailSummaryCpu: "处理器:",
+          emailSummaryGpu: "图形加速器:",
+          emailSummaryRam: "每台服务器的内存:",
+          emailSummaryNetwork: "网络带宽:",
+          emailSummaryArchive: "总存档容量:",
+          emailSummaryStorageServers: "存储服务器数量:",
+          emailSummaryRaid: "推荐的 RAID:",
+          emailSummaryFooter: "计算由网站自动生成。"
+        },
+        kk: {
+          topPill: "Инфрақұрылымның алдын ала есебі",
+          topTitle: "Сервер конфигурация калькуляторы",
+          topSub: "Камералар санын, ағын параметрлерін және қажет модульдерді енгізіңіз. Калькулятор шамамен жүктемені, архив көлемін және ұсынылатын конфигурацияны көрсетеді.",
+          logoTitle: "vengeea.com",
+          logoSubtitle: "БОЛАШАҚ ОҚИҒАЛАРДЫ БОЛЖАУ",
+          navHome: "Басты бет",
+          navAbout: "Біз туралы",
+          navModules: "Модульдер",
+          navCalculator: "Калькулятор",
+          navContacts: "Байланыс",
+          ctaHeader: "Шешім сұрау",
+          footerText: "Ағып кетуді анықтау және инциденттердің алдын алуға бағытталған даму",
+          
+          sectionInput: "Кіріс параметрлері",
+          sectionInputStatus: "Реттелетін конфигурация",
+          labelTotalCameras: "Камералардың жалпы саны",
+          labelFps: "Кадр жиілігі",
+          fps10: "Секундына 10 кадр",
+          fps15: "Секундына 15 кадр",
+          fps20: "Секундына 20 кадр",
+          fps25: "Секундына 25 кадр",
+          fps30: "Секундына 30 кадр",
+          labelResolution: "Бейне ажыратымдылығы",
+          labelCodec: "Кодек",
+          labelBitrate: "Орташа битрейт (Мбит/с)",
+          labelRetention: "Архивті сақтау күндері",
+          
+          sectionModules: "Модульдерді камералар бойынша пайдалану",
+          modIntrusionTitle: "Кіруді анықтау",
+          modIntrusionDesc: "Тыйым салынған, қорғалатын және периметрлік аймақтарға кіруді бақылау.",
+          modIntrusionTag1: "Периметр",
+          modIntrusionTag2: "Нақты уақыттағы реакция",
+          labelCameraCount: "Камералар саны",
+          
+          modTheftTitle: "Ұрлықты анықтау",
+          modTheftDesc: "Күдікті әрекеттерді, тауарды жасыруды және қауіпті сценарийлерді анықтау.",
+          modTheftTag1: "Бөлшек сауда",
+          modTheftTag2: "Мінез-құлық талдауы",
+          
+          modFaceTitle: "Тұлғаларды анықтау",
+          modFaceDesc: "Бейнеағындағы тұлғаларды нақты уақыт режимінде бөліп көрсету және талдау.",
+          modFaceTag1: "Сәйкестендіру",
+          modFaceTag2: "Жедел іздеу",
+          
+          modFireTitle: "Түтін мен отты анықтау",
+          modFireDesc: "Бейнеағын бойынша түтіндеу мен жану белгілерін ерте анықтау.",
+          modFireTag1: "Өрт қауіпсіздігі",
+          modFireTag2: "Ерте ескерту",
+          
+          hintText: "Егер барлық модульдер бойынша 0 камера көрсетілсе, есептеу жүктемесі де 0 болып қалады. Сонымен қатар, егер камералар, битрейт және сақтау мерзімі көрсетілсе, архив бөлек есептелуі мүмкін.",
+          btnCalculate: "Конфигурацияны есептеу",
+          
+          resultLoadLabel: "Қорытынды есептеу жүктемесі",
+          resultLoadSub: "Ажыратымдылықты, кадр жиілігін, кодекті және аналитикалық модульдерді ескеретін шамамен есептелген жүктеме.",
+          meterLow: "Төмен",
+          meterMid: "Оңтайлы",
+          meterHigh: "Жоғары",
+          
+          quickServers: "Аналитикалық серверлер",
+          quickAccelerator: "Үдеткіш",
+          quickProfile: "Профиль",
+          
+          resAnalyticsTitle: "Аналитикалық жүйенің қажетті ресурстары",
+          resCpuCores: "Процессор ядроларының саны",
+          resRam: "Жедел жад",
+          resVram: "Графикалық жад",
+          resGpuPower: "Графикалық есептеу қуаты",
+          resNetwork: "Желінің өткізу қабілеті",
+          
+          resStorageTitle: "Бейнеархив сақтау сервері",
+          resStorageServers: "Сақтау серверлерінің саны",
+          resArchiveVol: "Архивтің жалпы көлемі",
+          resRaid: "Ұсынылатын RAID",
+          resDiskType: "Жинақтауыш түрі",
+          
+          resServerTitle: "Ұсынылатын сервер конфигурациясы",
+          resAnalyticServers: "Аналитикалық серверлер саны",
+          resCpu: "Процессор",
+          resRamPerServer: "Сервердегі жедел жад",
+          resGpu: "Графикалық үдеткіш",
+          resDrive: "Жинақтауыш",
+          resOs: "Операциялық жүйе",
+          
+          emailTitle: "Есепті email арқылы алу",
+          emailDesc: "Email-ді енгізіңіз, сервер инфрақұрылымының есебі сізге автоматты түрде жіберіледі.",
+          emailPlaceholder: "Сіздің email",
+          emailBtn: "Есепті жіберу",
+          footNote: "Есеп шамамен алынған және алдын ала бағалау үшін қажет. Соңғы конфигурация жүйе архитектурасына, аналитика сценарийлеріне және енгізу ерекшеліктеріне байланысты.",
 
-      document.querySelectorAll("[data-i18n]").forEach(function(el) {
-        const key = el.getAttribute("data-i18n");
-        if (dict[key]) {
-          el.textContent = dict[key];
+          profNoLoad: "Жүктеме жоқ",
+          profLow: "Төмен профиль",
+          profMid: "Орташа профиль",
+          profMidHigh: "Орташа-жоғары профиль",
+          profHigh: "Жоғары профиль",
+          
+          accelNone: "—",
+          accelEntry: "Бастапқы",
+          accelMid: "Орташа",
+          accelHigh: "Жоғары",
+          accelServer: "Серверлік",
+          
+          gpuT4: "NVIDIA T4 / баламасы",
+          gpuA4000: "NVIDIA RTX A4000 / баламасы",
+          gpuL40: "NVIDIA L40 / баламасы",
+          gpuA100: "NVIDIA A100 / баламасы",
+          
+          cpuEntry: "AMD Ryzen 9 / Intel Core i7 / баламасы",
+          cpuMid: "AMD Ryzen 9 16-ядролы / Intel Core i9 / баламасы",
+          cpuHigh: "Intel Xeon Silver / Gold / баламасы",
+          cpuServer: "Көп ядролы серверлік процессор",
+          
+          typeNone: "—",
+          typeSingle: "Жалғыз сервер",
+          typeCentral: "Орталықтандырылған",
+          
+          raidNone: "—",
+          raid5: "RAID 5",
+          raid6: "RAID 6",
+          raid60: "RAID 6 / RAID 60",
+          
+          diskNone: "—",
+          diskSata: "SATA HDD",
+          diskEnt: "Enterprise HDD",
+          diskEntCache: "Enterprise HDD + SSD кэші",
+          
+          driveNone: "—",
+          driveSsd: "Көлемі 1 ТБ немесе одан жоғары SSD",
+          
+          unitGB: "ГБ",
+          unitTB: "ТБ",
+          unitMbps: "Мбит/с",
+          unitTFLOPS: "TFLOPS",
+          
+          emailSummaryTitle: "Сервер инфрақұрылымының есебі",
+          emailSummaryLoad: "Қорытынды есептеу жүктемесі:",
+          emailSummaryAiServers: "Аналитикалық серверлер саны:",
+          emailSummaryCpu: "Процессор:",
+          emailSummaryGpu: "Графикалық үдеткіш:",
+          emailSummaryRam: "Сервердегі жедел жад:",
+          emailSummaryNetwork: "Желінің өткізу қабілеті:",
+          emailSummaryArchive: "Архивтің жалпы көлемі:",
+          emailSummaryStorageServers: "Сақтау серверлерінің саны:",
+          emailSummaryRaid: "Ұсынылатын RAID:",
+          emailSummaryFooter: "Есеп сайтта автоматты түрде жасалды."
         }
-      });
-
-      localStorage.setItem("site-language", selectedLang);
-    }
-
-    function okruglitVverh(chislo) {
-      return Math.ceil(chislo);
-    }
-
-    function opredelitProfilNagruzki(vychislitelnayaMoshnost) {
-      if (vychislitelnayaMoshnost <= 0) {
-        return "Нет нагрузки";
-      } else if (vychislitelnayaMoshnost <= 15) {
-        return "Низкий профиль";
-      } else if (vychislitelnayaMoshnost <= 35) {
-        return "Средний профиль";
-      } else if (vychislitelnayaMoshnost <= 70) {
-        return "Средне-высокий профиль";
-      } else {
-        return "Высокий профиль";
-      }
-    }
-
-    function opredelitKlassUskoritelya(vychislitelnayaMoshnost) {
-      if (vychislitelnayaMoshnost <= 0) {
-        return "—";
-      } else if (vychislitelnayaMoshnost <= 20) {
-        return "Начальный";
-      } else if (vychislitelnayaMoshnost <= 40) {
-        return "Средний";
-      } else if (vychislitelnayaMoshnost <= 70) {
-        return "Высокий";
-      } else {
-        return "Серверный";
-      }
-    }
-
-    function opredelitUskoritel(vychislitelnayaMoshnost) {
-      if (vychislitelnayaMoshnost <= 0) {
-        return "—";
-      } else if (vychislitelnayaMoshnost <= 20) {
-        return "NVIDIA T4 / аналог";
-      } else if (vychislitelnayaMoshnost <= 40) {
-        return "NVIDIA RTX A4000 / аналог";
-      } else if (vychislitelnayaMoshnost <= 70) {
-        return "NVIDIA L40 / аналог";
-      } else {
-        return "NVIDIA A100 / аналог";
-      }
-    }
-
-    function opredelitProcessor(vychislitelnayaMoshnost) {
-      if (vychislitelnayaMoshnost <= 0) {
-        return "—";
-      } else if (vychislitelnayaMoshnost <= 20) {
-        return "AMD Ryzen 9 / Intel Core i7 / аналог";
-      } else if (vychislitelnayaMoshnost <= 45) {
-        return "AMD Ryzen 9 16-core / Intel Core i9 / аналог";
-      } else if (vychislitelnayaMoshnost <= 75) {
-        return "Intel Xeon Silver / Gold / аналог";
-      } else {
-        return "Серверный многоядерный процессор";
-      }
-    }
-
-    function opredelitKolichestvoServerov(vychislitelnayaMoshnost, kolichestvoKamer) {
-      if (vychislitelnayaMoshnost <= 0 || kolichestvoKamer <= 0) {
-        return 0;
-      }
-
-      const poNagruzke = Math.ceil(vychislitelnayaMoshnost / 28);
-      const poKameram = Math.ceil(kolichestvoKamer / 12);
-
-      return Math.max(poNagruzke, poKameram);
-    }
-
-    function opredelitPamyatNaServer(obshchayaOperativnayaPamyat, kolichestvoServerov) {
-      if (kolichestvoServerov === 0) {
-        return "—";
-      }
-
-      const pamyatNaOdinServer = obshchayaOperativnayaPamyat / kolichestvoServerov;
-
-      if (pamyatNaOdinServer <= 16) {
-        return "16 ГБ";
-      } else if (pamyatNaOdinServer <= 32) {
-        return "32 ГБ";
-      } else if (pamyatNaOdinServer <= 64) {
-        return "64 ГБ";
-      } else {
-        return "128 ГБ";
-      }
-    }
-
-    function opredelitTipRazmeshcheniya(kolichestvoServerov) {
-      if (kolichestvoServerov === 0) {
-        return "—";
-      } else if (kolichestvoServerov === 1) {
-        return "Одиночный сервер";
-      } else {
-        return "Централизованный";
-      }
-    }
-
-    function opredelitStorageServers(storageTB) {
-      if (storageTB <= 0) return 0;
-      if (storageTB <= 40) return 1;
-      if (storageTB <= 120) return 2;
-      if (storageTB <= 300) return 3;
-      return Math.ceil(storageTB / 120);
-    }
-
-    function opredelitRaid(storageTB) {
-      if (storageTB <= 0) return "—";
-      if (storageTB <= 50) return "RAID 5";
-      if (storageTB <= 200) return "RAID 6";
-      return "RAID 6 / RAID 60";
-    }
-
-    function opredelitDiskType(storageTB) {
-      if (storageTB <= 0) return "—";
-      if (storageTB <= 50) return "SATA HDD";
-      if (storageTB <= 200) return "Enterprise HDD";
-      return "Enterprise HDD + SSD cache";
-    }
-
-    function formatStorage(gigabytes) {
-      if (gigabytes >= 1024) {
-        return (gigabytes / 1024).toFixed(2) + " ТБ";
-      }
-      return Math.round(gigabytes) + " ГБ";
-    }
-
-    function poluchitSvodkuDlyaEmail() {
-      const aiNagruzka = document.getElementById("itogovaya_nagruzka").innerText;
-      const aiServers = document.getElementById("kolichestvo_serverov").innerText;
-      const cpu = document.getElementById("model_processor").innerText;
-      const gpu = document.getElementById("graficheskiy_uskoritel").innerText;
-      const ramServer = document.getElementById("pamyat_na_server").innerText;
-      const archive = document.getElementById("archive_volume").innerText;
-      const storageServers = document.getElementById("storage_servers").innerText;
-      const raid = document.getElementById("raid_level").innerText;
-      const network = document.getElementById("setevaya_propusk").innerText;
-
-      return `
-Результаты расчёта серверной инфраструктуры
-
-Итоговая вычислительная нагрузка:
-${aiNagruzka} TFLOPS
-
-Количество аналитических серверов:
-${aiServers}
-
-Процессор:
-${cpu}
-
-Графический ускоритель:
-${gpu}
-
-Оперативная память на сервер:
-${ramServer}
-
-Пропускная способность сети:
-${network}
-
-Общий объём архива:
-${archive}
-
-Количество серверов хранения:
-${storageServers}
-
-Рекомендуемый RAID:
-${raid}
-
-Расчёт сформирован автоматически на сайте.
-`;
-    }
-
-    function vypolnitRaschet() {
-      const obshcheeKolichestvoKamer =
-        parseFloat(document.getElementById("obshchee_kolichestvo_kamer").value) || 0;
-
-      const chastotaKadrov =
-        parseFloat(document.getElementById("chastota_kadrov").value) || 25;
-
-      const razreshenieFactor =
-        parseFloat(document.getElementById("razreshenie").value) || 1.4;
-
-      const kodekFactor =
-        parseFloat(document.getElementById("kodek").value) || 1;
-
-      const bitrate =
-        parseFloat(document.getElementById("bitrate").value) || 8;
-
-      const retention =
-        parseFloat(document.getElementById("retention").value) || 30;
-
-      const kameryVtorzhenie =
-        parseFloat(document.getElementById("kamery_vtorzhenie").value) || 0;
-
-      const kameryKrazha =
-        parseFloat(document.getElementById("kamery_krazha").value) || 0;
-
-      const kameryLica =
-        parseFloat(document.getElementById("kamery_lica").value) || 0;
-
-      const kameryDymOgon =
-        parseFloat(document.getElementById("kamery_dym_ogon").value) || 0;
-
-      const summaModuley =
-        kameryVtorzhenie +
-        kameryKrazha +
-        kameryLica +
-        kameryDymOgon;
-
-      const bazaNaKameru = 0;
-      const dobavkaVtorzhenie = 0.15;
-      const dobavkaKrazha = 0.30;
-      const dobavkaLica = 0.20;
-      const dobavkaDymOgon = 0.20;
-
-      let modulnayaDobavka = 0;
-
-      if (kameryVtorzhenie > 0) modulnayaDobavka += dobavkaVtorzhenie;
-      if (kameryKrazha > 0) modulnayaDobavka += dobavkaKrazha;
-      if (kameryLica > 0) modulnayaDobavka += dobavkaLica;
-      if (kameryDymOgon > 0) modulnayaDobavka += dobavkaDymOgon;
-
-      let itogovayaNagruzka = 0;
-
-      if (summaModuley > 0 && obshcheeKolichestvoKamer > 0) {
-        const nagruzkaNaKameru = bazaNaKameru + 1.0 + modulnayaDobavka;
-
-        itogovayaNagruzka =
-          obshcheeKolichestvoKamer *
-          nagruzkaNaKameru *
-          razreshenieFactor *
-          (chastotaKadrov / 25) *
-          kodekFactor;
-      }
-
-      const kolichestvoYader =
-        itogovayaNagruzka > 0 ? okruglitVverh(itogovayaNagruzka * 0.87) : 0;
-
-      const operativnayaPamyat =
-        itogovayaNagruzka > 0 ? okruglitVverh(itogovayaNagruzka * 1.31) : 0;
-
-      const graficheskayaPamyat =
-        itogovayaNagruzka > 0 ? okruglitVverh(itogovayaNagruzka * 1.02) : 0;
-
-      const graficheskayaMoshnost =
-        itogovayaNagruzka > 0 ? itogovayaNagruzka.toFixed(2) : "0.00";
-
-      const setevayaPropusk =
-        obshcheeKolichestvoKamer > 0 ? (obshcheeKolichestvoKamer * bitrate).toFixed(2) : "0.00";
-
-      const diskovoeProstranstvoGB =
-        obshcheeKolichestvoKamer > 0
-          ? (obshcheeKolichestvoKamer * bitrate * 3600 * 24 * retention) / 8000
-          : 0;
-
-      const storageTB = diskovoeProstranstvoGB / 1024;
-      const storageServers = opredelitStorageServers(storageTB);
-      const raidLevel = opredelitRaid(storageTB);
-      const diskType = opredelitDiskType(storageTB);
-
-      const kolichestvoServerov =
-        opredelitKolichestvoServerov(itogovayaNagruzka, obshcheeKolichestvoKamer);
-
-      const processor =
-        opredelitProcessor(itogovayaNagruzka);
-
-      const uskoritel =
-        opredelitUskoritel(itogovayaNagruzka);
-
-      const pamyatNaServer =
-        opredelitPamyatNaServer(operativnayaPamyat, kolichestvoServerov);
-
-      const nakopitel =
-        kolichestvoServerov > 0 ? "Твердотельный накопитель 1 ТБ и выше" : "—";
-
-      const profilNagruzki =
-        opredelitProfilNagruzki(itogovayaNagruzka);
-
-      const klassUskoritelya =
-        opredelitKlassUskoritelya(itogovayaNagruzka);
-
-      const tipRazmeshcheniya =
-        opredelitTipRazmeshcheniya(kolichestvoServerov);
-
-      let protsentNagruzki = 0;
-      if (itogovayaNagruzka > 0) {
-        protsentNagruzki = Math.min(itogovayaNagruzka, 100);
-      }
-
-      document.getElementById("itogovaya_nagruzka").textContent = graficheskayaMoshnost;
-      document.getElementById("profil_nagruzki").textContent = profilNagruzki;
-      document.getElementById("polosa_nagruzki").style.width = protsentNagruzki + "%";
-
-      document.getElementById("kolichestvo_serverov_kratko").textContent = kolichestvoServerov;
-      document.getElementById("klass_uskoritelya").textContent = klassUskoritelya;
-      document.getElementById("tip_razmeshcheniya").textContent = tipRazmeshcheniya;
-
-      document.getElementById("yadra_processor").textContent = kolichestvoYader;
-      document.getElementById("operativnaya_pamyat").textContent = operativnayaPamyat + " ГБ";
-      document.getElementById("graficheskaya_pamyat").textContent = graficheskayaPamyat + " ГБ";
-      document.getElementById("graficheskaya_moshnost").textContent = graficheskayaMoshnost + " TFLOPS";
-      document.getElementById("setevaya_propusk").textContent = setevayaPropusk + " Мбит/с";
-
-      document.getElementById("storage_servers").textContent = storageServers;
-      document.getElementById("archive_volume").textContent = formatStorage(diskovoeProstranstvoGB);
-      document.getElementById("raid_level").textContent = raidLevel;
-      document.getElementById("disk_type").textContent = diskType;
-
-      document.getElementById("kolichestvo_serverov").textContent = kolichestvoServerov;
-      document.getElementById("model_processor").textContent = processor;
-      document.getElementById("pamyat_na_server").textContent = pamyatNaServer;
-      document.getElementById("graficheskiy_uskoritel").textContent = uskoritel;
-      document.getElementById("nakopitel").textContent = nakopitel;
-    }
-
-    document.getElementById("knopka_rascheta").addEventListener("click", vypolnitRaschet);
-
-    document.querySelectorAll("input, select").forEach(function(element) {
-      element.addEventListener("input", vypolnitRaschet);
-      element.addEventListener("change", vypolnitRaschet);
-    });
-
-    const form = document.getElementById("email_form");
-    const emailStatus = document.getElementById("email_status");
-
-    form.addEventListener("submit", function() {
-      document.getElementById("calc_message").value = poluchitSvodkuDlyaEmail();
-      emailStatus.innerText = "Отправка...";
-    });
-
-
-
-    const burger = document.getElementById("burger");
-    const nav = document.getElementById("main-nav");
-    const langSwitcher = document.getElementById("langSwitcher");
-    const langButton = document.getElementById("langButton");
-
-    if (burger && nav) {
-      burger.addEventListener("click", () => {
-        const isOpen = nav.classList.toggle("is-open");
-        burger.setAttribute("aria-expanded", String(isOpen));
-      });
-    }
-
-    if (langButton && langSwitcher) {
-      langButton.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const isOpen = langSwitcher.classList.toggle("is-open");
-        langButton.setAttribute("aria-expanded", String(isOpen));
-      });
-
-      document.querySelectorAll(".lang-switcher__option").forEach(function(option) {
-        option.addEventListener("click", function() {
-          applyTranslations(option.getAttribute("data-lang"));
-          langSwitcher.classList.remove("is-open");
-          langButton.setAttribute("aria-expanded", "false");
+      };
+
+      let currentLang = "ru";
+
+      const elements = {
+        obshcheeKolichestvoKamer: document.getElementById("obshchee_kolichestvo_kamer"),
+        chastotaKadrov: document.getElementById("chastota_kadrov"),
+        razreshenie: document.getElementById("razreshenie"),
+        kodek: document.getElementById("kodek"),
+        bitrate: document.getElementById("bitrate"),
+        retention: document.getElementById("retention"),
+        kameryVtorzhenie: document.getElementById("kamery_vtorzhenie"),
+        kameryKrazha: document.getElementById("kamery_krazha"),
+        kameryLica: document.getElementById("kamery_lica"),
+        kameryDymOgon: document.getElementById("kamery_dym_ogon"),
+        
+        itogovayaNagruzka: document.getElementById("itogovaya_nagruzka"),
+        profilNagruzki: document.getElementById("profil_nagruzki"),
+        polosaNagruzki: document.getElementById("polosa_nagruzki"),
+        
+        kolichestvoServerovKratko: document.getElementById("kolichestvo_serverov_kratko"),
+        klassUskoritelya: document.getElementById("klass_uskoritelya"),
+        tipRazmeshcheniya: document.getElementById("tip_razmeshcheniya"),
+        
+        yadraProcessor: document.getElementById("yadra_processor"),
+        operativnayaPamyat: document.getElementById("operativnaya_pamyat"),
+        graficheskayaPamyat: document.getElementById("graficheskaya_pamyat"),
+        graficheskayaMoshnost: document.getElementById("graficheskaya_moshnost"),
+        setevayaPropusk: document.getElementById("setevaya_propusk"),
+        
+        storageServers: document.getElementById("storage_servers"),
+        archiveVolume: document.getElementById("archive_volume"),
+        raidLevel: document.getElementById("raid_level"),
+        diskType: document.getElementById("disk_type"),
+        
+        kolichestvoServerov: document.getElementById("kolichestvo_serverov"),
+        modelProcessor: document.getElementById("model_processor"),
+        pamyatNaServer: document.getElementById("pamyat_na_server"),
+        graficheskiyUskoritel: document.getElementById("graficheskiy_uskoritel"),
+        nakopitel: document.getElementById("nakopitel"),
+
+        calcMessage: document.getElementById("calc_message"),
+        emailStatus: document.getElementById("email_status"),
+        langCurrentFlag: document.getElementById("langCurrentFlag"),
+        langCurrentText: document.getElementById("langCurrentText")
+      };
+
+      function applyTranslations(lang) {
+        currentLang = translations[lang] ? lang : "ru";
+        const dict = translations[currentLang];
+        const meta = languageMeta[currentLang];
+
+        document.documentElement.lang = meta.htmlLang;
+
+        if (elements.langCurrentFlag) elements.langCurrentFlag.textContent = meta.flag;
+        if (elements.langCurrentText) elements.langCurrentText.textContent = meta.code;
+
+        document.querySelectorAll("[data-i18n]").forEach(function(el) {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key]) el.textContent = dict[key];
         });
-      });
 
-      document.addEventListener("click", function(event) {
-        if (!langSwitcher.contains(event.target)) {
-          langSwitcher.classList.remove("is-open");
-          langButton.setAttribute("aria-expanded", "false");
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(function(el) {
+          const key = el.getAttribute("data-i18n-placeholder");
+          if (dict[key]) el.placeholder = dict[key];
+        });
+
+        document.querySelectorAll("[data-i18n-opt]").forEach(function(el) {
+          const key = el.getAttribute("data-i18n-opt");
+          if (dict[key]) el.textContent = dict[key];
+        });
+
+        localStorage.setItem("site-language", currentLang);
+        vypolnitRaschet(); 
+      }
+
+      function okruglitVverh(chislo) {
+        return Math.ceil(chislo);
+      }
+
+      function opredelitProfilNagruzki(vychislitelnayaMoshnost, dict) {
+        if (vychislitelnayaMoshnost <= 0) return dict.profNoLoad;
+        if (vychislitelnayaMoshnost <= 15) return dict.profLow;
+        if (vychislitelnayaMoshnost <= 35) return dict.profMid;
+        if (vychislitelnayaMoshnost <= 70) return dict.profMidHigh;
+        return dict.profHigh;
+      }
+
+      function opredelitKlassUskoritelya(vychislitelnayaMoshnost, dict) {
+        if (vychislitelnayaMoshnost <= 0) return dict.accelNone;
+        if (vychislitelnayaMoshnost <= 20) return dict.accelEntry;
+        if (vychislitelnayaMoshnost <= 40) return dict.accelMid;
+        if (vychislitelnayaMoshnost <= 70) return dict.accelHigh;
+        return dict.accelServer;
+      }
+
+      function opredelitUskoritel(vychislitelnayaMoshnost, dict) {
+        if (vychislitelnayaMoshnost <= 0) return dict.accelNone;
+        if (vychislitelnayaMoshnost <= 20) return dict.gpuT4;
+        if (vychislitelnayaMoshnost <= 40) return dict.gpuA4000;
+        if (vychislitelnayaMoshnost <= 70) return dict.gpuL40;
+        return dict.gpuA100;
+      }
+
+      function opredelitProcessor(vychislitelnayaMoshnost, dict) {
+        if (vychislitelnayaMoshnost <= 0) return dict.accelNone;
+        if (vychislitelnayaMoshnost <= 20) return dict.cpuEntry;
+        if (vychislitelnayaMoshnost <= 45) return dict.cpuMid;
+        if (vychislitelnayaMoshnost <= 75) return dict.cpuHigh;
+        return dict.cpuServer;
+      }
+
+      function opredelitKolichestvoServerov(vychislitelnayaMoshnost, kolichestvoKamer) {
+        if (vychislitelnayaMoshnost <= 0 || kolichestvoKamer <= 0) return 0;
+        const poNagruzke = Math.ceil(vychislitelnayaMoshnost / 28);
+        const poKameram = Math.ceil(kolichestvoKamer / 12);
+        return Math.max(poNagruzke, poKameram);
+      }
+
+      function opredelitPamyatNaServer(obshchayaOperativnayaPamyat, kolichestvoServerov, dict) {
+        if (kolichestvoServerov === 0) return dict.accelNone;
+        const pamyatNaOdinServer = obshchayaOperativnayaPamyat / kolichestvoServerov;
+        if (pamyatNaOdinServer <= 16) return "16 " + dict.unitGB;
+        if (pamyatNaOdinServer <= 32) return "32 " + dict.unitGB;
+        if (pamyatNaOdinServer <= 64) return "64 " + dict.unitGB;
+        return "128 " + dict.unitGB;
+      }
+
+      function opredelitTipRazmeshcheniya(kolichestvoServerov, dict) {
+        if (kolichestvoServerov === 0) return dict.typeNone;
+        if (kolichestvoServerov === 1) return dict.typeSingle;
+        return dict.typeCentral;
+      }
+
+      function opredelitStorageServers(storageTB) {
+        if (storageTB <= 0) return 0;
+        if (storageTB <= 40) return 1;
+        if (storageTB <= 120) return 2;
+        if (storageTB <= 300) return 3;
+        return Math.ceil(storageTB / 120);
+      }
+
+      function opredelitRaid(storageTB, dict) {
+        if (storageTB <= 0) return dict.raidNone;
+        if (storageTB <= 50) return dict.raid5;
+        if (storageTB <= 200) return dict.raid6;
+        return dict.raid60;
+      }
+
+      function opredelitDiskType(storageTB, dict) {
+        if (storageTB <= 0) return dict.diskNone;
+        if (storageTB <= 50) return dict.diskSata;
+        if (storageTB <= 200) return dict.diskEnt;
+        return dict.diskEntCache;
+      }
+
+      function formatStorage(gigabytes, dict) {
+        if (gigabytes >= 1024) {
+          return (gigabytes / 1024).toFixed(2) + " " + dict.unitTB;
+        }
+        return Math.round(gigabytes) + " " + dict.unitGB;
+      }
+
+      function poluchitSvodkuDlyaEmail(dict) {
+        return `
+${dict.emailSummaryTitle}
+
+${dict.emailSummaryLoad}
+${elements.itogovayaNagruzka.innerText}
+
+${dict.emailSummaryAiServers}
+${elements.kolichestvoServerov.innerText}
+
+${dict.emailSummaryCpu}
+${elements.modelProcessor.innerText}
+
+${dict.emailSummaryGpu}
+${elements.graficheskiyUskoritel.innerText}
+
+${dict.emailSummaryRam}
+${elements.pamyatNaServer.innerText}
+
+${dict.emailSummaryNetwork}
+${elements.setevayaPropusk.innerText}
+
+${dict.emailSummaryArchive}
+${elements.archiveVolume.innerText}
+
+${dict.emailSummaryStorageServers}
+${elements.storageServers.innerText}
+
+${dict.emailSummaryRaid}
+${elements.raidLevel.innerText}
+
+${dict.emailSummaryFooter}
+`;
+      }
+
+      function vypolnitRaschet() {
+        const dict = translations[currentLang];
+
+        const obshcheeKolichestvoKamer = parseFloat(elements.obshcheeKolichestvoKamer.value) || 0;
+        const chastotaKadrov = parseFloat(elements.chastotaKadrov.value) || 25;
+        const razreshenieFactor = parseFloat(elements.razreshenie.value) || 1.4;
+        const kodekFactor = parseFloat(elements.kodek.value) || 1;
+        const bitrate = parseFloat(elements.bitrate.value) || 8;
+        const retention = parseFloat(elements.retention.value) || 30;
+        const kameryVtorzhenie = parseFloat(elements.kameryVtorzhenie.value) || 0;
+        const kameryKrazha = parseFloat(elements.kameryKrazha.value) || 0;
+        const kameryLica = parseFloat(elements.kameryLica.value) || 0;
+        const kameryDymOgon = parseFloat(elements.kameryDymOgon.value) || 0;
+
+        const summaModuley = kameryVtorzhenie + kameryKrazha + kameryLica + kameryDymOgon;
+
+        const bazaNaKameru = 0;
+        let modulnayaDobavka = 0;
+        if (kameryVtorzhenie > 0) modulnayaDobavka += 0.15;
+        if (kameryKrazha > 0) modulnayaDobavka += 0.30;
+        if (kameryLica > 0) modulnayaDobavka += 0.20;
+        if (kameryDymOgon > 0) modulnayaDobavka += 0.20;
+
+        let itogovayaNagruzka = 0;
+        if (summaModuley > 0 && obshcheeKolichestvoKamer > 0) {
+          const nagruzkaNaKameru = bazaNaKameru + 1.0 + modulnayaDobavka;
+          itogovayaNagruzka = obshcheeKolichestvoKamer * nagruzkaNaKameru * razreshenieFactor * (chastotaKadrov / 25) * kodekFactor;
+        }
+
+        const kolichestvoYader = itogovayaNagruzka > 0 ? okruglitVverh(itogovayaNagruzka * 0.87) : 0;
+        const operativnayaPamyat = itogovayaNagruzka > 0 ? okruglitVverh(itogovayaNagruzka * 1.31) : 0;
+        const graficheskayaPamyat = itogovayaNagruzka > 0 ? okruglitVverh(itogovayaNagruzka * 1.02) : 0;
+        const graficheskayaMoshnost = itogovayaNagruzka > 0 ? itogovayaNagruzka.toFixed(2) : "0.00";
+        const setevayaPropusk = obshcheeKolichestvoKamer > 0 ? (obshcheeKolichestvoKamer * bitrate).toFixed(2) : "0.00";
+        const diskovoeProstranstvoGB = obshcheeKolichestvoKamer > 0 ? (obshcheeKolichestvoKamer * bitrate * 3600 * 24 * retention) / 8000 : 0;
+
+        const storageTB = diskovoeProstranstvoGB / 1024;
+        const storageServers = opredelitStorageServers(storageTB);
+        const raidLevel = opredelitRaid(storageTB, dict);
+        const diskType = opredelitDiskType(storageTB, dict);
+        const kolichestvoServerov = opredelitKolichestvoServerov(itogovayaNagruzka, obshcheeKolichestvoKamer);
+        const processor = opredelitProcessor(itogovayaNagruzka, dict);
+        const uskoritel = opredelitUskoritel(itogovayaNagruzka, dict);
+        const pamyatNaServer = opredelitPamyatNaServer(operativnayaPamyat, kolichestvoServerov, dict);
+        const nakopitel = kolichestvoServerov > 0 ? dict.driveSsd : dict.driveNone;
+        const profilNagruzki = opredelitProfilNagruzki(itogovayaNagruzka, dict);
+        const klassUskoritelya = opredelitKlassUskoritelya(itogovayaNagruzka, dict);
+        const tipRazmeshcheniya = opredelitTipRazmeshcheniya(kolichestvoServerov, dict);
+
+        let protsentNagruzki = itogovayaNagruzka > 0 ? Math.min(itogovayaNagruzka, 100) : 0;
+
+        if (elements.itogovayaNagruzka) elements.itogovayaNagruzka.textContent = graficheskayaMoshnost;
+        if (elements.profilNagruzki) elements.profilNagruzki.textContent = profilNagruzki;
+        if (elements.polosaNagruzki) elements.polosaNagruzki.style.width = protsentNagruzki + "%";
+
+        if (elements.kolichestvoServerovKratko) elements.kolichestvoServerovKratko.textContent = kolichestvoServerov;
+        if (elements.klassUskoritelya) elements.klassUskoritelya.textContent = klassUskoritelya;
+        if (elements.tipRazmeshcheniya) elements.tipRazmeshcheniya.textContent = tipRazmeshcheniya;
+
+        if (elements.yadraProcessor) elements.yadraProcessor.textContent = kolichestvoYader;
+        if (elements.operativnayaPamyat) elements.operativnayaPamyat.textContent = operativnayaPamyat + " " + dict.unitGB;
+        if (elements.graficheskayaPamyat) elements.graficheskayaPamyat.textContent = graficheskayaPamyat + " " + dict.unitGB;
+        if (elements.graficheskayaMoshnost) elements.graficheskayaMoshnost.textContent = graficheskayaMoshnost + " " + dict.unitTFLOPS;
+        if (elements.setevayaPropusk) elements.setevayaPropusk.textContent = setevayaPropusk + " " + dict.unitMbps;
+
+        if (elements.storageServers) elements.storageServers.textContent = storageServers;
+        if (elements.archiveVolume) elements.archiveVolume.textContent = formatStorage(diskovoeProstranstvoGB, dict);
+        if (elements.raidLevel) elements.raidLevel.textContent = raidLevel;
+        if (elements.diskType) elements.diskType.textContent = diskType;
+
+        if (elements.kolichestvoServerov) elements.kolichestvoServerov.textContent = kolichestvoServerov;
+        if (elements.modelProcessor) elements.modelProcessor.textContent = processor;
+        if (elements.pamyatNaServer) elements.pamyatNaServer.textContent = pamyatNaServer;
+        if (elements.graficheskiyUskoritel) elements.graficheskiyUskoritel.textContent = uskoritel;
+        if (elements.nakopitel) elements.nakopitel.textContent = nakopitel;
+      }
+
+      const knopka = document.getElementById("knopka_rascheta");
+      if (knopka) knopka.addEventListener("click", vypolnitRaschet);
+
+      const inputs = [
+        elements.obshcheeKolichestvoKamer, elements.chastotaKadrov, elements.razreshenie,
+        elements.kodek, elements.bitrate, elements.retention, elements.kameryVtorzhenie,
+        elements.kameryKrazha, elements.kameryLica, elements.kameryDymOgon
+      ];
+
+      inputs.forEach(function(element) {
+        if(element) {
+          element.addEventListener("input", vypolnitRaschet);
+          element.addEventListener("change", vypolnitRaschet);
         }
       });
-    }
 
-    const savedLanguage = localStorage.getItem("site-language") || "ru";
-    applyTranslations(savedLanguage);
-    vypolnitRaschet();
+      const form = document.getElementById("email_form");
+      if (form) {
+        form.addEventListener("submit", function() {
+          if (elements.calcMessage) {
+            elements.calcMessage.value = poluchitSvodkuDlyaEmail(translations[currentLang]);
+          }
+          if (elements.emailStatus) {
+            elements.emailStatus.innerText = "Отправка...";
+          }
+        });
+      }
+
+      const burger = document.getElementById("burger");
+      const nav = document.getElementById("main-nav");
+      const langSwitcher = document.getElementById("langSwitcher");
+      const langButton = document.getElementById("langButton");
+
+      if (burger && nav) {
+        burger.addEventListener("click", () => {
+          const isOpen = nav.classList.toggle("is-open");
+          burger.setAttribute("aria-expanded", String(isOpen));
+        });
+      }
+
+      if (langButton && langSwitcher) {
+        langButton.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const isOpen = langSwitcher.classList.toggle("is-open");
+          langButton.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        document.querySelectorAll(".lang-switcher__option").forEach(function(option) {
+          option.addEventListener("click", function() {
+            applyTranslations(option.getAttribute("data-lang"));
+            langSwitcher.classList.remove("is-open");
+            langButton.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        document.addEventListener("click", function(event) {
+          if (!langSwitcher.contains(event.target)) {
+            langSwitcher.classList.remove("is-open");
+            langButton.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
+
+      const savedLanguage = localStorage.getItem("site-language") || "ru";
+      applyTranslations(savedLanguage);
+    })();
   </script>
 </body>
 </html> 
