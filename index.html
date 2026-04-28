@@ -21,18 +21,18 @@
 
       --line: rgba(255, 255, 255, 0.08);
 
-      --blue: #3f7cff;
-      --blue-soft: #7ea7ff;
+      --blue: #ff3b30;
+      --blue-soft: #ff453a;
       --green: #47dd8c;
       --green-soft: #8cf0b6;
 
-      --purple: #7c5cff;
-      --purple-soft: #9c87ff;
+      --purple: #dc2626;
+      --purple-soft: #c41e3a;
 
       --shadow-xl: 0 30px 90px rgba(0, 0, 0, 0.34);
       --shadow-lg: 0 20px 65px rgba(0, 0, 0, 0.24);
-      --shadow-blue: 0 18px 50px rgba(63, 124, 255, 0.28);
-      --shadow-purple: 0 18px 50px rgba(124, 92, 255, 0.28);
+      --shadow-blue: 0 18px 50px rgba(255, 59, 48, 0.28);
+      --shadow-purple: 0 18px 50px rgba(220, 38, 38, 0.28);
 
       --radius-sm: 16px;
       --radius-md: 20px;
@@ -60,7 +60,7 @@
       font-family: Inter, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top, rgba(73, 126, 255, 0.18), transparent 22%),
+        radial-gradient(circle at top, rgba(255, 59, 48, 0.12), transparent 22%),
         linear-gradient(180deg, #06111c 0%, #081321 45%, #07111d 100%);
       overflow-x: hidden;
     }
@@ -139,7 +139,7 @@
       position: relative;
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(20, 37, 63, 0.78), rgba(8, 17, 31, 0.96));
+      background: linear-gradient(180deg, rgba(28, 15, 15, 0.82), rgba(8, 4, 4, 0.94));
       box-shadow: var(--shadow-xl);
       overflow: hidden;
     }
@@ -240,7 +240,7 @@
       font-weight: 900;
       letter-spacing: 0.05em;
       
-      background: linear-gradient(90deg, #3fb7ff 0%, #7c5cff 100%);
+      background: linear-gradient(90deg, #ff4d4d 0%, #dc2626 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       line-height: 1.1;
@@ -425,7 +425,7 @@
       display: flex;
       align-items: flex-end;
       overflow: hidden;
-      background: #08111e;
+      background: radial-gradient(circle at center, rgba(220, 38, 38, 0.12), transparent 70%), #050a14;
     }
 
     .hero__video {
@@ -768,7 +768,7 @@
       width: 760px;
       height: 260px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(63, 124, 255, 0.18), transparent 70%);
+      background: radial-gradient(circle, rgba(255, 59, 48, 0.12), transparent 70%);
       pointer-events: none;
     }
 
@@ -802,7 +802,7 @@
     }
 
     .cta-box__email a {
-      color: #a9beff;
+      color: #ff4d4d;
     }
 
     .cta-box__actions {
@@ -849,7 +849,7 @@
     }
 
     .footer__email {
-      color: #a9beff;
+      color: #ff4d4d;
       font-weight: 700;
     }
 
@@ -977,7 +977,7 @@
         font-weight: 900;
         letter-spacing: 0.05em;
         
-        background: linear-gradient(90deg, #3fb7ff 0%, #7c5cff 100%);
+        background: linear-gradient(90deg, #ff4d4d 0%, #dc2626 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         line-height: 1.1;
@@ -1066,7 +1066,7 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--blue-soft);
-      background: rgba(126, 167, 255, 0.08);
+      background: rgba(220, 38, 38, 0.08);
       border: 1px solid rgba(126, 167, 255, 0.16);
     }
 
@@ -1098,7 +1098,7 @@
       min-height: 320px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 28px;
-      background: linear-gradient(180deg, rgba(18, 33, 60, 0.78), rgba(9, 18, 35, 0.96));
+      background: linear-gradient(180deg, rgba(28, 15, 15, 0.78), rgba(12, 8, 8, 0.96));
       box-shadow: var(--shadow-xl);
       overflow: hidden;
       padding: 0;
@@ -1115,7 +1115,7 @@
     .solution-card:hover {
       transform: translateY(-8px) scale(1.02);
       box-shadow: 0 34px 90px rgba(0, 0, 0, 0.42);
-      border-color: rgba(125, 167, 255, 0.22);
+      border: 1px solid rgba(220, 38, 38, 0.22);
     }
 
     .solution-card:hover .solution-card__image {
@@ -1127,7 +1127,7 @@
     }
 
     .solution-card:focus-visible {
-      outline: 2px solid rgba(126, 167, 255, 0.9);
+      outline: 2px solid rgba(220, 38, 38, 0.9);
       outline-offset: 4px;
     }
 
@@ -1237,7 +1237,7 @@
     }
 
     .footer__email {
-      color: #a9beff;
+      color: #ff4d4d;
       font-weight: 700;
     }
 
@@ -1297,7 +1297,7 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at top left, rgba(126, 167, 255, 0.12), transparent 28%),
+        radial-gradient(circle at top left, rgba(220, 38, 38, 0.08), transparent 28%),
         radial-gradient(circle at bottom right, rgba(124, 92, 255, 0.1), transparent 24%);
     }
 
@@ -1599,7 +1599,7 @@
         font-weight: 900;
         letter-spacing: 0.05em;
         
-        background: linear-gradient(90deg, #3fb7ff 0%, #7c5cff 100%);
+        background: linear-gradient(90deg, #ff4d4d 0%, #dc2626 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         line-height: 1.1;
@@ -1701,7 +1701,7 @@
       }
 
       .footer__email {
-        color: #a9beff;
+        color: #ff4d4d;
         font-weight: 700;
       }
     }
@@ -2053,8 +2053,8 @@
       width: 0%;
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, #2f6df4 0%, #86b7ff 100%);
-      box-shadow: 0 0 18px rgba(79, 140, 255, 0.5);
+      background: linear-gradient(90deg, #dc2626 0%, #ff4d4d 100%);
+      box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
       transition: width 0.25s ease;
     }
 
@@ -2154,7 +2154,7 @@
 
     .status {
       margin-top: 12px;
-      color: #93c5fd;
+      color: #ff4d4d;
       font-size: 14px;
       line-height: 1.5;
     }
@@ -2193,7 +2193,7 @@
     }
 
     .footer__email {
-      color: #a9beff;
+      color: #ff4d4d;
       font-weight: 700;
       text-decoration: none;
     }
@@ -2362,10 +2362,7 @@
     <main>
       <!-- 1. Who we are -->
 <section class="hero" id="hero" aria-label="Главный экран">
-        <video class="hero__video" autoplay muted loop playsinline preload="auto">
-          <source src="./IMG_6557.MP4" type="video/mp4" />
-        </video>
-
+        <!-- Video removed per user request -->
         <div class="hero__video-mask" aria-hidden="true"></div>
 
         <div class="hero__content">
@@ -2904,38 +2901,35 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
+    <!-- 5. Contacts CTA -->
+    <section class="section" id="contacts" aria-labelledby="contacts-title">
+      <div class="container">
+        <div class="panel cta-box">
+          <h2 class="cta-box__title" id="contacts-title" data-i18n="ctaTitle">
+            Покажем, как решение будет работать на вашем объекте
+          </h2>
 
-      <!-- 5. Contacts CTA -->
-<section class="section" id="contacts" aria-labelledby="contacts-title">
-        <div class="container">
-          <div class="panel cta-box">
-            <h2 class="cta-box__title" id="contacts-title" data-i18n="ctaTitle">
-              Покажем, как решение будет работать на вашем объекте
-            </h2>
+          <p class="cta-box__text" data-i18n="ctaText">
+            Проверим применимость сценария на ваших камерах, зонах контроля и типовых рисках объекта.
+            Покажем ключевой сценарий по утечкам и обсудим развитие решения под вашу инфраструктуру.
+          </p>
 
-            <p class="cta-box__text" data-i18n="ctaText">
-              Проверим применимость сценария на ваших камерах, зонах контроля и типовых рисках объекта.
-              Покажем ключевой сценарий по утечкам и обсудим развитие решения под вашу инфраструктуру.
-            </p>
+          <p class="cta-box__email">
+            <a href="mailto:support@vengeea.com">support@vengeea.com</a>
+          </p>
 
-            <p class="cta-box__email">
-              <a href="mailto:support@vengeea.com">support@vengeea.com</a>
-            </p>
-
-            <div class="cta-box__actions">
-              <a class="btn btn--primary" href="./contact_us.html" data-i18n="requestSolution">Запросить решение</a>
-              <a class="btn btn--secondary" href="./modules.html" data-i18n="viewModules">Посмотреть модули</a>
-            </div>
+          <div class="cta-box__actions">
+            <a class="btn btn--primary" href="./contact_us.html" data-i18n="requestSolution">Запросить решение</a>
+            <a class="btn btn--secondary" href="./modules.html" data-i18n="viewModules">Посмотреть модули</a>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+  </main>
 
-<div
+  <div
     class="module-modal"
     id="moduleModal"
     aria-hidden="true"
@@ -2944,24 +2938,14 @@
     aria-labelledby="moduleModalTitle"
   >
     <div class="module-modal__backdrop" id="moduleBackdrop"></div>
-
     <div class="module-modal__panel" id="modulePanel">
       <div class="module-modal__media">
         <div class="module-modal__video-layer">
-          <video
-            id="moduleVideo"
-            class="module-modal__video"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-          >
+          <video id="moduleVideo" class="module-modal__video" autoplay muted loop playsinline preload="metadata">
             <source id="moduleVideoSource" src="" type="video/mp4" />
           </video>
         </div>
       </div>
-
       <div class="module-modal__body">
         <button class="module-modal__close" id="moduleClose" type="button" aria-label="Close window">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -2969,108 +2953,67 @@
             <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </button>
-
         <div class="module-modal__content" id="modalContent">
           <div class="module-modal__eyebrow" id="moduleEyebrow">AI-модуль</div>
           <h2 class="module-modal__title" id="moduleModalTitle">Заголовок модуля</h2>
-
-          <p class="module-modal__description" id="moduleDescription">
-            Описание модуля.
-          </p>
-
+          <p class="module-modal__description" id="moduleDescription">Описание модуля.</p>
           <div class="module-modal__info">
             <div class="module-modal__info-card">
               <div class="module-modal__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 4L19 7.5V12C19 16.5 16 19.5 12 21C8 19.5 5 16.5 5 12V7.5L12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 4L19 7.5V12C19 16.5 16 19.5 12 21C8 19.5 5 16.5 5 12V7.5L12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
               </div>
               <div>
                 <h3 class="module-modal__info-title" id="moduleDetectsTitle">Что обнаруживает</h3>
                 <p class="module-modal__info-text" id="moduleDetects"></p>
               </div>
             </div>
-
             <div class="module-modal__info-card">
               <div class="module-modal__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 5V12L16.5 14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.8"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 5V12L16.5 14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.8"/></svg>
               </div>
               <div>
                 <h3 class="module-modal__info-title" id="modulePurposeTitle">Зачем нужен</h3>
                 <p class="module-modal__info-text" id="modulePurpose"></p>
               </div>
             </div>
-
-            <div class="module-modal__info-card">
-              <div class="module-modal__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 21C16 17.2 19 14.2 19 10.5C19 6.91 15.87 4 12 4C8.13 4 5 6.91 5 10.5C5 14.2 8 17.2 12 21Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                  <circle cx="12" cy="10.5" r="2.5" stroke="currentColor" stroke-width="1.8"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="module-modal__info-title" id="moduleAreasTitle">Где применяется</h3>
-                <p class="module-modal__info-text" id="moduleAreas"></p>
-              </div>
-            </div>
           </div>
-
           <div class="module-modal__footer">
-            <p class="module-modal__footer-text" id="moduleFooter">
-              Решение помогает перейти от реакции на последствия — к предотвращению риска в момент его появления.
-            </p>
-
             <div class="module-modal__actions">
-              <a class="btn btn--primary" id="moduleDemoLink" href="mailto:support@vengeea.com?subject=Запрос демо модуля">
+              <a class="btn btn--primary" id="moduleDemoLink" href="mailto:support@vengeea.com">
                 <span id="moduleDemoLabel">Запросить демо модуля</span>
               </a>
               <a class="btn btn--ghost" href="./contact_us.html">
                 <span data-i18n="contactUs">Связаться с нами</span>
               </a>
             </div>
-
-            <div class="module-modal__note" id="moduleNote">
-              Чем раньше вы видите риск, тем дешевле обходятся его последствия.
-            </div>
           </div>
         </div>
       </div>
     </div>
-
-
-    
   </div>
 
-  
-
-    <footer class="footer">
-      <div class="container">
-        <div class="footer__row">
-          <a href="index.html#hero" class="footer__brand">
-            <img class="footer__logo" src="./logo-recreated (1).png" alt="Company logo" />
-            <div class="footer__brand-content">
-              <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;">Vengeea®</div>
-              <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident prevention</div>
-            </div>
-          </a>
-
-          <div class="footer__text">
-            <a class="footer__email" href="mailto:support@vengeea.com">support@vengeea.com</a>
-          </div>
+  <footer class="footer">
+    <div class="container footer__row">
+      <div class="footer__brand">
+        <img src="./logo-recreated (1).png" alt="Logo" class="footer__logo">
+        <div class="footer__brand-content">
+          <span class="footer__text" data-i18n="footerTitle" style="font-weight: 700; display: block; margin-bottom: 4px;">AI video analytics platform</span>
+          <p class="footer__text" data-i18n="footerText" style="opacity: 0.7; font-size: 14px;">Leak detection and development toward predictive incident prevention</p>
         </div>
       </div>
-    </footer>
+      <a href="mailto:support@vengeea.com" class="footer__email">support@vengeea.com</a>
+    </div>
+  </footer>
+
+  </div> <!-- Closing .site -->
 
   <script>
     (function () {
       const burger = document.getElementById("burger");
       const nav = document.getElementById("main-nav");
-      const langSwitcher = document.getElementById("langSwitcher");
-      const langButton = document.getElementById("langButton");
+      const langSwitcher = document.querySelector(".lang-switcher");
       const langMenu = document.getElementById("langMenu");
+      const langButton = document.getElementById("langButton");
       const langCurrentFlag = document.getElementById("langCurrentFlag");
       const langCurrentText = document.getElementById("langCurrentText");
 
@@ -3081,268 +3024,24 @@
         kk: { code: "KK", flag: "🇰🇿", htmlLang: "kk" }
       };
 
-      const translations = {
-  ru: {
-logoTitle: "Vengeea®",
-          logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
-
-          navHome: "Главная",
-          navAbout: "О нас",
-          navModules: "Модули",
-          navCalculator: "Калькулятор",
-          navContacts: "Контакты",
-
-          requestSolution: "Запросить решение",
-          viewModules: "Посмотреть модули",
-
+      const uiTranslations = {
+        ru: {
+          navHome: "Главная", navAbout: "О нас", navModules: "Модули", navCalculator: "Калькулятор", navContacts: "Контакты",
+          requestSolution: "Запросить решение", viewModules: "Посмотреть модули",
           heroTitle: "Vengeea® — компания, разрабатывающая технологии будущего.",
           heroText: "Мы работаем с 2020 года и создаем AI-решения для видеоаналитики, автоматизации мониторинга и предотвращения инцидентов.",
-
-          monitoringTitle: "Фиксация утечки в момент возникновения",
-          monitoringText: "Два сценария работы системы на реальном видеопотоке: обнаружение утечки и автоматическая регистрация события для дальнейшего реагирования.",
-
-          leakDetectionTitle: "Обнаружение утечки в кадре",
-          leakDetectionText: "Система анализирует видеопоток, отслеживает появление жидкости в зоне наблюдения и формирует событие без участия оператора.",
-
-          eventFixTitle: "Фиксация события и уведомление",
-          eventFixText: "После обнаружения система сохраняет видеосценарий, формирует метаданные события и направляет сигнал оператору для быстрой оценки ситуации.",
-
-          futureTitle: "От выявления аномалий и поведения — к их предотвращению",
-          futureText: "Система в реальном времени фиксирует отклонения и нетипичные действия, мгновенно уведомляя оператора. Следующий шаг — предиктивная аналитика: выявление рисков до того, как они перерастут в инцидент.",
-
-          predictiveContour: "Предиктивный контур",
-          predictiveSub: "Переход от фиксации события к раннему предупреждению риска",
-
-          stepNow: "Сейчас",
-          stepNowTitle: "Фиксация инцидента в момент появления",
-          stepNowText: "Обнаружение утечки на видеопотоке и мгновенное уведомление оператора.",
-
-          stepNext: "Далее",
-          stepNextTitle: "Переход к прогнозной аналитике и автономным решениям",
-          stepNextText: "Понимание поведения, контекста и развития событий с возможностью предсказать инцидент до его фактического начала.",
-
-          stepGoal: "Цель",
-          stepGoalTitle: "Автономное предотвращение рисков",
-          stepGoalText: "Система способна не только выявлять угрозы, но и самостоятельно инициировать меры для их предотвращения до наступления ущерба.",
-
           ctaTitle: "Покажем, как решение будет работать на вашем объекте",
-          ctaText: "Проверим применимость сценария на ваших камерах, зонах контроля и типовых рисках объекта. Покажем ключевой сценарий по утечкам и обсудим развитие решения под вашу инфраструктуру.",
-
+          ctaText: "Проверим применимость сценария на ваших камерах, зонах контроля и типовых рисках объекта.",
           footerTitle: "AI-платформа видеоаналитики",
           footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов",
-logoTitle: "Vengeea®",
-          logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
-          navHome: "Главная",
-          navAbout: "О нас",
-          navModules: "Модули",
-          navCalculator: "Калькулятор",
-          navContacts: "Контакты",
-          requestSolution: "Запросить решение",
-          pageEyebrow: "Модули",
-          pageText: "Выберите сценарий обнаружения для вашего объекта: от утечек и дыма до краж, вторжений и актов вандализма.",
-          cardTag: "AI-модуль",
-          cardLeakTitle: "Утечка жидкости",
-          cardLeakText: "Выявление разливов и утечек в критических зонах объекта.",
-          cardFireTitle: "Дым и огонь",
-          cardFireText: "Раннее обнаружение задымления и открытого пламени.",
-          cardIntrusionTitle: "Вторжение",
-          cardIntrusionText: "Фиксация несанкционированного проникновения на объект.",
-          cardFightTitle: "Драка и вандализм",
-          cardFightText: "Обнаружение агрессивных и разрушительных действий.",
-          cardTheftTitle: "Воровство",
-          cardTheftText: "Выявление сценариев, связанных с хищением имущества.",
-          cardFaceTitle: "Распознавание и детекция лица",
-          cardFaceText: "Фиксация лица, повторных появлений и контроль по собственным спискам наблюдения.",
-          contactUs: "Связаться с нами",
-          detectsTitle: "Что обнаруживает",
-          purposeTitle: "Зачем нужен",
-          areasTitle: "Где применяется",
-          demoButton: "Запросить демо модуля",
-          closeLabel: "Закрыть окно",
-          footerTitle: "AI-платформа видеоаналитики",
-          footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов",
-topPill: "Предварительный расчёт инфраструктуры",
-          topTitle: "Калькулятор серверной конфигурации",
-          topSub: "Укажите камеры, параметры потока и нужные модули. Калькулятор покажет ориентировочную нагрузку, архив и рекомендуемую конфигурацию.",
-          logoTitle: "Vengeea®",
-          logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
-          navHome: "Главная",
-          navAbout: "О нас",
-          navModules: "Модули",
-          navCalculator: "Калькулятор",
-          navContacts: "Контакты",
-          ctaHeader: "Запросить решение",
-          footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов",
-          
-          sectionInput: "Входные параметры",
-          sectionInputStatus: "Настраиваемая конфигурация",
-          labelTotalCameras: "Общее количество камер на объекте",
-          labelFps: "Частота кадров",
-          fps10: "10 кадров в секунду",
-          fps15: "15 кадров в секунду",
-          fps20: "20 кадров в секунду",
-          fps25: "25 кадров в секунду",
-          fps30: "30 кадров в секунду",
-          labelResolution: "Разрешение видео",
-          labelCodec: "Кодек",
-          labelBitrate: "Средний битрейт (Мбит/с)",
-          labelRetention: "Дни хранения архива",
-          
-          sectionModules: "Использование модулей по камерам",
-          modIntrusionTitle: "Обнаружение вторжения",
-          modIntrusionDesc: "Контроль проникновения в запрещённые, охраняемые и периметровые зоны.",
-          modIntrusionTag1: "Периметр",
-          modIntrusionTag2: "Реакция в реальном времени",
-          labelCameraCount: "Количество камер",
-          
-          modTheftTitle: "Обнаружение кражи",
-          modTheftDesc: "Выявление подозрительных действий, сокрытия товара и рискованных сценариев.",
-          modTheftTag1: "Розница",
-          modTheftTag2: "Поведенческий анализ",
-          
-          modFaceTitle: "Обнаружение лиц",
-          modFaceDesc: "Выделение и анализ лиц в видеопотоке в реальном времени.",
-          modFaceTag1: "Идентификация",
-          modFaceTag2: "Оперативный поиск",
-          
-          modFireTitle: "Обнаружение дыма и огня",
-          modFireDesc: "Раннее выявление задымления и признаки возгорания по видеопотоку.",
-          modFireTag1: "Пожарная безопасность",
-          modFireTag2: "Раннее предупреждение",
-          
-          hintText: "Если по всем модулям указано 0 камер, вычислительная нагрузка тоже остаётся 0. Архив при этом всё равно может рассчитываться отдельно, если указаны камеры, битрейт и срок хранения.",
-          btnCalculate: "Рассчитать конфигурацию",
-          
-          resultLoadLabel: "Итоговая вычислительная нагрузка",
-          resultLoadSub: "Ориентировочная вычислительная нагрузка с учётом разрешения, частоты кадров, кодека и аналитических модулей.",
-          meterLow: "Низкая",
-          meterMid: "Оптимальная",
-          meterHigh: "Высокая",
-          
-          quickServers: "Аналитических серверов",
-          quickAccelerator: "Ускоритель",
-          quickProfile: "Профиль",
-          
-          resAnalyticsTitle: "Требуемые ресурсы аналитической системы",
-          resCpuCores: "Количество процессорных ядер",
-          resRam: "Оперативная память",
-          resVram: "Графическая память",
-          resGpuPower: "Графическая вычислительная мощность",
-          resNetwork: "Пропускная способность сети",
-          
-          resStorageTitle: "Сервер хранения видеоархива",
-          resStorageServers: "Количество серверов хранения",
-          resArchiveVol: "Общий объём архива",
-          resRaid: "Рекомендуемый RAID",
-          resDiskType: "Тип накопителей",
-          
-          resServerTitle: "Рекомендуемая серверная конфигурация",
-          resAnalyticServers: "Количество аналитических серверов",
-          resCpu: "Процессор",
-          resRamPerServer: "Оперативная память на сервер",
-          resGpu: "Графический ускоритель",
-          resDrive: "Накопитель",
-          resOs: "Операционная система",
-          
-          emailTitle: "Получить расчёт на email",
-          emailDesc: "Введите email, и результаты расчёта серверной инфраструктуры будут отправлены вам автоматически.",
-          emailPlaceholder: "Ваш email",
-          emailBtn: "Отправить расчёт",
-          footNote: "Расчёт является ориентировочным и нужен для предварительной оценки. Итоговая конфигурация зависит от архитектуры системы, сценариев аналитики и особенностей внедрения.",
-
-          profNoLoad: "Нет нагрузки",
-          profLow: "Низкий профиль",
-          profMid: "Средний профиль",
-          profMidHigh: "Средне-высокий профиль",
-          profHigh: "Высокий профиль",
-          
-          accelNone: "—",
-          accelEntry: "Начальный",
-          accelMid: "Средний",
-          accelHigh: "Высокий",
-          accelServer: "Серверный",
-          
-          gpuT4: "NVIDIA T4 / аналог",
-          gpuA4000: "NVIDIA RTX A4000 / аналог",
-          gpuL40: "NVIDIA L40 / аналог",
-          gpuA100: "NVIDIA A100 / аналог",
-          
-          cpuEntry: "AMD Ryzen 9 / Intel Core i7 / аналог",
-          cpuMid: "AMD Ryzen 9 16-core / Intel Core i9 / аналог",
-          cpuHigh: "Intel Xeon Silver / Gold / аналог",
-          cpuServer: "Серверный многоядерный процессор",
-          
-          typeNone: "—",
-          typeSingle: "Одиночный сервер",
-          typeCentral: "Централизованный",
-          
-          raidNone: "—",
-          raid5: "RAID 5",
-          raid6: "RAID 6",
-          raid60: "RAID 6 / RAID 60",
-          
-          diskNone: "—",
-          diskSata: "SATA HDD",
-          diskEnt: "Enterprise HDD",
-          diskEntCache: "Enterprise HDD + SSD cache",
-          
-          driveNone: "—",
-          driveSsd: "Твердотельный накопитель 1 ТБ и выше",
-          
-          unitGB: "ГБ",
-          unitTB: "ТБ",
-          unitMbps: "Мбит/с",
-          unitTFLOPS: "TFLOPS",
-          
-          emailSummaryTitle: "Результаты расчёта серверной инфраструктуры",
-          emailSummaryLoad: "Итоговая вычислительная нагрузка:",
-          emailSummaryAiServers: "Количество аналитических серверов:",
-          emailSummaryCpu: "Процессор:",
-          emailSummaryGpu: "Графический ускоритель:",
-          emailSummaryRam: "Оперативная память на сервер:",
-          emailSummaryNetwork: "Пропускная способность сети:",
-          emailSummaryArchive: "Общий объём архива:",
-          emailSummaryStorageServers: "Количество серверов хранения:",
-          emailSummaryRaid: "Рекомендуемый RAID:",
-          emailSummaryFooter: "Расчёт сформирован автоматически на сайте.",
-          emailSending: "Отправка...",
-          emailSuccess: "Сообщение успешно отправлено!",
-          emailError: "Ошибка отправки. Попробуйте еще раз.",
-  },
-  en: {
-logoTitle: "Vengeea®",
-          logoSubtitle: "FORECASTING FUTURE EVENTS",
-
-          navHome: "Home",
-          navAbout: "About",
-          navModules: "Modules",
-          navCalculator: "Calculator",
-          navContacts: "Contacts",
-
-          requestSolution: "Request a solution",
-          viewModules: "View modules",
-
+          contactUs: "Связаться с нами", demoButton: "Запросить демо модуля",
+          logoTitle: "Vengeea®", logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ"
+        },
+        en: {
+          navHome: "Home", navAbout: "About", navModules: "Modules", navCalculator: "Calculator", navContacts: "Contacts",
+          requestSolution: "Request a solution", viewModules: "View modules",
           heroTitle: "Vengeea® — a company developing technologies of the future.",
           heroText: "We have been operating since 2020 and build AI solutions for video analytics, monitoring automation, and incident prevention.",
-
-          monitoringTitle: "Leak detection at the moment it occurs",
-          monitoringText: "Two system scenarios on a live video stream: leak detection and automatic event registration for further response.",
-
-          leakDetectionTitle: "Leak detection in the frame",
-          leakDetectionText: "The system analyzes the video stream, tracks the appearance of liquid in the monitoring zone, and generates an event without operator involvement.",
-
-          eventFixTitle: "Event recording and notification",
-          eventFixText: "After detection, the system saves the video scenario, creates event metadata, and sends an alert to the operator for rapid situation assessment.",
-
-          futureTitle: "From detecting anomalies and behavior to preventing them",
-          futureText: "The system detects deviations and unusual actions in real time, instantly notifying the operator. The next step is predictive analytics: identifying risks before they grow into an incident.",
-
-          predictiveContour: "Predictive layer",
-          predictiveSub: "Transition from event recording to early risk warning",
-
-          stepNow: "Now",
-          stepNowTitle: "Incident recording at the moment it appears",
-          stepNowText: "Leak detection in the video stream and instant operator notification.",
 
           stepNext: "Next",
           stepNextTitle: "Transition to predictive analytics and autonomous decisions",
@@ -3999,8 +3698,8 @@ topPill: "Инфрақұрылымның алдын ала есебі",
 };
 
       function applyTranslations(lang) {
-        const selectedLang = translations[lang] ? lang : "ru";
-        const dict = translations[selectedLang];
+        const selectedLang = uiTranslations[lang] ? lang : "ru";
+        const dict = uiTranslations[selectedLang];
         const meta = languageMeta[selectedLang];
 
         document.documentElement.lang = meta.htmlLang;
@@ -4060,7 +3759,7 @@ topPill: "Инфрақұрылымның алдын ала есебі",
       const savedLanguage = localStorage.getItem("site-language") || "ru";
       applyTranslations(savedLanguage);
 
-      consts = document.querySelectorAll(".reveal");
+      const reveals = document.querySelectorAll(".reveal");
 
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
@@ -4078,11 +3777,11 @@ topPill: "Инфрақұрылымның алдын ала есебі",
           }
         );
 
-       s.forEach(function (item) {
+        reveals.forEach(function (item) {
           observer.observe(item);
         });
       } else {
-       s.forEach(function (item) {
+        reveals.forEach(function (item) {
           item.classList.add("is-visible");
         });
       }
