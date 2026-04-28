@@ -853,7 +853,7 @@
       font-weight: 700;
     }
 
-    .reveal {
+    .{
       opacity: 0;
       transform: translateY(24px);
       transition: opacity 0.7s ease, transform 0.7s ease;
@@ -1037,7 +1037,7 @@
         transition: none !important;
       }
 
-      .reveal {
+      .{
         opacity: 1 !important;
         transform: none !important;
       }
@@ -2368,7 +2368,7 @@
 
         <div class="hero__video-mask" aria-hidden="true"></div>
 
-        <div class="hero__content reveal">
+        <div class="hero__content">
           <h1 class="hero__title" data-i18n="heroTitle">
             Vengeea® — компания, разрабатывающая технологии будущего.
           </h1>
@@ -2387,7 +2387,7 @@
       <!-- 2. Modules / Solutions -->
       <section class="section" id="modules" aria-labelledby="modules-section-title">
         <div class="container">
-          <header class="section-header reveal">
+          <header class="section-header">
             <h2 class="section-title" id="modules-section-title" data-i18n="navModules">Модули</h2>
             <p class="section-text" data-i18n="pageText">
               Выберите сценарий обнаружения для вашего объекта: от утечек и дыма до краж, вторжений и актов вандализма.
@@ -2480,7 +2480,7 @@
 <section class="section" aria-labelledby="monitoring-title">
         <div class="anchor" id="about" aria-hidden="true"></div>
         <div class="container">
-          <header class="section-header reveal">
+          <header class="section-header">
             <h2 class="section-title" id="monitoring-title" data-i18n="monitoringTitle">
               Фиксация утечки в момент возникновения
             </h2>
@@ -2492,7 +2492,7 @@
           </header>
 
           <div class="demo-grid">
-            <article class="panel demo-card reveal">
+            <article class="panel demo-card">
               <div class="demo-card__media">
                 <video autoplay muted loop playsinline preload="auto">
                   <source src="./IMG_6557.MP4" type="video/mp4" />
@@ -2508,7 +2508,7 @@
               </div>
             </article>
 
-            <article class="panel demo-card reveal">
+            <article class="panel demo-card">
               <div class="demo-card__media">
                 <video autoplay muted loop playsinline preload="auto">
                   <source src="./IMG_6540.MP4" type="video/mp4" />
@@ -2528,10 +2528,10 @@
       </section>
 
 <section class="section future-section" aria-labelledby="future-title">
-        <div class="anchor" id="modules" aria-hidden="true"></div>
-        <div class="anchor" id="calculator" aria-hidden="true"></div>
+        
+        
         <div class="container">
-          <div class="future-enterprise reveal">
+          <div class="future-enterprise">
             <div class="future-enterprise__intro">
               <h2 class="future-enterprise__title" id="future-title" data-i18n="futureTitle">
                 От выявления аномалий и поведения — к их предотвращению
@@ -2902,14 +2902,17 @@
             Расчёт является ориентировочным и нужен для предварительной оценки.
             Итоговая конфигурация зависит от архитектуры системы, сценариев аналитики и особенностей внедрения.
           </div>
+        </div>
+      </div>
     </div>
-      </section>
+  </div>
+</section>
 
 
       <!-- 5. Contacts CTA -->
 <section class="section" id="contacts" aria-labelledby="contacts-title">
         <div class="container">
-          <div class="panel cta-box reveal">
+          <div class="panel cta-box">
             <h2 class="cta-box__title" id="contacts-title" data-i18n="ctaTitle">
               Покажем, как решение будет работать на вашем объекте
             </h2>
@@ -3035,7 +3038,13 @@
           </div>
         </div>
       </div>
+    </div>
 
+
+    
+  </div>
+
+  
 
     <footer class="footer">
       <div class="container">
@@ -3054,7 +3063,6 @@
         </div>
       </div>
     </footer>
-  </div>
 
   <script>
     (function () {
@@ -4052,7 +4060,7 @@ topPill: "Инфрақұрылымның алдын ала есебі",
       const savedLanguage = localStorage.getItem("site-language") || "ru";
       applyTranslations(savedLanguage);
 
-      const reveals = document.querySelectorAll(".reveal");
+      consts = document.querySelectorAll(".reveal");
 
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
@@ -4070,11 +4078,11 @@ topPill: "Инфрақұрылымның алдын ала есебі",
           }
         );
 
-        reveals.forEach(function (item) {
+       s.forEach(function (item) {
           observer.observe(item);
         });
       } else {
-        reveals.forEach(function (item) {
+       s.forEach(function (item) {
           item.classList.add("is-visible");
         });
       }
@@ -4998,6 +5006,9 @@ const modal = document.getElementById("moduleModal");
 
       applyTranslations(currentLanguage);
     
+
+// --- CALCULATOR LOGIC ---
+
 
 // --- CALCULATOR JS ---
 
