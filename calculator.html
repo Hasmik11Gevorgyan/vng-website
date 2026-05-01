@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,8 +11,8 @@
     }
 
     :root {
-      --bg: #07111d;
-      --bg-deep: #081423;
+      --bg: #010000;
+      --bg-deep: #010000;
       --line: rgba(255, 255, 255, 0.08);
       --line-2: rgba(255, 255, 255, 0.12);
       --text: #f3f7ff;
@@ -19,17 +20,27 @@
       --text-muted: rgba(237, 243, 255, 0.62);
       --muted: rgba(203, 213, 225, 0.78);
       --muted-2: rgba(148, 163, 184, 0.92);
+
       --blue: #ff3b30;
-      --blue-2: #dc2626;
-      --glow: rgba(255, 59, 48, 0.35);
-      --success: #ff453a;
-      --purple: #dc2626;
-      --purple-soft: #ff4d4d;
-      --radius-lg: 32px;
-      --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.22);
-      --shadow-purple: 0 12px 30px rgba(220, 38, 38, 0.28);
-      --container: 1400px;
-      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --blue-soft: #ff453a;
+      --red: #ff3b30;
+      --red-soft: #ff453a;
+
+      --shadow-xl: 0 30px 90px rgba(0, 0, 0, 0.34);
+      --shadow-lg: 0 20px 65px rgba(0, 0, 0, 0.24);
+      --shadow-blue: 0 18px 50px rgba(220, 38, 38, 0.28);
+      --shadow-red: 0 18px 50px rgba(220, 38, 38, 0.28);
+
+      --radius-sm: 16px;
+      --radius-md: 20px;
+      --radius-lg: 26px;
+      --radius-xl: 32px;
+      --radius-pill: 999px;
+
+      --container: 1320px;
+
+      --transition-fast: 0.22s ease;
+      --transition-main: 0.3s ease;
     }
 
     body {
@@ -37,9 +48,13 @@
       min-width: 320px;
       font-family: Inter, Arial, sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at top, rgba(255, 59, 48, 0.12), transparent 22%),
-        linear-gradient(180deg, #06111c 0%, #081321 45%, #07111d 100%);
+      background: radial-gradient(ellipse 160% 90% at 50% 90%,
+          #FF2000 0%,
+          #CC0000 20%,
+          #8B0000 50%,
+          #4A0000 80%,
+          #2D0000 100%);
+      background-attachment: fixed;
       overflow-x: hidden;
     }
 
@@ -59,13 +74,11 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      background:
-        radial-gradient(circle at 20% 15%, rgba(220, 38, 38, 0.06), transparent 18%),
-        radial-gradient(circle at 80% 25%, rgba(255, 59, 48, 0.05), transparent 16%);
+      background: none;
     }
 
     .container {
-      width: min(100%, 1100px);
+      width: min(100%, var(--container));
       margin: 0 auto;
       padding-inline: 24px;
     }
@@ -76,7 +89,7 @@
     }
 
     .wrap {
-      max-width: 1100px;
+      max-width: var(--container);
       margin: 0 auto;
       padding: 90px 20px 40px;
     }
@@ -125,10 +138,7 @@
       font-size: 18px;
       font-weight: 900;
       letter-spacing: 0.05em;
-      
-      background: linear-gradient(90deg, #ff4d4d 0%, #dc2626 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #fff;
       line-height: 1.1;
       display: inline-block;
     }
@@ -308,32 +318,30 @@
     }
 
     .header-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       min-height: 52px;
       padding: 0 28px;
-      border: none;
+      border: 1px solid rgba(220, 38, 38, 0.3);
       border-radius: 14px;
       font-size: 16px;
       font-weight: 900;
       letter-spacing: -0.01em;
       cursor: pointer;
       white-space: nowrap;
-      transition:
-        transform var(--transition-fast),
-        background var(--transition-fast),
-        border-color var(--transition-fast),
-        box-shadow var(--transition-fast);
-      color: #fff;
-      background: linear-gradient(135deg, #ff3b30, #dc2626);
-      box-shadow: 0 10px 25px rgba(255, 59, 48, 0.3);
+      text-transform: uppercase;
+      background: #ffffff;
+      color: #dc2626;
+      /* Fallback */
+      transition: all 0.2s ease;
       text-decoration: none;
     }
 
     .header-cta:hover {
-      transform: translateY(-2px);
+      /* Static style */
     }
 
 
@@ -559,32 +567,46 @@
     }
 
     .btn {
+      position: relative;
       width: 100%;
       margin-top: 20px;
-      border: none;
-      border-radius: 20px;
-      padding: 17px 20px;
-      color: #fff;
-      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 56px;
+      padding: 0 32px;
+      border: 1px solid rgba(220, 38, 38, 0.5);
+      border-radius: 14px;
+      font-size: 15px;
       font-weight: 800;
-      background: linear-gradient(180deg, var(--blue) 0%, var(--blue-2) 100%);
-      box-shadow: 0 18px 40px var(--glow), inset 0 1px 0 rgba(255, 255, 255, 0.20);
+      letter-spacing: 0.04em;
       cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      white-space: nowrap;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #ff3b30, #dc2626);
+      color: #ffffff;
+      transition: all 0.2s ease;
+      text-decoration: none;
     }
 
+    .btn-text {
+      display: inline-block;
+      color: white;
+      pointer-events: none;
+    }
+
+   
+
     .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 22px 44px rgba(220, 38, 38, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.20);
+      /* Static style */
     }
 
     .hero {
       padding: 20px;
       border-radius: 22px;
       margin-bottom: 18px;
-      background:
-        radial-gradient(circle at top left, rgba(220, 38, 38, 0.28), transparent 45%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      background: none;
       border: 1px solid var(--line-2);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
@@ -596,7 +618,7 @@
       gap: 16px;
     }
 
-    .hero-top > div {
+    .hero-top>div {
       min-width: 0;
     }
 
@@ -763,6 +785,14 @@
     .footer {
       padding: 28px 0 40px;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: radial-gradient(ellipse 160% 90% at 50% 90%,
+          rgb(255, 32, 0) 0%,
+          rgb(204, 0, 0) 20%,
+          rgb(139, 0, 0) 50%,
+          rgb(74, 0, 0) 80%,
+          rgb(45, 0, 0) 100%);
+      ;
+      backdrop-filter: blur(12px);
     }
 
     .footer__row {
@@ -808,467 +838,458 @@
         gap: 24px;
       }
 
-    @media (max-width: 1180px) {
-      .nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 16px;
-        right: 16px;
-        padding: 18px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 16px;
-        border-radius: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(8, 17, 31, 0.94);
-        box-shadow: var(--shadow-xl);
+      @media (max-width: 1240px) {
+        .nav {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 16px;
+          right: 16px;
+          padding: 18px;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 16px;
+          border-radius: 22px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(8, 17, 31, 0.94);
+          box-shadow: var(--shadow-xl);
+        }
+
+        .nav.is-open {
+          display: flex;
+        }
+
+        .nav__links {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+        }
+
+        .nav__actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .lang-switcher {
+          width: 100%;
+        }
+
+        .lang-switcher__button {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .lang-switcher__menu {
+          position: static;
+          width: 100%;
+          margin-top: 10px;
+        }
+
+        .burger {
+          display: inline-flex;
+        }
       }
 
-      .nav.is-open {
-        display: flex;
+      @media (max-width: 860px) {
+        .container {
+          padding-inline: 16px;
+        }
+
+        .header {
+          padding: 14px 16px;
+        }
+
+        .hero-top {
+          flex-direction: column;
+        }
+
+
       }
 
-      .nav__links {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
+      @media (max-width: 560px) {
+        .logo__subtitle {
+          display: none;
+        }
       }
-
-      .nav__actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .lang-switcher {
-        width: 100%;
-      }
-
-      .lang-switcher__button {
-        width: 100%;
-        justify-content: space-between;
-      }
-
-      .lang-switcher__menu {
-        position: static;
-        width: 100%;
-        margin-top: 10px;
-      }
-
-      .burger {
-        display: inline-flex;
-      }
-    }
-
-    @media (max-width: 860px) {
-      .container {
-        padding-inline: 16px;
-      }
-
-      .header {
-        padding: 14px 16px;
-      }
-
-      .hero-top {
-        flex-direction: column;
-      }
-
-
-    }
-
-    @media (max-width: 560px) {
-      .logo__subtitle {
-        display: none;
-      }
-    }
   </style>
 </head>
+
 <body>
   <div class="site">
-  <div class="header-wrap">
-    <header class="header" aria-label="Шапка сайта">
-      <a href="index.html#hero" class="logo" aria-label="Перейти на главный экран">
-        <img class="logo__image" src="./logo-recreated (1).png" alt="Логотип компании" />
-        <span class="logo__text-group">
-          <span class="logo__title" data-i18n="logoTitle">Vengeea®</span>
-          <span class="logo__subtitle" data-i18n="logoSubtitle">ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ</span>
-        </span>
-      </a>
+    <div class="header-wrap">
+      <header class="header" aria-label="Шапка сайта">
+        <a href="index.html#hero" class="logo" aria-label="Vengeea">
+          <img class="logo__image" src="images/logo-recreated (1).png" alt="Логотип компании" />
+          <span class="logo__text-group">
+            <span class="logo__title" data-i18n="logoTitle">Vengeea®</span>
+            <span class="logo__subtitle" data-i18n="logoSubtitle">ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ</span>
+          </span>
+        </a>
 
-      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
+        <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
 
-      <nav class="nav" id="main-nav" aria-label="Основная навигация">
-        <div class="nav__links">
-          <a class="nav__link" href="index.html#hero" data-i18n="navHome">Главная</a>
-          <a class="nav__link" href="./about-us.html" data-i18n="navAbout">О нас</a>
-          <a class="nav__link" href="./modules.html" data-i18n="navModules">Модули</a>
-          <a class="nav__link is-active" href="./calculator.html" data-i18n="navCalculator">Калькулятор</a>
-          <a class="nav__link" href="./contact_us.html" data-i18n="navContacts">Контакты</a>
-        </div>
-
-        <div class="nav__actions">
-          <div class="lang-switcher" id="langSwitcher">
-            <button
-              class="lang-switcher__button"
-              id="langButton"
-              type="button"
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-controls="langMenu"
-            >
-              <span class="lang-switcher__current" id="langCurrentFlag">🇷🇺</span>
-              <span class="lang-switcher__current-text" id="langCurrentText">RU</span>
-              <svg class="lang-switcher__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-
-            <div class="lang-switcher__menu" id="langMenu" role="menu" aria-label="Выбор языка">
-              <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
-                <span class="lang-switcher__flag">🇷🇺</span>
-                <span class="lang-switcher__label">Русский</span>
-              </button>
-
-              <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
-                <span class="lang-switcher__flag">🇬🇧</span>
-                <span class="lang-switcher__label">English</span>
-              </button>
-
-              <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
-                <span class="lang-switcher__flag">🇨🇳</span>
-                <span class="lang-switcher__label">中文</span>
-              </button>
-
-              <button class="lang-switcher__option" type="button" data-lang="kk" role="menuitem">
-                <span class="lang-switcher__flag">🇰🇿</span>
-                <span class="lang-switcher__label">Қазақша</span>
-              </button>
-            </div>
+        <nav class="nav" id="main-nav" aria-label="Основная навигация">
+          <div class="nav__links">
+            <a class="nav__link" href="./index.html#hero" data-i18n="navHome">Главная</a>
+            <a class="nav__link is-active" href="./about-us.html" data-i18n="navAbout">О нас</a>
+            <a class="nav__link" href="./modules.html" data-i18n="navModules">Модули</a>
+            <a class="nav__link" href="./calculator.html" data-i18n="navCalculator">Калькулятор</a>
+            <a class="nav__link" href="./contact_us.html" data-i18n="navContacts">Контакты</a>
           </div>
 
-          <a class="header-cta" href="./contact_us.html" data-i18n="ctaHeader">Запросить решение</a>
-        </div>
-      </nav>
-    </header>
-  </div>
+          <div class="nav__actions">
+            <div class="lang-switcher" id="langSwitcher">
+              <button class="lang-switcher__button" id="langButton" type="button" aria-expanded="false"
+                aria-haspopup="true" aria-controls="langMenu">
+                <span class="lang-switcher__current" id="langCurrentFlag">🇷🇺</span>
+                <span class="lang-switcher__current-text" id="langCurrentText">RU</span>
+                <svg class="lang-switcher__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </button>
 
-  <main class="wrap">
-    <div class="top">
-      <div class="pill"><span data-i18n="topPill">Предварительный расчёт инфраструктуры</span></div>
-      <h1 data-i18n="topTitle">Калькулятор серверной конфигурации</h1>
-      <p class="sub" data-i18n="topSub">Укажите камеры, параметры потока и нужные модули. Калькулятор покажет ориентировочную нагрузку, архив и рекомендуемую конфигурацию.</p>
+              <div class="lang-switcher__menu" id="langMenu" role="menu" aria-label="Выбор языка">
+                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
+                  <span class="lang-switcher__flag">🇷🇺</span>
+                  <span class="lang-switcher__label">Русский</span>
+                </button>
+                <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
+                  <span class="lang-switcher__flag">🇬🇧</span>
+                  <span class="lang-switcher__label">English</span>
+                </button>
+                <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
+                  <span class="lang-switcher__flag">🇨🇳</span>
+                  <span class="lang-switcher__label">中文</span>
+                </button>
+                <button class="lang-switcher__option" type="button" data-lang="kk" role="menuitem">
+                  <span class="lang-switcher__flag">🇰🇿</span>
+                  <span class="lang-switcher__label">Қазақша</span>
+                </button>
+              </div>
+            </div>
+
+            <a class="btn btn--primary" href="./contact_us.html"><span class="btn-text"
+                data-i18n="requestSolution">Запросить решение</span></a>
+          </div>
+        </nav>
+      </header>
     </div>
 
-    <div class="grid">
-      <div class="card">
-        <div class="left">
-          <div class="row-top">
-            <div class="section-title" style="margin: 0;" data-i18n="sectionInput">Входные параметры</div>
-            <div class="mini-status" data-i18n="sectionInputStatus">Настраиваемая конфигурация</div>
-          </div>
-
-          <div class="field-grid">
-            <div class="field">
-              <label for="obshchee_kolichestvo_kamer" data-i18n="labelTotalCameras">Общее количество камер на объекте</label>
-              <input class="surface" type="number" id="obshchee_kolichestvo_kamer" value="0" min="0" />
-            </div>
-
-            <div class="field">
-              <label for="chastota_kadrov" data-i18n="labelFps">Частота кадров</label>
-              <select class="surface" id="chastota_kadrov">
-                <option value="10" data-i18n-opt="fps10">10 кадров в секунду</option>
-                <option value="15" data-i18n-opt="fps15">15 кадров в секунду</option>
-                <option value="20" data-i18n-opt="fps20">20 кадров в секунду</option>
-                <option value="25" selected data-i18n-opt="fps25">25 кадров в секунду</option>
-                <option value="30" data-i18n-opt="fps30">30 кадров в секунду</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field-grid-4">
-            <div class="field">
-              <label for="razreshenie" data-i18n="labelResolution">Разрешение видео</label>
-              <select class="surface" id="razreshenie">
-                <option value="1">720p</option>
-                <option value="1.4" selected>1080p</option>
-                <option value="2.0">2K</option>
-                <option value="2.8">4MP</option>
-                <option value="3.2">4K</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="kodek" data-i18n="labelCodec">Кодек</label>
-              <select class="surface" id="kodek">
-                <option value="1" selected>H.264</option>
-                <option value="0.7">H.265</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="bitrate" data-i18n="labelBitrate">Средний битрейт (Мбит/с)</label>
-              <input class="surface" type="number" id="bitrate" value="8" min="1" step="0.1" />
-            </div>
-
-            <div class="field">
-              <label for="retention" data-i18n="labelRetention">Дни хранения архива</label>
-              <input class="surface" type="number" id="retention" value="30" min="1" />
-            </div>
-          </div>
-
-          <div class="section-title" style="margin-top: 12px;" data-i18n="sectionModules">Использование модулей по камерам</div>
-
-          <div class="modules">
-            <div class="module">
-              <div>
-                <h3 data-i18n="modIntrusionTitle">Обнаружение вторжения</h3>
-                <p data-i18n="modIntrusionDesc">Контроль проникновения в запрещённые, охраняемые и периметровые зоны.</p>
-                <div class="tag-row">
-                  <span class="tag" data-i18n="modIntrusionTag1">Периметр</span>
-                  <span class="tag" data-i18n="modIntrusionTag2">Реакция в реальном времени</span>
-                </div>
-              </div>
-              <div class="module-input">
-                <label for="kamery_vtorzhenie" data-i18n="labelCameraCount">Количество камер</label>
-                <input class="surface" type="number" id="kamery_vtorzhenie" value="0" min="0" />
-              </div>
-            </div>
-
-            <div class="module">
-              <div>
-                <h3 data-i18n="modTheftTitle">Обнаружение кражи</h3>
-                <p data-i18n="modTheftDesc">Выявление подозрительных действий, сокрытия товара и рискованных сценариев.</p>
-                <div class="tag-row">
-                  <span class="tag" data-i18n="modTheftTag1">Розница</span>
-                  <span class="tag" data-i18n="modTheftTag2">Поведенческий анализ</span>
-                </div>
-              </div>
-              <div class="module-input">
-                <label for="kamery_krazha" data-i18n="labelCameraCount">Количество камер</label>
-                <input class="surface" type="number" id="kamery_krazha" value="0" min="0" />
-              </div>
-            </div>
-
-            <div class="module">
-              <div>
-                <h3 data-i18n="modFaceTitle">Обнаружение лиц</h3>
-                <p data-i18n="modFaceDesc">Выделение и анализ лиц в видеопотоке в реальном времени.</p>
-                <div class="tag-row">
-                  <span class="tag" data-i18n="modFaceTag1">Идентификация</span>
-                  <span class="tag" data-i18n="modFaceTag2">Оперативный поиск</span>
-                </div>
-              </div>
-              <div class="module-input">
-                <label for="kamery_lica" data-i18n="labelCameraCount">Количество камер</label>
-                <input class="surface" type="number" id="kamery_lica" value="0" min="0" />
-              </div>
-            </div>
-
-            <div class="module">
-              <div>
-                <h3 data-i18n="modFireTitle">Обнаружение дыма и огня</h3>
-                <p data-i18n="modFireDesc">Раннее выявление задымления и признаков возгорания по видеопотоку.</p>
-                <div class="tag-row">
-                  <span class="tag" data-i18n="modFireTag1">Пожарная безопасность</span>
-                  <span class="tag" data-i18n="modFireTag2">Раннее предупреждение</span>
-                </div>
-              </div>
-              <div class="module-input">
-                <label for="kamery_dym_ogon" data-i18n="labelCameraCount">Количество камер</label>
-                <input class="surface" type="number" id="kamery_dym_ogon" value="0" min="0" />
-              </div>
-            </div>
-          </div>
-
-          <div class="hint" data-i18n="hintText">
-            Если по всем модулям указано 0 камер, вычислительная нагрузка тоже остаётся 0.
-            Архив при этом всё равно может рассчитываться отдельно, если указаны камеры, битрейт и срок хранения.
-          </div>
-
-          <button class="btn" id="knopka_rascheta" type="button" data-i18n="btnCalculate">Рассчитать конфигурацию</button>
-        </div>
+    <main class="wrap">
+      <div class="top">
+        <div class="pill"><span data-i18n="topPill">Предварительный расчёт инфраструктуры</span></div>
+        <h1 data-i18n="topTitle">Калькулятор серверной конфигурации</h1>
+        <p class="sub" data-i18n="topSub">Укажите камеры, параметры потока и нужные модули. Калькулятор покажет
+          ориентировочную нагрузку, архив и рекомендуемую конфигурацию.</p>
       </div>
 
-      <div class="card">
-        <div class="right">
-          <div class="hero">
-            <div class="hero-top">
-              <div>
-                <div class="hero-label" data-i18n="resultLoadLabel">Итоговая вычислительная нагрузка</div>
-                <div class="hero-value" id="itogovaya_nagruzka">0.00</div>
+      <div class="grid">
+        <div class="card">
+          <div class="left">
+            <div class="row-top">
+              <div class="section-title" style="margin: 0;" data-i18n="sectionInput">Входные параметры</div>
+              <div class="mini-status" data-i18n="sectionInputStatus">Настраиваемая конфигурация</div>
+            </div>
+
+            <div class="field-grid">
+              <div class="field">
+                <label for="obshchee_kolichestvo_kamer" data-i18n="labelTotalCameras">Общее количество камер на
+                  объекте</label>
+                <input class="surface" type="number" id="obshchee_kolichestvo_kamer" value="0" min="0" />
               </div>
-              <div class="hero-badge" id="profil_nagruzki" data-i18n="profileNoLoad">Нет нагрузки</div>
-            </div>
 
-            <div class="hero-sub" data-i18n="resultLoadSub">
-              Ориентировочная вычислительная нагрузка с учётом разрешения, частоты кадров, кодека и аналитических модулей.
-            </div>
-
-            <div class="meter">
-              <div class="meter-line">
-                <div class="meter-fill" id="polosa_nagruzki"></div>
-              </div>
-              <div class="meter-meta">
-                <span data-i18n="meterLow">Низкая</span>
-                <span data-i18n="meterMid">Оптимальная</span>
-                <span data-i18n="meterHigh">Высокая</span>
+              <div class="field">
+                <label for="chastota_kadrov" data-i18n="labelFps">Частота кадров</label>
+                <select class="surface" id="chastota_kadrov">
+                  <option value="10" data-i18n-opt="fps10">10 кадров в секунду</option>
+                  <option value="15" data-i18n-opt="fps15">15 кадров в секунду</option>
+                  <option value="20" data-i18n-opt="fps20">20 кадров в секунду</option>
+                  <option value="25" selected data-i18n-opt="fps25">25 кадров в секунду</option>
+                  <option value="30" data-i18n-opt="fps30">30 кадров в секунду</option>
+                </select>
               </div>
             </div>
+
+            <div class="field-grid-4">
+              <div class="field">
+                <label for="razreshenie" data-i18n="labelResolution">Разрешение видео</label>
+                <select class="surface" id="razreshenie">
+                  <option value="1">720p</option>
+                  <option value="1.4" selected>1080p</option>
+                  <option value="2.0">2K</option>
+                  <option value="2.8">4MP</option>
+                  <option value="3.2">4K</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="kodek" data-i18n="labelCodec">Кодек</label>
+                <select class="surface" id="kodek">
+                  <option value="1" selected>H.264</option>
+                  <option value="0.7">H.265</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="bitrate" data-i18n="labelBitrate">Средний битрейт (Мбит/с)</label>
+                <input class="surface" type="number" id="bitrate" value="8" min="1" step="0.1" />
+              </div>
+
+              <div class="field">
+                <label for="retention" data-i18n="labelRetention">Дни хранения архива</label>
+                <input class="surface" type="number" id="retention" value="30" min="1" />
+              </div>
+            </div>
+
+            <div class="section-title" style="margin-top: 12px;" data-i18n="sectionModules">Использование модулей по
+              камерам</div>
+
+            <div class="modules">
+              <div class="module">
+                <div>
+                  <h3 data-i18n="modIntrusionTitle">Обнаружение вторжения</h3>
+                  <p data-i18n="modIntrusionDesc">Контроль проникновения в запрещённые, охраняемые и периметровые зоны.
+                  </p>
+                  <div class="tag-row">
+                    <span class="tag" data-i18n="modIntrusionTag1">Периметр</span>
+                    <span class="tag" data-i18n="modIntrusionTag2">Реакция в реальном времени</span>
+                  </div>
+                </div>
+                <div class="module-input">
+                  <label for="kamery_vtorzhenie" data-i18n="labelCameraCount">Количество камер</label>
+                  <input class="surface" type="number" id="kamery_vtorzhenie" value="0" min="0" />
+                </div>
+              </div>
+
+              <div class="module">
+                <div>
+                  <h3 data-i18n="modTheftTitle">Обнаружение кражи</h3>
+                  <p data-i18n="modTheftDesc">Выявление подозрительных действий, сокрытия товара и рискованных
+                    сценариев.</p>
+                  <div class="tag-row">
+                    <span class="tag" data-i18n="modTheftTag1">Розница</span>
+                    <span class="tag" data-i18n="modTheftTag2">Поведенческий анализ</span>
+                  </div>
+                </div>
+                <div class="module-input">
+                  <label for="kamery_krazha" data-i18n="labelCameraCount">Количество камер</label>
+                  <input class="surface" type="number" id="kamery_krazha" value="0" min="0" />
+                </div>
+              </div>
+
+              <div class="module">
+                <div>
+                  <h3 data-i18n="modFaceTitle">Обнаружение лиц</h3>
+                  <p data-i18n="modFaceDesc">Выделение и анализ лиц в видеопотоке в реальном времени.</p>
+                  <div class="tag-row">
+                    <span class="tag" data-i18n="modFaceTag1">Идентификация</span>
+                    <span class="tag" data-i18n="modFaceTag2">Оперативный поиск</span>
+                  </div>
+                </div>
+                <div class="module-input">
+                  <label for="kamery_lica" data-i18n="labelCameraCount">Количество камер</label>
+                  <input class="surface" type="number" id="kamery_lica" value="0" min="0" />
+                </div>
+              </div>
+
+              <div class="module">
+                <div>
+                  <h3 data-i18n="modFireTitle">Обнаружение дыма и огня</h3>
+                  <p data-i18n="modFireDesc">Раннее выявление задымления и признаков возгорания по видеопотоку.</p>
+                  <div class="tag-row">
+                    <span class="tag" data-i18n="modFireTag1">Пожарная безопасность</span>
+                    <span class="tag" data-i18n="modFireTag2">Раннее предупреждение</span>
+                  </div>
+                </div>
+                <div class="module-input">
+                  <label for="kamery_dym_ogon" data-i18n="labelCameraCount">Количество камер</label>
+                  <input class="surface" type="number" id="kamery_dym_ogon" value="0" min="0" />
+                </div>
+              </div>
+            </div>
+
+            <div class="hint" data-i18n="hintText">
+              Если по всем модулям указано 0 камер, вычислительная нагрузка тоже остаётся 0.
+              Архив при этом всё равно может рассчитываться отдельно, если указаны камеры, битрейт и срок хранения.
+            </div>
+
+            <button class="btn" id="knopka_rascheta" type="button"><span class="btn-text"
+                data-i18n="btnCalculate">Рассчитать конфигурацию</span></button>
           </div>
+        </div>
 
-          <div class="quick-grid">
-            <div class="quick-box">
-              <small data-i18n="quickServers">Аналитических серверов</small>
-              <strong id="kolichestvo_serverov_kratko">0</strong>
-            </div>
-            <div class="quick-box">
-              <small data-i18n="quickAccelerator">Ускоритель</small>
-              <strong id="klass_uskoritelya">—</strong>
-            </div>
-            <div class="quick-box">
-              <small data-i18n="quickProfile">Профиль</small>
-              <strong id="tip_razmeshcheniya">—</strong>
-            </div>
-          </div>
+        <div class="card">
+          <div class="right">
+            <div class="hero">
+              <div class="hero-top">
+                <div>
+                  <div class="hero-label" data-i18n="resultLoadLabel">Итоговая вычислительная нагрузка</div>
+                  <div class="hero-value" id="itogovaya_nagruzka">0.00</div>
+                </div>
+                <div class="hero-badge" id="profil_nagruzki" data-i18n="profileNoLoad">Нет нагрузки</div>
+              </div>
 
-          <div class="result-box">
-            <h3 data-i18n="resAnalyticsTitle">Требуемые ресурсы аналитической системы</h3>
+              <div class="hero-sub" data-i18n="resultLoadSub">
+                Ориентировочная вычислительная нагрузка с учётом разрешения, частоты кадров, кодека и аналитических
+                модулей.
+              </div>
 
-            <div class="row">
-              <span data-i18n="resCpuCores">Количество процессорных ядер</span>
-              <strong id="yadra_processor">0</strong>
-            </div>
-
-            <div class="row">
-              <span data-i18n="resRam">Оперативная память</span>
-              <strong id="operativnaya_pamyat">0 ГБ</strong>
-            </div>
-
-            <div class="row">
-              <span data-i18n="resVram">Графическая память</span>
-              <strong id="graficheskaya_pamyat">0 ГБ</strong>
+              <div class="meter">
+                <div class="meter-line">
+                  <div class="meter-fill" id="polosa_nagruzki"></div>
+                </div>
+                <div class="meter-meta">
+                  <span data-i18n="meterLow">Низкая</span>
+                  <span data-i18n="meterMid">Оптимальная</span>
+                  <span data-i18n="meterHigh">Высокая</span>
+                </div>
+              </div>
             </div>
 
-            <div class="row">
-              <span data-i18n="resGpuPower">Графическая вычислительная мощность</span>
-              <strong id="graficheskaya_moshnost">0.00 TFLOPS</strong>
+            <div class="quick-grid">
+              <div class="quick-box">
+                <small data-i18n="quickServers">Аналитических серверов</small>
+                <strong id="kolichestvo_serverov_kratko">0</strong>
+              </div>
+              <div class="quick-box">
+                <small data-i18n="quickAccelerator">Ускоритель</small>
+                <strong id="klass_uskoritelya">—</strong>
+              </div>
+              <div class="quick-box">
+                <small data-i18n="quickProfile">Профиль</small>
+                <strong id="tip_razmeshcheniya">—</strong>
+              </div>
             </div>
 
-            <div class="row">
-              <span data-i18n="resNetwork">Пропускная способность сети</span>
-              <strong id="setevaya_propusk">0 Мбит/с</strong>
-            </div>
-          </div>
+            <div class="result-box">
+              <h3 data-i18n="resAnalyticsTitle">Требуемые ресурсы аналитической системы</h3>
 
-          <div class="result-box">
-            <h3 data-i18n="resStorageTitle">Сервер хранения видеоархива</h3>
+              <div class="row">
+                <span data-i18n="resCpuCores">Количество процессорных ядер</span>
+                <strong id="yadra_processor">0</strong>
+              </div>
 
-            <div class="row">
-              <span data-i18n="resStorageServers">Количество серверов хранения</span>
-              <strong id="storage_servers">0</strong>
-            </div>
+              <div class="row">
+                <span data-i18n="resRam">Оперативная память</span>
+                <strong id="operativnaya_pamyat">0 ГБ</strong>
+              </div>
 
-            <div class="row">
-              <span data-i18n="resArchiveVol">Общий объём архива</span>
-              <strong id="archive_volume">0 ГБ</strong>
-            </div>
+              <div class="row">
+                <span data-i18n="resVram">Графическая память</span>
+                <strong id="graficheskaya_pamyat">0 ГБ</strong>
+              </div>
 
-            <div class="row">
-              <span data-i18n="resRaid">Рекомендуемый RAID</span>
-              <strong id="raid_level">—</strong>
-            </div>
+              <div class="row">
+                <span data-i18n="resGpuPower">Графическая вычислительная мощность</span>
+                <strong id="graficheskaya_moshnost">0.00 TFLOPS</strong>
+              </div>
 
-            <div class="row">
-              <span data-i18n="resDiskType">Тип накопителей</span>
-              <strong id="disk_type">—</strong>
-            </div>
-          </div>
-
-          <div class="result-box">
-            <h3 data-i18n="resServerTitle">Рекомендуемая серверная конфигурация</h3>
-
-            <div class="row">
-              <span data-i18n="resAnalyticServers">Количество аналитических серверов</span>
-              <strong id="kolichestvo_serverov">0</strong>
+              <div class="row">
+                <span data-i18n="resNetwork">Пропускная способность сети</span>
+                <strong id="setevaya_propusk">0 Мбит/с</strong>
+              </div>
             </div>
 
-            <div class="row">
-              <span data-i18n="resCpu">Процессор</span>
-              <strong id="model_processor">—</strong>
+            <div class="result-box">
+              <h3 data-i18n="resStorageTitle">Сервер хранения видеоархива</h3>
+
+              <div class="row">
+                <span data-i18n="resStorageServers">Количество серверов хранения</span>
+                <strong id="storage_servers">0</strong>
+              </div>
+
+              <div class="row">
+                <span data-i18n="resArchiveVol">Общий объём архива</span>
+                <strong id="archive_volume">0 ГБ</strong>
+              </div>
+
+              <div class="row">
+                <span data-i18n="resRaid">Рекомендуемый RAID</span>
+                <strong id="raid_level">—</strong>
+              </div>
+
+              <div class="row">
+                <span data-i18n="resDiskType">Тип накопителей</span>
+                <strong id="disk_type">—</strong>
+              </div>
             </div>
 
-            <div class="row">
-              <span data-i18n="resRamPerServer">Оперативная память на сервер</span>
-              <strong id="pamyat_na_server">—</strong>
+            <div class="result-box">
+              <h3 data-i18n="resServerTitle">Рекомендуемая серверная конфигурация</h3>
+
+              <div class="row">
+                <span data-i18n="resAnalyticServers">Количество аналитических серверов</span>
+                <strong id="kolichestvo_serverov">0</strong>
+              </div>
+
+              <div class="row">
+                <span data-i18n="resCpu">Процессор</span>
+                <strong id="model_processor">—</strong>
+              </div>
+
+              <div class="row">
+                <span data-i18n="resRamPerServer">Оперативная память на сервер</span>
+                <strong id="pamyat_na_server">—</strong>
+              </div>
+
+              <div class="row">
+                <span data-i18n="resGpu">Графический ускоритель</span>
+                <strong id="graficheskiy_uskoritel">—</strong>
+              </div>
+
+              <div class="row">
+                <span data-i18n="resDrive">Накопитель</span>
+                <strong id="nakopitel">—</strong>
+              </div>
+
+              <div class="row">
+                <span data-i18n="resOs">Операционная система</span>
+                <strong>Ubuntu 22.04</strong>
+              </div>
             </div>
 
-            <div class="row">
-              <span data-i18n="resGpu">Графический ускоритель</span>
-              <strong id="graficheskiy_uskoritel">—</strong>
+            <div class="result-box email-box">
+              <h3 data-i18n="emailTitle">Получить расчёт на email</h3>
+
+              <p data-i18n="emailDesc">
+                Введите email, и результаты расчёта серверной инфраструктуры будут отправлены вам автоматически.
+              </p>
+
+              <form id="email_form" action="https://formspree.io/f/xjgarawq" method="POST">
+                <div id="email_status" class="status" style="margin-bottom: 12px; font-size: 14px; font-weight: 500;">
+                </div>
+
+                <input type="email" name="email" id="user_email" data-i18n-placeholder="emailPlaceholder"
+                  placeholder="Ваш email" required class="surface" style="margin-bottom: 12px;" />
+
+                <textarea name="message" id="calc_message" style="display: none;"></textarea>
+
+                <button type="submit" class="btn"><span class="btn-text" data-i18n="emailBtn">Отправить
+                    расчёт</span></button>
+              </form>
             </div>
 
-            <div class="row">
-              <span data-i18n="resDrive">Накопитель</span>
-              <strong id="nakopitel">—</strong>
+            <div class="foot" data-i18n="footNote">
+              Расчёт является ориентировочным и нужен для предварительной оценки.
+              Итоговая конфигурация зависит от архитектуры системы, сценариев аналитики и особенностей внедрения.
             </div>
-
-            <div class="row">
-              <span data-i18n="resOs">Операционная система</span>
-              <strong>Ubuntu 22.04</strong>
-            </div>
-          </div>
-
-          <div class="result-box email-box">
-            <h3 data-i18n="emailTitle">Получить расчёт на email</h3>
-
-            <p data-i18n="emailDesc">
-              Введите email, и результаты расчёта серверной инфраструктуры будут отправлены вам автоматически.
-            </p>
-
-            <form id="email_form" action="https://formspree.io/f/xjgarawq" method="POST">
-              <div id="email_status" class="status" style="margin-bottom: 12px; font-size: 14px; font-weight: 500;"></div>
-              
-              <input
-                type="email"
-                name="email"
-                id="user_email"
-                data-i18n-placeholder="emailPlaceholder"
-                placeholder="Ваш email"
-                required
-                class="surface"
-                style="margin-bottom: 12px;"
-              />
-
-              <textarea
-                name="message"
-                id="calc_message"
-                style="display: none;"
-              ></textarea>
-
-              <button type="submit" class="btn" data-i18n="emailBtn">Отправить расчёт</button>
-            </form>
-          </div>
-
-          <div class="foot" data-i18n="footNote">
-            Расчёт является ориентировочным и нужен для предварительной оценки.
-            Итоговая конфигурация зависит от архитектуры системы, сценариев аналитики и особенностей внедрения.
-          </div>
     </main>
 
     <footer class="footer">
       <div class="container">
         <div class="footer__row">
           <a href="index.html#hero" class="footer__brand">
-            <img class="footer__logo" src="./logo-recreated (1).png" alt="Company logo" />
+            <img class="footer__logo" src="images/logo-recreated (1).png" alt="Company logo" />
             <div class="footer__brand-content">
               <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;">Vengeea®</div>
-              <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident prevention</div>
+              <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident
+                prevention</div>
             </div>
           </a>
 
@@ -1303,7 +1324,7 @@
           navContacts: "Контакты",
           ctaHeader: "Запросить решение",
           footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов",
-          
+
           sectionInput: "Входные параметры",
           sectionInputStatus: "Настраиваемая конфигурация",
           labelTotalCameras: "Общее количество камер на объекте",
@@ -1317,55 +1338,55 @@
           labelCodec: "Кодек",
           labelBitrate: "Средний битрейт (Мбит/с)",
           labelRetention: "Дни хранения архива",
-          
+
           sectionModules: "Использование модулей по камерам",
           modIntrusionTitle: "Обнаружение вторжения",
           modIntrusionDesc: "Контроль проникновения в запрещённые, охраняемые и периметровые зоны.",
           modIntrusionTag1: "Периметр",
           modIntrusionTag2: "Реакция в реальном времени",
           labelCameraCount: "Количество камер",
-          
+
           modTheftTitle: "Обнаружение кражи",
           modTheftDesc: "Выявление подозрительных действий, сокрытия товара и рискованных сценариев.",
           modTheftTag1: "Розница",
           modTheftTag2: "Поведенческий анализ",
-          
+
           modFaceTitle: "Обнаружение лиц",
           modFaceDesc: "Выделение и анализ лиц в видеопотоке в реальном времени.",
           modFaceTag1: "Идентификация",
           modFaceTag2: "Оперативный поиск",
-          
+
           modFireTitle: "Обнаружение дыма и огня",
           modFireDesc: "Раннее выявление задымления и признаки возгорания по видеопотоку.",
           modFireTag1: "Пожарная безопасность",
           modFireTag2: "Раннее предупреждение",
-          
+
           hintText: "Если по всем модулям указано 0 камер, вычислительная нагрузка тоже остаётся 0. Архив при этом всё равно может рассчитываться отдельно, если указаны камеры, битрейт и срок хранения.",
           btnCalculate: "Рассчитать конфигурацию",
-          
+
           resultLoadLabel: "Итоговая вычислительная нагрузка",
           resultLoadSub: "Ориентировочная вычислительная нагрузка с учётом разрешения, частоты кадров, кодека и аналитических модулей.",
           meterLow: "Низкая",
           meterMid: "Оптимальная",
           meterHigh: "Высокая",
-          
+
           quickServers: "Аналитических серверов",
           quickAccelerator: "Ускоритель",
           quickProfile: "Профиль",
-          
+
           resAnalyticsTitle: "Требуемые ресурсы аналитической системы",
           resCpuCores: "Количество процессорных ядер",
           resRam: "Оперативная память",
           resVram: "Графическая память",
           resGpuPower: "Графическая вычислительная мощность",
           resNetwork: "Пропускная способность сети",
-          
+
           resStorageTitle: "Сервер хранения видеоархива",
           resStorageServers: "Количество серверов хранения",
           resArchiveVol: "Общий объём архива",
           resRaid: "Рекомендуемый RAID",
           resDiskType: "Тип накопителей",
-          
+
           resServerTitle: "Рекомендуемая серверная конфигурация",
           resAnalyticServers: "Количество аналитических серверов",
           resCpu: "Процессор",
@@ -1373,7 +1394,7 @@
           resGpu: "Графический ускоритель",
           resDrive: "Накопитель",
           resOs: "Операционная система",
-          
+
           emailTitle: "Получить расчёт на email",
           emailDesc: "Введите email, и результаты расчёта серверной инфраструктуры будут отправлены вам автоматически.",
           emailPlaceholder: "Ваш email",
@@ -1385,45 +1406,45 @@
           profMid: "Средний профиль",
           profMidHigh: "Средне-высокий профиль",
           profHigh: "Высокий профиль",
-          
+
           accelNone: "—",
           accelEntry: "Начальный",
           accelMid: "Средний",
           accelHigh: "Высокий",
           accelServer: "Серверный",
-          
+
           gpuT4: "NVIDIA T4 / аналог",
           gpuA4000: "NVIDIA RTX A4000 / аналог",
           gpuL40: "NVIDIA L40 / аналог",
           gpuA100: "NVIDIA A100 / аналог",
-          
+
           cpuEntry: "AMD Ryzen 9 / Intel Core i7 / аналог",
           cpuMid: "AMD Ryzen 9 16-core / Intel Core i9 / аналог",
           cpuHigh: "Intel Xeon Silver / Gold / аналог",
           cpuServer: "Серверный многоядерный процессор",
-          
+
           typeNone: "—",
           typeSingle: "Одиночный сервер",
           typeCentral: "Централизованный",
-          
+
           raidNone: "—",
           raid5: "RAID 5",
           raid6: "RAID 6",
           raid60: "RAID 6 / RAID 60",
-          
+
           diskNone: "—",
           diskSata: "SATA HDD",
           diskEnt: "Enterprise HDD",
           diskEntCache: "Enterprise HDD + SSD cache",
-          
+
           driveNone: "—",
           driveSsd: "Твердотельный накопитель 1 ТБ и выше",
-          
+
           unitGB: "ГБ",
           unitTB: "ТБ",
           unitMbps: "Мбит/с",
           unitTFLOPS: "TFLOPS",
-          
+
           emailSummaryTitle: "Результаты расчёта серверной инфраструктуры",
           emailSummaryLoad: "Итоговая вычислительная нагрузка:",
           emailSummaryAiServers: "Количество аналитических серверов:",
@@ -1452,7 +1473,7 @@
           navContacts: "Contacts",
           ctaHeader: "Request a solution",
           footerText: "Leak detection and development toward predictive incident prevention",
-          
+
           sectionInput: "Input parameters",
           sectionInputStatus: "Custom configuration",
           labelTotalCameras: "Total number of cameras",
@@ -1466,55 +1487,55 @@
           labelCodec: "Codec",
           labelBitrate: "Average bitrate (Mbps)",
           labelRetention: "Archive retention days",
-          
+
           sectionModules: "Module usage by cameras",
           modIntrusionTitle: "Intrusion detection",
           modIntrusionDesc: "Access control for restricted, protected, and perimeter zones.",
           modIntrusionTag1: "Perimeter",
           modIntrusionTag2: "Real-time reaction",
           labelCameraCount: "Camera count",
-          
+
           modTheftTitle: "Theft detection",
           modTheftDesc: "Detection of suspicious activities, concealment, and risky scenarios.",
           modTheftTag1: "Retail",
           modTheftTag2: "Behavioral analysis",
-          
+
           modFaceTitle: "Face detection",
           modFaceDesc: "Real-time face extraction and analysis from the video stream.",
           modFaceTag1: "Identification",
           modFaceTag2: "Rapid search",
-          
+
           modFireTitle: "Smoke and fire detection",
           modFireDesc: "Early detection of smoke and signs of fire from the video stream.",
           modFireTag1: "Fire safety",
           modFireTag2: "Early warning",
-          
+
           hintText: "If 0 cameras are specified for all modules, the computing load will also remain 0. However, the archive size may still be calculated separately if cameras, bitrate, and retention are specified.",
           btnCalculate: "Calculate configuration",
-          
+
           resultLoadLabel: "Total computing load",
           resultLoadSub: "Estimated computing load considering resolution, frame rate, codec, and analytical modules.",
           meterLow: "Low",
           meterMid: "Optimal",
           meterHigh: "High",
-          
+
           quickServers: "Analytical servers",
           quickAccelerator: "Accelerator",
           quickProfile: "Profile",
-          
+
           resAnalyticsTitle: "Required analytical resources",
           resCpuCores: "Number of CPU cores",
           resRam: "RAM",
           resVram: "VRAM",
           resGpuPower: "GPU computing power",
           resNetwork: "Network bandwidth",
-          
+
           resStorageTitle: "Video archive storage server",
           resStorageServers: "Number of storage servers",
           resArchiveVol: "Total archive volume",
           resRaid: "Recommended RAID",
           resDiskType: "Drive type",
-          
+
           resServerTitle: "Recommended server configuration",
           resAnalyticServers: "Number of analytical servers",
           resCpu: "Processor",
@@ -1522,7 +1543,7 @@
           resGpu: "GPU",
           resDrive: "Storage drive",
           resOs: "Operating system",
-          
+
           emailTitle: "Get calculation via email",
           emailDesc: "Enter your email, and the server infrastructure calculation results will be sent to you automatically.",
           emailPlaceholder: "Your email",
@@ -1534,45 +1555,45 @@
           profMid: "Medium profile",
           profMidHigh: "Medium-high profile",
           profHigh: "High profile",
-          
+
           accelNone: "—",
           accelEntry: "Entry",
           accelMid: "Medium",
           accelHigh: "High",
           accelServer: "Server",
-          
+
           gpuT4: "NVIDIA T4 / equivalent",
           gpuA4000: "NVIDIA RTX A4000 / equivalent",
           gpuL40: "NVIDIA L40 / equivalent",
           gpuA100: "NVIDIA A100 / equivalent",
-          
+
           cpuEntry: "AMD Ryzen 9 / Intel Core i7 / equivalent",
           cpuMid: "AMD Ryzen 9 16-core / Intel Core i9 / equivalent",
           cpuHigh: "Intel Xeon Silver / Gold / equivalent",
           cpuServer: "Multi-core server processor",
-          
+
           typeNone: "—",
           typeSingle: "Single server",
           typeCentral: "Centralized",
-          
+
           raidNone: "—",
           raid5: "RAID 5",
           raid6: "RAID 6",
           raid60: "RAID 6 / RAID 60",
-          
+
           diskNone: "—",
           diskSata: "SATA HDD",
           diskEnt: "Enterprise HDD",
           diskEntCache: "Enterprise HDD + SSD cache",
-          
+
           driveNone: "—",
           driveSsd: "Solid State Drive 1 TB or higher",
-          
+
           unitGB: "GB",
           unitTB: "TB",
           unitMbps: "Mbps",
           unitTFLOPS: "TFLOPS",
-          
+
           emailSummaryTitle: "Server Infrastructure Calculation Results",
           emailSummaryLoad: "Total analytical load:",
           emailSummaryAiServers: "Number of analytical servers:",
@@ -1601,7 +1622,7 @@
           navContacts: "联系我们",
           ctaHeader: "申请方案",
           footerText: "泄漏检测以及向预测性事故预防方向发展",
-          
+
           sectionInput: "输入参数",
           sectionInputStatus: "自定义配置",
           labelTotalCameras: "摄像头总数",
@@ -1615,55 +1636,55 @@
           labelCodec: "编解码器",
           labelBitrate: "平均比特率 (Mbps)",
           labelRetention: "存档保留天数",
-          
+
           sectionModules: "各摄像头的模块使用情况",
           modIntrusionTitle: "入侵检测",
           modIntrusionDesc: "针对受限区域、受保护区域及周边的访问控制。",
           modIntrusionTag1: "周边",
           modIntrusionTag2: "实时反应",
           labelCameraCount: "摄像头数量",
-          
+
           modTheftTitle: "防盗检测",
           modTheftDesc: "检测可疑活动、隐蔽行为及危险场景。",
           modTheftTag1: "零售",
           modTheftTag2: "行为分析",
-          
+
           modFaceTitle: "人脸检测",
           modFaceDesc: "从视频流中实时提取和分析人脸。",
           modFaceTag1: "识别",
           modFaceTag2: "快速搜索",
-          
+
           modFireTitle: "烟雾与火灾检测",
           modFireDesc: "从视频流中及早检测烟雾和火灾迹象。",
           modFireTag1: "消防安全",
           modFireTag2: "早期预警",
-          
+
           hintText: "如果所有模块的摄像头数均设为0，计算负载也将保持为0。但如果指定了摄像头、比特率和保留天数，仍可以单独计算存档大小。",
           btnCalculate: "计算配置",
-          
+
           resultLoadLabel: "总计算负载",
           resultLoadSub: "综合分辨率、帧率、编解码器和分析模块的预估计算负载。",
           meterLow: "低",
           meterMid: "最佳",
           meterHigh: "高",
-          
+
           quickServers: "分析服务器",
           quickAccelerator: "加速器",
           quickProfile: "配置文件",
-          
+
           resAnalyticsTitle: "所需分析资源",
           resCpuCores: "CPU核心数",
           resRam: "内存",
           resVram: "显存",
           resGpuPower: "GPU计算能力",
           resNetwork: "网络带宽",
-          
+
           resStorageTitle: "视频存档存储服务器",
           resStorageServers: "存储服务器数量",
           resArchiveVol: "存档总容量",
           resRaid: "推荐 RAID",
           resDiskType: "硬盘类型",
-          
+
           resServerTitle: "推荐服务器配置",
           resAnalyticServers: "分析服务器数量",
           resCpu: "处理器",
@@ -1671,7 +1692,7 @@
           resGpu: "GPU",
           resDrive: "存储硬盘",
           resOs: "操作系统",
-          
+
           emailTitle: "通过电子邮件接收计算结果",
           emailDesc: "输入您的电子邮件，服务器基础架构计算结果将自动发送给您。",
           emailPlaceholder: "您的邮箱",
@@ -1683,45 +1704,45 @@
           profMid: "中等负载",
           profMidHigh: "中高负载",
           profHigh: "高负载",
-          
+
           accelNone: "—",
           accelEntry: "入门级",
           accelMid: "中级",
           accelHigh: "高级",
           accelServer: "服务器级",
-          
+
           gpuT4: "NVIDIA T4 / 同等",
           gpuA4000: "NVIDIA RTX A4000 / 同等",
           gpuL40: "NVIDIA L40 / 同等",
           gpuA100: "NVIDIA A100 / 同等",
-          
+
           cpuEntry: "AMD Ryzen 9 / Intel Core i7 / 同等",
           cpuMid: "AMD Ryzen 9 16核 / Intel Core i9 / 同等",
           cpuHigh: "Intel Xeon Silver / Gold / 同等",
           cpuServer: "多核服务器处理器",
-          
+
           typeNone: "—",
           typeSingle: "单服务器",
           typeCentral: "集中式",
-          
+
           raidNone: "—",
           raid5: "RAID 5",
           raid6: "RAID 6",
           raid60: "RAID 6 / RAID 60",
-          
+
           diskNone: "—",
           diskSata: "SATA HDD",
           diskEnt: "企业级 HDD",
           diskEntCache: "企业级 HDD + SSD 缓存",
-          
+
           driveNone: "—",
           driveSsd: "1 TB 或更高容量固态硬盘",
-          
+
           unitGB: "GB",
           unitTB: "TB",
           unitMbps: "Mbps",
           unitTFLOPS: "TFLOPS",
-          
+
           emailSummaryTitle: "服务器基础架构计算结果",
           emailSummaryLoad: "总分析负载:",
           emailSummaryAiServers: "分析服务器数量:",
@@ -1750,7 +1771,7 @@
           navContacts: "Байланыс",
           ctaHeader: "Шешім сұрау",
           footerText: "Ағып кетуді анықтау және инциденттердің алдын алуға бағытталған даму",
-          
+
           sectionInput: "Кіріс параметрлері",
           sectionInputStatus: "Реттелетін конфигурация",
           labelTotalCameras: "Камералардың жалпы саны",
@@ -1764,55 +1785,55 @@
           labelCodec: "Кодек",
           labelBitrate: "Орташа битрейт (Мбит/с)",
           labelRetention: "Архивті сақтау күндері",
-          
+
           sectionModules: "Модульдерді камералар бойынша пайдалану",
           modIntrusionTitle: "Кіруді анықтау",
           modIntrusionDesc: "Тыйым салынған, қорғалатын және периметрлік аймақтарға кіруді бақылау.",
           modIntrusionTag1: "Периметр",
           modIntrusionTag2: "Нақты уақыттағы реакция",
           labelCameraCount: "Камералар саны",
-          
+
           modTheftTitle: "Ұрлықты анықтау",
           modTheftDesc: "Күдікті әрекеттерді, тауарды жасыруды және қауіпті сценарийлерді анықтау.",
           modTheftTag1: "Бөлшек сауда",
           modTheftTag2: "Мінез-құлық талдауы",
-          
+
           modFaceTitle: "Тұлғаларды анықтау",
           modFaceDesc: "Бейнеағындағы тұлғаларды нақты уақыт режимінде бөліп көрсету және талдау.",
           modFaceTag1: "Сәйкестендіру",
           modFaceTag2: "Жедел іздеу",
-          
+
           modFireTitle: "Түтін мен отты анықтау",
           modFireDesc: "Бейнеағын бойынша түтіндеу мен жану белгілерін ерте анықтау.",
           modFireTag1: "Өрт қауіпсіздігі",
           modFireTag2: "Ерте ескерту",
-          
+
           hintText: "Егер барлық модульдер бойынша 0 камера көрсетілсе, есептеу жүктемесі де 0 болып қалады. Сонымен қатар, егер камералар, битрейт және сақтау мерзімі көрсетілсе, архив бөлек есептелуі мүмкін.",
           btnCalculate: "Конфигурацияны есептеу",
-          
+
           resultLoadLabel: "Қорытынды есептеу жүктемесі",
           resultLoadSub: "Ажыратымдылықты, кадр жиілігін, кодекті және аналитикалық модульдерді ескеретін шамамен есептелген жүктеме.",
           meterLow: "Төмен",
           meterMid: "Оңтайлы",
           meterHigh: "Жоғары",
-          
+
           quickServers: "Аналитикалық серверлер",
           quickAccelerator: "Үдеткіш",
           quickProfile: "Профиль",
-          
+
           resAnalyticsTitle: "Аналитикалық жүйенің қажетті ресурстары",
           resCpuCores: "Процессор ядроларының саны",
           resRam: "Жедел жад",
           resVram: "Графикалық жад",
           resGpuPower: "Графикалық есептеу қуаты",
           resNetwork: "Желінің өткізу қабілеті",
-          
+
           resStorageTitle: "Бейнеархив сақтау сервері",
           resStorageServers: "Сақтау серверлерінің саны",
           resArchiveVol: "Архивтің жалпы көлемі",
           resRaid: "Ұсынылатын RAID",
           resDiskType: "Жинақтауыш түрі",
-          
+
           resServerTitle: "Ұсынылатын сервер конфигурациясы",
           resAnalyticServers: "Аналитикалық серверлер саны",
           resCpu: "Процессор",
@@ -1820,7 +1841,7 @@
           resGpu: "Графикалық үдеткіш",
           resDrive: "Жинақтауыш",
           resOs: "Операциялық жүйе",
-          
+
           emailTitle: "Есепті email арқылы алу",
           emailDesc: "Email-ді енгізіңіз, сервер инфрақұрылымының есебі сізге автоматты түрде жіберіледі.",
           emailPlaceholder: "Сіздің email",
@@ -1832,45 +1853,45 @@
           profMid: "Орташа профиль",
           profMidHigh: "Орташа-жоғары профиль",
           profHigh: "Жоғары профиль",
-          
+
           accelNone: "—",
           accelEntry: "Бастапқы",
           accelMid: "Орташа",
           accelHigh: "Жоғары",
           accelServer: "Серверлік",
-          
+
           gpuT4: "NVIDIA T4 / баламасы",
           gpuA4000: "NVIDIA RTX A4000 / баламасы",
           gpuL40: "NVIDIA L40 / баламасы",
           gpuA100: "NVIDIA A100 / баламасы",
-          
+
           cpuEntry: "AMD Ryzen 9 / Intel Core i7 / баламасы",
           cpuMid: "AMD Ryzen 9 16-ядролы / Intel Core i9 / баламасы",
           cpuHigh: "Intel Xeon Silver / Gold / баламасы",
           cpuServer: "Көп ядролы серверлік процессор",
-          
+
           typeNone: "—",
           typeSingle: "Жалғыз сервер",
           typeCentral: "Орталықтандырылған",
-          
+
           raidNone: "—",
           raid5: "RAID 5",
           raid6: "RAID 6",
           raid60: "RAID 6 / RAID 60",
-          
+
           diskNone: "—",
           diskSata: "SATA HDD",
           diskEnt: "Enterprise HDD",
           diskEntCache: "Enterprise HDD + SSD кэші",
-          
+
           driveNone: "—",
           driveSsd: "Көлемі 1 ТБ немесе одан жоғары SSD",
-          
+
           unitGB: "ГБ",
           unitTB: "ТБ",
           unitMbps: "Мбит/с",
           unitTFLOPS: "TFLOPS",
-          
+
           emailSummaryTitle: "Сервер инфрақұрылымының есебі",
           emailSummaryLoad: "Қорытынды есептеу жүктемесі:",
           emailSummaryAiServers: "Аналитикалық серверлер саны:",
@@ -1901,26 +1922,26 @@
         kameryKrazha: document.getElementById("kamery_krazha"),
         kameryLica: document.getElementById("kamery_lica"),
         kameryDymOgon: document.getElementById("kamery_dym_ogon"),
-        
+
         itogovayaNagruzka: document.getElementById("itogovaya_nagruzka"),
         profilNagruzki: document.getElementById("profil_nagruzki"),
         polosaNagruzki: document.getElementById("polosa_nagruzki"),
-        
+
         kolichestvoServerovKratko: document.getElementById("kolichestvo_serverov_kratko"),
         klassUskoritelya: document.getElementById("klass_uskoritelya"),
         tipRazmeshcheniya: document.getElementById("tip_razmeshcheniya"),
-        
+
         yadraProcessor: document.getElementById("yadra_processor"),
         operativnayaPamyat: document.getElementById("operativnaya_pamyat"),
         graficheskayaPamyat: document.getElementById("graficheskaya_pamyat"),
         graficheskayaMoshnost: document.getElementById("graficheskaya_moshnost"),
         setevayaPropusk: document.getElementById("setevaya_propusk"),
-        
+
         storageServers: document.getElementById("storage_servers"),
         archiveVolume: document.getElementById("archive_volume"),
         raidLevel: document.getElementById("raid_level"),
         diskType: document.getElementById("disk_type"),
-        
+
         kolichestvoServerov: document.getElementById("kolichestvo_serverov"),
         modelProcessor: document.getElementById("model_processor"),
         pamyatNaServer: document.getElementById("pamyat_na_server"),
@@ -1943,23 +1964,23 @@
         if (elements.langCurrentFlag) elements.langCurrentFlag.textContent = meta.flag;
         if (elements.langCurrentText) elements.langCurrentText.textContent = meta.code;
 
-        document.querySelectorAll("[data-i18n]").forEach(function(el) {
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
           const key = el.getAttribute("data-i18n");
           if (dict[key]) el.textContent = dict[key];
         });
 
-        document.querySelectorAll("[data-i18n-placeholder]").forEach(function(el) {
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
           const key = el.getAttribute("data-i18n-placeholder");
           if (dict[key]) el.placeholder = dict[key];
         });
 
-        document.querySelectorAll("[data-i18n-opt]").forEach(function(el) {
+        document.querySelectorAll("[data-i18n-opt]").forEach(function (el) {
           const key = el.getAttribute("data-i18n-opt");
           if (dict[key]) el.textContent = dict[key];
         });
 
         localStorage.setItem("site-language", currentLang);
-        vypolnitRaschet(); 
+        vypolnitRaschet();
       }
 
       function okruglitVverh(chislo) {
@@ -2170,8 +2191,8 @@ ${dict.emailSummaryFooter}
         elements.kameryKrazha, elements.kameryLica, elements.kameryDymOgon
       ];
 
-      inputs.forEach(function(element) {
-        if(element) {
+      inputs.forEach(function (element) {
+        if (element) {
           element.addEventListener("input", vypolnitRaschet);
           element.addEventListener("change", vypolnitRaschet);
         }
@@ -2179,9 +2200,9 @@ ${dict.emailSummaryFooter}
 
       const form = document.getElementById("email_form");
       if (form) {
-        form.addEventListener("submit", async function(e) {
+        form.addEventListener("submit", async function (e) {
           e.preventDefault();
-          
+
           if (elements.calcMessage) {
             elements.calcMessage.value = poluchitSvodkuDlyaEmail(translations[currentLang]);
           }
@@ -2196,7 +2217,7 @@ ${dict.emailSummaryFooter}
               method: form.method,
               body: formData,
               headers: {
-                  'Accept': 'application/json'
+                'Accept': 'application/json'
               }
             });
             if (response.ok) {
@@ -2215,10 +2236,10 @@ ${dict.emailSummaryFooter}
               }
             }
           } catch (error) {
-             if (elements.emailStatus) {
-                elements.emailStatus.innerText = translations[currentLang].emailError;
-                elements.emailStatus.style.color = "#ef4444";
-             }
+            if (elements.emailStatus) {
+              elements.emailStatus.innerText = translations[currentLang].emailError;
+              elements.emailStatus.style.color = "#ef4444";
+            }
           }
         });
       }
@@ -2242,15 +2263,15 @@ ${dict.emailSummaryFooter}
           langButton.setAttribute("aria-expanded", String(isOpen));
         });
 
-        document.querySelectorAll(".lang-switcher__option").forEach(function(option) {
-          option.addEventListener("click", function() {
+        document.querySelectorAll(".lang-switcher__option").forEach(function (option) {
+          option.addEventListener("click", function () {
             applyTranslations(option.getAttribute("data-lang"));
             langSwitcher.classList.remove("is-open");
             langButton.setAttribute("aria-expanded", "false");
           });
         });
 
-        document.addEventListener("click", function(event) {
+        document.addEventListener("click", function (event) {
           if (!langSwitcher.contains(event.target)) {
             langSwitcher.classList.remove("is-open");
             langButton.setAttribute("aria-expanded", "false");
@@ -2263,4 +2284,5 @@ ${dict.emailSummaryFooter}
     })();
   </script>
 </body>
-</html> 
+
+</html>

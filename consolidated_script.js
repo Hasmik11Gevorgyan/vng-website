@@ -1,1364 +1,8 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Модули AI-видеоаналитики</title>
-  <meta
-    name="description"
-    content="Модули AI-видеоаналитики: утечка жидкости, дым и огонь, вторжение, драка и вандализм, воровство, распознавание и детекция лиц."
-  />
-  <meta name="theme-color" content="#010000" />
-
-  <style>
-    :root {
-      --bg: #010000;
-      --bg-deep: #010000;
-      --text: #edf3ff;
-      --text-soft: #dce8fb;
-      --text-muted: #a7bad8;
-      --text-dim: #7d91b0;
-
-      --line: rgba(255, 255, 255, 0.08);
-
-      --blue: #ff3b30;
-      --blue-soft: #ff453a;
-      --red: #ff3b30;
-      --red-soft: #ff453a;
-
-      --shadow-xl: 0 30px 90px rgba(0, 0, 0, 0.34);
-      --shadow-lg: 0 20px 65px rgba(0, 0, 0, 0.24);
-      --shadow-blue: 0 18px 50px rgba(220, 38, 38, 0.28);
-      --shadow-red: 0 18px 50px rgba(255, 59, 48, 0.28);
-
-      --radius-sm: 16px;
-      --radius-md: 20px;
-      --radius-lg: 26px;
-      --radius-xl: 32px;
-      --radius-pill: 999px;
-
-      --container: 1320px;
-
-      --transition-fast: 0.22s ease;
-      --transition-main: 0.3s ease;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      min-width: 320px;
-      font-family: Inter, Arial, sans-serif;
-      color: var(--text);
-      background: radial-gradient(circle, #FF1A1A 0%, #F20D0D 30%, #D40000 60%, #B81010 85%, #A01818 100%);
-      background-attachment: fixed;
-      overflow-x: hidden;
-    }
-
-    body.menu-open,
-    body.modal-open {
-      overflow: hidden;
-    }
-
-    img,
-    video {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .site {
-      position: relative;
-      min-height: 100vh;
-      isolation: isolate;
-    }
-
-    .site::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      background: none;
-    }
-
-    .container {
-      width: min(100%, var(--container));
-      margin: 0 auto;
-      padding-inline: 24px;
-    }
-
-    .btn {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 56px;
-      padding: 0 32px;
-      border: 1px solid rgba(220, 38, 38, 0.5);
-      border-radius: 14px;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      white-space: nowrap;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, #ff3b30, #dc2626);
-      color: #ffffff;
-      transition: all 0.2s ease;
-      text-decoration: none;
-    }
-
-    .btn-text {
-      display: inline-block;
-      color: white;
-      pointer-events: none;
-    }
-
-    
-
-    .btn:hover {
-      /* No hover effect */
-    }
-
-    .btn--primary {
-      border: 2px solid #dc2626;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn--primary:hover {
-      /* Static style */
-    }
-
-    .btn--ghost {
-      border: 1px solid rgba(0, 0, 0, 0.15);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .btn--ghost:hover {
-      /* Static style */
-    }
-
-    .header-wrap {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(180deg, rgba(6, 12, 24, 0.82), rgba(6, 12, 24, 0.46));
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .header {
-      width: min(100%, var(--container));
-      margin: 0 auto;
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      position: relative;
-    }
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      min-width: 180px;
-      flex-shrink: 0;
-    }
-
-    .logo__image {
-      width: 46px;
-      height: 46px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .logo__text-group {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .logo__title {
-      font-size: 18px;
-      font-weight: 900;
-      letter-spacing: 0.05em;
-      color: #fff;
-      line-height: 1.1;
-      display: inline-block;
-    }
-
-    .logo__subtitle {
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 500;
-      line-height: 1.3;
-      letter-spacing: 0.03em;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav__links {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      flex-wrap: wrap;
-    }
-
-    .nav__link {
-      color: var(--text-soft);
-      font-size: 15px;
-      font-weight: 700;
-      opacity: 0.95;
-      transition: color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
-    }
-
-    .nav__link:hover,
-    .nav__link.is-active {
-      color: #fff;
-      transform: translateY(-1px);
-      opacity: 1;
-    }
-
-    .nav__actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .burger {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      width: 46px;
-      height: 46px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.04);
-      color: #fff;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .burger svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    .lang-switcher {
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .lang-switcher__button {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 52px;
-      padding: 0 16px;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      cursor: pointer;
-      transition:
-        background var(--transition-fast),
-        border-color var(--transition-fast),
-        transform var(--transition-fast);
-    }
-
-    .lang-switcher__button:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(126, 167, 255, 0.24);
-      transform: translateY(-1px);
-    }
-
-    .lang-switcher__current {
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .lang-switcher__current-text {
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .lang-switcher__arrow {
-      width: 18px;
-      height: 18px;
-      opacity: 0.9;
-      transition: transform var(--transition-fast);
-    }
-
-    .lang-switcher.is-open .lang-switcher__arrow {
-      transform: rotate(180deg);
-    }
-
-    .lang-switcher__menu {
-      position: absolute;
-      top: calc(100% + 10px);
-      right: 0;
-      width: 220px;
-      padding: 10px;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(8, 17, 31, 0.98);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(16px);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(8px);
-      pointer-events: none;
-      transition:
-        opacity var(--transition-fast),
-        visibility var(--transition-fast),
-        transform var(--transition-fast);
-      z-index: 120;
-    }
-
-    .lang-switcher.is-open .lang-switcher__menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .lang-switcher__option {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px;
-      border: none;
-      border-radius: 12px;
-      background: transparent;
-      color: var(--text-soft);
-      text-align: left;
-      cursor: pointer;
-      transition: background var(--transition-fast), color var(--transition-fast);
-    }
-
-    .lang-switcher__option:hover {
-      background: rgba(255, 255, 255, 0.06);
-      color: #fff;
-    }
-
-    .lang-switcher__flag {
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .lang-switcher__label {
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .modules-page {
-      padding: 72px 0 96px;
-      background : radial-gradient(
-    ellipse 160% 90% at 50% 90%,
-    rgb(255, 32, 0)   0%,
-    rgb(204, 0, 0)    20%,
-    rgb(139, 0, 0)    50%,
-    rgb(74, 0, 0)     80%,
-    rgb(45, 0, 0)     100%
-  );
-    }
-
-    .hero-head {
-      max-width: 940px;
-      margin: 0 auto 42px;
-      text-align: center;
-      background: radial-gradient(
-    ellipse 160% 90% at 50% 90%,
-    rgb(255, 32, 0)   0%,
-    rgb(204, 0, 0)    20%,
-    rgb(139, 0, 0)    50%,
-    rgb(74, 0, 0)     80%,
-    rgb(45, 0, 0)     100%
-  );
-    }
-
-    .hero-head__eyebrow {
-      display: inline-flex;
-      align-items: center;
-      width: fit-content;
-      min-height: 38px;
-      padding: 0 14px;
-      border-radius: 999px;
-      margin-bottom: 16px;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--blue-soft);
-      background: rgba(126, 167, 255, 0.08);
-      border: 1px solid rgba(126, 167, 255, 0.16);
-    }
-
-    .hero-head__title {
-      margin: 0;
-      font-size: clamp(36px, 5vw, 58px);
-      line-height: 1.06;
-      letter-spacing: -0.04em;
-      font-weight: 950;
-    }
-
-    .hero-head__text {
-      max-width: 860px;
-      margin: 16px auto 0;
-      color: var(--text-muted);
-      font-size: 18px;
-      line-height: 1.65;
-    }
-
-    .solutions-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .solution-card {
-      position: relative;
-      min-height: 320px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 28px;
-      background: none;
-      box-shadow: var(--shadow-xl);
-      overflow: hidden;
-      padding: 0;
-      cursor: pointer;
-      text-align: left;
-      color: inherit;
-      transform: translateY(0) scale(1);
-      transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease,
-        border-color 0.35s ease;
-    }
-
-    .solution-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 34px 90px rgba(0, 0, 0, 0.42);
-      border-color: rgba(125, 167, 255, 0.22);
-    }
-
-    .solution-card:hover .solution-card__image {
-      transform: scale(1.08);
-    }
-
-    .solution-card:hover .solution-card__arrow {
-      transform: translateX(6px);
-    }
-
-    .solution-card:focus-visible {
-      outline: 2px solid rgba(126, 167, 255, 0.9);
-      outline-offset: 4px;
-    }
-
-    .solution-card__image-wrap {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-
-    .solution-card__image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1);
-      transition: transform 0.6s ease;
-    }
-
-    .solution-card__overlay {
-      position: absolute;
-      inset: 0;
-      background: none;
-    }
-
-    .solution-card__content {
-      position: absolute;
-      left: 24px;
-      right: 24px;
-      bottom: 22px;
-      z-index: 2;
-    }
-
-    .solution-card__tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 12px;
-      margin-bottom: 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #eef4ff;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      backdrop-filter: blur(8px);
-    }
-
-    .solution-card__title {
-      margin: 0 0 10px;
-      font-size: 30px;
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-      font-weight: 800;
-      color: #fff;
-      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
-    }
-
-    .solution-card__text {
-      margin: 0;
-      max-width: 420px;
-      font-size: 16px;
-      line-height: 1.55;
-      color: #dbe7fa;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.24);
-    }
-
-    .solution-card__arrow {
-      display: inline-block;
-      margin-top: 16px;
-      font-size: 24px;
-      font-weight: 700;
-      color: #fff;
-      transition: transform 0.3s ease;
-    }
-
-    .footer {
-      padding: 28px 0 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      background: radial-gradient(ellipse 160% 90% at 50% 90%,
-          rgb(255, 32, 0) 0%,
-          rgb(204, 0, 0) 20%,
-          rgb(139, 0, 0) 50%,
-          rgb(74, 0, 0) 80%,
-          rgb(45, 0, 0) 100%);
-      ;
-      backdrop-filter: blur(12px);
-    }
-
-    .footer__row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .footer__brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .footer__logo {
-      width: 38px;
-      height: 38px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .footer__text {
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .footer__email {
-      color: #a9beff;
-      font-weight: 700;
-    }
-
-    .module-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 400;
-      display: flex;
-      align-items: stretch;
-      justify-content: flex-start;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .module-modal.is-open {
-      visibility: visible;
-      pointer-events: auto;
-    }
-
-    .module-modal__backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(2, 8, 18, 0.62);
-      backdrop-filter: blur(10px);
-      opacity: 0;
-      transition: opacity var(--transition-slow);
-    }
-
-    .module-modal.is-open .module-modal__backdrop {
-      opacity: 1;
-    }
-
-    .module-modal__panel {
-      position: relative;
-      z-index: 1;
-      width: min(92vw, 1240px);
-      height: 100vh;
-      display: grid;
-      grid-template-columns: minmax(420px, 1.05fr) minmax(380px, 0.95fr);
-      background: none;
-      border-right: 1px solid rgba(255, 255, 255, 0.09);
-      box-shadow: 30px 0 90px rgba(0, 0, 0, 0.34);
-      backdrop-filter: blur(18px);
-      overflow: hidden;
-      transform: translateX(-100%);
-      transition: transform var(--transition-slow);
-    }
-
-    .module-modal.is-open .module-modal__panel {
-      transform: translateX(0);
-    }
-
-    .module-modal__panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: none;
-    }
-
-    .module-modal__media {
-      position: relative;
-      min-width: 0;
-      background: #010000;
-      border-right: 1px solid rgba(255, 255, 255, 0.06);
-      overflow: hidden;
-    }
-
-    .module-modal__video-layer {
-      position: absolute;
-      inset: 0;
-    }
-
-    .module-modal__video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      background: #010000;
-    }
-
-    .module-modal__media::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: none;
-    }
-
-    .module-modal__body {
-      position: relative;
-      min-width: 0;
-      padding: 96px 42px 42px;
-      overflow-y: auto;
-    }
-
-    .module-modal__close {
-      position: absolute;
-      top: 22px;
-      right: 22px;
-      z-index: 3;
-      width: 52px;
-      height: 52px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.06);
-      color: #fff;
-      cursor: pointer;
-      transition:
-        transform var(--transition-fast),
-        background var(--transition-fast),
-        border-color var(--transition-fast);
-      backdrop-filter: blur(10px);
-    }
-
-    .module-modal__close:hover {
-      transform: translateY(-1px);
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(126, 167, 255, 0.26);
-    }
-
-    .module-modal__close svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    .module-modal__content {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.24s ease, transform 0.24s ease;
-    }
-
-    .module-modal__content.is-switching {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-
-    .module-modal__eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      margin-bottom: 18px;
-      background: rgba(126, 167, 255, 0.09);
-      border: 1px solid rgba(126, 167, 255, 0.14);
-      color: var(--blue-soft);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .module-modal__title {
-      margin: 0;
-      font-size: clamp(32px, 3.4vw, 48px);
-      line-height: 1.02;
-      letter-spacing: -0.04em;
-      font-weight: 950;
-      color: #fff;
-    }
-
-    .module-modal__description {
-      margin: 18px 0 0;
-      color: var(--text-soft);
-      font-size: 18px;
-      line-height: 1.72;
-      max-width: 640px;
-    }
-
-    .module-modal__info {
-      display: grid;
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .module-modal__info-card {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 14px;
-      align-items: start;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      padding: 18px 18px 16px;
-      background: rgba(255, 255, 255, 0.035);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
-    }
-
-    .module-modal__icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(180deg, rgba(126, 167, 255, 0.16), rgba(124, 92, 255, 0.12));
-      border: 1px solid rgba(126, 167, 255, 0.16);
-      color: #fff;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    }
-
-    .module-modal__icon svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    .module-modal__info-title {
-      margin: 0 0 8px;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .module-modal__info-text {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    .module-modal__footer {
-      margin-top: 28px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .module-modal__footer-text {
-      margin: 0 0 22px;
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.65;
-    }
-
-    .module-modal__actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .module-modal__note {
-      margin-top: 18px;
-      color: rgba(237, 243, 255, 0.62);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 1240px) {
-      .solutions-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 16px;
-        right: 16px;
-        padding: 18px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 16px;
-        border-radius: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(8, 17, 31, 0.94);
-        box-shadow: var(--shadow-xl);
-      }
-
-      .nav.is-open {
-        display: flex;
-      }
-
-      .nav__links {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-      }
-
-      .nav__actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .lang-switcher {
-        width: 100%;
-      }
-
-      .lang-switcher__button {
-        width: 100%;
-        justify-content: space-between;
-      }
-
-      .lang-switcher__menu {
-        position: static;
-        width: 100%;
-        margin-top: 10px;
-      }
-
-      .burger {
-        display: inline-flex;
-      }
-
-      .module-modal__panel {
-        width: 100vw;
-        grid-template-columns: 1fr;
-      }
-
-      .module-modal__media {
-        min-height: 42vh;
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      }
-
-      .module-modal__body {
-        padding: 86px 24px 28px;
-      }
-    }
-
-    @media (max-width: 860px) {
-      .header {
-        padding: 14px 16px;
-      }
-
-      .container {
-        padding-inline: 16px;
-      }
-
-      .hero-head__title {
-        font-size: 38px;
-      }
-
-      .hero-head__text {
-        font-size: 17px;
-      }
-
-      .solution-card__title {
-        font-size: 26px;
-      }
-
-      .module-modal__media {
-        min-height: 36vh;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .logo__subtitle {
-        display: none;
-      }
-
-      .logo__title {
-        font-size: 14px;
-        font-weight: 900;
-        letter-spacing: 0.05em;
-        
-        background: linear-gradient(90deg, #ff4d4d 0%, #dc2626 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        line-height: 1.1;
-        display: inline-block;
-      }
-
-      .solutions-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .solution-card {
-        min-height: 280px;
-      }
-
-      .solution-card__content {
-        left: 18px;
-        right: 18px;
-        bottom: 18px;
-      }
-
-      .solution-card__title {
-        font-size: 24px;
-      }
-
-      .solution-card__text {
-        font-size: 15px;
-      }
-
-      .hero-head__title {
-        font-size: 32px;
-      }
-
-      .module-modal__body {
-        padding-inline: 18px;
-      }
-
-      .module-modal__title {
-        font-size: 30px;
-      }
-
-      .module-modal__description {
-        font-size: 16px;
-      }
-
-      .module-modal__info-card {
-        grid-template-columns: 1fr;
-      }
-
-      .module-modal__icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 14px;
-      }
-
-      .module-modal__actions .btn {
-        width: 100%;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-        scroll-behavior: auto !important;
-      }
-      .footer {
-        padding: 28px 0 40px;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-      }
-
-      .footer__row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 18px;
-        flex-wrap: wrap;
-      }
-
-      .footer__brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-      }
-
-      .footer__logo {
-        width: 38px;
-        height: 38px;
-        object-fit: contain;
-        flex-shrink: 0;
-      }
-
-      .footer__text {
-        color: var(--text-dim);
-        font-size: 14px;
-        line-height: 1.55;
-      }
-
-      .footer__email {
-        color: #a9beff;
-        font-weight: 700;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="site">
-    <div class="header-wrap">
-      <header class="header" aria-label="Site header">
-        <a href="index.html#hero" class="logo" aria-label="Go to main screen">
-          <img class="logo__image" src="images/logo-recreated (1).png" alt="Company logo" />
-          <span class="logo__text-group">
-            <span class="logo__title" data-i18n="logoTitle">Vengeea®</span>
-            <span class="logo__subtitle" data-i18n="logoSubtitle">ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ</span>
-          </span>
-        </a>
-
-        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-
-        <nav class="nav" id="main-nav" aria-label="Main navigation">
-          <div class="nav__links">
-            <a class="nav__link" href="./index.html#hero" data-i18n="navHome">Главная</a>
-            <a class="nav__link" href="./about-us.html" data-i18n="navAbout">О нас</a>
-            <a class="nav__link is-active" href="./modules.html" data-i18n="navModules">Модули</a>
-            <a class="nav__link" href="./calculator.html" data-i18n="navCalculator">Калькулятор</a>
-            <a class="nav__link" href="./contact_us.html" data-i18n="navContacts">Контакты</a>
-          </div>
-
-          <div class="nav__actions">
-            <div class="lang-switcher" id="langSwitcher">
-              <button
-                class="lang-switcher__button"
-                id="langButton"
-                type="button"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-controls="langMenu"
-              >
-                <span class="lang-switcher__current" id="langCurrentFlag">🇷🇺</span>
-                <span class="lang-switcher__current-text" id="langCurrentText">RU</span>
-                <svg class="lang-switcher__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </button>
-
-              <div class="lang-switcher__menu" id="langMenu" role="menu" aria-label="Language selection">
-                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
-                  <span class="lang-switcher__flag">🇷🇺</span>
-                  <span class="lang-switcher__label">Русский</span>
-                </button>
-
-                <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
-                  <span class="lang-switcher__flag">🇬🇧</span>
-                  <span class="lang-switcher__label">English</span>
-                </button>
-
-                <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
-                  <span class="lang-switcher__flag">🇨🇳</span>
-                  <span class="lang-switcher__label">中文</span>
-                </button>
-
-                <button class="lang-switcher__option" type="button" data-lang="kk" role="menuitem">
-                  <span class="lang-switcher__flag">🇰🇿</span>
-                  <span class="lang-switcher__label">Қазақша</span>
-                </button>
-              </div>
-            </div>
-
-            <a class="btn btn--primary" href="./contact_us.html"><span class="btn-text" data-i18n="requestSolution">Запросить решение</span></a>
-          </div>
-        </nav>
-      </header>
-    </div>
-
-    <main class="modules-page">
-      <div class="container">
-        <header class="hero-head">
-          <div class="hero-head__eyebrow" data-i18n="pageEyebrow">Модули</div>
-          <h1 class="hero-head__title" data-i18n="pageTitle">Модули AI-видеоаналитики</h1>
-          <p class="hero-head__text" data-i18n="pageText">
-            Выберите сценарий обнаружения для вашего объекта: от утечек и дыма до краж, вторжений и актов вандализма.
-          </p>
-        </header>
-
-        <section class="solutions-grid" aria-label="Modules list">
-          <button class="solution-card" type="button" data-module="leak">
-            <div class="solution-card__image-wrap">
-              <img class="solution-card__image" src="images/oil_spil.png" alt="Leak detection" />
-            </div>
-            <div class="solution-card__overlay"></div>
-            <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
-              <h2 class="solution-card__title" data-i18n="cardLeakTitle">Утечка жидкости</h2>
-              <p class="solution-card__text" data-i18n="cardLeakText">Выявление разливов и утечек в критических зонах объекта.</p>
-              <span class="solution-card__arrow">→</span>
-            </div>
-          </button>
-
-          <button class="solution-card" type="button" data-module="fire">
-            <div class="solution-card__image-wrap">
-              <img class="solution-card__image" src="images/fire.png" alt="Smoke and fire detection" />
-            </div>
-            <div class="solution-card__overlay"></div>
-            <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
-              <h2 class="solution-card__title" data-i18n="cardFireTitle">Дым и огонь</h2>
-              <p class="solution-card__text" data-i18n="cardFireText">Раннее обнаружение задымления и открытого пламени.</p>
-              <span class="solution-card__arrow">→</span>
-            </div>
-          </button>
-
-          <button class="solution-card" type="button" data-module="intrusion">
-            <div class="solution-card__image-wrap">
-              <img class="solution-card__image" src="images/intrusion.png" alt="Intrusion detection" />
-            </div>
-            <div class="solution-card__overlay"></div>
-            <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
-              <h2 class="solution-card__title" data-i18n="cardIntrusionTitle">Вторжение</h2>
-              <p class="solution-card__text" data-i18n="cardIntrusionText">Фиксация несанкционированного проникновения на объект.</p>
-              <span class="solution-card__arrow">→</span>
-            </div>
-          </button>
-
-          <button class="solution-card" type="button" data-module="fight">
-            <div class="solution-card__image-wrap">
-              <img class="solution-card__image" src="images/fight.png" alt="Fight and vandalism detection" />
-            </div>
-            <div class="solution-card__overlay"></div>
-            <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
-              <h2 class="solution-card__title" data-i18n="cardFightTitle">Драка и вандализм</h2>
-              <p class="solution-card__text" data-i18n="cardFightText">Обнаружение агрессивных и разрушительных действий.</p>
-              <span class="solution-card__arrow">→</span>
-            </div>
-          </button>
-
-          <button class="solution-card" type="button" data-module="theft">
-            <div class="solution-card__image-wrap">
-              <img class="solution-card__image" src="images/shoplift.png" alt="Theft detection" />
-            </div>
-            <div class="solution-card__overlay"></div>
-            <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
-              <h2 class="solution-card__title" data-i18n="cardTheftTitle">Воровство</h2>
-              <p class="solution-card__text" data-i18n="cardTheftText">Выявление сценариев, связанных с хищением имущества.</p>
-              <span class="solution-card__arrow">→</span>
-            </div>
-          </button>
-
-          <button class="solution-card" type="button" data-module="face">
-            <div class="solution-card__image-wrap">
-              <img class="solution-card__image" src="images/face-det.png" alt="Face Detection and Recognition" />
-            </div>
-            <div class="solution-card__overlay"></div>
-            <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
-              <h2 class="solution-card__title" data-i18n="cardFaceTitle">Распознавание и детекция лица</h2>
-              <p class="solution-card__text" data-i18n="cardFaceText">Фиксация лица, повторных появлений и контроль по собственным спискам наблюдения.</p>
-              <span class="solution-card__arrow">→</span>
-            </div>
-          </button>
-        </section>
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="container">
-        <div class="footer__row">
-          <a href="index.html#hero" class="footer__brand">
-            <img class="footer__logo" src="images/logo-recreated (1).png" alt="Company logo" />
-            <div class="footer__brand-content">
-              <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;">Vengeea®</div>
-              <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident prevention</div>
-            </div>
-          </a>
-
-          <div class="footer__text">
-            <a class="footer__email" href="mailto:support@vengeea.com">support@vengeea.com</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div>
-
-  <div
-    class="module-modal"
-    id="moduleModal"
-    aria-hidden="true"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="moduleModalTitle"
-  >
-    <div class="module-modal__backdrop" id="moduleBackdrop"></div>
-
-    <div class="module-modal__panel" id="modulePanel">
-      <div class="module-modal__media">
-        <div class="module-modal__video-layer">
-          <video
-            id="moduleVideo"
-            class="module-modal__video"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-          >
-            <source id="moduleVideoSource" src="" type="video/mp4" />
-          </video>
-        </div>
-      </div>
-
-      <div class="module-modal__body">
-        <button class="module-modal__close" id="moduleClose" type="button" aria-label="Close window">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-
-        <div class="module-modal__content" id="modalContent">
-          <div class="module-modal__eyebrow" id="moduleEyebrow">AI-модуль</div>
-          <h2 class="module-modal__title" id="moduleModalTitle">Заголовок модуля</h2>
-
-          <p class="module-modal__description" id="moduleDescription">
-            Описание модуля.
-          </p>
-
-          <div class="module-modal__info">
-            <div class="module-modal__info-card">
-              <div class="module-modal__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 4L19 7.5V12C19 16.5 16 19.5 12 21C8 19.5 5 16.5 5 12V7.5L12 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="module-modal__info-title" id="moduleDetectsTitle">Что обнаруживает</h3>
-                <p class="module-modal__info-text" id="moduleDetects"></p>
-              </div>
-            </div>
-
-            <div class="module-modal__info-card">
-              <div class="module-modal__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 5V12L16.5 14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.8"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="module-modal__info-title" id="modulePurposeTitle">Зачем нужен</h3>
-                <p class="module-modal__info-text" id="modulePurpose"></p>
-              </div>
-            </div>
-
-            <div class="module-modal__info-card">
-              <div class="module-modal__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 21C16 17.2 19 14.2 19 10.5C19 6.91 15.87 4 12 4C8.13 4 5 6.91 5 10.5C5 14.2 8 17.2 12 21Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-                  <circle cx="12" cy="10.5" r="2.5" stroke="currentColor" stroke-width="1.8"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="module-modal__info-title" id="moduleAreasTitle">Где применяется</h3>
-                <p class="module-modal__info-text" id="moduleAreas"></p>
-              </div>
-            </div>
-          </div>
-
-          <div class="module-modal__footer">
-            <p class="module-modal__footer-text" id="moduleFooter">
-              Решение помогает перейти от реакции на последствия — к предотвращению риска в момент его появления.
-            </p>
-
-            <div class="module-modal__actions">
-              <a class="btn btn--primary" id="moduleDemoLink" href="mailto:support@vengeea.com?subject=Запрос демо модуля">
-                <span class="btn-text" id="moduleDemoLabel">Запросить демо модуля</span>
-              </a>
-              <a class="btn btn--ghost" href="./contact_us.html">
-                <span class="btn-text" data-i18n="contactUs">Связаться с нами</span>
-              </a>
-            </div>
-
-            <div class="module-modal__note" id="moduleNote">
-              Чем раньше вы видите риск, тем дешевле обходятся его последствия.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
     (function () {
       const burger = document.getElementById("burger");
       const nav = document.getElementById("main-nav");
-
-      const langSwitcher = document.getElementById("langSwitcher");
+      const langSwitcher = document.querySelector(".lang-switcher");
+      const langMenu = document.getElementById("langMenu");
       const langButton = document.getElementById("langButton");
       const langCurrentFlag = document.getElementById("langCurrentFlag");
       const langCurrentText = document.getElementById("langCurrentText");
@@ -1377,7 +21,6 @@
       const modalFooter = document.getElementById("moduleFooter");
       const modalNote = document.getElementById("moduleNote");
       const moduleDemoLink = document.getElementById("moduleDemoLink");
-      const moduleDemoLabel = document.getElementById("moduleDemoLabel");
 
       const modalVideo = document.getElementById("moduleVideo");
       const modalVideoSource = document.getElementById("moduleVideoSource");
@@ -1388,7 +31,6 @@
 
       let lastFocusedCard = null;
       let currentModuleKey = null;
-      let currentLanguage = localStorage.getItem("site-language") || "ru";
 
       const languageMeta = {
         ru: { code: "RU", flag: "🇷🇺", htmlLang: "ru" },
@@ -1407,7 +49,13 @@
           navCalculator: "Калькулятор",
           navContacts: "Контакты",
           requestSolution: "Запросить решение",
+          viewModules: "Посмотреть модули",
+          heroTitle: "Vengeea® — компания, разрабатывающая технологии будущего.",
+          heroText: "Мы работаем с 2020 года и создаем AI-решения для видеоаналитики, автоматизации мониторинга и предотвращения инцидентов.",
+          ctaTitle: "Покажем, как решение будет работать на вашем объекте",
+          ctaText: "Проверим применимость сценария на ваших камерах, зонах контроля и типовых рисках объекта.",
           pageEyebrow: "Модули",
+          pageTitle: "Модули видеоаналитики AI",
           pageText: "Выберите сценарий обнаружения для вашего объекта: от утечек и дыма до краж, вторжений и актов вандализма.",
           cardTag: "AI-модуль",
           cardLeakTitle: "Утечка жидкости",
@@ -1440,6 +88,17 @@
           navCalculator: "Calculator",
           navContacts: "Contacts",
           requestSolution: "Request a solution",
+          viewModules: "View modules",
+          heroTitle: "Vengeea® — a company developing technologies of the future.",
+          heroText: "We have been operating since 2020 and build AI solutions for video analytics, monitoring automation, and incident prevention.",
+          stepNext: "Next",
+          stepNextTitle: "Transition to predictive analytics and autonomous decisions",
+          stepNextText: "Understanding behavior, context, and event development with the ability to predict an incident before it actually begins.",
+          stepGoal: "Goal",
+          stepGoalTitle: "Autonomous risk prevention",
+          stepGoalText: "The system is capable not only of detecting threats, but also of independently initiating measures to prevent them before damage occurs.",
+          ctaTitle: "We’ll show how the solution will work at your facility",
+          ctaText: "We will assess the applicability of the scenario on your cameras, control zones, and typical facility risks. We’ll demonstrate the key leak-detection scenario and discuss how the solution can evolve for your infrastructure.",
           pageEyebrow: "Modules",
           pageTitle: "AI Video Analytics Modules",
           pageText: "Choose a detection scenario for your facility: from leaks and smoke to theft, intrusion, vandalism, and face recognition workflows.",
@@ -1474,6 +133,30 @@
           navCalculator: "计算器",
           navContacts: "联系我们",
           requestSolution: "申请方案",
+          viewModules: "查看模块",
+          heroTitle: "Vengeea® — 一家开发未来技术的公司。",
+          heroText: "我们自2020年开始运营，并为视频分析、监控自动化和事故预防构建人工智能解决方案。",
+          monitoringTitle: "在泄漏发生时即时检测",
+          monitoringText: "系统在真实视频流中的两种工作场景：泄漏检测与自动事件记录，以便后续响应。",
+          leakDetectionTitle: "画面中的泄漏检测",
+          leakDetectionText: "系统分析视频流，跟踪监控区域内液体的出现，并在无需操作员参与的情况下生成事件。",
+          eventFixTitle: "事件记录与通知",
+          eventFixText: "检测到后，系统会保存视频片段、生成事件元数据，并将警报发送给操作员，以便快速评估情况。",
+          futureTitle: "从异常与行为识别到主动预防",
+          futureText: "系统能够实时识别偏差和异常行为，并立即通知操作员。下一步是预测性分析：在风险演变为事件之前识别出来。",
+          predictiveContour: "预测性模块",
+          predictiveSub: "从事件记录转向风险早期预警",
+          stepNow: "当前",
+          stepNowTitle: "在事件出现时即时记录",
+          stepNowText: "在视频流中检测泄漏并立即通知操作员。",
+          stepNext: "下一步",
+          stepNextTitle: "转向预测分析与自主决策",
+          stepNextText: "理解行为、上下文和事件发展，并能够在事件真正开始之前进行预测。",
+          stepGoal: "目标",
+          stepGoalTitle: "自主风险预防",
+          stepGoalText: "系统不仅能够识别威胁，还能够在损失发生前自主启动预防措施。",
+          ctaTitle: "我们将展示该方案如何在您的设施中运行",
+          ctaText: "我们会根据您的摄像头、控制区域和典型风险评估该场景的适用性。展示关键的泄漏检测场景，并讨论如何针对您的基础设施扩展该方案。",
           pageEyebrow: "模块",
           pageTitle: "AI 视频分析模块",
           pageText: "为您的设施选择检测场景：从泄漏和烟雾到盗窃、入侵、破坏以及人脸识别流程。",
@@ -1508,6 +191,30 @@
           navCalculator: "Калькулятор",
           navContacts: "Байланыс",
           requestSolution: "Шешімге сұраныс",
+          viewModules: "Модульдерді қарау",
+          heroTitle: "Vengeea® — болашақ технологияларын әзірлейтін компания.",
+          heroText: "Біз 2020 жылдан бері жұмыс істейміз және бейнеаналитика, мониторингті автоматтандыру және инциденттердің алдын алу үшін AI-шешімдерді жасаймыз.",
+          monitoringTitle: "Ағып кетуді пайда болған сәтте тіркеу",
+          monitoringText: "Жүйенің нақты бейнеағында жұмыс істеуінің екі сценарийі: ағып кетуді анықтау және кейінгі әрекет ету үшін оқиғаны автоматты түрде тіркеу.",
+          leakDetectionTitle: "Кадрдағы ағып кетуді анықтау",
+          leakDetectionText: "Жүйе бейнеағынды талдайды, бақылау аймағында сұйықтықтың пайда болуын қадағалайды және оператордың қатысуынсыз оқиға қалыптастырады.",
+          eventFixTitle: "Оқиғаны тіркеу және хабарлау",
+          eventFixText: "Анықталғаннан кейін жүйе бейнесценарийді сақтайды, оқиға метадеректерін қалыптастырады және жағдайды жедел бағалау үшін операторға сигнал жібереді.",
+          futureTitle: "Аномалиялар мен мінез-құлықты анықтаудан — олардың алдын алуға дейін",
+          futureText: "Жүйе нақты уақытта ауытқулар мен әдеттен тыс әрекеттерді тіркеп, операторға бірден хабар береді. Келесі қадам — предиктивті аналитика: тәуекелдерді инцидентке айналмай тұрып анықтау.",
+          predictiveContour: "Предиктивті контур",
+          predictiveSub: "Оқиғаны тіркеуден тәуекелді ертерек ескертуге көшу",
+          stepNow: "Қазір",
+          stepNowTitle: "Инцидентті пайда болған сәтте тіркеу",
+          stepNowText: "Бейнеағында ағып кетуді анықтау және операторға жедел хабарлау.",
+          stepNext: "Келесі",
+          stepNextTitle: "Болжамды аналитика мен автономды шешімдерге көшу",
+          stepNextText: "Инцидент нақты басталғанға дейін оны болжау мүмкіндігімен мінез-құлықты, контексті және оқиғалардың дамуын түсіну.",
+          stepGoal: "Мақсат",
+          stepGoalTitle: "Тәуекелдерді автономды түрде болдырмау",
+          stepGoalText: "Жүйе түгелдей қауіптерді анықтап қана қоймай, залал туындағанға дейін олардың алдын алу шараларын өздігінен іске қоса алады.",
+          ctaTitle: "Шешімнің сіздің нысаныңызда қалай жұмыс істейтінін көрсетеміз",
+          ctaText: "Сценарийдің сіздің камераларыңызда, бақылау аймақтарыңызда және нысанға тән тәуекелдерде қолданылуын тексереміз. Ағып кету бойынша негізгі сценарийді көрсетіп, шешімді сіздің инфрақұрылымыңызға бейімдеу жолдарын талқылаймыз.",
           pageEyebrow: "Модульдер",
           pageTitle: "AI-бейнеаналитика модульдері",
           pageText: "Нысаныңыз үшін анықтау сценарийін таңдаңыз: ағып кетуден және түтіннен бастап ұрлық, басып кіру, вандализм және бетті тану процестеріне дейін.",
@@ -1784,7 +491,6 @@
             footer: "Иногда важно не знать, кто именно находится в кадре, а понимать, что происходит.",
             note: "Система по умолчанию не использует биометрические данные. При необходимости функции работы с лицами могут быть ограничены или настроены оператором в соответствии с требованиями законодательства."
           },
-
           en: {
             eyebrow: "AI Module",
             shortTitle: "Face Recognition and Detection",
@@ -1821,61 +527,19 @@
         }
       };
 
-      function applyTranslations(lang) {
-        currentLanguage = languageMeta[lang] ? lang : "ru";
-        const dictionary = uiTranslations[currentLanguage];
-
-        document.documentElement.lang = languageMeta[currentLanguage].htmlLang;
-        if (langCurrentFlag) langCurrentFlag.textContent = languageMeta[currentLanguage].flag;
-        if (langCurrentText) langCurrentText.textContent = languageMeta[currentLanguage].code;
-
-        document.querySelectorAll("[data-i18n]").forEach((element) => {
-          const key = element.dataset.i18n;
-          if (dictionary[key]) {
-            element.textContent = dictionary[key];
-          }
-        });
-
-        if (moduleDetectsTitle) moduleDetectsTitle.textContent = dictionary.detectsTitle;
-        if (modulePurposeTitle) modulePurposeTitle.textContent = dictionary.purposeTitle;
-        if (moduleAreasTitle) moduleAreasTitle.textContent = dictionary.areasTitle;
-        if (moduleDemoLabel) moduleDemoLabel.textContent = dictionary.demoButton;
-        if (closeButton) closeButton.setAttribute("aria-label", dictionary.closeLabel);
-
-        localStorage.setItem("site-language", currentLanguage);
-
-        if (currentModuleKey) {
-          setModalContent(currentModuleKey);
-        }
-      }
-
-      function closeMenu() {
-        nav.classList.remove("is-open");
-        document.body.classList.remove("menu-open");
-        burger.setAttribute("aria-expanded", "false");
-      }
-
       function setVideoSource(src) {
+        if (!modalVideo || !modalVideoSource) return;
         modalVideo.pause();
         modalVideoSource.src = src;
         modalVideo.load();
-
-        const playPromise = modalVideo.play();
-        if (playPromise && typeof playPromise.catch === "function") {
-          playPromise.catch(() => {});
-        }
-      }
-
-      function getModuleText(moduleKey) {
-        const moduleData = modules[moduleKey];
-        if (!moduleData) return null;
-        return moduleData[currentLanguage] || moduleData.ru;
       }
 
       function setModalContent(moduleKey) {
         const moduleData = modules[moduleKey];
-        const localized = getModuleText(moduleKey);
-        if (!moduleData || !localized) return;
+        if (!moduleData) return;
+
+        const lang = localStorage.getItem("site-language") || "ru";
+        const localized = moduleData[lang] || moduleData.ru;
 
         modalEyebrow.textContent = localized.eyebrow;
         modalTitle.textContent = localized.title;
@@ -1886,8 +550,36 @@
         modalFooter.textContent = localized.footer;
         modalNote.textContent = localized.note;
 
-        const subject = encodeURIComponent(`${uiTranslations[currentLanguage].demoButton}: ${localized.shortTitle}`);
+        if (moduleDetectsTitle) moduleDetectsTitle.textContent = uiTranslations[lang].detectsTitle;
+        if (modulePurposeTitle) modulePurposeTitle.textContent = uiTranslations[lang].purposeTitle;
+        if (moduleAreasTitle) moduleAreasTitle.textContent = uiTranslations[lang].areasTitle;
+        if (moduleDemoLabel) moduleDemoLabel.textContent = uiTranslations[lang].demoButton;
+
+        const subject = encodeURIComponent(`${uiTranslations[lang].demoButton}: ${localized.shortTitle}`);
         moduleDemoLink.href = `mailto:support@vengeea.com?subject=${subject}`;
+      }
+
+      function applyTranslations(lang) {
+        const selectedLang = uiTranslations[lang] ? lang : "ru";
+        const dict = uiTranslations[selectedLang];
+        const meta = languageMeta[selectedLang];
+
+        document.documentElement.lang = meta.htmlLang;
+        if (langCurrentFlag) langCurrentFlag.textContent = meta.flag;
+        if (langCurrentText) langCurrentText.textContent = meta.code;
+
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          const key = el.getAttribute("data-i18n");
+          if (dict[key]) {
+            el.textContent = dict[key];
+          }
+        });
+
+        if (currentModuleKey) {
+          setModalContent(currentModuleKey);
+        }
+
+        localStorage.setItem("site-language", selectedLang);
       }
 
       function openModal(moduleKey, triggerElement) {
@@ -1932,42 +624,47 @@
         }
       }
 
-      burger.addEventListener("click", () => {
-        const isOpen = nav.classList.toggle("is-open");
-        document.body.classList.toggle("menu-open", isOpen);
-        burger.setAttribute("aria-expanded", String(isOpen));
-      });
-
-      langButton.addEventListener("click", (event) => {
-        event.stopPropagation();
-        const shouldOpen = !langSwitcher.classList.contains("is-open");
-        langSwitcher.classList.toggle("is-open", shouldOpen);
-        langButton.setAttribute("aria-expanded", String(shouldOpen));
-      });
-
-      document.querySelectorAll(".lang-switcher__option").forEach((button) => {
-        button.addEventListener("click", () => {
-          const lang = button.dataset.lang || "ru";
-          applyTranslations(lang);
-          langSwitcher.classList.remove("is-open");
-          langButton.setAttribute("aria-expanded", "false");
+      if (burger && nav) {
+        burger.addEventListener("click", () => {
+          const isOpen = nav.classList.toggle("is-open");
+          document.body.classList.toggle("menu-open", isOpen);
+          burger.setAttribute("aria-expanded", String(isOpen));
         });
-      });
 
-      document.addEventListener("click", (event) => {
-        if (!langSwitcher.contains(event.target)) {
-          langSwitcher.classList.remove("is-open");
-          langButton.setAttribute("aria-expanded", "false");
-        }
-      });
+        nav.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            if (window.innerWidth <= 1180) {
+              nav.classList.remove("is-open");
+              document.body.classList.remove("menu-open");
+              burger.setAttribute("aria-expanded", "false");
+            }
+          });
+        });
+      }
 
-      document.querySelectorAll(".nav__link").forEach((link) => {
-        link.addEventListener("click", () => {
-          if (window.innerWidth <= 1180) {
-            closeMenu();
+      if (langSwitcher && langButton && langMenu) {
+        langButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const isOpen = langSwitcher.classList.toggle("is-open");
+          langButton.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        langMenu.querySelectorAll("[data-lang]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const lang = button.getAttribute("data-lang") || "ru";
+            applyTranslations(lang);
+            langSwitcher.classList.remove("is-open");
+            langButton.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!langSwitcher.contains(event.target)) {
+            langSwitcher.classList.remove("is-open");
+            langButton.setAttribute("aria-expanded", "false");
           }
         });
-      });
+      }
 
       document.querySelectorAll(".solution-card").forEach((card) => {
         card.addEventListener("click", () => {
@@ -1976,23 +673,46 @@
         });
       });
 
-      closeButton.addEventListener("click", closeModal);
-      backdrop.addEventListener("click", closeModal);
+      if (closeButton) closeButton.addEventListener("click", closeModal);
+      if (backdrop) backdrop.addEventListener("click", closeModal);
 
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
-          if (modal.classList.contains("is-open")) {
+          if (modal && modal.classList.contains("is-open")) {
             closeModal();
           }
-          if (langSwitcher.classList.contains("is-open")) {
+          if (langSwitcher && langSwitcher.classList.contains("is-open")) {
             langSwitcher.classList.remove("is-open");
             langButton.setAttribute("aria-expanded", "false");
           }
         }
       });
 
-      applyTranslations(currentLanguage);
+      const reveals = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          function (entries, obs) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.14,
+            rootMargin: "0px 0px -40px 0px"
+          }
+        );
+        reveals.forEach(function (item) {
+          observer.observe(item);
+        });
+      } else {
+        reveals.forEach(function (item) {
+          item.classList.add("is-visible");
+        });
+      }
+
+      const savedLanguage = localStorage.getItem("site-language") || "ru";
+      applyTranslations(savedLanguage);
     })();
-  </script>
-</body>
-</html>

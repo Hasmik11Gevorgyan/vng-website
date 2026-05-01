@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vengeea | О нас</title>
-  <meta
-    name="description"
-    content="История компании Vengeea и путь к созданию AI-решений для раннего выявления рисков и предотвращения инцидентов."
-  />
-  <meta name="theme-color" content="#07111d" />
+  <meta name="description"
+    content="История компании Vengeea и путь к созданию AI-решений для раннего выявления рисков и предотвращения инцидентов." />
+  <meta name="theme-color" content="#010000" />
 
   <style>
     :root {
-      --bg: #07111d;
-      --bg-deep: #081423;
+      --bg: #010000;
+      --bg-deep: #010000;
       --text: #edf3ff;
       --text-soft: #dce8fb;
       --text-muted: #a7bad8;
@@ -23,15 +22,18 @@
 
       --blue: #ff3b30;
       --blue-soft: #ff453a;
-
-      --purple: #dc2626;
-      --purple-soft: #c41e3a;
+      --red: #ff3b30;
+      --red-soft: #ff453a;
 
       --shadow-xl: 0 30px 90px rgba(0, 0, 0, 0.34);
       --shadow-lg: 0 20px 65px rgba(0, 0, 0, 0.24);
-      --shadow-purple: 0 18px 50px rgba(220, 38, 38, 0.28);
+      --shadow-blue: 0 18px 50px rgba(220, 38, 38, 0.28);
+      --shadow-red: 0 18px 50px rgba(220, 38, 38, 0.28);
 
+      --radius-sm: 16px;
+      --radius-md: 20px;
       --radius-lg: 26px;
+      --radius-xl: 32px;
       --radius-pill: 999px;
 
       --container: 1320px;
@@ -53,9 +55,13 @@
       min-width: 320px;
       font-family: Inter, Arial, sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at top, rgba(255, 59, 48, 0.12), transparent 22%),
-        linear-gradient(180deg, #06111c 0%, #081321 45%, #07111d 100%);
+      background: radial-gradient(ellipse 160% 90% at 50% 90%,
+          #FF2000 0%,
+          #CC0000 20%,
+          #8B0000 50%,
+          #4A0000 80%,
+          #2D0000 100%);
+      background-attachment: fixed;
       overflow-x: hidden;
     }
 
@@ -90,9 +96,7 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      background:
-        radial-gradient(circle at 20% 15%, rgba(220, 38, 38, 0.06), transparent 18%),
-        radial-gradient(circle at 80% 25%, rgba(255, 59, 48, 0.05), transparent 16%);
+      background: none;
     }
 
     .container {
@@ -105,7 +109,7 @@
       position: relative;
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(28, 15, 15, 0.82), rgba(8, 4, 4, 0.94));
+      background: none;
       box-shadow: var(--shadow-xl);
       overflow: hidden;
     }
@@ -114,51 +118,60 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top, rgba(220, 38, 38, 0.06), transparent 34%);
+      background: none;
       pointer-events: none;
     }
 
     .btn {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      min-height: 58px;
-      padding: 0 26px;
-      border: none;
-      border-radius: 16px;
-      font-size: 16px;
+      min-height: 56px;
+      padding: 0 32px;
+      border: 1px solid rgba(220, 38, 38, 0.5);
+      border-radius: 14px;
+      font-size: 15px;
       font-weight: 800;
-      letter-spacing: -0.01em;
+      letter-spacing: 0.04em;
       cursor: pointer;
       white-space: nowrap;
-      transition:
-        transform var(--transition-fast),
-        background var(--transition-fast),
-        border-color var(--transition-fast),
-        box-shadow var(--transition-fast);
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #ff3b30, #dc2626);
+      color: #ffffff;
+      transition: all 0.2s ease;
+      text-decoration: none;
     }
 
+    .btn-text {
+      display: inline-block;
+      color: white;
+      pointer-events: none;
+    }
+
+   
+
     .btn:hover {
-      transform: translateY(-2px);
+      /* No hover effect */
     }
 
     .btn--primary {
-      color: #fff;
-      background: linear-gradient(180deg, var(--purple-soft), var(--purple));
-      box-shadow: var(--shadow-purple);
+      border: 2px solid #dc2626;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn--primary:hover {
+      /* Static style */
     }
 
     .btn--secondary {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .btn--secondary:hover {
-      border-color: rgba(220, 38, 38, 0.28);
-      background: rgba(255, 255, 255, 0.08);
+      /* Static style */
     }
 
     .header-wrap {
@@ -194,6 +207,7 @@
       height: 46px;
       object-fit: contain;
       flex-shrink: 0;
+      filter: brightness(0) invert(1);
     }
 
     .logo__text-group {
@@ -206,10 +220,7 @@
       font-size: 18px;
       font-weight: 900;
       letter-spacing: 0.05em;
-      
-      background: linear-gradient(90deg, #ff4d4d 0%, #dc2626 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #ffffff !important;
       line-height: 1.1;
       display: inline-block;
     }
@@ -398,10 +409,7 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background:
-        radial-gradient(circle at 12% 18%, rgba(220, 38, 38, 0.08), transparent 24%),
-        radial-gradient(circle at 86% 20%, rgba(255, 59, 48, 0.1), transparent 22%),
-        linear-gradient(180deg, rgba(7, 17, 29, 0.1), rgba(7, 17, 29, 0));
+      background: none;
     }
 
     .about-layout {
@@ -604,7 +612,13 @@
     .footer {
       padding: 28px 0 40px;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
-      background: rgba(5, 11, 20, 0.4);
+      background: radial-gradient(ellipse 160% 90% at 50% 90%,
+          rgb(255, 32, 0) 0%,
+          rgb(204, 0, 0) 20%,
+          rgb(139, 0, 0) 50%,
+          rgb(74, 0, 0) 80%,
+          rgb(45, 0, 0) 100%);
+      ;
       backdrop-filter: blur(12px);
     }
 
@@ -628,6 +642,7 @@
       height: 38px;
       object-fit: contain;
       flex-shrink: 0;
+      filter: brightness(0) invert(1);
     }
 
     .footer__text {
@@ -653,7 +668,7 @@
       transform: translateY(0);
     }
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1240px) {
       .about-layout {
         grid-template-columns: 1fr;
       }
@@ -767,10 +782,7 @@
         font-size: 15px;
         font-weight: 900;
         letter-spacing: 0.05em;
-        
-        background: linear-gradient(90deg, #ff4d4d 0%, #dc2626 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: #fff;
         line-height: 1.1;
         display: inline-block;
       }
@@ -795,12 +807,13 @@
     }
   </style>
 </head>
+
 <body>
   <div class="site">
     <div class="header-wrap">
       <header class="header" aria-label="Шапка сайта">
         <a href="index.html#hero" class="logo" aria-label="Vengeea">
-          <img class="logo__image" src="./logo-recreated (1).png" alt="Логотип компании" />
+          <img class="logo__image" src="images/logo-recreated (1).png" alt="Логотип компании" />
           <span class="logo__text-group">
             <span class="logo__title" data-i18n="logoTitle">Vengeea®</span>
             <span class="logo__subtitle" data-i18n="logoSubtitle">ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ</span>
@@ -809,8 +822,8 @@
 
         <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                          <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           </svg>
         </button>
 
@@ -825,18 +838,13 @@
 
           <div class="nav__actions">
             <div class="lang-switcher" id="langSwitcher">
-              <button
-                class="lang-switcher__button"
-                id="langButton"
-                type="button"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-controls="langMenu"
-              >
+              <button class="lang-switcher__button" id="langButton" type="button" aria-expanded="false"
+                aria-haspopup="true" aria-controls="langMenu">
                 <span class="lang-switcher__current" id="langCurrentFlag">🇷🇺</span>
                 <span class="lang-switcher__current-text" id="langCurrentText">RU</span>
                 <svg class="lang-switcher__arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" />
                 </svg>
               </button>
 
@@ -860,7 +868,8 @@
               </div>
             </div>
 
-            <a class="btn btn--primary" href="./contact_us.html" data-i18n="requestSolution">Запросить решение</a>
+            <a class="btn btn--primary" href="./contact_us.html"><span class="btn-text"
+                data-i18n="requestSolution">Запросить решение</span></a>
           </div>
         </nav>
       </header>
@@ -879,40 +888,61 @@
 
               <div class="about-story__text" id="about-text">
                 <p class="about-story__lead">Лето 2024 года. Амиачный завод. Ночная смена.</p>
-                <p>Наш помощник Илья заступил в дежурство ещё вечером. К трём ночи всё уже шло по привычному сценарию. Самая обычная тишина в цехах, редкие сигналы по системе, однообразная картинка с камер. Он сидел в операторской, пил остывший кофе и время от времени пролистывал экраны. Ничего необычного. Та самая смена, когда ждёшь, что до утра так ничего и не произойдёт.</p>
-                <p>В какой-то момент система подсветила участок на одной из линий. Без звука тревоги, без резких сигналов, а просто самая обычная отметка, что в зоне появилось отклонение. Илья даже не сразу переключился. На камере это выглядело как лёгкое искажение, почти как блик. Ничего, что однозначно говорило бы о проблеме. Но, он всё-таки открыл этот поток, посмотрел внимательнее. Картинка оставалась спокойной. Ни дыма, ни явных признаков утечки. В обычной ситуации на этом всё бы и закончилось, Илья бы отметил бы как "шум" и пошёл дальше.</p>
+                <p>Наш помощник Илья заступил в дежурство ещё вечером. К трём ночи всё уже шло по привычному сценарию.
+                  Самая обычная тишина в цехах, редкие сигналы по системе, однообразная картинка с камер. Он сидел в
+                  операторской, пил остывший кофе и время от времени пролистывал экраны. Ничего необычного. Та самая
+                  смена, когда ждёшь, что до утра так ничего и не произойдёт.</p>
+                <p>В какой-то момент система подсветила участок на одной из линий. Без звука тревоги, без резких
+                  сигналов, а просто самая обычная отметка, что в зоне появилось отклонение. Илья даже не сразу
+                  переключился. На камере это выглядело как лёгкое искажение, почти как блик. Ничего, что однозначно
+                  говорило бы о проблеме. Но, он всё-таки открыл этот поток, посмотрел внимательнее. Картинка оставалась
+                  спокойной. Ни дыма, ни явных признаков утечки. В обычной ситуации на этом всё бы и закончилось, Илья
+                  бы отметил бы как "шум" и пошёл дальше.</p>
                 <p>Но система не убрала метку. Наоборот, она продолжала держать этот участок в фокусе.</p>
-                <p>Через несколько секунд пришло уведомление, что уровень риска вырос. Не критично, но уже достаточно, чтобы не игнорировать.</p>
-                <p>Илья нахмурился, отставил кружку и вернулся к экрану. Что-то в этом было не так. Не визуально — логически. Система явно "видела" больше, чем он. Он увеличил изображение, переключил пару ракурсов, но по-прежнему не находил очевидной причины. И всё же решил не откладывать, и передал информацию инженерам и попросил проверить участок.</p>
-                <p>Когда бригада подошла к линии, утечка уже начинала проявляться. Хоть и слабая, но реальная. Её удалось локализовать практически сразу, до того, как она переросла в проблему.</p>
-                <p>Если бы её заметили позже, хотя бы через десять–пятнадцать минут, ситуация могла бы развиваться совсем иначе. Для таких объектов это не просто инцидент, а цепочка последствий: утечки, остановка производства, проверки, суды, страховые разбирательства, многомиллионные потери. И каждый раз, на кону стоит репутация, которую невозможно восстановить полностью.</p>
-                <p>Илья потом ещё долго смотрел на тот самый фрагмент записи. Визуально там по-прежнему почти ничего не было. Но система это увидела.</p>
-                <p>И в ту ночь самым важным было не то, что произошло. А то, что не успело произойти. И тогда, наша компания поняла, что назад пути нет: Нужно создавать решения, которые действительно нужны людям. Потому что мы не единственные, кто сталкивается с такими ситуациями.</p>
+                <p>Через несколько секунд пришло уведомление, что уровень риска вырос. Не критично, но уже достаточно,
+                  чтобы не игнорировать.</p>
+                <p>Илья нахмурился, отставил кружку и вернулся к экрану. Что-то в этом было не так. Не визуально —
+                  логически. Система явно "видела" больше, чем он. Он увеличил изображение, переключил пару ракурсов, но
+                  по-прежнему не находил очевидной причины. И всё же решил не откладывать, и передал информацию
+                  инженерам и попросил проверить участок.</p>
+                <p>Когда бригада подошла к линии, утечка уже начинала проявляться. Хоть и слабая, но реальная. Её
+                  удалось локализовать практически сразу, до того, как она переросла в проблему.</p>
+                <p>Если бы её заметили позже, хотя бы через десять–пятнадцать минут, ситуация могла бы развиваться
+                  совсем иначе. Для таких объектов это не просто инцидент, а цепочка последствий: утечки, остановка
+                  производства, проверки, суды, страховые разбирательства, многомиллионные потери. И каждый раз, на кону
+                  стоит репутация, которую невозможно восстановить полностью.</p>
+                <p>Илья потом ещё долго смотрел на тот самый фрагмент записи. Визуально там по-прежнему почти ничего не
+                  было. Но система это увидела.</p>
+                <p>И в ту ночь самым важным было не то, что произошло. А то, что не успело произойти. И тогда, наша
+                  компания поняла, что назад пути нет: Нужно создавать решения, которые действительно нужны людям.
+                  Потому что мы не единственные, кто сталкивается с такими ситуациями.</p>
                 <p>В мире тысячи подобных объектов и риск у всех один и тот же.</p>
               </div>
 
               <div class="about-story__actions">
-                <a href="./contact_us.html" class="btn btn--primary" id="about-btn-primary">Запросить решение</a>
-                <a href="./contact_us.html" class="btn btn--secondary" id="about-btn-secondary">Связаться с нами</a>
+                <a href="./contact_us.html" class="btn btn--primary"><span class="btn-text"
+                    id="about-btn-primary">Запросить решение</span></a>
+                <a href="./contact_us.html" class="btn btn--secondary"><span class="btn-text"
+                    id="about-btn-secondary">Связаться с нами</span></a>
               </div>
             </article>
 
             <aside class="about-media panel" aria-label="Визуальные материалы истории">
               <div class="about-media__grid">
                 <div class="about-media__item">
-                  <img class="about-media__image" src="./night_view_1.png" alt="Илья в операторской" />
+                  <img class="about-media__image" src="images/night_view_1.png" alt="Илья в операторской" />
                 </div>
 
                 <div class="about-media__item">
-                  <img class="about-media__image" src="./ilya-Monitroing.png" alt="Обнаружение утечки" />
+                  <img class="about-media__image" src="images/ilya-Monitroing.png" alt="Обнаружение утечки" />
                 </div>
 
                 <div class="about-media__item">
-                  <img class="about-media__image" src="./detection 2.png" alt="Обнаружение вторжения" />
+                  <img class="about-media__image" src="images/detection 2.png" alt="Обнаружение вторжения" />
                 </div>
 
                 <div class="about-media__item">
-                  <img class="about-media__image" src="./detection.png" alt="AI детекция" />
+                  <img class="about-media__image" src="images/detection.png" alt="AI детекция" />
                 </div>
               </div>
             </aside>
@@ -925,10 +955,11 @@
       <div class="container">
         <div class="footer__row">
           <a href="index.html#hero" class="footer__brand">
-            <img class="footer__logo" src="./logo-recreated (1).png" alt="Company logo" />
+            <img class="footer__logo" src="images/logo-recreated (1).png" alt="Company logo" />
             <div class="footer__brand-content">
               <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;">Vengeea®</div>
-              <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident prevention</div>
+              <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident
+                prevention</div>
             </div>
           </a>
 
@@ -943,7 +974,8 @@
     <div class="lightbox" id="lightbox" aria-hidden="true">
       <div class="lightbox__content">
         <button class="lightbox__close" id="lightboxClose" aria-label="Закрыть">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
@@ -1137,8 +1169,8 @@
           }
         });
 
-        try { setAboutLanguage(selectedLang); } catch(e) { console.error(e); }
-        try { localStorage.setItem("site-language", selectedLang); } catch(e) { console.error(e); }
+        try { setAboutLanguage(selectedLang); } catch (e) { console.error(e); }
+        try { localStorage.setItem("site-language", selectedLang); } catch (e) { console.error(e); }
       }
 
       if (burger && nav) {
@@ -1208,8 +1240,8 @@
       }
 
       var savedLanguage = "ru";
-      try { savedLanguage = localStorage.getItem("site-language") || "ru"; } catch(e) {}
-      try { applyTranslations(savedLanguage); } catch(e) {}
+      try { savedLanguage = localStorage.getItem("site-language") || "ru"; } catch (e) { }
+      try { applyTranslations(savedLanguage); } catch (e) { }
       // Lightbox Logic
       const lightbox = document.getElementById("lightbox");
       const lightboxClose = document.getElementById("lightboxClose");
@@ -1264,4 +1296,5 @@
     })();
   </script>
 </body>
+
 </html>
