@@ -177,7 +177,7 @@
       top: 0;
       z-index: 100;
       backdrop-filter: blur(16px);
-      background: linear-gradient(180deg, rgba(6, 12, 24, 0.82), rgba(6, 12, 24, 0.46));
+      background: rgba(60, 0, 0, 0.75);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
@@ -344,7 +344,7 @@
       padding: 10px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(8, 17, 31, 0.98);
+      background: rgba(60, 0, 0, 0.75);
       box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
       backdrop-filter: blur(16px);
       opacity: 0;
@@ -495,23 +495,17 @@
     .contact-copy__eyebrow {
       display: inline-flex;
       align-items: center;
-      padding: 8px 12px;
+      width: fit-content;
+      min-height: 38px;
+      padding: 0 14px;
       border-radius: 999px;
-      margin-bottom: 16px;
-      background: radial-gradient(ellipse 160% 90% at 50% 90%,
-          rgb(255, 32, 0) 0%,
-          rgb(204, 0, 0) 20%,
-          rgb(139, 0, 0) 50%,
-          rgb(74, 0, 0) 80%,
-          rgb(45, 0, 0) 100%);
-      ;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #ffffff;
       font-size: 12px;
       font-weight: 900;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      backdrop-filter: blur(10px);
+      color: var(--blue-soft);
+      background: rgba(220, 38, 38, 0.06);
+      border: 1px solid rgba(220, 38, 38, 0.16);
     }
 
     .contact-copy__title {
