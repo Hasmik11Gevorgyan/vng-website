@@ -768,62 +768,7 @@
       }
     }
 
-    @media (max-width: 1240px) {
-      .hero {
-        min-height: auto;
-      }
 
-      .nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 16px;
-        right: 16px;
-        padding: 18px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 16px;
-        border-radius: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(60, 0, 0, 0.96);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        border-color: rgba(255, 255, 255, 0.1);
-      }
-
-      .nav.is-open {
-        display: flex;
-      }
-
-      .nav__links {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-      }
-
-      .nav__actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .lang-switcher {
-        width: 100%;
-      }
-
-      .lang-switcher__button {
-        width: 100%;
-        justify-content: space-between;
-      }
-
-      .lang-switcher__menu {
-        position: static;
-        width: 100%;
-        margin-top: 10px;
-      }
-
-      .burger {
-        display: inline-flex;
-      }
-    }
 
     @media (max-width: 860px) {
       .section {
@@ -835,7 +780,7 @@
       }
 
       .container {
-        padding-inline: 16px;
+        padding-inline: 20px;
       }
 
       .hero__content {
@@ -876,7 +821,9 @@
       }
 
       .hero__title {
-        font-size: 36px;
+        font-size: 34px;
+        word-break: break-word;
+        hyphens: auto;
       }
 
       .hero__text {
@@ -1379,89 +1326,7 @@
       line-height: 1.6;
     }
 
-    @media (max-width: 1240px) {
-      .hero {
-        min-height: auto;
-      }
 
-      .hero__content {
-        padding-top: 100px;
-        padding-bottom: 60px;
-      }
-
-      .hero__title {
-        font-size: 42px;
-      }
-
-      .solutions-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 16px;
-        right: 16px;
-        padding: 18px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 16px;
-        border-radius: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(5, 1, 1, 0.94);
-        box-shadow: var(--shadow-xl);
-      }
-
-      .nav.is-open {
-        display: flex;
-      }
-
-      .nav__links {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-      }
-
-      .nav__actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .lang-switcher {
-        width: 100%;
-      }
-
-      .lang-switcher__button {
-        width: 100%;
-        justify-content: space-between;
-      }
-
-      .lang-switcher__menu {
-        position: static;
-        width: 100%;
-        margin-top: 10px;
-      }
-
-      .burger {
-        display: inline-flex;
-      }
-
-      .module-modal__panel {
-        width: 100vw;
-        grid-template-columns: 1fr;
-      }
-
-      .module-modal__media {
-        min-height: 42vh;
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      }
-
-      .module-modal__body {
-        padding: 86px 24px 28px;
-      }
-    }
 
     @media (max-width: 860px) {
       .header {
@@ -1658,20 +1523,48 @@
     }
 
     @media (max-width: 1240px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .hero__content {
+        padding-top: 100px;
+        padding-bottom: 60px;
+      }
+
+      .hero__title {
+        font-size: 28px !important;
+        line-height: 1.2;
+        word-break: break-word;
+        hyphens: auto;
+      }
+
+      .hero__video-mask {
+        top: 48%;
+        width: min(92vw, 920px);
+      }
+
+      .demo-grid,
+      .future-enterprise {
+        grid-template-columns: 1fr;
+      }
+
       .nav {
         display: none;
         position: absolute;
         top: 100%;
         left: 16px;
         right: 16px;
-        padding: 18px;
+        padding: 24px 32px;
         flex-direction: column;
         align-items: stretch;
         gap: 16px;
         border-radius: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(5, 1, 1, 0.94);
-        box-shadow: var(--shadow-xl);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: #1a0202;
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(24px);
+        z-index: 1000;
       }
 
       .nav.is-open {
@@ -1681,12 +1574,36 @@
       .nav__links {
         flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+
+      .nav__link {
+        font-size: 14px !important;
+        white-space: nowrap !important;
+        padding: 8px 0;
+        width: 100%;
+        text-align: left;
       }
 
       .nav__actions {
         flex-direction: column;
         align-items: stretch;
+        gap: 16px;
+        margin-top: 12px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .nav .btn {
+        width: 100%;
+        font-size: 14px !important;
+        white-space: nowrap !important;
+        padding: 0 20px;
+        min-height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .lang-switcher {
@@ -1696,6 +1613,11 @@
       .lang-switcher__button {
         width: 100%;
         justify-content: space-between;
+        font-size: 14px !important;
+      }
+
+      .lang-switcher__current {
+        display: none;
       }
 
       .lang-switcher__menu {
@@ -1706,6 +1628,25 @@
 
       .burger {
         display: inline-flex;
+      }
+
+      .solutions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .module-modal__panel {
+        width: 100vw;
+        grid-template-columns: 1fr;
+      }
+
+      .module-modal__media {
+        min-height: 42vh;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .module-modal__body {
+        padding: 86px 24px 28px;
       }
     }
 
@@ -1746,6 +1687,7 @@
         <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           </svg>
         </button>

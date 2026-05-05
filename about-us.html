@@ -751,14 +751,16 @@
         top: 100%;
         left: 16px;
         right: 16px;
-        padding: 18px;
+        padding: 24px 32px;
         flex-direction: column;
         align-items: stretch;
         gap: 16px;
         border-radius: 22px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: rgba(8, 17, 31, 0.94);
-        box-shadow: var(--shadow-xl);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: #1a0202;
+        box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(24px);
+        z-index: 1000;
       }
 
       .nav.is-open {
@@ -768,12 +770,36 @@
       .nav__links {
         flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+
+      .nav__link {
+        font-size: 14px !important;
+        white-space: nowrap !important;
+        padding: 8px 0;
+        width: 100%;
+        text-align: left;
       }
 
       .nav__actions {
         flex-direction: column;
         align-items: stretch;
+        gap: 16px;
+        margin-top: 12px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .nav .btn {
+        width: 100%;
+        font-size: 14px !important;
+        white-space: nowrap !important;
+        padding: 0 20px;
+        min-height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .lang-switcher {
@@ -783,6 +809,11 @@
       .lang-switcher__button {
         width: 100%;
         justify-content: space-between;
+        font-size: 14px !important;
+      }
+
+      .lang-switcher__current {
+        display: none;
       }
 
       .lang-switcher__menu {
@@ -816,6 +847,8 @@
 
       .about-story__title {
         font-size: 30px;
+        word-break: break-word;
+        hyphens: auto;
       }
 
       .about-story__text p {
@@ -893,6 +926,7 @@
         <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path d="M4 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             <path d="M4 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
           </svg>
         </button>
