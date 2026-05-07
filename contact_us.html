@@ -118,6 +118,13 @@
       padding-inline: 24px;
     }
 
+    .logo__mark, .logo__reg {
+      font-size: 0.55em;
+      vertical-align: super;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
     .btn {
       position: relative;
       display: inline-flex;
@@ -314,8 +321,13 @@
     }
 
     .lang-switcher__current {
-      font-size: 18px;
-      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      font-family:
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Noto Color Emoji",
+        sans-serif;
     }
 
     .lang-switcher__current-text {
@@ -388,6 +400,11 @@
     .lang-switcher__flag {
       font-size: 18px;
       line-height: 1;
+      font-family:
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Noto Color Emoji",
+        sans-serif;
     }
 
     .lang-switcher__label {
@@ -887,7 +904,8 @@
       }
 
       .lang-switcher__current {
-        display: none;
+        display: inline-flex;
+        align-items: center;
       }
 
       .lang-switcher__menu {
@@ -1039,7 +1057,7 @@
         <a href="index.html#hero" class="logo" aria-label="Go to main screen">
           <img class="logo__image" src="images/logo-recreated (1).png" alt="Company logo" />
           <span class="logo__text-group">
-            <span class="logo__title" data-i18n="logoTitle">Vengeea®</span>
+            <span class="logo__title" data-i18n="logoTitle">Vengeea<span class="logo__mark">®</span></span>
             <span class="logo__subtitle" data-i18n="logoSubtitle">ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ</span>
           </span>
         </a>
@@ -1074,14 +1092,14 @@
               </button>
 
               <div class="lang-switcher__menu" id="langMenu" role="menu" aria-label="Language selection">
-                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
-                  <span class="lang-switcher__flag">🇷🇺</span>
-                  <span class="lang-switcher__label">Русский</span>
-                </button>
-
                 <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
                   <span class="lang-switcher__flag">🇬🇧</span>
                   <span class="lang-switcher__label">English</span>
+                </button>
+
+                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
+                  <span class="lang-switcher__flag">🇷🇺</span>
+                  <span class="lang-switcher__label">Русский</span>
                 </button>
 
                 <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
@@ -1221,7 +1239,7 @@
           <a href="index.html#hero" class="footer__brand">
             <img class="footer__logo" src="images/logo-recreated (1).png" alt="Company logo" />
             <div class="footer__brand-content">
-              <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;">Vengeea®</div>
+              <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;" data-i18n="logoTitle">Vengeea<span class="logo__reg">R</span></div>
               <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident
                 prevention</div>
             </div>
@@ -1259,21 +1277,23 @@
       const errorMessage = document.getElementById("errorMessage");
 
       const languageMeta = {
-        ru: { code: "RU", flag: "🇷🇺", htmlLang: "ru" },
         en: { code: "EN", flag: "🇬🇧", htmlLang: "en" },
+        ru: { code: "RU", flag: "🇷🇺", htmlLang: "ru" },
         zh: { code: "ZH", flag: "🇨🇳", htmlLang: "zh" },
         kk: { code: "KK", flag: "🇰🇿", htmlLang: "kk" }
       };
 
       const translations = {
         ru: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
           navHome: "Главная",
           navAbout: "О нас",
           navModules: "Модули",
           navCalculator: "Калькулятор",
           navContacts: "Контакты",
+          navProducts: "Продукты",
+          modTitle: "Интеллектуальные модули видеоаналитики",
           requestSolution: "Запросить решение",
 
           contactEyebrow: "Связаться с нами",
@@ -1321,13 +1341,15 @@
         },
 
         en: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "FORECASTING FUTURE EVENTS",
           navHome: "Home",
           navAbout: "About",
           navModules: "Modules",
           navCalculator: "Calculator",
           navContacts: "Contacts",
+          navProducts: "Products",
+          modTitle: "Intelligent video analytics modules",
           requestSolution: "Request a solution",
 
           contactEyebrow: "Contact us",
@@ -1375,13 +1397,15 @@
         },
 
         zh: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "预测未来事件",
           navHome: "首页",
           navAbout: "关于我们",
           navModules: "模块",
           navCalculator: "计算器",
           navContacts: "联系我们",
+          navProducts: "产品",
+          modTitle: "智能视频分析模块",
           requestSolution: "申请方案",
 
           contactEyebrow: "联系我们",
@@ -1429,13 +1453,15 @@
         },
 
         kk: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "БОЛАШАҚ ОҚИҒАЛАРДЫ БОЛЖАУ",
           navHome: "Басты бет",
           navAbout: "Біз туралы",
           navModules: "Модульдер",
           navCalculator: "Калькулятор",
           navContacts: "Байланыс",
+          navProducts: "Өнімдер",
+          modTitle: "Интеллектуалды бейнеаналитика модульдері",
           requestSolution: "Шешімге сұраныс",
 
           contactEyebrow: "Бізбен байланыс",
@@ -1506,7 +1532,7 @@
           const key = element.dataset.i18n;
           const value = dict?.[key] || translations.ru[key];
           if (value) {
-            element.textContent = value;
+            element.innerHTML = value;
           }
         });
 

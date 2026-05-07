@@ -109,7 +109,7 @@
       width: min(100%, var(--container));
       margin: 0 auto;
       padding-inline: 24px;
-      
+
     }
 
     /* Wrap: matches calculator.html layout */
@@ -123,6 +123,14 @@
       position: relative;
       padding: 84px 0;
       background: none;
+    }
+
+    .logo__mark,
+    .logo__reg {
+      font-size: 0.55em;
+      vertical-align: super;
+      font-weight: 400;
+      letter-spacing: 0;
     }
 
     .pill {
@@ -287,7 +295,12 @@
       letter-spacing: 0.05em;
       color: #fff;
       line-height: 1.1;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    flex-shrink {
+      0;
     }
 
     .logo__subtitle {
@@ -381,8 +394,13 @@
     }
 
     .lang-switcher__current {
-      font-size: 18px;
-      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      font-family:
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Noto Color Emoji",
+        sans-serif;
     }
 
     .lang-switcher__current-text {
@@ -455,6 +473,11 @@
     .lang-switcher__flag {
       font-size: 18px;
       line-height: 1;
+      font-family:
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Noto Color Emoji",
+        sans-serif;
     }
 
     .lang-switcher__label {
@@ -629,7 +652,7 @@
       text-align: center;
       overflow: hidden;
       position: relative;
-       background: radial-gradient(ellipse 160% 90% at 50% 90%,
+      background: radial-gradient(ellipse 160% 90% at 50% 90%,
           rgb(255, 32, 0) 0%,
           rgb(204, 0, 0) 20%,
           rgb(139, 0, 0) 50%,
@@ -697,7 +720,7 @@
       margin-top: 26px;
     }
 
-   .footer {
+    .footer {
       padding: 28px 0 40px;
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       background: radial-gradient(ellipse 160% 90% at 50% 90%,
@@ -1539,6 +1562,13 @@
         hyphens: auto;
       }
 
+      .hero__mark {
+        font-size: 0.4em;
+        vertical-align: super;
+        font-weight: 400;
+        letter-spacing: 0;
+      }
+
       .hero__video-mask {
         top: 48%;
         width: min(92vw, 920px);
@@ -1617,7 +1647,8 @@
       }
 
       .lang-switcher__current {
-        display: none;
+        display: inline-flex;
+        align-items: center;
       }
 
       .lang-switcher__menu {
@@ -1679,7 +1710,7 @@
         <a href="index.html#hero" class="logo" aria-label="Vengeea">
           <img class="logo__image" src="images/logo-recreated (1).png" alt="Логотип компании" />
           <span class="logo__text-group">
-            <span class="logo__title" data-i18n="logoTitle">Vengeea®</span>
+            <span class="logo__title" data-i18n="logoTitle">Vengeea<span class="logo__mark">®</span></span>
             <span class="logo__subtitle" data-i18n="logoSubtitle">ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ</span>
           </span>
         </a>
@@ -1714,13 +1745,13 @@
               </button>
 
               <div class="lang-switcher__menu" id="langMenu" role="menu" aria-label="Выбор языка">
-                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
-                  <span class="lang-switcher__flag">🇷🇺</span>
-                  <span class="lang-switcher__label">Русский</span>
-                </button>
                 <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
                   <span class="lang-switcher__flag">🇬🇧</span>
                   <span class="lang-switcher__label">English</span>
+                </button>
+                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
+                  <span class="lang-switcher__flag">🇷🇺</span>
+                  <span class="lang-switcher__label">Русский</span>
                 </button>
                 <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
                   <span class="lang-switcher__flag">🇨🇳</span>
@@ -1748,8 +1779,9 @@
         <div class="hero__video-mask" aria-hidden="true"></div>
 
         <div class="hero__content">
-          <h1 class="hero__title" data-i18n="heroTitle">
-            Vengeea® — компания, разрабатывающая технологии будущего.
+          <h1 class="hero__title">
+            Vengeea<span class="logo__mark">®</span> — <span data-i18n="heroTitle">компания, разрабатывающая технологии
+              будущего.</span>
           </h1>
 
           <p class="hero__text" data-i18n="heroText">
@@ -2028,7 +2060,8 @@
           <a href="index.html#hero" class="footer__brand">
             <img class="footer__logo" src="images/logo-recreated (1).png" alt="Company logo" />
             <div class="footer__brand-content">
-              <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;">Vengeea®</div>
+              <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;" data-i18n="logoTitle">Vengeea<span
+                  class="logo__mark">®</span></div>
               <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident
                 prevention</div>
             </div>
@@ -2088,16 +2121,17 @@
 
       const uiTranslations = {
         ru: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
           navHome: "Главная",
           navAbout: "О нас",
           navModules: "Модули",
           navContacts: "Контакты",
           navCalculator: "Калькулятор",
+          navProducts: "Продукты",
           requestSolution: "Запросить решение",
           viewModules: "Посмотреть модули",
-          heroTitle: "Vengeea® — компания, разрабатывающая технологии будущего.",
+          heroTitle: 'компания, разрабатывающая технологии будущего.',
           heroText: "Мы работаем с 2020 года и создаем AI-решения для видеоаналитики, автоматизации мониторинга и предотвращения инцидентов.",
           monitoringTitle: "Фиксация утечки в момент возникновения",
           monitoringText: "Два сценария работы системы на реальном видеопотоке: обнаружение утечки и автоматическая регистрация события для дальнейшего реагирования.",
@@ -2133,16 +2167,18 @@
           footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
         },
         en: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "FORECASTING FUTURE EVENTS",
           navHome: "Home",
           navAbout: "About",
           navModules: "Modules",
           navContacts: "Contacts",
           navCalculator: "Calculator",
+          navProducts: "Products",
+          modTitle: "Intelligent video analytics modules",
           requestSolution: "Request a solution",
           viewModules: "View modules",
-          heroTitle: "Vengeea® — a company developing technologies of the future.",
+          heroTitle: 'a company developing technologies of the future.',
           heroText: "We have been operating since 2020 and build AI solutions for video analytics, monitoring automation, and incident prevention.",
           monitoringTitle: "Fixing the leak at the moment of occurrence",
           monitoringText: "Two scenarios of the system's operation on a real video stream: leak detection and automatic registration of an event for further response.",
@@ -2184,16 +2220,18 @@
           footerText: "Leak detection and development toward predictive incident prevention"
         },
         zh: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "预测未来事件",
           navHome: "首页",
           navAbout: "关于我们",
           navModules: "模块",
           navContacts: "联系我们",
           navCalculator: "计算器",
+          navProducts: "产品",
+          modTitle: "智能视频分析模块",
           requestSolution: "申请方案",
           viewModules: "查看模块",
-          heroTitle: "Vengeea® — 一家开发未来技术的公司。",
+          heroTitle: '一家开发未来技术的公司。',
           heroText: "我们自2020年开始运营，并为视频分析、监控自动化和事故预防构建人工智能解决方案。",
           monitoringTitle: "在泄漏发生时即时检测",
           monitoringText: "系统在真实视频流中的两种工作场景：泄漏检测与自动事件记录，以便后续响应。",
@@ -2242,16 +2280,18 @@
           footerText: "泄漏检测以及向预测性事故预防方向发展"
         },
         kk: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "БОЛАШАҚ ОҚИҒАЛАРДЫ БОЛЖАУ",
           navHome: "Басты бет",
           navAbout: "Біз туралы",
           navModules: "Модульдер",
           navContacts: "Байланыс",
           navCalculator: "Калькулятор",
+          navProducts: "Өнімдер",
+          modTitle: "Интеллектуалды бейнеаналитика модульдері",
           requestSolution: "Шешімге сұраныс",
           viewModules: "Модульдерді қарау",
-          heroTitle: "Vengeea® — болашақ технологияларын әзірлейтін компания.",
+          heroTitle: 'болашақ технологияларын әзірлейтін компания.',
           heroText: "Біз 2020 жылдан бері жұмыс істейміз және бейнеаналитика, мониторингті автоматтандыру және инциденттердің алдын алу үшін AI-шешімдерді жасаймыз.",
           monitoringTitle: "Ағып кетуді пайда болған сәтте тіркеу",
           monitoringText: "Жүйенің нақты бейнеағында жұмыс істеуінің екі сценарийі: ағып кетуді анықтау және кейінгі әрекет ету үшін оқиғаны автоматты түрде тіркеу.",
@@ -2631,7 +2671,7 @@
         document.querySelectorAll("[data-i18n]").forEach(function (el) {
           const key = el.getAttribute("data-i18n");
           if (dict[key]) {
-            el.textContent = dict[key];
+            el.innerHTML = dict[key];
           }
         });
 

@@ -41,16 +41,18 @@
 
       const uiTranslations = {
         ru: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
           navHome: "Главная",
           navAbout: "О нас",
           navModules: "Модули",
           navCalculator: "Калькулятор",
           navContacts: "Контакты",
+          navProducts: "Продукты",
+          modTitle: "Интеллектуальные модули видеоаналитики",
           requestSolution: "Запросить решение",
           viewModules: "Посмотреть модули",
-          heroTitle: "Vengeea® — компания, разрабатывающая технологии будущего.",
+          heroTitle: 'компания, разрабатывающая технологии будущего.',
           heroText: "Мы работаем с 2020 года и создаем AI-решения для видеоаналитики, автоматизации мониторинга и предотвращения инцидентов.",
           ctaTitle: "Покажем, как решение будет работать на вашем объекте",
           ctaText: "Проверим применимость сценария на ваших камерах, зонах контроля и типовых рисках объекта.",
@@ -80,16 +82,18 @@
           footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
         },
         en: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "FORECASTING FUTURE EVENTS",
           navHome: "Home",
           navAbout: "About",
           navModules: "Modules",
           navCalculator: "Calculator",
           navContacts: "Contacts",
+          navProducts: "Products",
+          modTitle: "Intelligent video analytics modules",
           requestSolution: "Request a solution",
           viewModules: "View modules",
-          heroTitle: "Vengeea® — a company developing technologies of the future.",
+          heroTitle: 'a company developing technologies of the future.',
           heroText: "We have been operating since 2020 and build AI solutions for video analytics, monitoring automation, and incident prevention.",
           stepNext: "Next",
           stepNextTitle: "Transition to predictive analytics and autonomous decisions",
@@ -125,16 +129,18 @@
           footerText: "Leak detection and development toward predictive incident prevention"
         },
         zh: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "预测未来事件",
           navHome: "首页",
           navAbout: "关于我们",
           navModules: "模块",
           navCalculator: "计算器",
           navContacts: "联系我们",
+          navProducts: "产品",
+          modTitle: "智能视频分析模块",
           requestSolution: "申请方案",
           viewModules: "查看模块",
-          heroTitle: "Vengeea® — 一家开发未来技术的公司。",
+          heroTitle: '一家开发未来技术的公司。',
           heroText: "我们自2020年开始运营，并为视频分析、监控自动化和事故预防构建人工智能解决方案。",
           monitoringTitle: "在泄漏发生时即时检测",
           monitoringText: "系统在真实视频流中的两种工作场景：泄漏检测与自动事件记录，以便后续响应。",
@@ -183,16 +189,18 @@
           footerText: "泄漏检测以及向预测性事故预防方向发展"
         },
         kk: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "БОЛАШАҚ ОҚИҒАЛАРДЫ БОЛЖАУ",
           navHome: "Басты бет",
           navAbout: "Біз туралы",
           navModules: "Модульдер",
           navCalculator: "Калькулятор",
           navContacts: "Байланыс",
+          navProducts: "Өнімдер",
+          modTitle: "Интеллектуалды бейнеаналитика модульдері",
           requestSolution: "Шешімге сұраныс",
           viewModules: "Модульдерді қарау",
-          heroTitle: "Vengeea® — болашақ технологияларын әзірлейтін компания.",
+          heroTitle: 'болашақ технологияларын әзірлейтін компания.',
           heroText: "Біз 2020 жылдан бері жұмыс істейміз және бейнеаналитика, мониторингті автоматтандыру және инциденттердің алдын алу үшін AI-шешімдерді жасаймыз.",
           monitoringTitle: "Ағып кетуді пайда болған сәтте тіркеу",
           monitoringText: "Жүйенің нақты бейнеағында жұмыс істеуінің екі сценарийі: ағып кетуді анықтау және кейінгі әрекет ету үшін оқиғаны автоматты түрде тіркеу.",
@@ -571,7 +579,7 @@
         document.querySelectorAll("[data-i18n]").forEach(function (el) {
           const key = el.getAttribute("data-i18n");
           if (dict[key]) {
-            el.textContent = dict[key];
+            el.innerHTML = dict[key];
           }
         });
 

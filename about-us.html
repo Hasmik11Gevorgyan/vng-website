@@ -55,7 +55,7 @@
       scroll-behavior: smooth;
     }
 
-     body {
+    body {
       margin: 0;
       min-width: 320px;
       font-family: Inter, Arial, sans-serif;
@@ -246,7 +246,7 @@
       top: 0;
       z-index: 100;
       backdrop-filter: blur(16px);
-       background: rgba(60, 0, 0, 0.75);
+      background: rgba(60, 0, 0, 0.75);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
@@ -274,7 +274,14 @@
       height: 46px;
       object-fit: contain;
       flex-shrink: 0;
-     
+    }
+
+    .logo__mark,
+    .logo__reg {
+      font-size: 0.55em;
+      vertical-align: super;
+      font-weight: 400;
+      letter-spacing: 0;
     }
 
     .logo__text-group {
@@ -385,8 +392,13 @@
     }
 
     .lang-switcher__current {
-      font-size: 18px;
-      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      font-family:
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Noto Color Emoji",
+        sans-serif;
     }
 
     .lang-switcher__current-text {
@@ -415,7 +427,7 @@
       padding: 10px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-     background: rgba(5, 1, 1, 0.98);
+      background: rgba(5, 1, 1, 0.98);
       box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
       backdrop-filter: blur(16px);
       opacity: 0;
@@ -459,6 +471,11 @@
     .lang-switcher__flag {
       font-size: 18px;
       line-height: 1;
+      font-family:
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Noto Color Emoji",
+        sans-serif;
     }
 
     .lang-switcher__label {
@@ -472,7 +489,7 @@
       overflow: hidden;
 
     }
-    
+
 
     .about-page::before {
       content: "";
@@ -813,7 +830,8 @@
       }
 
       .lang-switcher__current {
-        display: none;
+        display: inline-flex;
+        align-items: center;
       }
 
       .lang-switcher__menu {
@@ -918,7 +936,7 @@
         <a href="index.html#hero" class="logo" aria-label="Vengeea">
           <img class="logo__image" src="images/logo-recreated (1).png" alt="Логотип компании" />
           <span class="logo__text-group">
-            <span class="logo__title" data-i18n="logoTitle">Vengeea®</span>
+            <span class="logo__title" data-i18n="logoTitle">Vengeea<span class="logo__mark">®</span></span>
             <span class="logo__subtitle" data-i18n="logoSubtitle">ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ</span>
           </span>
         </a>
@@ -953,13 +971,13 @@
               </button>
 
               <div class="lang-switcher__menu" id="langMenu" role="menu" aria-label="Выбор языка">
-                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
-                  <span class="lang-switcher__flag">🇷🇺</span>
-                  <span class="lang-switcher__label">Русский</span>
-                </button>
                 <button class="lang-switcher__option" type="button" data-lang="en" role="menuitem">
                   <span class="lang-switcher__flag">🇬🇧</span>
                   <span class="lang-switcher__label">English</span>
+                </button>
+                <button class="lang-switcher__option" type="button" data-lang="ru" role="menuitem">
+                  <span class="lang-switcher__flag">🇷🇺</span>
+                  <span class="lang-switcher__label">Русский</span>
                 </button>
                 <button class="lang-switcher__option" type="button" data-lang="zh" role="menuitem">
                   <span class="lang-switcher__flag">🇨🇳</span>
@@ -1061,7 +1079,8 @@
           <a href="index.html#hero" class="footer__brand">
             <img class="footer__logo" src="images/logo-recreated (1).png" alt="Company logo" />
             <div class="footer__brand-content">
-              <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;">Vengeea®</div>
+              <div class="logo__title" style="font-size: 16px; margin-bottom: 2px;" data-i18n="logoTitle">Vengeea<span
+                  class="logo__mark">®</span></div>
               <div class="footer__text" data-i18n="footerText">Leak detection and development toward predictive incident
                 prevention</div>
             </div>
@@ -1100,57 +1119,65 @@
       const langCurrentText = document.getElementById("langCurrentText");
 
       const languageMeta = {
-        ru: { code: "RU", flag: "🇷🇺", htmlLang: "ru" },
         en: { code: "EN", flag: "🇬🇧", htmlLang: "en" },
+        ru: { code: "RU", flag: "🇷🇺", htmlLang: "ru" },
         zh: { code: "ZH", flag: "🇨🇳", htmlLang: "zh" },
         kk: { code: "KK", flag: "🇰🇿", htmlLang: "kk" }
       };
 
       const translations = {
         ru: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "ПРОГНОЗИРОВАНИЕ БУДУЩИХ СОБЫТИЙ",
           navHome: "Главная",
           navAbout: "О нас",
           navModules: "Модули",
           navCalculator: "Калькулятор",
           navContacts: "Контакты",
+          navProducts: "Продукты",
+          modTitle: "Интеллектуальные модули видеоаналитики",
           requestSolution: "Запросить решение",
           footerTitle: "AI-платформа видеоаналитики",
           footerText: "Обнаружение утечек и развитие в сторону предиктивного предотвращения инцидентов"
         },
         en: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "FORECASTING FUTURE EVENTS",
           navHome: "Home",
           navAbout: "About",
           navModules: "Modules",
           navCalculator: "Calculator",
           navContacts: "Contacts",
+          navProducts: "Products",
+          modTitle: "Intelligent video analytics modules",
           requestSolution: "Request a Solution",
           footerTitle: "AI video analytics platform",
           footerText: "Leak detection and development toward predictive incident prevention"
         },
         zh: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "预测未来事件",
           navHome: "首页",
           navAbout: "关于我们",
           navModules: "模块",
           navCalculator: "计算器",
           navContacts: "联系我们",
+          navProducts: "产品",
+          modTitle: "智能视频分析模块",
           requestSolution: "申请解决方案",
           footerTitle: "AI 视频分析平台",
           footerText: "泄漏检测以及向预测性事故预防方向发展"
         },
         kk: {
-          logoTitle: "Vengeea®",
+          logoTitle: 'Vengeea<span class="logo__mark">®</span>',
           logoSubtitle: "БОЛАШАҚ ОҚИҒАЛАРДЫ БОЛЖАУ",
           navHome: "Басты бет",
           navAbout: "Біз туралы",
           navModules: "Модульдер",
           navCalculator: "Калькулятор",
           navContacts: "Байланыс",
+          navProducts: "Өнімдер",
+          modTitle: "Интеллектуалды бейнеаналитика модульдері",
           requestSolution: "Шешім сұрау",
           footerTitle: "AI-бейнеаналитика платформасы",
           footerText: "Ағып кетуді анықтау және инциденттердің алдын алуға бағытталған даму"
@@ -1269,7 +1296,7 @@
         document.querySelectorAll("[data-i18n]").forEach(function (el) {
           const key = el.getAttribute("data-i18n");
           if (dict[key]) {
-            el.textContent = dict[key];
+            el.innerHTML = dict[key];
           }
         });
 
