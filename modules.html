@@ -542,7 +542,9 @@
 
     .solution-card {
       position: relative;
-      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      min-height: 420px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 28px;
       background: none;
@@ -600,54 +602,55 @@
 
     .solution-card__content {
       position: absolute;
-      left: 24px;
-      right: 24px;
-      bottom: 22px;
+      inset: 0;
+      padding: 200px 32px 32px;
       z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
     }
 
     .solution-card__tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 12px;
-      margin-bottom: 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #eef4ff;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      backdrop-filter: blur(8px);
+      display: none;
     }
 
     .solution-card__title {
-      margin: 0 0 10px;
-      font-size: 30px;
-      line-height: 1.08;
-      letter-spacing: -0.02em;
+      margin: 0 0 12px;
+      font-size: 28px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
       font-weight: 800;
       color: #fff;
-      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
     }
 
     .solution-card__text {
       margin: 0;
-      max-width: 420px;
-      font-size: 16px;
-      line-height: 1.55;
-      color: #dbe7fa;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.24);
+      max-width: 100%;
+      font-size: 15px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.8);
     }
 
     .solution-card__arrow {
-      display: inline-block;
-      margin-top: 16px;
-      font-size: 24px;
-      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 20px;
       color: #fff;
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
+    }
+
+    .solution-card:hover .solution-card__arrow {
+      background: #ff3b30;
+      border-color: #ff3b30;
+      transform: translateX(4px);
     }
 
     .footer {
@@ -948,6 +951,12 @@
       .solutions-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+      
+      @media (max-width: 768px) {
+        .solutions-grid {
+          grid-template-columns: 1fr;
+        }
+      }
 
       .nav {
         display: none;
@@ -1093,25 +1102,28 @@
       }
 
       .solutions-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
       }
 
       .solution-card {
-        min-height: 280px;
+        min-height: 340px;
       }
 
       .solution-card__content {
-        left: 18px;
-        right: 18px;
-        bottom: 18px;
+        padding: 60px 16px 16px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.3) 100%);
       }
 
       .solution-card__title {
-        font-size: 24px;
+        font-size: 18px;
+        margin-bottom: 10px;
+        line-height: 1.2;
       }
 
       .solution-card__text {
-        font-size: 15px;
+        font-size: 13px;
+        line-height: 1.4;
       }
 
       .hero-head__title {
@@ -1285,7 +1297,6 @@
             </div>
             <div class="solution-card__overlay"></div>
             <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
               <h2 class="solution-card__title" data-i18n="cardLeakTitle">Утечка жидкости</h2>
               <p class="solution-card__text" data-i18n="cardLeakText">Выявление разливов и утечек в критических зонах объекта.</p>
               <span class="solution-card__arrow">→</span>
@@ -1298,7 +1309,6 @@
             </div>
             <div class="solution-card__overlay"></div>
             <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
               <h2 class="solution-card__title" data-i18n="cardFireTitle">Дым и огонь</h2>
               <p class="solution-card__text" data-i18n="cardFireText">Раннее обнаружение задымления и открытого пламени.</p>
               <span class="solution-card__arrow">→</span>
@@ -1311,7 +1321,6 @@
             </div>
             <div class="solution-card__overlay"></div>
             <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
               <h2 class="solution-card__title" data-i18n="cardIntrusionTitle">Вторжение</h2>
               <p class="solution-card__text" data-i18n="cardIntrusionText">Фиксация несанкционированного проникновения на объект.</p>
               <span class="solution-card__arrow">→</span>
@@ -1324,7 +1333,6 @@
             </div>
             <div class="solution-card__overlay"></div>
             <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
               <h2 class="solution-card__title" data-i18n="cardFightTitle">Драка и вандализм</h2>
               <p class="solution-card__text" data-i18n="cardFightText">Обнаружение агрессивных и разрушительных действий.</p>
               <span class="solution-card__arrow">→</span>
@@ -1337,7 +1345,6 @@
             </div>
             <div class="solution-card__overlay"></div>
             <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
               <h2 class="solution-card__title" data-i18n="cardTheftTitle">Воровство</h2>
               <p class="solution-card__text" data-i18n="cardTheftText">Выявление сценариев, связанных с хищением имущества.</p>
               <span class="solution-card__arrow">→</span>
@@ -1350,7 +1357,6 @@
             </div>
             <div class="solution-card__overlay"></div>
             <div class="solution-card__content">
-              <span class="solution-card__tag" data-i18n="cardTag">AI-модуль</span>
               <h2 class="solution-card__title" data-i18n="cardFaceTitle">Распознавание и детекция лица</h2>
               <p class="solution-card__text" data-i18n="cardFaceText">Фиксация лица, повторных появлений и контроль по собственным спискам наблюдения.</p>
               <span class="solution-card__arrow">→</span>
